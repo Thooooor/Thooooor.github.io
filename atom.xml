@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2020-08-08T02:03:33.782Z</updated>
+  <updated>2020-08-08T02:27:42.927Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>数学建模——优化（规划）问题</title>
+    <link href="https://thooooor.github.io/2020/08/08/shu-xue-gui-hua/"/>
+    <id>https://thooooor.github.io/2020/08/08/shu-xue-gui-hua/</id>
+    <published>2020-08-08T02:25:00.000Z</published>
+    <updated>2020-08-08T02:27:42.927Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;线性规划&quot;&gt;&lt;a href=&quot;#线性规划&quot; class=&quot;headerlink&quot; title=&quot;线性规划&quot;&gt;&lt;/a&gt;线性规划&lt;/h1&gt;&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
+&lt;h2 id=&quot;特征&quot;&gt;&lt;a href=&quot;#特征&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数学建模" scheme="https://thooooor.github.io/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/"/>
+    
+    
+      <category term="Python" scheme="https://thooooor.github.io/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>Sympy的基本使用</title>
