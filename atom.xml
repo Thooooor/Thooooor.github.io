@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2020-08-07T10:04:01.665Z</updated>
+  <updated>2020-08-08T02:03:33.782Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Sympy的基本使用</title>
+    <link href="https://thooooor.github.io/2020/08/08/sympy/"/>
+    <id>https://thooooor.github.io/2020/08/08/sympy/</id>
+    <published>2020-08-08T02:02:00.000Z</published>
+    <updated>2020-08-08T02:03:33.782Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;pre class=&quot;line-numbers language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; sympy &lt;span class=&quot;token
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数学建模" scheme="https://thooooor.github.io/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/"/>
+    
+    
+      <category term="Python" scheme="https://thooooor.github.io/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>Gunicorn基本使用</title>
