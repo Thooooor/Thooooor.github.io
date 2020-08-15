@@ -72,6 +72,33 @@
   </entry>
   
   <entry>
+    <title>算法分析的数学基础</title>
+    <link href="https://thooooor.github.io/2020/04/27/suan-fa-fen-xi-de-shu-xue-ji-chu/"/>
+    <id>https://thooooor.github.io/2020/04/27/suan-fa-fen-xi-de-shu-xue-ji-chu/</id>
+    <published>2020-04-27T14:25:00.000Z</published>
+    <updated>2020-08-15T16:11:14.630Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;2-1-计算复杂性函数的阶&quot;&gt;&lt;a href=&quot;#2-1-计算复杂性函数的阶&quot; class=&quot;headerlink&quot; title=&quot;2.1 计算复杂性函数的阶&quot;&gt;&lt;/a&gt;2.1
+        
+      
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法设计与分析" scheme="https://thooooor.github.io/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>算法概论</title>
     <link href="https://thooooor.github.io/2020/04/26/suan-fa-gai-lun/"/>
     <id>https://thooooor.github.io/2020/04/26/suan-fa-gai-lun/</id>
@@ -99,11 +126,11 @@
   </entry>
   
   <entry>
-    <title>Ubuntu服务器安装Anaconda</title>
-    <link href="https://thooooor.github.io/2020/04/03/ubuntu-fu-wu-qi-an-zhuang-anaconda/"/>
-    <id>https://thooooor.github.io/2020/04/03/ubuntu-fu-wu-qi-an-zhuang-anaconda/</id>
+    <title>Gunicorn基本使用</title>
+    <link href="https://thooooor.github.io/2020/04/03/gunicorn-ji-ben-shi-yong/"/>
+    <id>https://thooooor.github.io/2020/04/03/gunicorn-ji-ben-shi-yong/</id>
     <published>2020-04-03T01:25:00.000Z</published>
-    <updated>2020-08-07T08:52:07.841Z</updated>
+    <updated>2020-08-07T10:04:01.665Z</updated>
     
     <summary type="html">
     
@@ -111,10 +138,7 @@
       
         
         
-          &lt;blockquote&gt;
-&lt;p&gt;Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1
+          &lt;h1 id=&quot;开启Gunicorn任务&quot;&gt;&lt;a href=&quot;#开启Gunicorn任务&quot; class=&quot;headerlink&quot; title=&quot;开启Gunicorn任务&quot;&gt;&lt;/a&gt;开启Gunicorn任务&lt;/h1&gt;&lt;pre class=&quot;line-numbers
         
       
     
@@ -131,11 +155,11 @@
   </entry>
   
   <entry>
-    <title>Gunicorn基本使用</title>
-    <link href="https://thooooor.github.io/2020/04/03/gunicorn-ji-ben-shi-yong/"/>
-    <id>https://thooooor.github.io/2020/04/03/gunicorn-ji-ben-shi-yong/</id>
+    <title>Ubuntu服务器安装Anaconda</title>
+    <link href="https://thooooor.github.io/2020/04/03/ubuntu-fu-wu-qi-an-zhuang-anaconda/"/>
+    <id>https://thooooor.github.io/2020/04/03/ubuntu-fu-wu-qi-an-zhuang-anaconda/</id>
     <published>2020-04-03T01:25:00.000Z</published>
-    <updated>2020-08-07T10:04:01.665Z</updated>
+    <updated>2020-08-07T08:52:07.841Z</updated>
     
     <summary type="html">
     
@@ -143,7 +167,10 @@
       
         
         
-          &lt;h1 id=&quot;开启Gunicorn任务&quot;&gt;&lt;a href=&quot;#开启Gunicorn任务&quot; class=&quot;headerlink&quot; title=&quot;开启Gunicorn任务&quot;&gt;&lt;/a&gt;开启Gunicorn任务&lt;/h1&gt;&lt;pre class=&quot;line-numbers
+          &lt;blockquote&gt;
+&lt;p&gt;Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1
         
       
     
