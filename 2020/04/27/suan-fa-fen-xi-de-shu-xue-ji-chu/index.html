@@ -436,8 +436,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="2-1-计算复杂性函数的阶"><a href="#2-1-计算复杂性函数的阶" class="headerlink" title="2.1 计算复杂性函数的阶"></a>2.1 计算复杂性函数的阶</h1><p>##　增长的阶</p>
-<p>算法的实际运行时间受除算法设计本身以外很多其他因素的影响，如：指令集、操作系统、编译器…… </p>
+                <h1 id="2-1-计算复杂性函数的阶"><a href="#2-1-计算复杂性函数的阶" class="headerlink" title="2.1 计算复杂性函数的阶"></a>2.1 计算复杂性函数的阶</h1><h2 id="增长的阶"><a href="#增长的阶" class="headerlink" title="增长的阶"></a>增长的阶</h2><p>算法的实际运行时间受除算法设计本身以外很多其他因素的影响，如：指令集、操作系统、编译器…… </p>
 <ul>
 <li>如何描述算法的效率$\to$只与<strong>输入问题的规模</strong>有关<ul>
 <li>增长率</li>
@@ -469,7 +468,7 @@
 <li>若$p(n)=\sum_{i=0}^{d}a_in^i$，其中$a_i$是常数且$a_d&gt;0$，则$p(n)=\Theta(n^d)$</li>
 <li>$\Theta(n^0)$或者$\Theta(1)$为<strong>常数时间复杂性</strong></li>
 </ul>
-<h2 id="低阶函数集合-O"><a href="#低阶函数集合-O" class="headerlink" title="低阶函数集合 $O$"></a>低阶函数集合 $O$</h2><p>对于给定函数$g(n)$:<br>$$<br>O(g(n))=f{(n) ,\bold{存在}正常数c和n_0 满足对于所有n\ge n_0, 0 \le f(n) \le cg(n),}<br>$$<br>记作$f(n)\in O(g(n))$, 或简记为$f(n)=O(g(n))$</p>
+<h2 id="低阶函数集合-O"><a href="#低阶函数集合-O" class="headerlink" title="低阶函数集合 $O$"></a>低阶函数集合 $O$</h2><p>对于给定函数$g(n)$:<br>$$<br>O(g(n))=f{(n) 存在正常数c和n_0 满足对于所有n\ge n_0, 0 \le f(n) \le cg(n)}<br>$$<br>记作$f(n)\in O(g(n))$, 或简记为$f(n)=O(g(n))$</p>
 <p>$\Theta(g(n))$与$O(g(n))$的关系：</p>
 <ul>
 <li>$f(n)=\Theta(g(n))\implies f(n)=O(g(n))$</li>
@@ -482,14 +481,18 @@
 </li>
 </ul>
 <p><strong>如果 $f(n)=O(n^k)$ ，则称$f(n)$是多项式界限的​</strong></p>
-<h2 id="严格低阶函数-o"><a href="#严格低阶函数-o" class="headerlink" title="严格低阶函数 $o$"></a>严格低阶函数 $o$</h2><p>对于给定函数$g(n)$:<br>$$<br>o(g(n))=f{(n) ,存在\bold{任意}正常数c,\bold{存在一个正数}n_0 满足对于所有n\ge n_0, 0 \le f(n) &lt; cg(n),}<br>$$<br>记作$f(n)\in o(g(n))$, 或简记为$f(n)=o(g(n))$</p>
+<h2 id="严格低阶函数-o"><a href="#严格低阶函数-o" class="headerlink" title="严格低阶函数 $o$"></a>严格低阶函数 $o$</h2><p>对于给定函数$g(n)$:<br>$$<br>o(g(n))=f{(n) ,存在任意正常数c,存在一个正数n_0 满足对于所有n\ge n_0, 0 \le f(n) &lt; cg(n)}<br>$$<br>记作$f(n)\in o(g(n))$, 或简记为$f(n)=o(g(n))$</p>
 <p>$o$<strong>与$O$的关系：</strong></p>
 <ul>
 <li>$O$<strong>可能</strong>是或不是紧的<pre><code>- $2n^2=O(n^2)$是紧的，但$2n=O(n^2)$不是紧的</code></pre>
 </li>
 <li>$o$标记上界且<strong>不紧</strong><pre><code>- $2n=o(n^2)$，但是$2n^2\ne o(n^2)$</code></pre>
 <ul>
-<li>区别：$\cases{O:\exist,c,某个正常数\o:\forall,c,任意正常数}$</li>
+<li>区别：<ul>
+<li>$O:\exist,c,某个正常数$</li>
+<li>$o:\forall c任意正常数$</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -502,13 +505,19 @@
 <li>最坏运行时间为$\Omega(n^2)$</li>
 </ul>
 <p>也可以用来<strong>描述问题</strong>：</p>
-<p>​    - 排序问题的时间复杂性为$\bold{\Omega(n)}$ $\to$ <strong>最好情况</strong></p>
-<p><strong>$\bold{O,\Theta,\Omega}$的关系：</strong><br>$$<br>对于f(n)和g(n),\bold{f(n)=\Theta(g(n))}当且仅当<br>\bold{f(n)=O(g(n))且f(n)=\Omega(g(n))}<br>$$</p>
-<h2 id="严格高阶函数集合-omega"><a href="#严格高阶函数集合-omega" class="headerlink" title="严格高阶函数集合 $\omega$"></a>严格高阶函数集合 $\omega$</h2><p>对于给定函数$g(n)$:<br>$$<br>\omega(g(n))=f{(n) ,对于\bold{任意}正常数c，\bold{存在正数}n_0 满足对于所有n\ge n_0, 0 \le cg(n) \le f(n),}<br>$$<br>记作$f(n)\in \omega(g(n))$, 或简记为$f(n)=\omega(g(n))$</p>
+<ul>
+<li>排序问题的时间复杂性为$\Omega(n)$ $\to$ <strong>最好情况</strong></li>
+</ul>
+<p><strong>$O,\Theta,\Omega$的关系：</strong><br>$$<br>对于f(n)和g(n),f(n)=\Theta(g(n))当且仅当<br>f(n)=O(g(n))且f(n)=\Omega(g(n))<br>$$</p>
+<h2 id="严格高阶函数集合-omega"><a href="#严格高阶函数集合-omega" class="headerlink" title="严格高阶函数集合 $\omega$"></a>严格高阶函数集合 $\omega$</h2><p>对于给定函数$g(n)$:<br>$$<br>\omega(g(n))=f{(n) ,对于任意正常数c，存在正数n_0 满足对于所有n\ge n_0, 0 \le cg(n) \le f(n),}<br>$$<br>记作$f(n)\in \omega(g(n))$, 或简记为$f(n)=\omega(g(n))$</p>
 <p>$$<br>\lim_{n\to \infty}\frac{f(n)}{g(n)}=\infty<br>$$</p>
 <p>$\omega$表示<strong>不紧</strong>的下界</p>
 <p>$$<br>\frac{n^2}{2}=\omega(n)$，但$\frac{n^2}{2}\ne \omega(n^2)<br>$$</p>
-<p><strong>$\omega$与 $\Omega$ 的区别</strong>:$\cases{ \omega:,\exists,c存在正常数\ \Omega:,\forall,c,任意正常数 }$</p>
+<p><strong>$\omega$与 $\Omega$ 的区别</strong>:</p>
+<ul>
+<li>$\omega:,\exists,c存在正常数$</li>
+<li>$\Omega:,\forall,c,任意正常数$</li>
+</ul>
 <p><strong>$\omega$与$o$的关系：</strong><br>$$<br>f(n)=\omega(g(n)) \iff g(n)=o(f(n))<br>$$</p>
 <h2 id="渐进符号的性质"><a href="#渐进符号的性质" class="headerlink" title="渐进符号的性质"></a>渐进符号的性质</h2><ul>
 <li><p><strong>传递性</strong>：$O, \Theta, \Omega, o, \omega$<br>$$<br>f(n)=\Theta(g(n))\and g(n)=\Theta(h(n)) \implies f(n)=\Theta(h(n))<br>$$</p>
@@ -529,7 +538,8 @@
 </ol>
 <p>   线性性质对于无限收敛级数同样适用。</p>
 <p>   线性性质可以用来对项中包含渐进符号的和式求和，例如：</p>
-<p>$$<br> \sum_{k=1}^{n}\Theta(f(k))=\Theta(\sum_{k=1}^{n}f(k))\<br>   等式中，左边的\Theta符号作用于变量k，而右边的\Theta则作用于n。这种处理方法同样适用于无限收敛级数。<br>$$</p>
+<p>$$<br>\sum_{k=1}^{n}\Theta(f(k))=\Theta(\sum_{k=1}^{n}f(k))\<br>$$</p>
+<p>等式中，左边的$\Theta$符号作用于变量k，而右边的$\Theta$则作用于n。这种处理方法同样适用于无限收敛级数。</p>
 <ol start="2">
 <li>级数</li>
 </ol>
@@ -556,7 +566,7 @@
 </li>
 </ol>
 <h2 id="求和的界限"><a href="#求和的界限" class="headerlink" title="求和的界限"></a>求和的界限</h2><ol>
-<li><h4 id="放大法"><a href="#放大法" class="headerlink" title="放大法"></a>放大法</h4><p>例1：$\sum_{k=1}^{n}k\le\sum_{k=1}^{n}n=n^2$ $\impliedby\bold{\sum_{k=1}^{n}a_i\le n\times \max{a_k}}$</p>
+<li><h4 id="放大法"><a href="#放大法" class="headerlink" title="放大法"></a>放大法</h4><p>例1：$\sum_{k=1}^{n}k\le\sum_{k=1}^{n}n=n^2 \impliedby\sum_{k=1}^{n}a_i\le n\times \max{a_k}$</p>
 </li>
 </ol>
 <ol start="2">
@@ -617,7 +627,7 @@
 <p><strong>避免陷阱</strong></p>
 <p>例4：求解$T(n)=2T(\lfloor\frac{n}{2}\rfloor)+n$</p>
 <p>解：猜$T(n)=O(n)$</p>
-<p>​    证：用数学归纳法证明$T(n)\le cn$<br>$$<br>T(n)\le2(c\lfloor\frac{n}{2}\rfloor)+n\le cn+n=O(n)\quad\color{red}错误<br>$$<br>错误之处：过早地使用了$O(n)$而陷入了陷阱应该在证明了$T(n)\le cn$才可用。从$T(n)\le cn+n$不可能得到$T(n)\le cn$，因为对于任何$c&gt;0$，我们都得不到$cn+n\le cn$</p>
+<p>​    证：用数学归纳法证明$T(n)\le cn$<br>$$<br>T(n)\le2(c\lfloor\frac{n}{2}\rfloor)+n\le cn+n=O(n)\quad\color{red}{错误}<br>$$<br>错误之处：过早地使用了$O(n)$而陷入了陷阱应该在证明了$T(n)\le cn$才可用。从$T(n)\le cn+n$不可能得到$T(n)\le cn$，因为对于任何$c&gt;0$，我们都得不到$cn+n\le cn$</p>
 <hr>
 </li>
 <li><p>变量替换法：<strong>经变量替换把递归方程变换为熟悉的方程</strong></p>
@@ -647,7 +657,15 @@
 
 <hr>
 <p>例6：$T(n)=n+3T(\lfloor\frac{n}{4}\rfloor)$</p>
-<p>解：<br>$$<br>\begin{align}<br>T(n)&amp;=n+3T(\lfloor\frac{n}{4}\rfloor)\<br>&amp;=n+3(\lfloor\frac{n}{4}\rfloor+3T(\lfloor\frac{n}{16}\rfloor))\<br>&amp;=n+3(\lfloor\frac{n}{4}\rfloor+3(\lfloor\frac{n}{16}\rfloor+3T(\lfloor\frac{n}{64}\rfloor)))\<br>&amp;=n+3\lfloor\frac{n}{4}\rfloor+9\lfloor\frac{n}{16}\rfloor+27T(\lfloor\frac{n}{64}\rfloor)\<br>&amp;=n+3\lfloor\frac{n}{4}\rfloor+3^2|\frac{n}{4^2}|+3^3(|\frac{n}{4^3}|)+…+3^iT(\lfloor\frac{n}{4^i}\rfloor)\<br>&amp;令\frac{n}{4^i}=1\implies4^i=n\implies i=\log_{4}{n}\<br>&amp;=n+3\lfloor\frac{n}{4}\rfloor+3^2\lfloor\frac{n}{4^2}\rfloor+3^3(\lfloor\frac{n}{4^3}\rfloor)+…+3^{\log_4{n}}T(\lfloor1\rfloor)\<br>&amp;\le\sum_{i=0}^{\log_4{n}}3^i\cdot\frac{n}{4^i}+O(n)\le n\sum_{i=0}^{\infin}(\frac{3}{4})^i=n\times\frac{1}{1-\frac{3}{4}}=4n=O(n)<br>\end{align}<br>$$</p>
+<p>解：</p>
+<p>$T(n)=n+3T(\lfloor\frac{n}{4}\rfloor)$</p>
+<p>$=n+3(\lfloor\frac{n}{4}\rfloor+3T(\lfloor\frac{n}{16}\rfloor))$</p>
+<p>$=n+3(\lfloor\frac{n}{4}\rfloor+3(\lfloor\frac{n}{16}\rfloor+3T(\lfloor\frac{n}{64}\rfloor)))$</p>
+<p>$=n+3\lfloor\frac{n}{4}\rfloor+9\lfloor\frac{n}{16}\rfloor+27T(\lfloor\frac{n}{64}\rfloor)$</p>
+<p>$=n+3\lfloor\frac{n}{4}\rfloor+3^2|\frac{n}{4^2}|+3^3(|\frac{n}{4^3}|)+…+3^iT(\lfloor\frac{n}{4^i}\rfloor)$</p>
+<p>$令\frac{n}{4^i}=1\implies4^i=n\implies i=\log_{4}{n}$</p>
+<p>$=n+3\lfloor\frac{n}{4}\rfloor+3^2\lfloor\frac{n}{4^2}\rfloor+3^3(\lfloor\frac{n}{4^3}\rfloor)+…+3^{\log_4{n}}T(\lfloor1\rfloor)$</p>
+<p>$\le\sum_{i=0}^{\log_4{n}}3^i\cdot\frac{n}{4^i}+O(n)\le n\sum_{i=0}^{\infin}(\frac{3}{4})^i=n\times\frac{1}{1-\frac{3}{4}}=4n=O(n)$</p>
 <h2 id="Master定理法"><a href="#Master定理法" class="headerlink" title="Master定理法"></a>Master定理法</h2><ul>
 <li><strong>目的</strong>：求解$T(n)=aT(\frac{n}{b})+f(n)$型方程，$a\ge1,b&gt;0$是常数，$f(n)$是正函数</li>
 <li><strong>方法</strong>：记住三种情况，不用纸笔直接求解</li>
@@ -671,7 +689,7 @@
 </ol>
 <img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200312105441.png" style="zoom:50%;">
 $$
-\bold{\color{red}对于红色部分，Master定理无能为力}
+\color{red}{对于红色部分，Master定理无能为力}
 $$
 **更进一步**：
 
