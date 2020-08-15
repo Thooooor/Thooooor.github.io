@@ -99,35 +99,6 @@
   </entry>
   
   <entry>
-    <title>Gunicorn基本使用</title>
-    <link href="https://thooooor.github.io/2020/04/03/gunicorn-ji-ben-shi-yong/"/>
-    <id>https://thooooor.github.io/2020/04/03/gunicorn-ji-ben-shi-yong/</id>
-    <published>2020-04-03T01:25:00.000Z</published>
-    <updated>2020-08-07T10:04:01.665Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;开启Gunicorn任务&quot;&gt;&lt;a href=&quot;#开启Gunicorn任务&quot; class=&quot;headerlink&quot; title=&quot;开启Gunicorn任务&quot;&gt;&lt;/a&gt;开启Gunicorn任务&lt;/h1&gt;&lt;pre class=&quot;line-numbers
-        
-      
-    
-    </summary>
-    
-    
-      <category term="脱坑实录" scheme="https://thooooor.github.io/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/"/>
-    
-    
-      <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
-    
-      <category term="Ubuntu" scheme="https://thooooor.github.io/tags/Ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Ubuntu服务器安装Anaconda</title>
     <link href="https://thooooor.github.io/2020/04/03/ubuntu-fu-wu-qi-an-zhuang-anaconda/"/>
     <id>https://thooooor.github.io/2020/04/03/ubuntu-fu-wu-qi-an-zhuang-anaconda/</id>
@@ -144,6 +115,35 @@
 &lt;p&gt;Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1
+        
+      
+    
+    </summary>
+    
+    
+      <category term="脱坑实录" scheme="https://thooooor.github.io/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/"/>
+    
+    
+      <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
+    
+      <category term="Ubuntu" scheme="https://thooooor.github.io/tags/Ubuntu/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Gunicorn基本使用</title>
+    <link href="https://thooooor.github.io/2020/04/03/gunicorn-ji-ben-shi-yong/"/>
+    <id>https://thooooor.github.io/2020/04/03/gunicorn-ji-ben-shi-yong/</id>
+    <published>2020-04-03T01:25:00.000Z</published>
+    <updated>2020-08-07T10:04:01.665Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;开启Gunicorn任务&quot;&gt;&lt;a href=&quot;#开启Gunicorn任务&quot; class=&quot;headerlink&quot; title=&quot;开启Gunicorn任务&quot;&gt;&lt;/a&gt;开启Gunicorn任务&lt;/h1&gt;&lt;pre class=&quot;line-numbers
         
       
     
