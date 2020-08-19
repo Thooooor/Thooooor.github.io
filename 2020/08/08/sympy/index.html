@@ -414,7 +414,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    682
+                    658
                 </div>
                 
 
@@ -436,94 +436,116 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre class="line-numbers language-python"><code class="language-python"><span class="token keyword">from</span> sympy <span class="token keyword">import</span> <span class="token operator">*</span>
-init_printing<span class="token punctuation">(</span>use_unicode<span class="token operator">=</span><span class="token boolean">True</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+                <pre class="line-numbers language-language-python"><code class="language-language-python">from sympy import *
+init_printing(use_unicode=True)
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p><a target="_blank" rel="noopener" href="https://docs.sympy.org/latest/tutorial/index.html"><code>Sympy</code></a>是一个用于符号计算的python库，可以完成多项式求值、求极限、解方程、求积分、微分方程等符号计算问题，介绍一些常用功能。</p>
-<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><h2 id="1-定义变量"><a href="#1-定义变量" class="headerlink" title="1. 定义变量"></a>1. 定义变量</h2><pre class="line-numbers language-python"><code class="language-python">x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> z <span class="token operator">=</span> symbols<span class="token punctuation">(</span><span class="token string">"x y z"</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true"># 多个变量</span>
-t <span class="token operator">=</span> Symbol<span class="token punctuation">(</span><span class="token string">'t'</span><span class="token punctuation">)</span>    <span class="token comment" spellcheck="true"># 单个变量</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h2 id="2-运算符"><a href="#2-运算符" class="headerlink" title="2. 运算符"></a>2. 运算符</h2><h3 id="导数diff"><a href="#导数diff" class="headerlink" title="导数diff"></a>导数<code>diff</code></h3><pre class="line-numbers language-python"><code class="language-python">In<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> diff<span class="token punctuation">(</span>cos<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token operator">-</span>sin<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># 高阶导数两种写法</span>
-In<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">:</span> diff<span class="token punctuation">(</span>x<span class="token operator">**</span><span class="token number">4</span><span class="token punctuation">,</span> x<span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">24</span>⋅x
+<h1>基本操作</h1>
+<h2 id="1-定义变量">1. 定义变量</h2>
+<pre class="line-numbers language-language-python"><code class="language-language-python">x, y, z = symbols("x y z")	# 多个变量
+t = Symbol('t')	# 单个变量
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="2-运算符">2. 运算符</h2>
+<h3 id="导数diff">导数<code>diff</code></h3>
+<pre class="line-numbers language-language-python"><code class="language-language-python">In[1]: diff(cos(x), x)
+Out[1]: -sin(x)
+# 高阶导数两种写法
+In[2]: diff(x**4, x, 3)
+Out[2]: 24⋅x
+    
+In[3]: diff(x**4, x, x, x)
+Out[3]: 24⋅x
+    
+# 偏导数
+In[4]: 	expr = exp(x*y*z) 
+		diff(expr, x, y, 2, z, 4)
+Out[4]: 
+ 3  2 ⎛ 3  3  3       2  2  2                ⎞  x⋅y⋅z
+x ⋅y ⋅⎝x ⋅y ⋅z  + 14⋅x ⋅y ⋅z  + 52⋅x⋅y⋅z + 48⎠⋅ℯ
 
-In<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">:</span> diff<span class="token punctuation">(</span>x<span class="token operator">**</span><span class="token number">4</span><span class="token punctuation">,</span> x<span class="token punctuation">,</span> x<span class="token punctuation">,</span> x<span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">24</span>⋅x
-
-<span class="token comment" spellcheck="true"># 偏导数</span>
-In<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">:</span>     expr <span class="token operator">=</span> exp<span class="token punctuation">(</span>x<span class="token operator">*</span>y<span class="token operator">*</span>z<span class="token punctuation">)</span> 
-        diff<span class="token punctuation">(</span>expr<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> z<span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">:</span> 
- <span class="token number">3</span>  <span class="token number">2</span> ⎛ <span class="token number">3</span>  <span class="token number">3</span>  <span class="token number">3</span>       <span class="token number">2</span>  <span class="token number">2</span>  <span class="token number">2</span>                ⎞  x⋅y⋅z
-x ⋅y ⋅⎝x ⋅y ⋅z  <span class="token operator">+</span> <span class="token number">14</span>⋅x ⋅y ⋅z  <span class="token operator">+</span> <span class="token number">52</span>⋅x⋅y⋅z <span class="token operator">+</span> <span class="token number">48</span>⎠⋅ℯ
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="积分intergrate"><a href="#积分intergrate" class="headerlink" title="积分intergrate"></a>积分<code>intergrate</code></h3><p><code>intergrate(integration_variable, lower_limit, upper_limit)</code></p>
-<pre class="line-numbers language-python"><code class="language-python">In<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">:</span> integrate<span class="token punctuation">(</span>sin<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token operator">-</span>cos<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-
-In<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">:</span> integrate<span class="token punctuation">(</span>exp<span class="token punctuation">(</span><span class="token operator">-</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> oo<span class="token punctuation">)</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">1</span>
-<span class="token comment" spellcheck="true"># 多重积分</span>
-In<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">:</span> integrate<span class="token punctuation">(</span>exp<span class="token punctuation">(</span><span class="token operator">-</span>x<span class="token operator">**</span><span class="token number">2</span><span class="token operator">-</span>y<span class="token operator">**</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span><span class="token operator">-</span>oo<span class="token punctuation">,</span>oo<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>y<span class="token punctuation">,</span> <span class="token operator">-</span>oo<span class="token punctuation">,</span> oo<span class="token punctuation">)</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">]</span><span class="token punctuation">:</span> π<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="极限limit"><a href="#极限limit" class="headerlink" title="极限limit"></a>极限<code>limit</code></h3><p><code>limit(f(x), x, x0)</code></p>
-<pre class="line-numbers language-python"><code class="language-python">In<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">:</span> limit<span class="token punctuation">(</span>sin<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token operator">/</span>x<span class="token punctuation">,</span> x<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">8</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token number">1</span>
-<span class="token comment" spellcheck="true"># 单侧极限</span>
-In<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">:</span> limit<span class="token punctuation">(</span><span class="token number">1</span><span class="token operator">/</span>x<span class="token punctuation">,</span> x<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token string">'+'</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">9</span><span class="token punctuation">]</span><span class="token punctuation">:</span> ∞<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="等式Eq"><a href="#等式Eq" class="headerlink" title="等式Eq"></a>等式<code>Eq</code></h3><pre class="line-numbers language-python"><code class="language-python">In<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">:</span> Eq<span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">:</span> x <span class="token operator">=</span> y<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-<h2 id="3-方程"><a href="#3-方程" class="headerlink" title="3. 方程"></a>3. 方程</h2><h3 id="代数方程solveset"><a href="#代数方程solveset" class="headerlink" title="代数方程solveset"></a>代数方程<code>solveset</code></h3><p><code>solveset(f, symbol=None, domain=S.Complexes)</code></p>
-<pre class="line-numbers language-python"><code class="language-python">In<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span><span class="token punctuation">:</span> solveset<span class="token punctuation">(</span>x<span class="token operator">**</span><span class="token number">2</span><span class="token operator">-</span>x<span class="token punctuation">,</span> x<span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">11</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;0, 1&amp;#125;</span>
-
-In<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span><span class="token punctuation">:</span> solveset<span class="token punctuation">(</span>exp<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> x<span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">12</span><span class="token punctuation">]</span><span class="token punctuation">:</span> ∅<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="线性方程组linsolve"><a href="#线性方程组linsolve" class="headerlink" title="线性方程组linsolve"></a>线性方程组<code>linsolve</code></h3><p><code>linsolve(system, *symbols)</code></p>
-<pre class="line-numbers language-python"><code class="language-python">In<span class="token punctuation">[</span><span class="token number">13</span><span class="token punctuation">]</span><span class="token punctuation">:</span> linsolve<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token operator">+</span>y<span class="token operator">+</span>z<span class="token number">-1</span><span class="token punctuation">,</span>x<span class="token operator">+</span>y<span class="token operator">+</span><span class="token number">2</span><span class="token operator">*</span>z<span class="token number">-3</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">,</span>z<span class="token punctuation">)</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">13</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;(-y - 1, y, 2)&amp;#125;</span>
-
-In<span class="token punctuation">[</span><span class="token number">14</span><span class="token punctuation">]</span><span class="token punctuation">:</span>linsolve<span class="token punctuation">(</span>Matrix<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> z<span class="token punctuation">)</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">14</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;(-y - 1, y, 2)&amp;#125;</span>
-
-In<span class="token punctuation">[</span><span class="token number">15</span><span class="token punctuation">]</span><span class="token punctuation">:</span> M <span class="token operator">=</span> Matrix<span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-        system <span class="token operator">=</span> A<span class="token punctuation">,</span> b <span class="token operator">=</span> M<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token punctuation">:</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> M<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token punctuation">,</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span>
-        linsolve<span class="token punctuation">(</span>system<span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">,</span> z<span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">15</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;(-y - 1, y, 2)&amp;#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h3 id="非线性方程组nonlinsolve"><a href="#非线性方程组nonlinsolve" class="headerlink" title="非线性方程组nonlinsolve"></a>非线性方程组<code>nonlinsolve</code></h3><p><code>nonlinsolve(system, *symbols)</code></p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 仅有实数解</span>
-In<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">:</span> nonlinsolve<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token operator">*</span>y <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">,</span> x <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> x<span class="token punctuation">,</span> y<span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">16</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;(2, 1/2)&amp;#125;</span>
-<span class="token comment" spellcheck="true"># 仅有复数解</span>
-In<span class="token punctuation">[</span><span class="token number">17</span><span class="token punctuation">]</span><span class="token punctuation">:</span> nonlinsolve<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token operator">**</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">,</span> y<span class="token operator">**</span><span class="token number">2</span><span class="token operator">+</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>x<span class="token punctuation">,</span>y<span class="token punctuation">]</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">17</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;(-ⅈ, -ⅈ), (-ⅈ, ⅈ), (ⅈ, -ⅈ), (ⅈ, ⅈ)&amp;#125;</span>
-<span class="token comment" spellcheck="true"># 同时存在实数解和复数解</span>
-In<span class="token punctuation">[</span><span class="token number">18</span><span class="token punctuation">]</span><span class="token punctuation">:</span> nonlinsolve<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token operator">**</span><span class="token number">2</span><span class="token operator">-</span><span class="token number">2</span><span class="token operator">*</span>y<span class="token operator">**</span><span class="token number">2</span><span class="token operator">-</span><span class="token number">2</span><span class="token punctuation">,</span> x<span class="token operator">*</span>y<span class="token number">-2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>x<span class="token punctuation">,</span> y<span class="token punctuation">]</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">18</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;(-2, -1), (2, 1), (-√2⋅ⅈ, √2⋅ⅈ), (√2⋅ⅈ, -√2⋅ⅈ)&amp;#125;</span>
-<span class="token comment" spellcheck="true"># 无数值解</span>
-In<span class="token punctuation">[</span><span class="token number">19</span><span class="token punctuation">]</span><span class="token punctuation">:</span> nonlinsolve<span class="token punctuation">(</span><span class="token punctuation">[</span>x<span class="token operator">*</span>y<span class="token punctuation">,</span> x<span class="token operator">*</span>y<span class="token operator">-</span>x<span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span>x<span class="token punctuation">,</span> y<span class="token punctuation">]</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">19</span><span class="token punctuation">]</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;(0, y)&amp;#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="积分intergrate">积分<code>intergrate</code></h3>
+<p><code>intergrate(integration_variable, lower_limit, upper_limit)</code></p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">In[5]: integrate(sin(x), x)
+Out[5]: -cos(x)
+    
+In[6]: integrate(exp(-x), (x, 0, oo))
+Out[6]: 1
+# 多重积分
+In[7]: integrate(exp(-x**2-y**2), (x,-oo,oo), (y, -oo, oo))
+Out[7]: π
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="极限limit">极限<code>limit</code></h3>
+<p><code>limit(f(x), x, x0)</code></p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">In[8]: limit(sin(x)/x, x, 0)
+Out[8]: 1
+# 单侧极限
+In[9]: limit(1/x, x, 0, '+')
+Out[9]: ∞
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="等式Eq">等式<code>Eq</code></h3>
+<pre class="line-numbers language-language-python"><code class="language-language-python">In[10]: Eq(x, y)
+Out[10]: x = y
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<h2 id="3-方程">3. 方程</h2>
+<h3 id="代数方程solveset">代数方程<code>solveset</code></h3>
+<p><code>solveset(f, symbol=None, domain=S.Complexes)</code></p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">In[11]: solveset(x**2-x, x)
+Out[11]: {0, 1}
+    
+In[12]: solveset(exp(x), x)
+Out[12]: ∅
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="线性方程组linsolve">线性方程组<code>linsolve</code></h3>
+<p><code>linsolve(system, *symbols)</code></p>
+<pre class="line-numbers language-language-python"><code class="language-language-python">In[13]: linsolve([x+y+z-1,x+y+2*z-3], (x,y,z))
+Out[13]: {(-y - 1, y, 2)}
+    
+In[14]:linsolve(Matrix(([1, 1, 1, 1], [1, 1, 2, 3])), (x, y, z))
+Out[14]: {(-y - 1, y, 2)}
+    
+In[15]: M = Matrix(((1, 1, 1, 1), (1, 1, 2, 3)))
+		system = A, b = M[:, :-1], M[:, -1]
+		linsolve(system, x, y, z)
+Out[15]: {(-y - 1, y, 2)}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="非线性方程组nonlinsolve">非线性方程组<code>nonlinsolve</code></h3>
+<p><code>nonlinsolve(system, *symbols)</code></p>
+<pre class="line-numbers language-language-python"><code class="language-language-python"># 仅有实数解
+In[16]: nonlinsolve([x*y - 1, x - 2], x, y)
+Out[16]: {(2, 1/2)}
+# 仅有复数解
+In[17]: nonlinsolve([x**2+1, y**2+1], [x,y])
+Out[17]: {(-ⅈ, -ⅈ), (-ⅈ, ⅈ), (ⅈ, -ⅈ), (ⅈ, ⅈ)}
+# 同时存在实数解和复数解
+In[18]: nonlinsolve([x**2-2*y**2-2, x*y-2], [x, y])
+Out[18]: {(-2, -1), (2, 1), (-√2⋅ⅈ, √2⋅ⅈ), (√2⋅ⅈ, -√2⋅ⅈ)}
+# 无数值解
+In[19]: nonlinsolve([x*y, x*y-x], [x, y])
+Out[19]: {(0, y)}
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>解的顺序与给定符号的顺序相对应.</p>
-<h3 id="微分方程dsolve"><a href="#微分方程dsolve" class="headerlink" title="微分方程dsolve"></a>微分方程<code>dsolve</code></h3><p><code>dsolve(eq, func=None, hint="default", simplify=True, ics= None, xi=None, eta=None, x0=0, n=6, **kwargs)</code></p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># 首先需要创建新的未定义函数</span>
-In<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">:</span> f<span class="token punctuation">,</span> g <span class="token operator">=</span> symbols<span class="token punctuation">(</span><span class="token string">'f g'</span><span class="token punctuation">,</span> cls<span class="token operator">=</span>Function<span class="token punctuation">)</span>
-        f<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">:</span> f<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
-<span class="token comment" spellcheck="true"># 定义方程</span>
-In<span class="token punctuation">[</span><span class="token number">21</span><span class="token punctuation">]</span><span class="token punctuation">:</span><span class="token punctuation">:</span>diffeq <span class="token operator">=</span> Eq<span class="token punctuation">(</span>x<span class="token punctuation">.</span>diff<span class="token punctuation">(</span>x<span class="token punctuation">,</span> x<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">2</span><span class="token operator">*</span>f<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">.</span>diff<span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">+</span> f<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">,</span> sin<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">21</span><span class="token punctuation">]</span><span class="token punctuation">:</span> 
+<h3 id="微分方程dsolve">微分方程<code>dsolve</code></h3>
+<p><code>dsolve(eq, func=None, hint="default", simplify=True, ics= None, xi=None, eta=None, x0=0, n=6, **kwargs)</code></p>
+<pre class="line-numbers language-language-python"><code class="language-language-python"># 首先需要创建新的未定义函数
+In[20]: f, g = symbols('f g', cls=Function)
+    	f(x)
+Out[20]: f(x)
+# 定义方程
+In[21]::diffeq = Eq(x.diff(x, x) - 2*f(x).diff(x) + f(x), sin(x))
+Out[21]: 
          d                
-f<span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">2</span>⋅──<span class="token punctuation">(</span>f<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">=</span> sin<span class="token punctuation">(</span>x<span class="token punctuation">)</span>
+f(x) - 2⋅──(f(x)) = sin(x)
          dx               
-In<span class="token punctuation">[</span><span class="token number">22</span><span class="token punctuation">]</span><span class="token punctuation">:</span> dsolve<span class="token punctuation">(</span>diffeq<span class="token punctuation">,</span> f<span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
-Out<span class="token punctuation">[</span><span class="token number">22</span><span class="token punctuation">]</span><span class="token punctuation">:</span> 
-       ⎛      <span class="token operator">-</span>x              <span class="token operator">-</span>x        ⎞   
+In[22]: dsolve(diffeq, f(x))
+Out[22]: 
+       ⎛      -x              -x        ⎞   
        ⎜      ───             ───       ⎟  x
-       ⎜       <span class="token number">2</span>               <span class="token number">2</span>        ⎟  ─
-       ⎜     ℯ   ⋅sin<span class="token punctuation">(</span>x<span class="token punctuation">)</span>   <span class="token number">2</span>⋅ℯ   ⋅cos<span class="token punctuation">(</span>x<span class="token punctuation">)</span>⎟  <span class="token number">2</span>
-f<span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token operator">=</span> ⎜C₁ <span class="token operator">+</span> ─────────── <span class="token operator">+</span> ─────────────⎟⋅ℯ 
-       ⎝          <span class="token number">5</span>              <span class="token number">5</span>      ⎠ <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+       ⎜       2               2        ⎟  ─
+       ⎜     ℯ   ⋅sin(x)   2⋅ℯ   ⋅cos(x)⎟  2
+f(x) = ⎜C₁ + ─────────── + ─────────────⎟⋅ℯ 
+       ⎝          5              5      ⎠ 
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1137,7 +1159,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">18.6k</span>&nbsp;字
+                class="white-color">20.4k</span>&nbsp;字
             
             
             
