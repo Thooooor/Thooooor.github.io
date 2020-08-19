@@ -418,7 +418,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    317
+                    258
                 </div>
                 
 
@@ -460,7 +460,7 @@
 <li>如果$x_m\ne y_n，那么z_k\ne x_m\implies Z是X_{m-1}和Y的一个LCS$</li>
 <li>如果$x_m\ne y_n，那么z_k\ne y_n\implies Z是X和Y_{n-1}的一个LCS$</li>
 </ul>
-<h2 id="2-一个递归解"><a href="#2-一个递归解" class="headerlink" title="2. 一个递归解"></a>2. 一个递归解</h2><p>$$<br>c[i,j]=\begin{cases}<br>0\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad;;若i=1或j=0\<br>c[i-1,j-1]+1\quad\quad\quad\quad;;,若i,j&gt;0且x_i=y_i\<br>max(c[i,j-1],c[i-1,j])\quad 若i,j&gt;0且x_i\ne y_i<br>\end{cases}<br>$$</p>
+<h2 id="2-一个递归解"><a href="#2-一个递归解" class="headerlink" title="2. 一个递归解"></a>2. 一个递归解</h2><p><img src="http://note.lizhihao999.cn/notes/20200819163534.png"></p>
 <h2 id="3-计算LCS的长度"><a href="#3-计算LCS的长度" class="headerlink" title="3. 计算LCS的长度"></a>3. 计算LCS的长度</h2><pre class="line-numbers language-pseudocode"><code class="language-pseudocode"> LCS-LENGTH(X,Y)
  m <- X.length
  n <- Y.length
