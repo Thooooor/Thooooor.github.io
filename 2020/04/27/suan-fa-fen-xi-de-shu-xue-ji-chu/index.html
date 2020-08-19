@@ -469,7 +469,7 @@
 <li>若$p(n)=\sum_{i=0}^{d}a_in^i$，其中$a_i$是常数且$a_d&gt;0$，则$p(n)=\Theta(n^d)$</li>
 <li>$\Theta(n^0)$或者$\Theta(1)$为<strong>常数时间复杂性</strong></li>
 </ul>
-<h2 id="低阶函数集合-O"><a href="#低阶函数集合-O" class="headerlink" title="低阶函数集合 $O$"></a>低阶函数集合 $O$</h2><p>对于给定函数$g(n)$:<br>$$<br>O(g(n))=f{(n) ,\bold{存在}正常数c和n_0 满足对于所有n\ge n_0, 0 \le f(n) \le cg(n),}<br>$$<br>记作$f(n)\in O(g(n))$, 或简记为$f(n)=O(g(n))$</p>
+<h2 id="低阶函数集合-O"><a href="#低阶函数集合-O" class="headerlink" title="低阶函数集合 $O$"></a>低阶函数集合 $O$</h2><p>对于给定函数$g(n)$:<br>$$<br>O(g(n))=f{(n) 存在正常数c和n_0 满足对于所有n\ge n_0, 0 \le f(n) \le cg(n),}<br>$$<br>记作$f(n)\in O(g(n))$, 或简记为$f(n)=O(g(n))$</p>
 <p>$\Theta(g(n))$与$O(g(n))$的关系：</p>
 <ul>
 <li>$f(n)=\Theta(g(n))\implies f(n)=O(g(n))$</li>
@@ -482,7 +482,7 @@
 </li>
 </ul>
 <p><strong>如果 $f(n)=O(n^k)$ ，则称$f(n)$是多项式界限的​</strong></p>
-<h2 id="严格低阶函数-o"><a href="#严格低阶函数-o" class="headerlink" title="严格低阶函数 $o$"></a>严格低阶函数 $o$</h2><p>对于给定函数$g(n)$:<br>$$<br>o(g(n))=f{(n) ,存在\bold{任意}正常数c,\bold{存在一个正数}n_0 满足对于所有n\ge n_0, 0 \le f(n) &lt; cg(n),}<br>$$<br>记作$f(n)\in o(g(n))$, 或简记为$f(n)=o(g(n))$</p>
+<h2 id="严格低阶函数-o"><a href="#严格低阶函数-o" class="headerlink" title="严格低阶函数 $o$"></a>严格低阶函数 $o$</h2><p>对于给定函数$g(n)$:<br>$$<br>o(g(n))=f{(n) 存在任意正常数c,存在一个正数n_0 满足对于所有n\ge n_0, 0 \le f(n) &lt; cg(n),}<br>$$<br>记作$f(n)\in o(g(n))$, 或简记为$f(n)=o(g(n))$</p>
 <p>$o$<strong>与$O$的关系：</strong></p>
 <ul>
 <li>$O$<strong>可能</strong>是或不是紧的<pre><code>- $2n^2=O(n^2)$是紧的，但$2n=O(n^2)$不是紧的</code></pre>
@@ -503,11 +503,11 @@
 </ul>
 <p>也可以用来<strong>描述问题</strong>：</p>
 <p>​    - 排序问题的时间复杂性为$\bold{\Omega(n)}$ $\to$ <strong>最好情况</strong></p>
-<p><strong>$\bold{O,\Theta,\Omega}$的关系：</strong><br>$$<br>对于f(n)和g(n),\bold{f(n)=\Theta(g(n))}当且仅当<br>\bold{f(n)=O(g(n))且f(n)=\Omega(g(n))}<br>$$</p>
-<h2 id="严格高阶函数集合-omega"><a href="#严格高阶函数集合-omega" class="headerlink" title="严格高阶函数集合 $\omega$"></a>严格高阶函数集合 $\omega$</h2><p>对于给定函数$g(n)$:<br>$$<br>\omega(g(n))=f{(n) ,对于\bold{任意}正常数c，\bold{存在正数}n_0 满足对于所有n\ge n_0, 0 \le cg(n) \le f(n),}<br>$$<br>记作$f(n)\in \omega(g(n))$, 或简记为$f(n)=\omega(g(n))$</p>
+<p><strong>$\bold{O,\Theta,\Omega}$的关系：</strong><br>$$<br>对于f(n)和g(n),f(n)=\Theta(g(n))当且仅当<br>f(n)=O(g(n))且f(n)=\Omega(g(n))<br>$$</p>
+<h2 id="严格高阶函数集合-omega"><a href="#严格高阶函数集合-omega" class="headerlink" title="严格高阶函数集合 $\omega$"></a>严格高阶函数集合 $\omega$</h2><p>对于给定函数$g(n)$:<br>$$<br>\omega(g(n))=f{(n) \quad对于任意正常数c，存在正数n_0 满足对于所有n\ge n_0, 0 \le cg(n) \le f(n),}<br>$$<br>记作$f(n)\in \omega(g(n))$, 或简记为$f(n)=\omega(g(n))$</p>
 <p>$$<br>\lim_{n\to \infty}\frac{f(n)}{g(n)}=\infty<br>$$</p>
 <p>$\omega$表示<strong>不紧</strong>的下界</p>
-<p>$$<br>\frac{n^2}{2}=\omega(n)$，但$\frac{n^2}{2}\ne \omega(n^2)<br>$$</p>
+<p>$$<br>\frac{n^2}{2}=\omega(n)，但\frac{n^2}{2}\ne \omega(n^2)<br>$$</p>
 <p><strong>$\omega$与 $\Omega$ 的区别</strong>:$\cases{ \omega:,\exists,c存在正常数\ \Omega:,\forall,c,任意正常数 }$</p>
 <p><strong>$\omega$与$o$的关系：</strong><br>$$<br>f(n)=\omega(g(n)) \iff g(n)=o(f(n))<br>$$</p>
 <h2 id="渐进符号的性质"><a href="#渐进符号的性质" class="headerlink" title="渐进符号的性质"></a>渐进符号的性质</h2><ul>
@@ -689,7 +689,7 @@
 </ol>
 </li>
 </ol>
-<p><img src="http://note.lizhihao999.cn/notes/20200818115456.png"><br>$$<br>\color{red}对于红色部分，Master定理无能为力<br>$$<br><strong>更进一步</strong>：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20200818115456.png"><br>$$<br>\color{red}{对于红色部分，Master定理无能为力}<br>$$<br><strong>更进一步</strong>：</p>
 <ol>
 <li><p>在第一种情况，$f(n)$不仅小于$n^{\log_b{a}}$，必须多项式地小于，即对于一个常数$\epsilon&gt;0,;f(n)=O(\frac{n^{\log_b{a}}}{n^\epsilon})$</p>
 </li>
@@ -994,31 +994,31 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/08/08/sympy/">
+                <a href="/2020/04/28/kuai-su-pai-xu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="Sympy的基本使用">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="快速排序">
                         
-                        <span class="card-title">Sympy的基本使用</span>
+                        <span class="card-title">快速排序</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Python科学计算库Sympy的基本使用
+                            基于分治思想的快速排序、复杂度分析和C/C++代码实现
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-08
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-28
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="post-category">
-                                    数学建模
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    学习笔记
                                 </a>
                             
                             
@@ -1028,8 +1028,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Python/">
-                        <span class="chip bg-color">Python</span>
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
+                        <span class="chip bg-color">算法设计与分析</span>
+                    </a>
+                    
+                    <a href="/tags/C-C/">
+                        <span class="chip bg-color">C/C++</span>
                     </a>
                     
                 </div>
@@ -1329,7 +1333,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">14.3k</span>&nbsp;字
+                class="white-color">17.7k</span>&nbsp;字
             
             
             
