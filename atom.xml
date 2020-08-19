@@ -29,9 +29,8 @@
       
         
         
-          &lt;h1&gt;线性规划&lt;/h1&gt;
-&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
-&lt;h2
+          &lt;h1 id=&quot;线性规划&quot;&gt;&lt;a href=&quot;#线性规划&quot; class=&quot;headerlink&quot; title=&quot;线性规划&quot;&gt;&lt;/a&gt;线性规划&lt;/h1&gt;&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
+&lt;h2 id=&quot;特征&quot;&gt;&lt;a href=&quot;#特征&quot;
         
       
     
@@ -58,7 +57,7 @@
       
         
         
-          &lt;pre class=&quot;line-numbers language-language-python&quot;&gt;&lt;code class=&quot;language-language-python&quot;&gt;from sympy import
+          &lt;pre class=&quot;line-numbers language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; sympy &lt;span class=&quot;token
         
       
     
@@ -85,15 +84,7 @@
       
         
         
-          &lt;h1&gt;问题定义&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;子序列&lt;/strong&gt;&lt;br&gt;
-$$&lt;br&gt;
-对于给定序列X=&amp;lt;x_1,x_2,…,x_m&amp;gt;，Z=&amp;lt;z_1,z_2,…z_k&amp;gt;&lt;br&gt;
-$$&lt;br&gt;
-$$&lt;br&gt;
-存在一个严格递增的X
+          &lt;h1 id=&quot;问题定义&quot;&gt;&lt;a href=&quot;#问题定义&quot; class=&quot;headerlink&quot;
         
       
     
@@ -122,8 +113,7 @@ $$&lt;br&gt;
       
         
         
-          &lt;h1&gt;问题描述&lt;/h1&gt;
-&lt;p&gt;给定n个矩阵的链$&amp;lt;A_1,A_2,…,A_n&amp;gt;$，矩阵$A_i$的规模为$p_{i-1}\times p{i}(1\le i\le
+          &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h1&gt;&lt;p&gt;给定n个矩阵的链$&amp;lt;A_1,A_2,…,A_n&amp;gt;$，矩阵$A_i$的规模为$p_{i-1}\times
         
       
     
@@ -151,7 +141,9 @@ $$&lt;br&gt;
         
         
           &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Those who cannot remember the past are condemned to repeat
+&lt;p&gt;&lt;strong&gt;Those who cannot remember the past are condemned to repeat it.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot;
         
       
     
@@ -170,7 +162,7 @@ $$&lt;br&gt;
     <link href="https://thooooor.github.io/2020/04/28/kuai-su-pai-xu/"/>
     <id>https://thooooor.github.io/2020/04/28/kuai-su-pai-xu/</id>
     <published>2020-04-28T12:25:00.000Z</published>
-    <updated>2020-08-19T08:48:16.827Z</updated>
+    <updated>2020-08-19T08:53:54.007Z</updated>
     
     <summary type="html">
     
@@ -179,13 +171,7 @@ $$&lt;br&gt;
         
         
           &lt;p&gt;&lt;strong&gt;快速排序能够实现原址排序，而且平均性能很好。最基本的快速排序基于分治思想。&lt;/strong&gt;&lt;/p&gt;
-&lt;h1&gt;算法过程&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;选定分界值，将原数组划分为两个部分&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;左边的值都小于分界值，右边的值
+&lt;h1 id=&quot;算法过程&quot;&gt;&lt;a href=&quot;#算法过程&quot; class=&quot;headerlink&quot;
         
       
     
@@ -214,8 +200,7 @@ $$&lt;br&gt;
       
         
         
-          &lt;h1&gt;2.1 计算复杂性函数的阶&lt;/h1&gt;
-&lt;h2
+          &lt;h1 id=&quot;2-1-计算复杂性函数的阶&quot;&gt;&lt;a href=&quot;#2-1-计算复杂性函数的阶&quot; class=&quot;headerlink&quot; title=&quot;2.1 计算复杂性函数的阶&quot;&gt;&lt;/a&gt;2.1 计算复杂性函数的阶&lt;/h1&gt;&lt;h2 id=&quot;增长的阶&quot;&gt;&lt;a
         
       
     
@@ -242,9 +227,7 @@ $$&lt;br&gt;
       
         
         
-          &lt;h1&gt;1.1 算法&lt;/h1&gt;
-&lt;h2 id=&quot;（1）计算&quot;&gt;（1）计算&lt;/h2&gt;
-&lt;h3
+          &lt;h1 id=&quot;1-1-算法&quot;&gt;&lt;a href=&quot;#1-1-算法&quot; class=&quot;headerlink&quot; title=&quot;1.1 算法&quot;&gt;&lt;/a&gt;1.1 算法&lt;/h1&gt;&lt;h2 id=&quot;（1）计算&quot;&gt;&lt;a href=&quot;#（1）计算&quot; class=&quot;headerlink&quot;
         
       
     
@@ -271,18 +254,8 @@ $$&lt;br&gt;
       
         
         
-          &lt;h1&gt;一. 分治算法的设计&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;h3 id=&quot;划分&quot;&gt;划分&lt;/h3&gt;
-&lt;p&gt;将整个问题划分为多个子问题&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;h3 id=&quot;求解&quot;&gt;求解&lt;/h3&gt;
-&lt;p&gt;求解各个子问题&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;h3
+          &lt;h1 id=&quot;一-分治算法的设计&quot;&gt;&lt;a href=&quot;#一-分治算法的设计&quot; class=&quot;headerlink&quot; title=&quot;一. 分治算法的设计&quot;&gt;&lt;/a&gt;一. 分治算法的设计&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;h3 id=&quot;划分&quot;&gt;&lt;a href=&quot;#划分&quot;
         
       
     
@@ -309,8 +282,7 @@ $$&lt;br&gt;
       
         
         
-          &lt;h1&gt;开启Gunicorn任务&lt;/h1&gt;
-&lt;pre class=&quot;line-numbers language-language-shell&quot;&gt;&lt;code class=&quot;language-language-shell&quot;&gt;gunicorn --bind
+          &lt;h1 id=&quot;开启Gunicorn任务&quot;&gt;&lt;a href=&quot;#开启Gunicorn任务&quot; class=&quot;headerlink&quot; title=&quot;开启Gunicorn任务&quot;&gt;&lt;/a&gt;开启Gunicorn任务&lt;/h1&gt;&lt;pre class=&quot;line-numbers
         
       
     
@@ -342,7 +314,7 @@ $$&lt;br&gt;
           &lt;blockquote&gt;
 &lt;p&gt;Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;Anaconda
+&lt;h1
         
       
     
@@ -371,9 +343,8 @@ $$&lt;br&gt;
       
         
         
-          &lt;h1&gt;安装虚拟环境&lt;/h1&gt;
-&lt;p&gt;输入命令：&lt;/p&gt;
-&lt;pre class=&quot;line-numbers language-language-shell&quot;&gt;&lt;code class=&quot;language-language-shell&quot;&gt;sudo pip install
+          &lt;h1 id=&quot;安装虚拟环境&quot;&gt;&lt;a href=&quot;#安装虚拟环境&quot; class=&quot;headerlink&quot; title=&quot;安装虚拟环境&quot;&gt;&lt;/a&gt;安装虚拟环境&lt;/h1&gt;&lt;p&gt;输入命令：&lt;/p&gt;
+&lt;pre class=&quot;line-numbers
         
       
     
@@ -403,8 +374,7 @@ $$&lt;br&gt;
         
         
           &lt;blockquote&gt;
-&lt;p&gt;IDE：PyCharm 2019.3.3 (Professional Edition)&lt;br&gt;
-ECS：腾讯云 Ubuntu 18.04.4
+&lt;p&gt;IDE：PyCharm 2019.3.3 (Professional Edition)&lt;br&gt;ECS：腾讯云 Ubuntu 18.04.4
         
       
     
@@ -431,9 +401,7 @@ ECS：腾讯云 Ubuntu 18.04.4
       
         
         
-          &lt;h1&gt;HTTP协议与WebSocket协议&lt;/h1&gt;
-&lt;h2 id=&quot;HTTP协议简介&quot;&gt;HTTP协议简介&lt;/h2&gt;
-&lt;p&gt;​	HTTP协议指超文本传输协议（&lt;strong&gt;H&lt;/strong&gt;yper&lt;strong&gt;T&lt;/strong&gt;ext
+          &lt;h1 id=&quot;HTTP协议与WebSocket协议&quot;&gt;&lt;a href=&quot;#HTTP协议与WebSocket协议&quot; class=&quot;headerlink&quot; title=&quot;HTTP协议与WebSocket协议&quot;&gt;&lt;/a&gt;HTTP协议与WebSocket协议&lt;/h1&gt;&lt;h2
         
       
     
