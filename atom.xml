@@ -29,9 +29,8 @@
       
         
         
-          &lt;h1&gt;线性规划&lt;/h1&gt;
-&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
-&lt;h2
+          &lt;h1 id=&quot;线性规划&quot;&gt;&lt;a href=&quot;#线性规划&quot; class=&quot;headerlink&quot; title=&quot;线性规划&quot;&gt;&lt;/a&gt;线性规划&lt;/h1&gt;&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
+&lt;h2 id=&quot;特征&quot;&gt;&lt;a href=&quot;#特征&quot;
         
       
     
@@ -58,7 +57,7 @@
       
         
         
-          &lt;pre class=&quot;line-numbers language-language-python&quot;&gt;&lt;code class=&quot;language-language-python&quot;&gt;from sympy import
+          &lt;pre class=&quot;line-numbers language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; sympy &lt;span class=&quot;token
         
       
     
@@ -77,7 +76,7 @@
     <link href="https://thooooor.github.io/2020/04/27/suan-fa-fen-xi-de-shu-xue-ji-chu/"/>
     <id>https://thooooor.github.io/2020/04/27/suan-fa-fen-xi-de-shu-xue-ji-chu/</id>
     <published>2020-04-27T14:25:00.000Z</published>
-    <updated>2020-08-18T04:02:12.957Z</updated>
+    <updated>2020-08-19T01:40:45.179Z</updated>
     
     <summary type="html">
     
@@ -85,7 +84,7 @@
       
         
         
-          &lt;h1&gt;2.1
+          &lt;h1 id=&quot;2-1-计算复杂性函数的阶&quot;&gt;&lt;a href=&quot;#2-1-计算复杂性函数的阶&quot; class=&quot;headerlink&quot; title=&quot;2.1 计算复杂性函数的阶&quot;&gt;&lt;/a&gt;2.1
         
       
     
@@ -112,9 +111,7 @@
       
         
         
-          &lt;h1&gt;1.1 算法&lt;/h1&gt;
-&lt;h2 id=&quot;（1）计算&quot;&gt;（1）计算&lt;/h2&gt;
-&lt;h3
+          &lt;h1 id=&quot;1-1-算法&quot;&gt;&lt;a href=&quot;#1-1-算法&quot; class=&quot;headerlink&quot; title=&quot;1.1 算法&quot;&gt;&lt;/a&gt;1.1 算法&lt;/h1&gt;&lt;h2 id=&quot;（1）计算&quot;&gt;&lt;a href=&quot;#（1）计算&quot; class=&quot;headerlink&quot;
         
       
     
@@ -141,8 +138,7 @@
       
         
         
-          &lt;h1&gt;开启Gunicorn任务&lt;/h1&gt;
-&lt;pre class=&quot;line-numbers language-language-shell&quot;&gt;&lt;code class=&quot;language-language-shell&quot;&gt;gunicorn --bind
+          &lt;h1 id=&quot;开启Gunicorn任务&quot;&gt;&lt;a href=&quot;#开启Gunicorn任务&quot; class=&quot;headerlink&quot; title=&quot;开启Gunicorn任务&quot;&gt;&lt;/a&gt;开启Gunicorn任务&lt;/h1&gt;&lt;pre class=&quot;line-numbers
         
       
     
@@ -174,7 +170,7 @@
           &lt;blockquote&gt;
 &lt;p&gt;Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;Anaconda
+&lt;h1
         
       
     
@@ -203,9 +199,8 @@
       
         
         
-          &lt;h1&gt;安装虚拟环境&lt;/h1&gt;
-&lt;p&gt;输入命令：&lt;/p&gt;
-&lt;pre class=&quot;line-numbers language-language-shell&quot;&gt;&lt;code class=&quot;language-language-shell&quot;&gt;sudo pip install
+          &lt;h1 id=&quot;安装虚拟环境&quot;&gt;&lt;a href=&quot;#安装虚拟环境&quot; class=&quot;headerlink&quot; title=&quot;安装虚拟环境&quot;&gt;&lt;/a&gt;安装虚拟环境&lt;/h1&gt;&lt;p&gt;输入命令：&lt;/p&gt;
+&lt;pre class=&quot;line-numbers
         
       
     
@@ -235,8 +230,7 @@
         
         
           &lt;blockquote&gt;
-&lt;p&gt;IDE：PyCharm 2019.3.3 (Professional Edition)&lt;br&gt;
-ECS：腾讯云 Ubuntu 18.04.4
+&lt;p&gt;IDE：PyCharm 2019.3.3 (Professional Edition)&lt;br&gt;ECS：腾讯云 Ubuntu 18.04.4
         
       
     
@@ -263,9 +257,7 @@ ECS：腾讯云 Ubuntu 18.04.4
       
         
         
-          &lt;h1&gt;HTTP协议与WebSocket协议&lt;/h1&gt;
-&lt;h2 id=&quot;HTTP协议简介&quot;&gt;HTTP协议简介&lt;/h2&gt;
-&lt;p&gt;​	HTTP协议指超文本传输协议（&lt;strong&gt;H&lt;/strong&gt;yper&lt;strong&gt;T&lt;/strong&gt;ext
+          &lt;h1 id=&quot;HTTP协议与WebSocket协议&quot;&gt;&lt;a href=&quot;#HTTP协议与WebSocket协议&quot; class=&quot;headerlink&quot; title=&quot;HTTP协议与WebSocket协议&quot;&gt;&lt;/a&gt;HTTP协议与WebSocket协议&lt;/h1&gt;&lt;h2
         
       
     
