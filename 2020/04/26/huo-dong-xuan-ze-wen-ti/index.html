@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Pycharm远程调试, Thor&#39;s Blog">
+    <meta name="keywords" content="活动选择问题, Thor&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Pycharm远程调试 | Thor&#39;s Blog</title>
+    <title>活动选择问题 | Thor&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -253,12 +253,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Pycharm远程调试</h1>
+                    <h1 class="description center-align post-title">活动选择问题</h1>
                 </div>
             </div>
         </div>
@@ -375,8 +375,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Linux/">
-                                <span class="chip bg-color">Linux</span>
+                            <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
+                                <span class="chip bg-color">算法设计与分析</span>
                             </a>
                         
                     </div>
@@ -387,8 +387,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="post-category">
-                                脱坑实录
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                学习笔记
                             </a>
                         
                     </div>
@@ -400,21 +400,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-28
+                    2020-04-26
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-08-07
+                    2020-08-22
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    730
+                    718
                 </div>
                 
 
@@ -436,88 +436,66 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p>IDE：PyCharm 2019.3.3 (Professional Edition)<br>ECS：腾讯云 Ubuntu 18.04.4 LTS</p>
-</blockquote>
-<p>利用pycharm进行远程调试，主要有两种模式：</p>
+                <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>有一个n个活动的集合，$S={a_1,a_2,…,a_n}$，这些活动使用同一个资源（一个教室），而这个资源在某个时刻只能供一个活动使用。</p>
+<p>每个活动都有一个$开始时间s_i$和一个$结束时间f_i$，其中$0\le s_i&lt;f_i&lt;\infin$。如果被选中。任务$a_i$发生在半开时间区间$[s_i,f_i)$期间。</p>
+<p>如果两个活动$a_i$和$a_j$满足$[s_i,f_i)$和$[s_j,f_j)$不重叠，则称它们是<strong>兼容的</strong>。</p>
+<p>在<strong>活动选择问题</strong>中，我们希望选出一个<strong>最大兼容活动集</strong>。</p>
+<h1 id="问题假设"><a href="#问题假设" class="headerlink" title="问题假设"></a>问题假设</h1><p>活动已经按<strong>结束时间的单调递增顺序</strong>排序：<br>$$<br>f_1\le f_2\le f_3\le …\le f_{n-1}\le f_n<br>$$</p>
+<h1 id="设计算法"><a href="#设计算法" class="headerlink" title="设计算法"></a>设计算法</h1><h2 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h2><ul>
+<li>$S_{ij}$：在$a_i$活动结束之后，且在$a_j$开始之前结束的所有活动的集合</li>
+<li>$A_{ij}$：$S_{ij} $的最大相互兼容的活动子集</li>
+</ul>
+<p>设$A_{ij}$包含活动$a_k$，$S_{ij}$中最大兼容任务子集</p>
 <ul>
-<li>利用云服务器端的环境调试本地代码，实现本地开发，Linux云端调试</li>
-<li>在本地调试云端代码</li>
+<li>$A_{ij}$包含$|A_{ij}|=|A_{ik}|+|A_{kj}|+1$个活动</li>
+<li>$A_{ij}=A_{ik}\bigcup{a_k}\bigcup A_{kj}$</li>
 </ul>
-<p>两种模式共同点都需要在本地的pycharm连接上云服务器的环境，首先需要先配置好服务器端的环境。</p>
-<h2 id="一-配置远程连接"><a href="#一-配置远程连接" class="headerlink" title="一. 配置远程连接"></a>一. 配置远程连接</h2><h4 id="1-进入Pycharm菜单栏，如下图依次点击Tools-gt-Deployment-gt-Configuration…"><a href="#1-进入Pycharm菜单栏，如下图依次点击Tools-gt-Deployment-gt-Configuration…" class="headerlink" title="1. 进入Pycharm菜单栏，如下图依次点击Tools->Deployment->Configuration…"></a>1. 进入Pycharm菜单栏，如下图依次点击Tools-&gt;Deployment-&gt;Configuration…</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328204451.png" alt="菜单栏"></p>
-<h4 id="2-右侧点击-添加SFTP"><a href="#2-右侧点击-添加SFTP" class="headerlink" title="2. 右侧点击+添加SFTP"></a>2. 右侧点击+添加SFTP</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328213703.png"></p>
-<h4 id="3-设置Name（自己设置）"><a href="#3-设置Name（自己设置）" class="headerlink" title="3. 设置Name（自己设置）"></a>3. 设置Name（自己设置）</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328213919.png"></p>
-<h4 id="4-填写连接配置"><a href="#4-填写连接配置" class="headerlink" title="4. 填写连接配置"></a>4. 填写连接配置</h4><ul>
-<li><strong>Host（外网IP）</strong></li>
-<li><strong>端口</strong></li>
-<li><strong>用户名</strong></li>
-<li><strong>密码</strong></li>
-</ul>
-<img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/1.png" style="zoom:80%;">
-
-<p>填好之后可以<strong>测试连接</strong></p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/2.png"></p>
-<p>之后点击<strong>Autodetect</strong>确定根目录</p>
-<h4 id="5-点击OK结束"><a href="#5-点击OK结束" class="headerlink" title="5. 点击OK结束"></a>5. 点击OK结束</h4><h2 id="二-配置远程解释器"><a href="#二-配置远程解释器" class="headerlink" title="二. 配置远程解释器"></a>二. 配置远程解释器</h2><h4 id="1-进入Pycharm菜单栏，如下图依次点击File-gt-Settings…"><a href="#1-进入Pycharm菜单栏，如下图依次点击File-gt-Settings…" class="headerlink" title="1. 进入Pycharm菜单栏，如下图依次点击File->Settings…"></a>1. 进入Pycharm菜单栏，如下图依次点击File-&gt;Settings…</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328223125.png"></p>
-<h4 id="2-选择Project-gt-Project-Interpreter"><a href="#2-选择Project-gt-Project-Interpreter" class="headerlink" title="2. 选择Project->Project Interpreter"></a>2. 选择Project-&gt;Project Interpreter</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328223329.png"></p>
-<h4 id="3-点击添加解释器"><a href="#3-点击添加解释器" class="headerlink" title="3. 点击添加解释器"></a>3. 点击添加解释器</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328223536.png"></p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328223554.png"></p>
-<h4 id="4-选择SSH-Interpreter-gt-Existing-server-configuration-gt-刚刚新建的Deployment"><a href="#4-选择SSH-Interpreter-gt-Existing-server-configuration-gt-刚刚新建的Deployment" class="headerlink" title="4. 选择SSH Interpreter->Existing server configuration->刚刚新建的Deployment"></a>4. 选择SSH Interpreter-&gt;Existing server configuration-&gt;刚刚新建的Deployment</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/4.png"></p>
-<h4 id="5-选择Move-gt-Next"><a href="#5-选择Move-gt-Next" class="headerlink" title="5. 选择Move ->Next"></a>5. 选择Move -&gt;Next</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200331105544.png"></p>
-<h4 id="6-设置远端解释器"><a href="#6-设置远端解释器" class="headerlink" title="6. 设置远端解释器"></a>6. 设置远端解释器</h4><p>我在这里设置为虚拟环境中的解释器，是否需要<strong>sudo</strong>权限根据自己的实际需要</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/5.png"></p>
-<p>可以看到pycharm在<code>tmp</code>文件夹下新建了<code>pycharm_project_xxx</code>文件夹用于放置本地的同步项目代码</p>
-<p>点击<strong>Finish</strong>结束配置</p>
-<h4 id="7-成功后可以看到环境中的安装的依赖包"><a href="#7-成功后可以看到环境中的安装的依赖包" class="headerlink" title="7. 成功后可以看到环境中的安装的依赖包"></a>7. 成功后可以看到环境中的安装的依赖包</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328224945.png"></p>
-<p>点击<strong>Apply</strong>完成配置</p>
-<h4 id="8-检查Mappings"><a href="#8-检查Mappings" class="headerlink" title="8. 检查Mappings"></a>8. 检查Mappings</h4><ul>
-<li><strong>Tools-&gt;Deployment-&gt;Configuration…</strong></li>
-<li><strong>查看之前Deployment的Mappings下的Deployment path</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200331111651.png"></p>
+<h2 id="贪心选择"><a href="#贪心选择" class="headerlink" title="贪心选择"></a>贪心选择</h2><ul>
+<li><p><strong>选择所有可选活动中，最早结束的活动</strong></p>
+<p><strong>证明：</strong><br>$$<br>考虑任意非空子问题S_k，令a_m是S_k种结束时间最早的活动，则a_m在S_k的某个最大兼容活动子集中<br>$$<br>令$A_k$是$S_k$的一个最大兼容活动子集，且$a_m$是$A_k$中结束时间最早的活动。</p>
 <ul>
-<li><strong>如果没有自动定位可以手动设置</strong></li>
+<li><p>若$a_j=a_m$，则已经证明$a_m$在$S_k$的某个最大兼容活动子集中</p>
+</li>
+<li><p>若$a_j\ne a_m$，令集合$A’_k=A_k-{a_j}\bigcup{a_m}$，即：将$A_k$中的$a_j$替换为$a_m$。</p>
+<p>$\because A_k$中的活动都是不相交的，$a_j$是$A_k$中结束时间最早的活动，并且$f_m\le f_j$</p>
+<p>$\therefore A’_{k}$中的活动都是不相交的</p>
+<p>$\because |A’_k|=|A_k|$</p>
+<p>$\therefore A’_k$也是$S_k$的一个最大兼容活动子集</p>
+</li>
 </ul>
-<h2 id="三-远程调试本地代码"><a href="#三-远程调试本地代码" class="headerlink" title="三.远程调试本地代码"></a>三.远程调试本地代码</h2><blockquote>
-<p>以<strong>Django</strong>项目为例</p>
-</blockquote>
-<h4 id="1-设置ALLOWED-HOSTS"><a href="#1-设置ALLOWED-HOSTS" class="headerlink" title="1. 设置ALLOWED_HOSTS"></a>1. 设置ALLOWED_HOSTS</h4><p>允许所有的host访问</p>
-<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># DataAdmin/settings.py</span>
-<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
-ALLOWED_HOSTS <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token string">"*"</span><span class="token punctuation">]</span>
-<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<h4 id="2-自动同步代码"><a href="#2-自动同步代码" class="headerlink" title="2. 自动同步代码"></a>2. 自动同步代码</h4><p>实际的运行过程是：pycharm将本地代码<strong>自动同步</strong>到服务器上对应的的<code>tmp/pycharm_projectXXX</code>文件夹中，实际运行时也是运行的服务器端的代码。</p>
+</li>
+<li><p>选择所有可选活动中，最晚开始的活动</p>
+<p><strong>证明</strong>：<br>$$<br>考虑任意非空子问题S_k，令a_m是S_k种开始时间最晚的活动，则a_m在S_k的某个最大兼容活动子集中<br>$$<br>令$A_k$是$S_k$的一个最大兼容活动子集，且$a_m$是$A_k$中开始时间最晚的活动。</p>
 <ul>
-<li><strong>可以通过File Transfer查看同步情况</strong></li>
+<li><p>若$a_j=a_m$，则已经证明$a_m$在$S_k$的某个最大兼容活动子集中</p>
+</li>
+<li><p>若$a_j\ne a_m$，令集合$A’_k=A_k-{a_j}\bigcup{a_m}$，即：将$A_k$中的$a_j$替换为$a_m$。</p>
+<p>$\because A_k$中的活动都是不相交的，$a_j$是$A_k$中开始时间最晚的活动，并且$s_m\ge s_j$</p>
+<p>$\therefore A’_{k}$中的活动都是不相交的</p>
+<p>$\because |A’_k|=|A_k|$</p>
+<p>$\therefore A’_k$也是$S_k$的一个最大兼容活动子集</p>
+</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200331112257.png"></p>
-<ul>
-<li><strong>可以通过Tools-&gt;Deployment-&gt;Browse Remote Host查看服务器端目录结构</strong></li>
+</li>
 </ul>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200331112330.png"></p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200331112502.png"></p>
-<h4 id="3-调试运行项目"><a href="#3-调试运行项目" class="headerlink" title="3. 调试运行项目"></a>3. 调试运行项目</h4><ul>
-<li><strong>Run manage.py-&gt;Edit  Configurations…</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200331110847.png"></p>
-<ul>
-<li><strong>检查Script path是否对应自己的项目地址</strong></li>
-<li><strong>添加Parameters：<code>runserver 0.0.0.0:8000</code></strong></li>
-<li><strong>Apply-&gt;OK</strong></li>
-<li><strong>Run</strong></li>
-</ul>
-<p>打开<strong>IP:8000</strong>，可以看到自己的网页</p>
-<h2 id="四-远程调试云端代码"><a href="#四-远程调试云端代码" class="headerlink" title="四. 远程调试云端代码"></a>四. 远程调试云端代码</h2><h4 id="1-连接到服务器Tools-gt-Start-SSH-session…"><a href="#1-连接到服务器Tools-gt-Start-SSH-session…" class="headerlink" title="1. 连接到服务器Tools->Start SSH session…"></a>1. 连接到服务器Tools-&gt;Start SSH session…</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328231327.png"></p>
-<h4 id="2-选择对应的HOST"><a href="#2-选择对应的HOST" class="headerlink" title="2.选择对应的HOST"></a>2.选择对应的HOST</h4><p>连接成功后，会有终端显示</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/7.png"></p>
-<h4 id="3-显示服务器目录结构Tools-gt-Deployment-gt-Browse-Remote-Host"><a href="#3-显示服务器目录结构Tools-gt-Deployment-gt-Browse-Remote-Host" class="headerlink" title="3. 显示服务器目录结构Tools->Deployment->Browse Remote Host"></a>3. 显示服务器目录结构Tools-&gt;Deployment-&gt;Browse Remote Host</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328231901.png"></p>
-<p>选择后会显示出服务器目录结构，选中项目文件能够打开编辑</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/9.png"></p>
-<h4 id="4-编辑完成后更新版本"><a href="#4-编辑完成后更新版本" class="headerlink" title="4. 编辑完成后更新版本"></a>4. 编辑完成后更新版本</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328232528.png"></p>
-<p>可以设置自动上传更新<strong>Tools-&gt;Deployment-&gt;Automatic Upload</strong></p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328232726.png"></p>
-<h4 id="5-在终端调试运行"><a href="#5-在终端调试运行" class="headerlink" title="5. 在终端调试运行"></a>5. 在终端调试运行</h4><script>
+<h2 id="递归贪心算法"><a href="#递归贪心算法" class="headerlink" title="递归贪心算法"></a>递归贪心算法</h2><pre class="line-numbers language-pseudocode"><code class="language-pseudocode">RECURSIVE-ACTIVITY-SELECTOR(s,f,k,n)
+    m = k+1
+    while m<=n and s[m]<f[k] do
+        m = m+1
+        if m <= n do
+            return &#123;a[m]&#125; and RECURSIVE-ACTIVITY-SELECTOR(s,f,m,n)
+        else 
+            return<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="迭代贪心算法"><a href="#迭代贪心算法" class="headerlink" title="迭代贪心算法"></a>迭代贪心算法</h2><pre class="line-numbers language-pseudocode"><code class="language-pseudocode">GREEDY-ACTIVITY-SELECTOR(s,f)
+    n = s.length
+    A=&#123;a[1]&#125;
+    k=1
+    for m=2 to n do
+        if s[m]>=f[k] do
+            A.append&#123;a[m]&#125;
+            k = m
+    return A<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -560,7 +538,7 @@ ALLOWED_HOSTS <span class="token operator">=</span> <span class="token punctuati
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://thooooor.github.io/2020/03/28/pycharm-yuan-cheng-diao-shi/">https://thooooor.github.io/2020/03/28/pycharm-yuan-cheng-diao-shi/</a>
+                    <a href="https://thooooor.github.io/2020/04/26/huo-dong-xuan-ze-wen-ti/">https://thooooor.github.io/2020/04/26/huo-dong-xuan-ze-wen-ti/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -598,8 +576,8 @@ ALLOWED_HOSTS <span class="token operator">=</span> <span class="token punctuati
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Linux/">
-                                    <span class="chip bg-color">Linux</span>
+                                <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
+                                    <span class="chip bg-color">算法设计与分析</span>
                                 </a>
                             
                         </div>
@@ -770,7 +748,7 @@ ALLOWED_HOSTS <span class="token operator">=</span> <span class="token punctuati
         repo: 'blogcomment',
         owner: 'Thooooor',
         admin: "Thooooor",
-        id: '2020-03-28T09-25-00',
+        id: '2020-04-26T22-31-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -798,30 +776,31 @@ ALLOWED_HOSTS <span class="token operator">=</span> <span class="token punctuati
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/03/29/linux-pei-zhi-xu-ni-huan-jing/">
+                <a href="/2020/04/26/ha-fu-man-bian-ma/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Linux配置虚拟环境">
                         
-                        <span class="card-title">Linux配置虚拟环境</span>
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="哈夫曼编码">
+                        
+                        <span class="card-title">哈夫曼编码</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在Ubuntu服务器上配置管理虚拟环境
+                            哈夫曼编码算法流程以及正确性的证明
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-29
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-26
                         </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="post-category">
-                                    脱坑实录
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    学习笔记
                                 </a>
                             
                             
@@ -831,12 +810,8 @@ ALLOWED_HOSTS <span class="token operator">=</span> <span class="token punctuati
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
-                    </a>
-                    
-                    <a href="/tags/Ubuntu/">
-                        <span class="chip bg-color">Ubuntu</span>
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
+                        <span class="chip bg-color">算法设计与分析</span>
                     </a>
                     
                 </div>
@@ -850,30 +825,31 @@ ALLOWED_HOSTS <span class="token operator">=</span> <span class="token punctuati
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/03/08/li-yong-channels-shi-xian-websocket-xie-yi/">
+                <a href="/2020/04/26/suan-fa-gai-lun/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="利用Channels实现WebSocket协议">
                         
-                        <span class="card-title">利用Channels实现WebSocket协议</span>
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="算法概论">
+                        
+                        <span class="card-title">算法概论</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在Django中利用Channels实现WebSocket实时通讯协议
+                            算法设计与分析概论
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-26
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AE%9E%E6%88%98/" class="post-category">
-                                    技术实战
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    学习笔记
                                 </a>
                             
                             
@@ -883,8 +859,8 @@ ALLOWED_HOSTS <span class="token operator">=</span> <span class="token punctuati
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Django/">
-                        <span class="chip bg-color">Django</span>
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
+                        <span class="chip bg-color">算法设计与分析</span>
                     </a>
                     
                 </div>
@@ -1059,6 +1035,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
 
 
 
