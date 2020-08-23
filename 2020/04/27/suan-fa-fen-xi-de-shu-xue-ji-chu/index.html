@@ -436,9 +436,12 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="2-1-计算复杂性函数的阶"><a href="#2-1-计算复杂性函数的阶" class="headerlink" title="2.1 计算复杂性函数的阶"></a>2.1 计算复杂性函数的阶</h1><h2 id="增长的阶"><a href="#增长的阶" class="headerlink" title="增长的阶"></a>增长的阶</h2><p>算法的实际运行时间受除算法设计本身以外很多其他因素的影响，如：指令集、操作系统、编译器…… </p>
+                <h1>2.1 计算复杂性函数的阶</h1>
+<h2 id="增长的阶">增长的阶</h2>
+<p>算法的实际运行时间受除算法设计本身以外很多其他因素的影响，如：指令集、操作系统、编译器……</p>
 <ul>
-<li>如何描述算法的效率$\to$只与<strong>输入问题的规模</strong>有关<ul>
+<li>如何描述算法的效率$\to$只与<strong>输入问题的规模</strong>有关
+<ul>
 <li>增长率</li>
 <li>时间复杂度</li>
 </ul>
@@ -446,18 +449,23 @@
 <li>忽略低阶项</li>
 <li>保留最高阶项</li>
 <li>忽略常系数</li>
-<li>常见增长阶：$\Theta(1)$, $\Theta(lg,n)$, $\Theta(\sqrt[]{n})$, $\Theta(n)$, $\Theta(nlg,n)$, $\Theta(n^2)$, $\Theta(n^3)$, $\Theta(2^n)$, $\Theta(n!)$<ul>
+<li>常见增长阶：$\Theta(1)$, $\Theta(lg,n)$, $\Theta(\sqrt[]{n})$, $\Theta(n)$, $\Theta(nlg,n)$, $\Theta(n^2)$, $\Theta(n^3)$, $\Theta(2^n)$, $\Theta(n!)$
+<ul>
 <li>利用$\Theta(n^2)$表示插入排序的<strong>最坏</strong>运行时间</li>
 </ul>
 </li>
-<li>增长记号$O, \Theta, \Omega, o, \omega$<ul>
+<li>增长记号$O, \Theta, \Omega, o, \omega$
+<ul>
 <li>$O$表示<strong>渐进上界</strong></li>
 <li>$\Theta$表示<strong>渐进紧界</strong></li>
 <li>$\Omega$表示<strong>渐进下界</strong></li>
 </ul>
 </li>
 </ul>
-<h2 id="同阶函数集合-Theta"><a href="#同阶函数集合-Theta" class="headerlink" title="同阶函数集合 $\Theta$"></a>同阶函数集合 $\Theta$</h2><p>$$<br>\Theta(g(n))={,f(n)|\exists c_1,c_2 &gt;0,\forall n&gt;n_0,c_1g(n)\le f(n) \le c_2g(n) ,}<br>$$</p>
+<h2 id="同阶函数集合-Theta">同阶函数集合 $\Theta$</h2>
+<p>$$<br>
+\Theta(g(n))={,f(n)|\exists c_1,c_2 &gt;0,\forall n&gt;n_0,c_1g(n)\le f(n) \le c_2g(n) ,}<br>
+$$</p>
 <p>称为与g(n)<strong>同阶的函数集合</strong></p>
 <ul>
 <li>若$f(n)\in \Theta(g(n))$, $g(n)$与$f(n)$同阶, 记作$f(n) = \Theta(g(n))$</li>
@@ -468,12 +476,18 @@
 <li>若$p(n)=\sum_{i=0}^{d}a_in^i$，其中$a_i$是常数且$a_d&gt;0$，则$p(n)=\Theta(n^d)$</li>
 <li>$\Theta(n^0)$或者$\Theta(1)$为<strong>常数时间复杂性</strong></li>
 </ul>
-<h2 id="低阶函数集合-O"><a href="#低阶函数集合-O" class="headerlink" title="低阶函数集合 $O$"></a>低阶函数集合 $O$</h2><p>对于给定函数$g(n)$:<br>$$<br>O(g(n))=f{(n) 存在正常数c和n_0 满足对于所有n\ge n_0, 0 \le f(n) \le cg(n),}<br>$$<br>记作$f(n)\in O(g(n))$, 或简记为$f(n)=O(g(n))$</p>
+<h2 id="低阶函数集合-O">低阶函数集合 $O$</h2>
+<p>对于给定函数$g(n)$:<br>
+$$<br>
+O(g(n))=f{(n) 存在正常数c和n_0 满足对于所有n\ge n_0, 0 \le f(n) \le cg(n),}<br>
+$$<br>
+记作$f(n)\in O(g(n))$, 或简记为$f(n)=O(g(n))$</p>
 <p>$\Theta(g(n))$与$O(g(n))$的关系：</p>
 <ul>
 <li>$f(n)=\Theta(g(n))\implies f(n)=O(g(n))$</li>
 <li>$\Theta$强于$O$</li>
-<li>$\Theta(g(n)) \subseteq O(g(n))$<ul>
+<li>$\Theta(g(n)) \subseteq O(g(n))$
+<ul>
 <li>$an^2+bn+c=\Theta(n^2)$并且$an^2+bn+c=O(n^2)$</li>
 <li>$an+b=O(n^2)$</li>
 <li>$n=O(n^2)$</li>
@@ -481,18 +495,32 @@
 </li>
 </ul>
 <p><strong>如果 $f(n)=O(n^k)$ ，则称$f(n)$是多项式界限的​</strong></p>
-<h2 id="严格低阶函数-o"><a href="#严格低阶函数-o" class="headerlink" title="严格低阶函数 $o$"></a>严格低阶函数 $o$</h2><p>对于给定函数$g(n)$:<br>$$<br>o(g(n))=f{(n) 存在任意正常数c,存在一个正数n_0 满足对于所有n\ge n_0, 0 \le f(n) &lt; cg(n),}<br>$$<br>记作$f(n)\in o(g(n))$, 或简记为$f(n)=o(g(n))$</p>
+<h2 id="严格低阶函数-o">严格低阶函数 $o$</h2>
+<p>对于给定函数$g(n)$:<br>
+$$<br>
+o(g(n))=f{(n) 存在任意正常数c,存在一个正数n_0 满足对于所有n\ge n_0, 0 \le f(n) &lt; cg(n),}<br>
+$$<br>
+记作$f(n)\in o(g(n))$, 或简记为$f(n)=o(g(n))$</p>
 <p>$o$<strong>与$O$的关系：</strong></p>
 <ul>
-<li>$O$<strong>可能</strong>是或不是紧的<pre><code>- $2n^2=O(n^2)$是紧的，但$2n=O(n^2)$不是紧的</code></pre>
-</li>
-<li>$o$标记上界且<strong>不紧</strong><pre><code>- $2n=o(n^2)$，但是$2n^2\ne o(n^2)$</code></pre>
+<li>$O$<strong>可能</strong>是或不是紧的
 <ul>
+<li>$2n^2=O(n^2)$是紧的，但$2n=O(n^2)$不是紧的</li>
+</ul>
+</li>
+<li>$o$标记上界且<strong>不紧</strong>
+<ul>
+<li>$2n=o(n^2)$，但是$2n^2\ne o(n^2)$</li>
 <li>区别：$\cases{O:\exist,c,某个正常数\o:\forall,c,任意正常数}$</li>
 </ul>
 </li>
 </ul>
-<h2 id="高阶函数集合-Omega"><a href="#高阶函数集合-Omega" class="headerlink" title="高阶函数集合 $\Omega$"></a>高阶函数集合 $\Omega$</h2><p>对于给定函数$g(n)$:<br>$$<br>\Omega(g(n))=f{(n) ,存在正常数c和n_0 满足对于所有n\ge n_0, 0 \le cg(n) \le f(n),}<br>$$<br>记作$f(n)\in \Omega(g(n))$, 或简记为$f(n)=\Omega(g(n))$</p>
+<h2 id="高阶函数集合-Omega">高阶函数集合 $\Omega$</h2>
+<p>对于给定函数$g(n)$:<br>
+$$<br>
+\Omega(g(n))=f{(n) ,存在正常数c和n_0 满足对于所有n\ge n_0, 0 \le cg(n) \le f(n),}<br>
+$$<br>
+记作$f(n)\in \Omega(g(n))$, 或简记为$f(n)=\Omega(g(n))$</p>
 <p>$\Omega$用来描述运行时间的<strong>最好情况</strong>，对<strong>所有输入</strong>都正确</p>
 <p>例如，对于插入排序：</p>
 <ul>
@@ -501,38 +529,85 @@
 <li>最坏运行时间为$\Omega(n^2)$</li>
 </ul>
 <p>也可以用来<strong>描述问题</strong>：</p>
-<p>​    - 排序问题的时间复杂性为$\bold{\Omega(n)}$ $\to$ <strong>最好情况</strong></p>
-<p><strong>$\bold{O,\Theta,\Omega}$的关系：</strong><br>$$<br>对于f(n)和g(n),f(n)=\Theta(g(n))当且仅当<br>f(n)=O(g(n))且f(n)=\Omega(g(n))<br>$$</p>
-<h2 id="严格高阶函数集合-omega"><a href="#严格高阶函数集合-omega" class="headerlink" title="严格高阶函数集合 $\omega$"></a>严格高阶函数集合 $\omega$</h2><p>对于给定函数$g(n)$:<br>$$<br>\omega(g(n))=f{(n) \quad对于任意正常数c，存在正数n_0 满足对于所有n\ge n_0, 0 \le cg(n) \le f(n),}<br>$$<br>记作$f(n)\in \omega(g(n))$, 或简记为$f(n)=\omega(g(n))$</p>
-<p>$$<br>\lim_{n\to \infty}\frac{f(n)}{g(n)}=\infty<br>$$</p>
+<p>​	- 排序问题的时间复杂性为$\bold{\Omega(n)}$ $\to$ <strong>最好情况</strong></p>
+<p><strong>$\bold{O,\Theta,\Omega}$的关系：</strong><br>
+$$<br>
+对于f(n)和g(n),f(n)=\Theta(g(n))当且仅当<br>
+f(n)=O(g(n))且f(n)=\Omega(g(n))<br>
+$$</p>
+<h2 id="严格高阶函数集合-omega">严格高阶函数集合 $\omega$</h2>
+<p>对于给定函数$g(n)$:<br>
+$$<br>
+\omega(g(n))=f{(n) \quad对于任意正常数c，存在正数n_0 满足对于所有n\ge n_0, 0 \le cg(n) \le f(n),}<br>
+$$<br>
+记作$f(n)\in \omega(g(n))$, 或简记为$f(n)=\omega(g(n))$</p>
+<p>$$<br>
+\lim_{n\to \infty}\frac{f(n)}{g(n)}=\infty<br>
+$$</p>
 <p>$\omega$表示<strong>不紧</strong>的下界</p>
-<p>$$<br>\frac{n^2}{2}=\omega(n)，但\frac{n^2}{2}\ne \omega(n^2)<br>$$</p>
+<p>$$<br>
+\frac{n^2}{2}=\omega(n)，但\frac{n^2}{2}\ne \omega(n^2)<br>
+$$</p>
 <p><strong>$\omega$与 $\Omega$ 的区别</strong>:$\cases{ \omega:,\exists,c存在正常数\ \Omega:,\forall,c,任意正常数 }$</p>
-<p><strong>$\omega$与$o$的关系：</strong><br>$$<br>f(n)=\omega(g(n)) \iff g(n)=o(f(n))<br>$$</p>
-<h2 id="渐进符号的性质"><a href="#渐进符号的性质" class="headerlink" title="渐进符号的性质"></a>渐进符号的性质</h2><ul>
-<li><p><strong>传递性</strong>：$O, \Theta, \Omega, o, \omega$<br>$$<br>f(n)=\Theta(g(n))\and g(n)=\Theta(h(n)) \implies f(n)=\Theta(h(n))<br>$$</p>
-</li>
-<li><p><strong>自反性</strong>：$O,\Theta,\Omega $<br>$$<br>f(n)=\Theta(f(n))<br>$$</p>
-</li>
-<li><p><strong>对称性</strong>：$\Theta$<br>$$<br>f(n)=\Theta(g(n)) \iff g(n)=\Theta(f(n))<br>$$</p>
-</li>
-<li><p><strong>反对称性</strong>：$O, \Omega, o, \omega$<br>$$<br>f(n)=O(g(n)) \iff g(n)=\Omega(f(n))<br>$$</p>
-</li>
-</ul>
-<p>$$<br>  f(n)=o(g(n)) \iff g(n)=\omega(f(n))<br>$$</p>
+<p><strong>$\omega$与$o$的关系：</strong><br>
+$$<br>
+f(n)=\omega(g(n)) \iff g(n)=o(f(n))<br>
+$$</p>
+<h2 id="渐进符号的性质">渐进符号的性质</h2>
 <ul>
-<li><p><strong>等价性</strong>$\cases{\text{传递性}\自反性\对称性} $$\implies $ $\Theta$</p>
+<li>
+<p><strong>传递性</strong>：$O, \Theta, \Omega, o, \omega$<br>
+$$<br>
+f(n)=\Theta(g(n))\and g(n)=\Theta(h(n)) \implies f(n)=\Theta(h(n))<br>
+$$</p>
 </li>
-<li><p><strong>并非所有函数都可比</strong></p>
+<li>
+<p><strong>自反性</strong>：$O,\Theta,\Omega $<br>
+$$<br>
+f(n)=\Theta(f(n))<br>
+$$</p>
+</li>
+<li>
+<p><strong>对称性</strong>：$\Theta$<br>
+$$<br>
+f(n)=\Theta(g(n)) \iff g(n)=\Theta(f(n))<br>
+$$</p>
+</li>
+<li>
+<p><strong>反对称性</strong>：$O, \Omega, o, \omega$<br>
+$$<br>
+f(n)=O(g(n)) \iff g(n)=\Omega(f(n))<br>
+$$</p>
 </li>
 </ul>
-<h1 id="2-2-和式的估计与界限"><a href="#2-2-和式的估计与界限" class="headerlink" title="2.2 和式的估计与界限"></a>2.2 和式的估计与界限</h1><h2 id="求和公式"><a href="#求和公式" class="headerlink" title="求和公式"></a>求和公式</h2><ol>
-<li>线性和<br>$$<br>\sum_{k=1}^{n}(ca_k+b_k) = c\sum_{k=1}^{n}a_k+\sum_{k=1}^{n}b_k<br>$$</li>
+<p>$$<br>
+f(n)=o(g(n)) \iff g(n)=\omega(f(n))<br>
+$$</p>
+<ul>
+<li>
+<p><strong>等价性</strong>$\cases{\text{传递性}\自反性\对称性} $$\implies $ $\Theta$</p>
+</li>
+<li>
+<p><strong>并非所有函数都可比</strong></p>
+</li>
+</ul>
+<h1>2.2 和式的估计与界限</h1>
+<h2 id="求和公式">求和公式</h2>
+<ol>
+<li>
+<p>线性和<br>
+$$<br>
+\sum_{k=1}^{n}(ca_k+b_k) = c\sum_{k=1}^{n}a_k+\sum_{k=1}^{n}b_k<br>
+$$</p>
+<p>线性性质对于无限收敛级数同样适用。</p>
+<p>线性性质可以用来对项中包含渐进符号的和式求和，例如：</p>
+</li>
 </ol>
-<p>   线性性质对于无限收敛级数同样适用。</p>
-<p>   线性性质可以用来对项中包含渐进符号的和式求和，例如：</p>
-<p>$$<br>\sum_{k=1}^{n}\Theta(f(k))=\Theta(\sum_{k=1}^{n}f(k))<br>$$</p>
-<pre><code>       等式中，左边的\Theta符号作用于变量k，而右边的\Theta则作用于n。这种处理方法同样适用于无限收敛级数。</code></pre>
+<p>$$<br>
+\sum_{k=1}^{n}\Theta(f(k))=\Theta(\sum_{k=1}^{n}f(k))<br>
+$$</p>
+<pre><code>	等式中，左边的\Theta符号作用于变量k，而右边的\Theta则作用于n。这种处理方法同样适用于无限收敛级数。
+</code></pre>
 <ol start="2">
 <li>级数</li>
 </ol>
@@ -540,7 +615,8 @@
 <li>等差级数：$\sum_{i=1}^{n}i=\frac{n(n+1)}{2}=\Theta(n^2)$</li>
 <li>几何级数：$\sum_{k=0}^{n}x^k=1+x+x^2+…+x^n=\frac{x^{n+1}-1}{x-1}\quad(x\ne1)$</li>
 <li>无限递减几何级数：$\sum_{k=0}^{\infin}x^k=\frac{1}{1-x}\quad|x|&lt;1$</li>
-<li>裂项级数：$\sum_{k=1}^{n}(a_k-a_{k-1})=a_n-a_0$<ul>
+<li>裂项级数：$\sum_{k=1}^{n}(a_k-a_{k-1})=a_n-a_0$
+<ul>
 <li>$\sum_{k=0}^{n-1}(a_k-a_{k+1})=a_0-a_n$</li>
 <li>$\sum_{k=1}^{n-1}\frac{1}{k(k+1)}=\sum_{k=1}^{n-1}(\frac{1}{k}-\frac{1}{k+1})=1-\frac{1}{n}$</li>
 </ul>
@@ -548,62 +624,99 @@
 <li>调和级数：$H_n=\sum_{k=1}^{n}\frac{1}{k}=\ln{n}+O(1)$</li>
 </ul>
 <ol start="3">
-<li><p>常用公式</p>
-<p>乘积：$lg(\prod_{k=1}^{n}a_k)=\sum_{k=1}^{n}\lg{a_k}$<br>平方和：$\sum_{k=0}^{n}k^2=\frac{n(n+1)(2n+1)}{6}$<br>立方和：$\sum_{k=0}^{n}=\frac{n^2(n+1)^2}{4}$</p>
+<li>
+<p>常用公式</p>
+<p>乘积：$lg(\prod_{k=1}^{n}a_k)=\sum_{k=1}^{n}\lg{a_k}$<br>
+平方和：$\sum_{k=0}^{n}k^2=\frac{n(n+1)(2n+1)}{6}$<br>
+立方和：$\sum_{k=0}^{n}=\frac{n^2(n+1)^2}{4}$</p>
 </li>
-</ol>
-<ol start="4">
-<li><p>和的界限</p>
+<li>
+<p>和的界限</p>
 <p><strong>利用公式和定义</strong></p>
-<p>例1：证明$\sum_{k=0}^{n}3^k=O(3^n)$<br>证：证明对于$c\ge\frac{3}{2}$存在一个$n_0，当n\ge n_0时\sum_{k=0}^{n}3^k\le c3^n$<br>当n=0时，$\sum_{k=0}^{n}3^k=1\le c=c3^n$<br>设$n\le m$时成立,令n=m+1,则<br>$\sum_{k=0}^{m+1}3^k=\sum_{k=0}^{m}3^k+3^{m+1}\le c3^m+3^{m+1}=c3^{m+1}(\frac{1}{3}+\frac{1}{c})\le c3^{m+1}$</p>
+<p>例1：证明$\sum_{k=0}^{n}3^k=O(3^n)$<br>
+证：证明对于$c\ge\frac{3}{2}$存在一个$n_0，当n\ge n_0时\sum_{k=0}^{n}3^k\le c3^n$<br>
+当n=0时，$\sum_{k=0}^{n}3^k=1\le c=c3^n$<br>
+设$n\le m$时成立,令n=m+1,则<br>
+$\sum_{k=0}^{m+1}3^k=\sum_{k=0}^{m}3^k+3^{m+1}\le c3^m+3^{m+1}=c3^{m+1}(\frac{1}{3}+\frac{1}{c})\le c3^{m+1}$</p>
 </li>
 </ol>
-<h2 id="求和的界限"><a href="#求和的界限" class="headerlink" title="求和的界限"></a>求和的界限</h2><ol>
-<li><h4 id="放大法"><a href="#放大法" class="headerlink" title="放大法"></a>放大法</h4><p>例1：$\sum_{k=1}^{n}k\le\sum_{k=1}^{n}n=n^2$ $\impliedby\bold{\sum_{k=1}^{n}a_i\le n\times \max{a_k}}$</p>
+<h2 id="求和的界限">求和的界限</h2>
+<ol>
+<li>
+<h4 id="放大法">放大法</h4>
+<p>例1：$\sum_{k=1}^{n}k\le\sum_{k=1}^{n}n=n^2$ $\impliedby\bold{\sum_{k=1}^{n}a_i\le n\times \max{a_k}}$</p>
+</li>
+<li>
+<h4 id="前后项之比">前后项之比</h4>
 </li>
 </ol>
-<ol start="2">
-<li><h4 id="前后项之比"><a href="#前后项之比" class="headerlink" title="前后项之比"></a>前后项之比</h4></li>
-</ol>
-<p>例2：设对于所有$k\ge0,\frac{a_{k+1}}{a_k}\le r\le1,求\sum_{k=0}^{n}a_k$的上界.<br>   解：$\frac{a_1}{a_0}\le r \implies a_1 \le a_0r,$<br>   $\frac{a_2}{a_1} \le r\implies a_2\le a_1r\le a_0r^2,$<br>   $\frac{a_3}{a_2}\le r\implies a_3\le a_2r \le a_0r^3,……$<br>   $\frac{a_k}{a_{k-1}}\le r\implies a_k\le a_{k-1}r \le a_0r^k$<br>   $\therefore \sum_{k=0}^{n}a_k\le \sum_{k=0}^{\infin}a_0r^k=a_0\sum_{k=0}^{\infin}r^k=\frac{a_0}{1-r}$</p>
+<p>例2：设对于所有$k\ge0,\frac{a_{k+1}}{a_k}\le r\le1,求\sum_{k=0}^{n}a_k$的上界.<br>
+解：$\frac{a_1}{a_0}\le r \implies a_1 \le a_0r,$<br>
+$\frac{a_2}{a_1} \le r\implies a_2\le a_1r\le a_0r^2,$<br>
+$\frac{a_3}{a_2}\le r\implies a_3\le a_2r \le a_0r^3,…$<br>
+$\frac{a_k}{a_{k-1}}\le r\implies a_k\le a_{k-1}r \le a_0r^k$<br>
+$\therefore \sum_{k=0}^{n}a_k\le \sum_{k=0}^{\infin}a_0r^k=a_0\sum_{k=0}^{\infin}r^k=\frac{a_0}{1-r}$</p>
 <ol start="3">
-<li><h4 id="分裂和"><a href="#分裂和" class="headerlink" title="分裂和"></a>分裂和</h4><p>例4：用分裂和的方法求$\sum_{k=1}^{n}k$的下界.<br>解：$\sum_{k=1}^{n}k=\sum_{k=1}^{\frac{n}{2}}k+\sum_{k=\frac{n}{2}+1}^{n}k\ge\sum_{k=1}^{\frac{n}{2}}0+\sum_{k=\frac{n}{2}+1}^{n}\frac{n}{2}\ge(\frac{n}{2})^2=\Omega(n^2)$</p>
+<li>
+<h4 id="分裂和">分裂和</h4>
+<p>例4：用分裂和的方法求$\sum_{k=1}^{n}k$的下界.<br>
+解：$\sum_{k=1}^{n}k=\sum_{k=1}^{\frac{n}{2}}k+\sum_{k=\frac{n}{2}+1}^{n}k\ge\sum_{k=1}^{\frac{n}{2}}0+\sum_{k=\frac{n}{2}+1}^{n}\frac{n}{2}\ge(\frac{n}{2})^2=\Omega(n^2)$</p>
 </li>
 </ol>
-<p>例5：求$\sum_{k=0}^{\infin}\frac{k^2}{2^k}$的上界.<br>   解：当$k\ge3$时，$\frac{\frac{(k+1)^2}{2^{k+1}}}{\frac{k^2}{2^k}}=\frac{(k+1)^2}{2k^2}\le\frac{8}{9}$<br>   于是$\quad \sum_{k=0}^{\infin}\frac{k^2}{2^k}=\sum_{k=0}^{2}\frac{k^2}{2^k}+\sum_{k=3}^{\infin}\frac{k^2}{2^k}\le\theta(1)+\sum_{k=3}^{\infin}\frac{9}{8}\cdot(\frac{8}{9})^k=O(1)$</p>
-<p> (调和级数上界)例6：求$H_n=\sum_{k=1}^{n}\frac{1}{k}$的上界.<br>   解：$\sum_{k=1}^{n}\frac{1}{k}=\frac{1}{1}+(\frac{1}{2}+\frac{1}{3})+(\frac{1}{4}+\frac{1}{5}+\frac{1}{6}+\frac{1}{7})+…$<br>                       $\le \sum_{i=1}^{\lceil\log{n}\rceil}\sum_{j=0}^{2^i-1}\frac{1}{2^i+j}\le\sum_{i=0}^{\lceil\log{n}\rceil}1\le\log{n}+1=O(\log{n})$</p>
+<p>例5：求$\sum_{k=0}^{\infin}\frac{k^2}{2^k}$的上界.<br>
+解：当$k\ge3$时，$\frac{\frac{(k+1)^2}{2^{k+1}}}{\frac{k^2}{2^k}}=\frac{(k+1)^2}{2k^2}\le\frac{8}{9}$<br>
+于是$\quad \sum_{k=0}^{\infin}\frac{k^2}{2^k}=\sum_{k=0}^{2}\frac{k^2}{2^k}+\sum_{k=3}^{\infin}\frac{k^2}{2^k}\le\theta(1)+\sum_{k=3}^{\infin}\frac{9}{8}\cdot(\frac{8}{9})^k=O(1)$</p>
+<p>(调和级数上界)例6：求$H_n=\sum_{k=1}^{n}\frac{1}{k}$的上界.<br>
+解：$\sum_{k=1}^{n}\frac{1}{k}=\frac{1}{1}+(\frac{1}{2}+\frac{1}{3})+(\frac{1}{4}+\frac{1}{5}+\frac{1}{6}+\frac{1}{7})+…$<br>
+$\le \sum_{i=1}^{\lceil\log{n}\rceil}\sum_{j=0}^{2^i-1}\frac{1}{2^i+j}\le\sum_{i=0}^{\lceil\log{n}\rceil}1\le\log{n}+1=O(\log{n})$</p>
 <ol start="4">
-<li><h4 id="单调函数"><a href="#单调函数" class="headerlink" title="单调函数"></a>单调函数</h4></li>
+<li>
+<h4 id="单调函数">单调函数</h4>
+</li>
 </ol>
-<p>f(k)单调递增，则$\int_{m-1}^{n}f(x)dx\le\sum_{k=m}^{n}f(k)\le\int_{m}^{n+1}f(x)dx$<br>f(k)单调递减，则$\int_{m}^{n+1}f(x)dx\le\sum_{k=m}^{n}f(k)\le\int_{m-1}^{n}f(x)dx$</p>
-<p>例7：调和级数：<br>$\sum_{k=1}^{n}\frac{1}{k}\ge\int_{1}^{n+1}\frac{dx}{x}=\ln{(n+1)}$ </p>
+<p>f(k)单调递增，则$\int_{m-1}^{n}f(x)dx\le\sum_{k=m}^{n}f(k)\le\int_{m}^{n+1}f(x)dx$<br>
+f(k)单调递减，则$\int_{m}^{n+1}f(x)dx\le\sum_{k=m}^{n}f(k)\le\int_{m-1}^{n}f(x)dx$</p>
+<p>例7：调和级数：<br>
+$\sum_{k=1}^{n}\frac{1}{k}\ge\int_{1}^{n+1}\frac{dx}{x}=\ln{(n+1)}$</p>
 <p>$\quad\sum_{k=2}^{n}\cdot\frac{1}{k}\le\int_{1}^{n}\frac{dx}{x}=\ln{n}$</p>
 <ol start="5">
-<li><h4 id="分割求和"><a href="#分割求和" class="headerlink" title="分割求和"></a>分割求和</h4></li>
+<li>
+<h4 id="分割求和">分割求和</h4>
+</li>
 </ol>
-<p>$$<br>\sum_{k=1}^{n}k=\sum_{k=0}^{k_0-1}a_k+\sum_{k=k_0}^{n}a_k=\Theta(1)+\sum_{k=k_0}^{n}a_k<br>$$</p>
+<p>$$<br>
+\sum_{k=1}^{n}k=\sum_{k=0}^{k_0-1}a_k+\sum_{k=k_0}^{n}a_k=\Theta(1)+\sum_{k=k_0}^{n}a_k<br>
+$$</p>
 <p>对于算法分析中的和式，通常可以将和式分割。并忽略其常数个起始项。</p>
-<p>一般情况下，该技巧适用于和式$\sum_{k=0}^{n}a_k$中每一项$a_k$均独立于n的情况。之后，对于任意常数k_0&gt;0，有<br>$$<br>\sum_{k=k_0}^{n}a_k=\sum_{k=0}^{k_0-1}a_k+\sum_{k=k_0}^{n}a_k=\Theta(1)+\sum_{k=k_0}^{n}a_k<br>$$</p>
-<p>​    </p>
-<h1 id="2-3-递归方程"><a href="#2-3-递归方程" class="headerlink" title="2.3 递归方程"></a>2.3 递归方程</h1><p>递归方程是使用小的输入值来描述一个函数的方程或不等式</p>
-<h2 id="替换法"><a href="#替换法" class="headerlink" title="替换法"></a>替换法</h2><ol>
+<p>一般情况下，该技巧适用于和式$\sum_{k=0}^{n}a_k$中每一项$a_k$均独立于n的情况。之后，对于任意常数k_0&gt;0，有<br>
+$$<br>
+\sum_{k=k_0}^{n}a_k=\sum_{k=0}^{k_0-1}a_k+\sum_{k=k_0}^{n}a_k=\Theta(1)+\sum_{k=k_0}^{n}a_k<br>
+$$</p>
+<p>​</p>
+<h1>2.3 递归方程</h1>
+<p>递归方程是使用小的输入值来描述一个函数的方程或不等式</p>
+<h2 id="替换法">替换法</h2>
+<ol>
 <li><strong>首先猜想</strong></li>
 <li><strong>数学归纳法证明</strong></li>
 </ol>
-<h4 id="替换方法："><a href="#替换方法：" class="headerlink" title="替换方法："></a>替换方法：</h4><ul>
-<li><p><strong>联想已知的$T(n)$</strong></p>
+<h4 id="替换方法：">替换方法：</h4>
+<ul>
+<li>
+<p><strong>联想已知的$T(n)$</strong></p>
 <p>例1：求解$2T(\frac{n}{2}+17)+n$</p>
 <p>解：猜测：$T(n)=2T(\frac{n}{2}+17)+n$与$T(n)=2T(\frac{n}{2})+n$只相差一个$17$</p>
-<p>​    当n充分大时$T(\frac{n}{2}+17)$与$T(\frac{n}{2})$的差别并不大，因为$\frac{n}{2}+17$与$\frac{n}{2}$相差小</p>
-<p>​    我们可以猜$T(n)=O(n\lg{n})$</p>
+<p>​	当n充分大时$T(\frac{n}{2}+17)$与$T(\frac{n}{2})$的差别并不大，因为$\frac{n}{2}+17$与$\frac{n}{2}$相差小</p>
+<p>​	我们可以猜$T(n)=O(n\lg{n})$</p>
 <hr>
 </li>
-<li><p><strong>猜测上下界，减少不确定性范围</strong></p>
+<li>
+<p><strong>猜测上下界，减少不确定性范围</strong></p>
 <p>例2：求解$T(n)=2T(\frac{n}{2})+n$</p>
 <p>解：首先证明$T(n)=\Omega(n),T(n)=O(n^2)$</p>
-<p>​    然后逐阶降低上界，提高上界</p>
-<p>​    $\Omega(n)$的上一个阶是$\Omega(n\lg(n))$</p>
-<p>​    $O(n^2)$的下一个阶是$O(n\lg{n})$</p>
+<p>​	然后逐阶降低上界，提高上界</p>
+<p>​	$\Omega(n)$的上一个阶是$\Omega(n\lg(n))$</p>
+<p>​	$O(n^2)$的下一个阶是$O(n\lg{n})$</p>
 <hr>
 <p><strong>细微差别的处理</strong></p>
 <ul>
@@ -612,30 +725,39 @@
 </ul>
 <p>例3：求解$T(n)=T(\lfloor\frac{n}{2}\rfloor)+T(\lceil\frac{n}{2}\rceil)+1$</p>
 <p>解：（1）我们猜$T(n)=O(n)$</p>
-<p>​        证：$T(n)\le c\lfloor\frac{n}{2}\rfloor+c\lceil\frac{n}{2}\rceil+1=cn+1\ne cn$</p>
-<p>​        <strong>证不出</strong>$T(n)=O(cn)$</p>
-<p>​       （2）减去一个低阶项，猜$T(n)\le cn-b$，$b\ge0$是常数</p>
-<p>​        证：设当$\le n-1$时成立<br>$$<br>T(n)=T(\lfloor\frac{n}{2}\rfloor+T(\lceil\frac{n}{2}\rceil)+1\le c\lfloor\frac{n}{2}\rfloor-b+c\lfloor\frac{n}{2}\rfloor-b+1)<br>$$</p>
-<p>$$<br>=cn-2b+1=cn-b-b+1\le cn-b（只要b\ge1）<br>$$</p>
+<p>​		证：$T(n)\le c\lfloor\frac{n}{2}\rfloor+c\lceil\frac{n}{2}\rceil+1=cn+1\ne cn$</p>
+<p>​		<strong>证不出</strong>$T(n)=O(cn)$</p>
+<p>​	   （2）减去一个低阶项，猜$T(n)\le cn-b$，$b\ge0$是常数</p>
+<p>​		证：设当$\le n-1$时成立<br>
+$$<br>
+T(n)=T(\lfloor\frac{n}{2}\rfloor+T(\lceil\frac{n}{2}\rceil)+1\le c\lfloor\frac{n}{2}\rfloor-b+c\lfloor\frac{n}{2}\rfloor-b+1)<br>
+$$</p>
+<p>$$<br>
+=cn-2b+1=cn-b-b+1\le cn-b（只要b\ge1）<br>
+$$</p>
+<hr>
+<p><strong>避免陷阱</strong></p>
+<p>例4：求解$T(n)=2T(\lfloor\frac{n}{2}\rfloor)+n$</p>
+<p>解：猜$T(n)=O(n)$</p>
+<p>​	证：用数学归纳法证明$T(n)\le cn$<br>
+$$<br>
+T(n)\le2(c\lfloor\frac{n}{2}\rfloor)+n\le cn+n=O(n)\quad\color{red}{错误}<br>
+$$<br>
+错误之处：过早地使用了$O(n)$而陷入了陷阱应该在证明了$T(n)\le cn$才可用。从$T(n)\le cn+n$不可能得到$T(n)\le cn$，因为对于任何$c&gt;0$，我们都得不到$cn+n\le cn$</p>
+<hr>
 </li>
-</ul>
-<hr>
-<p>  <strong>避免陷阱</strong></p>
-<p>  例4：求解$T(n)=2T(\lfloor\frac{n}{2}\rfloor)+n$</p>
-<p>  解：猜$T(n)=O(n)$</p>
-<p>  ​    证：用数学归纳法证明$T(n)\le cn$<br>  $$<br>  T(n)\le2(c\lfloor\frac{n}{2}\rfloor)+n\le cn+n=O(n)\quad\color{red}{错误}<br>  $$<br>  错误之处：过早地使用了$O(n)$而陷入了陷阱应该在证明了$T(n)\le cn$才可用。从$T(n)\le cn+n$不可能得到$T(n)\le cn$，因为对于任何$c&gt;0$，我们都得不到$cn+n\le cn$</p>
-<hr>
-<ul>
-<li><p>变量替换法：<strong>经变量替换把递归方程变换为熟悉的方程</strong></p>
+<li>
+<p>变量替换法：<strong>经变量替换把递归方程变换为熟悉的方程</strong></p>
 <p>例5：求解$T(n)=2T(\sqrt{n})+\lg{n}$</p>
 <p>解：令$m=\lg{n}$，则$n=2^m$，$T(2^m)=2T(2^{\frac{m}{2}})+m$</p>
-<p>​        令$S(m)=T(2^m)$，则$T(2^{\frac{m}{2}})=S(\frac{m}{2})$</p>
-<p>​        于是，$S(m)=2S(\frac{m}{2})+m$</p>
-<p>​        显然，$S(m)=O(m\lg{m})$，即$T(2^m)=\Theta(m\lg{m})$</p>
-<p>​        由于$2^m=n$，$m=\lg{n}$，$T(n)=\Theta(\lg{n}\times\lg(\lg{n}))$</p>
+<p>​		令$S(m)=T(2^m)$，则$T(2^{\frac{m}{2}})=S(\frac{m}{2})$</p>
+<p>​		于是，$S(m)=2S(\frac{m}{2})+m$</p>
+<p>​		显然，$S(m)=O(m\lg{m})$，即$T(2^m)=\Theta(m\lg{m})$</p>
+<p>​		由于$2^m=n$，$m=\lg{n}$，$T(n)=\Theta(\lg{n}\times\lg(\lg{n}))$</p>
 </li>
 </ul>
-<h2 id="迭代方法"><a href="#迭代方法" class="headerlink" title="迭代方法"></a>迭代方法</h2><ol>
+<h2 id="迭代方法">迭代方法</h2>
+<ol>
 <li>循环地展开递归方程（画出递归树）</li>
 <li>将递归方程转化为和式</li>
 <li>使用求和技术解之</li>
@@ -653,7 +775,7 @@
 <p>$T(n)=3T(\frac{n}{4})+cn^2$</p>
 <p>$=cn^2+3[c\frac{n^2}{16}+3T(\frac{n}{16})]$</p>
 <p>$=cn^2+3[c\frac{n^2}{16}+3[c\frac{n^2}{256}+3T(\frac{n}{64})]]$</p>
-<p>……</p>
+<p>…</p>
 <p>$=3^0cn^2+3^1(\frac{n}{4})^2+3^2c(\frac{n}{4^2})^2+…+3^iT(\frac{n}{4^i})$</p>
 <p>令$\frac{n}{4^i}=1\implies4^i=n\implies i=\log_4{n}$</p>
 <p>$=3^0cn^2+3^1(\frac{n}{4})^2+3^2c(\frac{n}{4^2})^2+…+3^iT(1)$</p>
@@ -664,10 +786,8 @@
 <p>例6：$T(n)=n+3T(\lfloor\frac{n}{4}\rfloor)$</p>
 <p>解：</p>
 <img src="http://note.lizhihao999.cn/notes/20200819093653.png" style="zoom: 80%;">
-
-
-
-<h2 id="Master定理法"><a href="#Master定理法" class="headerlink" title="Master定理法"></a>Master定理法</h2><ul>
+<h2 id="Master定理法">Master定理法</h2>
+<ul>
 <li><strong>目的</strong>：求解$T(n)=aT(\frac{n}{b})+f(n)$型方程，$a\ge1,b&gt;0$是常数，$f(n)$是正函数</li>
 <li><strong>方法</strong>：记住三种情况，不用纸笔直接求解</li>
 </ul>
@@ -679,39 +799,46 @@
 <li>若$f(n)=\Theta(n^{\log_b{a}})$，则$T(n)=\Theta(n^{\log_b{a}}\lg{n})$</li>
 <li>若$f(n)=\Omega(n^{\log_b{a}+\epsilon}),\epsilon&gt;0$是常数，且对所有充分大的$n,af(\frac{n}{b})\le cf(n),c&gt;1$是常数，则$T(n)=\Theta(f(n))$</li>
 </ol>
-<p><strong>直观地：</strong>用$f(n)$与$n^{\log_b{a}}$比较</p>
+<p>**直观地：**用$f(n)$与$n^{\log_b{a}}$比较</p>
 <ol>
-<li><p>若$n^{\log_b{a}}$大，则$T(n)=\Theta(n^{\log_b{a}})$</p>
+<li>
+<p>若$n^{\log_b{a}}$大，则$T(n)=\Theta(n^{\log_b{a}})$</p>
 <ol start="2">
 <li>若$f(n)$大，则$T(n)=\Theta(f(n))$</li>
 <li>若$f(n)$与$n^{\log_b{a}}$同阶，则$T(n)=\Theta(n^{\log_b{a}}\lg{n})=\Theta(f(n)\lg{n})$</li>
 </ol>
 </li>
 </ol>
-<p><img src="http://note.lizhihao999.cn/notes/20200818115456.png"><br>$$<br>\color{red}{对于红色部分，Master定理无能为力}<br>$$<br><strong>更进一步</strong>：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20200818115456.png" alt=""><br>
+$$<br>
+\color{red}{对于红色部分，Master定理无能为力}<br>
+$$<br>
+<strong>更进一步</strong>：</p>
 <ol>
-<li><p>在第一种情况，$f(n)$不仅小于$n^{\log_b{a}}$，必须多项式地小于，即对于一个常数$\epsilon&gt;0,;f(n)=O(\frac{n^{\log_b{a}}}{n^\epsilon})$</p>
+<li>
+<p>在第一种情况，$f(n)$不仅小于$n^{\log_b{a}}$，必须多项式地小于，即对于一个常数$\epsilon&gt;0,;f(n)=O(\frac{n^{\log_b{a}}}{n^\epsilon})$</p>
 </li>
-<li><p>在第三种情况，$f(n)$不仅大于$n^{\log_b{a}}$，必须多项式地大于，即对于一个常数$\epsilon&gt;0,;f(n)=\Omega(n^{\log_b{a}}\cdot n^\epsilon)$</p>
+<li>
+<p>在第三种情况，$f(n)$不仅大于$n^{\log_b{a}}$，必须多项式地大于，即对于一个常数$\epsilon&gt;0,;f(n)=\Omega(n^{\log_b{a}}\cdot n^\epsilon)$</p>
 </li>
 </ol>
 <hr>
 <p>例7：求解$T(n)=9T(\frac{n}{3})+n$</p>
 <p>解：$a=9,;b=3,;f(n)=n,;n^{\log_b{a}}=\Theta(n^2)$</p>
-<p>​        $\because f(n)=n=O(n^{\log_b{a}-\epsilon}),;\epsilon=1$</p>
-<p>​        $\therefore T(n)=\Theta(n^{\log_b{a}})=\Theta(n^2)$</p>
+<p>​		$\because f(n)=n=O(n^{\log_b{a}-\epsilon}),;\epsilon=1$</p>
+<p>​		$\therefore T(n)=\Theta(n^{\log_b{a}})=\Theta(n^2)$</p>
 <p>例8：求解$T(n)=T(\frac{2n}{3})+1$</p>
 <p>解：$a=1,;b=\frac{3}{2},;f(n)=1,;n^{log_{\frac{3}{2}}1}=n^0=1$</p>
-<p>​        $f(n)=1=\Theta(1)=\Theta(n^{\log_b{a}}),;T(n)=\Theta(n^{\log_b{a}}\cdot\lg{n})=\Theta(\lg{n})$</p>
+<p>​		$f(n)=1=\Theta(1)=\Theta(n^{\log_b{a}}),;T(n)=\Theta(n^{\log_b{a}}\cdot\lg{n})=\Theta(\lg{n})$</p>
 <p>例9：求解$T(n)=3T(\frac{n}{4})+n\lg{n}$</p>
 <p>解：$a=3,;b=4,;f(n)=n\lg{n},;n^{\log_b{a}}=n^{\log_4{3}}=O(n^{0.793})$</p>
-<p>​        （1）$f(n)=n\lg{n}\ge n=n^{\log_b{a}+\epsilon},;\epsilon\approx0.2$</p>
-<p>​        （2）对所有$n,;af(\frac{n}{b})=3\times\frac{n}{4}\lg{\frac{n}{4}}=\frac{3}{4}n\lg{\frac{n}{4}}\le\frac{3}{4}n\lg{n}=cf(n),;c=\frac{3}{4}$</p>
-<p>​        于是，$T(n)=\Theta(f(n))=\Theta(n\lg{n})$</p>
+<p>​		（1）$f(n)=n\lg{n}\ge n=n^{\log_b{a}+\epsilon},;\epsilon\approx0.2$</p>
+<p>​		（2）对所有$n,;af(\frac{n}{b})=3\times\frac{n}{4}\lg{\frac{n}{4}}=\frac{3}{4}n\lg{\frac{n}{4}}\le\frac{3}{4}n\lg{n}=cf(n),;c=\frac{3}{4}$</p>
+<p>​		于是，$T(n)=\Theta(f(n))=\Theta(n\lg{n})$</p>
 <p>例10：求解$T(n)=2T(\frac{n}{2})+n\lg{n}$</p>
 <p>解：$a=2,;b=2,;f(n)=n\lg{n},;n^{log_b{a}}=n$</p>
-<p>​        $f(n)=n\lg{n}$大于$n^{\log_b{a}}=n$</p>
-<p>​        但<strong>不是多项式地大于</strong>，Master定理<strong>不适用</strong>于该$T(n)$</p>
+<p>​		$f(n)=n\lg{n}$大于$n^{\log_b{a}}=n$</p>
+<p>​		但<strong>不是多项式地大于</strong>，Master定理<strong>不适用</strong>于该$T(n)$</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1332,7 +1459,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">21.1k</span>&nbsp;字
+                class="white-color">18k</span>&nbsp;字
             
             
             
