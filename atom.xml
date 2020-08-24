@@ -29,9 +29,8 @@
       
         
         
-          &lt;h1&gt;线性规划&lt;/h1&gt;
-&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
-&lt;h2
+          &lt;h1 id=&quot;线性规划&quot;&gt;&lt;a href=&quot;#线性规划&quot; class=&quot;headerlink&quot; title=&quot;线性规划&quot;&gt;&lt;/a&gt;线性规划&lt;/h1&gt;&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
+&lt;h2 id=&quot;特征&quot;&gt;&lt;a href=&quot;#特征&quot;
         
       
     
@@ -58,7 +57,7 @@
       
         
         
-          &lt;pre class=&quot;line-numbers language-language-python&quot;&gt;&lt;code class=&quot;language-language-python&quot;&gt;from sympy import
+          &lt;pre class=&quot;line-numbers language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; sympy &lt;span class=&quot;token
         
       
     
@@ -73,11 +72,38 @@
   </entry>
   
   <entry>
+    <title>单源最短路径</title>
+    <link href="https://thooooor.github.io/2020/05/07/dan-yuan-zui-duan-lu-jing/"/>
+    <id>https://thooooor.github.io/2020/05/07/dan-yuan-zui-duan-lu-jing/</id>
+    <published>2020-05-07T07:20:00.000Z</published>
+    <updated>2020-08-24T06:35:58.598Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;最短路径问题&quot;&gt;&lt;a href=&quot;#最短路径问题&quot; class=&quot;headerlink&quot; title=&quot;最短路径问题&quot;&gt;&lt;/a&gt;最短路径问题&lt;/h1&gt;&lt;p&gt;在该问题中，给定一个带权重的有向图$G=(V,E)$和权重函数$w:E\to
+        
+      
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法设计与分析" scheme="https://thooooor.github.io/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>最小生成树</title>
-    <link href="https://thooooor.github.io/2020/05/03/zui-xiao-sheng-cheng-shu/"/>
-    <id>https://thooooor.github.io/2020/05/03/zui-xiao-sheng-cheng-shu/</id>
-    <published>2020-05-03T07:20:00.000Z</published>
-    <updated>2020-08-23T09:50:33.633Z</updated>
+    <link href="https://thooooor.github.io/2020/05/06/zui-xiao-sheng-cheng-shu/"/>
+    <id>https://thooooor.github.io/2020/05/06/zui-xiao-sheng-cheng-shu/</id>
+    <published>2020-05-06T07:20:00.000Z</published>
+    <updated>2020-08-24T06:32:49.977Z</updated>
     
     <summary type="html">
     
@@ -100,11 +126,11 @@
   </entry>
   
   <entry>
-    <title>最长公共子序列</title>
-    <link href="https://thooooor.github.io/2020/05/01/zui-chang-gong-gong-zi-xu-lie/"/>
-    <id>https://thooooor.github.io/2020/05/01/zui-chang-gong-gong-zi-xu-lie/</id>
-    <published>2020-05-01T07:20:00.000Z</published>
-    <updated>2020-08-22T04:19:51.259Z</updated>
+    <title>哈夫曼编码</title>
+    <link href="https://thooooor.github.io/2020/05/05/ha-fu-man-bian-ma/"/>
+    <id>https://thooooor.github.io/2020/05/05/ha-fu-man-bian-ma/</id>
+    <published>2020-05-05T14:52:00.000Z</published>
+    <updated>2020-08-24T06:30:54.378Z</updated>
     
     <summary type="html">
     
@@ -112,15 +138,91 @@
       
         
         
-          &lt;h1&gt;问题定义&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;strong&gt;子序列&lt;/strong&gt;&lt;br&gt;
-$$&lt;br&gt;
-对于给定序列X=&amp;lt;x_1,x_2,…,x_m&amp;gt;，Z=&amp;lt;z_1,z_2,…z_k&amp;gt;&lt;br&gt;
-$$&lt;br&gt;
-$$&lt;br&gt;
-存在一个严格递增的X
+          &lt;p&gt;哈夫曼编码可以很有效地压缩数据，通常可以节省20%-90%的空间，具体压缩率依赖于数据的特性。我们将带压缩数据看作字符序列，根据每个字符的出现频率，哈夫曼贪心算法构造出字符串的最优二进制表示。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;变长编码&lt;/strong
+        
+      
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法设计与分析" scheme="https://thooooor.github.io/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>活动选择问题</title>
+    <link href="https://thooooor.github.io/2020/05/04/huo-dong-xuan-ze-wen-ti/"/>
+    <id>https://thooooor.github.io/2020/05/04/huo-dong-xuan-ze-wen-ti/</id>
+    <published>2020-05-04T14:31:00.000Z</published>
+    <updated>2020-08-24T06:30:35.154Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法设计与分析" scheme="https://thooooor.github.io/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>贪心算法</title>
+    <link href="https://thooooor.github.io/2020/05/03/tan-xin-suan-fa/"/>
+    <id>https://thooooor.github.io/2020/05/03/tan-xin-suan-fa/</id>
+    <published>2020-05-03T07:20:00.000Z</published>
+    <updated>2020-08-24T06:30:21.418Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;贪心算法通过做出一系列选择来求出问题的最优解。在每个决策点，它做出在当时看来最佳的选择。这种启发式策略不能保证总能找到最优解，但对某些问题确实能够得到最优解。&lt;/p&gt;
+&lt;h1 id=&quot;设计步骤&quot;&gt;&lt;a href=&quot;#设计步骤&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法设计与分析" scheme="https://thooooor.github.io/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>最长公共子序列</title>
+    <link href="https://thooooor.github.io/2020/05/02/zui-chang-gong-gong-zi-xu-lie/"/>
+    <id>https://thooooor.github.io/2020/05/02/zui-chang-gong-gong-zi-xu-lie/</id>
+    <published>2020-05-02T07:20:00.000Z</published>
+    <updated>2020-08-24T06:25:34.010Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;问题定义&quot;&gt;&lt;a href=&quot;#问题定义&quot; class=&quot;headerlink&quot;
         
       
     
@@ -138,10 +240,10 @@ $$&lt;br&gt;
   
   <entry>
     <title>矩阵链乘法</title>
-    <link href="https://thooooor.github.io/2020/04/30/ju-zhen-lian-cheng-fa/"/>
-    <id>https://thooooor.github.io/2020/04/30/ju-zhen-lian-cheng-fa/</id>
-    <published>2020-04-30T10:20:00.000Z</published>
-    <updated>2020-08-22T03:40:51.285Z</updated>
+    <link href="https://thooooor.github.io/2020/05/01/ju-zhen-lian-cheng-fa/"/>
+    <id>https://thooooor.github.io/2020/05/01/ju-zhen-lian-cheng-fa/</id>
+    <published>2020-05-01T10:20:00.000Z</published>
+    <updated>2020-08-24T06:24:54.242Z</updated>
     
     <summary type="html">
     
@@ -149,8 +251,7 @@ $$&lt;br&gt;
       
         
         
-          &lt;h1&gt;问题描述&lt;/h1&gt;
-&lt;p&gt;给定n个矩阵的链$&amp;lt;A_1,A_2,…,A_n&amp;gt;$，矩阵$A_i$的规模为$p_{i-1}\times p_{i}(1\le i\le
+          &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h1&gt;&lt;p&gt;给定n个矩阵的链$&amp;lt;A_1,A_2,…,A_n&amp;gt;$，矩阵$A_i$的规模为$p_{i-1}\times
         
       
     
@@ -178,7 +279,9 @@ $$&lt;br&gt;
         
         
           &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Those who cannot remember the past are condemned to repeat
+&lt;p&gt;&lt;strong&gt;Those who cannot remember the past are condemned to repeat it.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot;
         
       
     
@@ -206,13 +309,7 @@ $$&lt;br&gt;
         
         
           &lt;p&gt;&lt;strong&gt;快速排序能够实现原址排序，而且平均性能很好。最基本的快速排序基于分治思想。&lt;/strong&gt;&lt;/p&gt;
-&lt;h1&gt;算法过程&lt;/h1&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;选定分界值，将原数组划分为两个部分&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;左边的值都小于分界值，右边的值
+&lt;h1 id=&quot;算法过程&quot;&gt;&lt;a href=&quot;#算法过程&quot; class=&quot;headerlink&quot;
         
       
     
@@ -229,11 +326,39 @@ $$&lt;br&gt;
   </entry>
   
   <entry>
+    <title>分治算法</title>
+    <link href="https://thooooor.github.io/2020/04/27/fen-zhi-suan-fa/"/>
+    <id>https://thooooor.github.io/2020/04/27/fen-zhi-suan-fa/</id>
+    <published>2020-04-27T12:25:00.000Z</published>
+    <updated>2020-08-24T06:23:18.456Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一-分治算法的设计&quot;&gt;&lt;a href=&quot;#一-分治算法的设计&quot; class=&quot;headerlink&quot; title=&quot;一. 分治算法的设计&quot;&gt;&lt;/a&gt;一. 分治算法的设计&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;&lt;h3 id=&quot;划分&quot;&gt;&lt;a href=&quot;#划分&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法设计与分析" scheme="https://thooooor.github.io/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>算法分析的数学基础</title>
-    <link href="https://thooooor.github.io/2020/04/27/suan-fa-fen-xi-de-shu-xue-ji-chu/"/>
-    <id>https://thooooor.github.io/2020/04/27/suan-fa-fen-xi-de-shu-xue-ji-chu/</id>
-    <published>2020-04-27T14:25:00.000Z</published>
-    <updated>2020-08-19T08:39:23.756Z</updated>
+    <link href="https://thooooor.github.io/2020/04/26/suan-fa-fen-xi-de-shu-xue-ji-chu/"/>
+    <id>https://thooooor.github.io/2020/04/26/suan-fa-fen-xi-de-shu-xue-ji-chu/</id>
+    <published>2020-04-26T14:25:00.000Z</published>
+    <updated>2020-08-24T06:22:34.995Z</updated>
     
     <summary type="html">
     
@@ -241,66 +366,7 @@ $$&lt;br&gt;
       
         
         
-          &lt;h1&gt;2.1 计算复杂性函数的阶&lt;/h1&gt;
-&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="算法设计与分析" scheme="https://thooooor.github.io/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>哈夫曼编码</title>
-    <link href="https://thooooor.github.io/2020/04/26/ha-fu-man-bian-ma/"/>
-    <id>https://thooooor.github.io/2020/04/26/ha-fu-man-bian-ma/</id>
-    <published>2020-04-26T14:52:00.000Z</published>
-    <updated>2020-08-22T12:09:36.937Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;哈夫曼编码可以很有效地压缩数据，通常可以节省20%-90%的空间，具体压缩率依赖于数据的特性。我们将带压缩数据看作字符序列，根据每个字符的出现频率，哈夫曼贪心算法构造出字符串的最优二进制表示。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;变长编码&lt;/strong
-        
-      
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="算法设计与分析" scheme="https://thooooor.github.io/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>活动选择问题</title>
-    <link href="https://thooooor.github.io/2020/04/26/huo-dong-xuan-ze-wen-ti/"/>
-    <id>https://thooooor.github.io/2020/04/26/huo-dong-xuan-ze-wen-ti/</id>
-    <published>2020-04-26T14:31:00.000Z</published>
-    <updated>2020-08-22T07:56:27.167Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;问题描述&lt;/h1&gt;
-&lt;p&gt;有一个n个活动的集合，$S={a_1,a_2,…,a_n}$，这些活动使用同一个资源（一个教室），而这个资源在某个时刻只能供一个活动使用。&lt;/p&gt;
-&lt;p&gt;每个活动都有一个$开始时间s_i$和一个$结束时间f_i$，其中$0\le
+          &lt;h1 id=&quot;2-1-计算复杂性函数的阶&quot;&gt;&lt;a href=&quot;#2-1-计算复杂性函数的阶&quot; class=&quot;headerlink&quot; title=&quot;2.1 计算复杂性函数的阶&quot;&gt;&lt;/a&gt;2.1 计算复杂性函数的阶&lt;/h1&gt;&lt;h2 id=&quot;增长的阶&quot;&gt;&lt;a
         
       
     
@@ -316,10 +382,10 @@ $$&lt;br&gt;
   
   <entry>
     <title>算法概论</title>
-    <link href="https://thooooor.github.io/2020/04/26/suan-fa-gai-lun/"/>
-    <id>https://thooooor.github.io/2020/04/26/suan-fa-gai-lun/</id>
-    <published>2020-04-26T14:25:00.000Z</published>
-    <updated>2020-08-15T14:27:51.064Z</updated>
+    <link href="https://thooooor.github.io/2020/04/25/suan-fa-gai-lun/"/>
+    <id>https://thooooor.github.io/2020/04/25/suan-fa-gai-lun/</id>
+    <published>2020-04-25T14:25:00.000Z</published>
+    <updated>2020-08-24T06:22:16.046Z</updated>
     
     <summary type="html">
     
@@ -327,47 +393,7 @@ $$&lt;br&gt;
       
         
         
-          &lt;h1&gt;1.1 算法&lt;/h1&gt;
-&lt;h2 id=&quot;（1）计算&quot;&gt;（1）计算&lt;/h2&gt;
-&lt;h3
-        
-      
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="算法设计与分析" scheme="https://thooooor.github.io/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>分治算法</title>
-    <link href="https://thooooor.github.io/2020/04/25/fen-zhi-suan-fa/"/>
-    <id>https://thooooor.github.io/2020/04/25/fen-zhi-suan-fa/</id>
-    <published>2020-04-25T12:25:00.000Z</published>
-    <updated>2020-08-19T08:40:41.105Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1&gt;一. 分治算法的设计&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;h3 id=&quot;划分&quot;&gt;划分&lt;/h3&gt;
-&lt;p&gt;将整个问题划分为多个子问题&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;h3 id=&quot;求解&quot;&gt;求解&lt;/h3&gt;
-&lt;p&gt;求解各个子问题&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;h3
+          &lt;h1 id=&quot;1-1-算法&quot;&gt;&lt;a href=&quot;#1-1-算法&quot; class=&quot;headerlink&quot; title=&quot;1.1 算法&quot;&gt;&lt;/a&gt;1.1 算法&lt;/h1&gt;&lt;h2 id=&quot;（1）计算&quot;&gt;&lt;a href=&quot;#（1）计算&quot; class=&quot;headerlink&quot;
         
       
     
@@ -394,8 +420,7 @@ $$&lt;br&gt;
       
         
         
-          &lt;h1&gt;开启Gunicorn任务&lt;/h1&gt;
-&lt;pre class=&quot;line-numbers language-language-shell&quot;&gt;&lt;code class=&quot;language-language-shell&quot;&gt;gunicorn --bind
+          &lt;h1 id=&quot;开启Gunicorn任务&quot;&gt;&lt;a href=&quot;#开启Gunicorn任务&quot; class=&quot;headerlink&quot; title=&quot;开启Gunicorn任务&quot;&gt;&lt;/a&gt;开启Gunicorn任务&lt;/h1&gt;&lt;pre class=&quot;line-numbers
         
       
     
@@ -427,7 +452,7 @@ $$&lt;br&gt;
           &lt;blockquote&gt;
 &lt;p&gt;Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1&gt;Anaconda
+&lt;h1
         
       
     
@@ -456,9 +481,8 @@ $$&lt;br&gt;
       
         
         
-          &lt;h1&gt;安装虚拟环境&lt;/h1&gt;
-&lt;p&gt;输入命令：&lt;/p&gt;
-&lt;pre class=&quot;line-numbers language-language-shell&quot;&gt;&lt;code class=&quot;language-language-shell&quot;&gt;sudo pip install
+          &lt;h1 id=&quot;安装虚拟环境&quot;&gt;&lt;a href=&quot;#安装虚拟环境&quot; class=&quot;headerlink&quot; title=&quot;安装虚拟环境&quot;&gt;&lt;/a&gt;安装虚拟环境&lt;/h1&gt;&lt;p&gt;输入命令：&lt;/p&gt;
+&lt;pre class=&quot;line-numbers
         
       
     
@@ -488,8 +512,7 @@ $$&lt;br&gt;
         
         
           &lt;blockquote&gt;
-&lt;p&gt;IDE：PyCharm 2019.3.3 (Professional Edition)&lt;br&gt;
-ECS：腾讯云 Ubuntu 18.04.4
+&lt;p&gt;IDE：PyCharm 2019.3.3 (Professional Edition)&lt;br&gt;ECS：腾讯云 Ubuntu 18.04.4
         
       
     
@@ -516,9 +539,7 @@ ECS：腾讯云 Ubuntu 18.04.4
       
         
         
-          &lt;h1&gt;HTTP协议与WebSocket协议&lt;/h1&gt;
-&lt;h2 id=&quot;HTTP协议简介&quot;&gt;HTTP协议简介&lt;/h2&gt;
-&lt;p&gt;​	HTTP协议指超文本传输协议（&lt;strong&gt;H&lt;/strong&gt;yper&lt;strong&gt;T&lt;/strong&gt;ext
+          &lt;h1 id=&quot;HTTP协议与WebSocket协议&quot;&gt;&lt;a href=&quot;#HTTP协议与WebSocket协议&quot; class=&quot;headerlink&quot; title=&quot;HTTP协议与WebSocket协议&quot;&gt;&lt;/a&gt;HTTP协议与WebSocket协议&lt;/h1&gt;&lt;h2
         
       
     

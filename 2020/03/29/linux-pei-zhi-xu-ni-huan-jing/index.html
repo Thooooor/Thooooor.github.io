@@ -418,7 +418,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    516
+                    514
                 </div>
                 
 
@@ -440,127 +440,85 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1>安装虚拟环境</h1>
-<p>输入命令：</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">sudo pip install virtualenv
-sudo pip install virtualenvwrapper
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+                <h1 id="安装虚拟环境"><a href="#安装虚拟环境" class="headerlink" title="安装虚拟环境"></a>安装虚拟环境</h1><p>输入命令：</p>
+<pre class="line-numbers language-shell"><code class="language-shell">sudo pip install virtualenv
+sudo pip install virtualenvwrapper<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <ul>
 <li><strong>virtualenv</strong>是虚拟环境的软件工具，可以在系统中建立多个互不干扰的虚拟环境</li>
 <li><strong>virtualenvwrapper</strong>对<strong>virtualenv</strong>进行封装，更加方便管理虚拟环境</li>
 </ul>
-<h1>virtualenv的使用</h1>
-<ul>
-<li>
-<p>新建虚拟环境</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">mkdir Myproject
+<h1 id="virtualenv的使用"><a href="#virtualenv的使用" class="headerlink" title="virtualenv的使用"></a>virtualenv的使用</h1><ul>
+<li><p>新建虚拟环境</p>
+<pre class="line-numbers language-shell"><code class="language-shell">mkdir Myproject
 cd Myproject
 virtualenv --python=python3 venv
-virtualenv --no-site-packages --python=python3.7 venv
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+virtualenv --no-site-packages --python=python3.7 venv<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <ul>
 <li><code>--python=python3</code>指定python环境</li>
 <li><code>--no-site-packages</code>指定获取独立第三方包的环境</li>
 <li><code>venv</code>为虚拟环境名称</li>
 </ul>
 </li>
-<li>
-<p>激活虚拟环境</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">source venv/bin/activate
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>激活虚拟环境</p>
+<pre class="line-numbers language-shell"><code class="language-shell">source venv/bin/activate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p>退出虚拟环境</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">deactivate
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>退出虚拟环境</p>
+<pre class="line-numbers language-shell"><code class="language-shell">deactivate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 </ul>
-<h1>配置一致的开发环境</h1>
-<ul>
-<li>
-<p>导出当前python环境的包</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">pip freeze > requirements.txt
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="配置一致的开发环境"><a href="#配置一致的开发环境" class="headerlink" title="配置一致的开发环境"></a>配置一致的开发环境</h1><ul>
+<li><p>导出当前python环境的包</p>
+<pre class="line-numbers language-shell"><code class="language-shell">pip freeze > requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>当前环境所有依赖的包及其版本都会收集到<code>requiements.txt</code>中</p>
 </li>
-<li>
-<p>在新环境中安装项目所需的包</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">pip install -r requirements.txt
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>在新环境中安装项目所需的包</p>
+<pre class="line-numbers language-shell"><code class="language-shell">pip install -r requirements.txt<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 </ul>
-<h1>使用virtualenvwrapper管理虚拟环境</h1>
-<h2 id="设置Linux环境变量">设置Linux环境变量</h2>
-<ul>
-<li>
-<p>将<strong>virtualenvwrapper</strong>添加到当前的环境变量中，先打开<strong>bashrc</strong>文件（针对当前用户）</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">sudo vim ~/.bashrc
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<h1 id="使用virtualenvwrapper管理虚拟环境"><a href="#使用virtualenvwrapper管理虚拟环境" class="headerlink" title="使用virtualenvwrapper管理虚拟环境"></a>使用virtualenvwrapper管理虚拟环境</h1><h2 id="设置Linux环境变量"><a href="#设置Linux环境变量" class="headerlink" title="设置Linux环境变量"></a>设置Linux环境变量</h2><ul>
+<li><p>将<strong>virtualenvwrapper</strong>添加到当前的环境变量中，先打开<strong>bashrc</strong>文件（针对当前用户）</p>
+<pre class="line-numbers language-shell"><code class="language-shell">sudo vim ~/.bashrc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p>写入以下代码</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">export WORKON_HOME=~/Envs #设置virtualenv的统一管理目录
+<li><p>写入以下代码</p>
+<pre class="line-numbers language-shell"><code class="language-shell">export WORKON_HOME=~/Envs #设置virtualenv的统一管理目录
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'   
-export VIRTUALENVWRAPPER_PYTHON=/home/admin/anaconda3/bin/python3 #指定python解释器
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+export VIRTUALENVWRAPPER_PYTHON=/home/admin/anaconda3/bin/python3 #指定python解释器<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>执行<strong>virtualenvwrapper</strong>安装脚本</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">source /home/admin/anaconda3/bin/virtualenvwrapper.sh
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>执行<strong>virtualenvwrapper</strong>安装脚本</p>
+<pre class="line-numbers language-shell"><code class="language-shell">source /home/admin/anaconda3/bin/virtualenvwrapper.sh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p>激活设置</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">source ~/.bashrc
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>激活设置</p>
+<pre class="line-numbers language-shell"><code class="language-shell">source ~/.bashrc<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 </ul>
-<h2 id="virtualenvwrapper的使用">virtualenvwrapper的使用</h2>
-<p><strong>virtualenvwrapper</strong>能够将所有的虚拟环境目录集中起来，能够对所有的虚拟环境进行统一管理，不需要自己去找对应的虚拟环境目录去激活。</p>
+<h2 id="virtualenvwrapper的使用"><a href="#virtualenvwrapper的使用" class="headerlink" title="virtualenvwrapper的使用"></a>virtualenvwrapper的使用</h2><p><strong>virtualenvwrapper</strong>能够将所有的虚拟环境目录集中起来，能够对所有的虚拟环境进行统一管理，不需要自己去找对应的虚拟环境目录去激活。</p>
 <ul>
-<li>
-<p>创建虚拟环境</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">mkvirtualenv [-a project_path] [-i package] [-r requirements_file] [virtualenv options] ENVNAME
-mkvirtualenv dataadmin
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<li><p>创建虚拟环境</p>
+<pre class="line-numbers language-shell"><code class="language-shell">mkvirtualenv [-a project_path] [-i package] [-r requirements_file] [virtualenv options] ENVNAME
+mkvirtualenv dataadmin<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 </li>
-<li>
-<p>激活虚拟环境</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">worken dataadmin
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>激活虚拟环境</p>
+<pre class="line-numbers language-shell"><code class="language-shell">worken dataadmin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p>退出当前虚拟环境</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">deactivate
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>退出当前虚拟环境</p>
+<pre class="line-numbers language-shell"><code class="language-shell">deactivate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>也可以直接切换到另外的环境</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">worken anothervenv
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-shell"><code class="language-shell">worken anothervenv<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p>删除虚拟环境（需要先退出）</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">rmvirtualenv dataadmin
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>删除虚拟环境（需要先退出）</p>
+<pre class="line-numbers language-shell"><code class="language-shell">rmvirtualenv dataadmin<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p>所有虚拟环境列表</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">lsvirtualenv
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>所有虚拟环境列表</p>
+<pre class="line-numbers language-shell"><code class="language-shell">lsvirtualenv<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p>导航到当前环境的目录</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">cdvirtualenv
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>导航到当前环境的目录</p>
+<pre class="line-numbers language-shell"><code class="language-shell">cdvirtualenv<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p>导航到当前环境的<strong>site-packages</strong>目录</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">cdsitepackages
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p>导航到当前环境的<strong>site-packages</strong>目录</p>
+<pre class="line-numbers language-shell"><code class="language-shell">cdsitepackages<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
-<li>
-<p><strong>site-packages</strong>列表</p>
-<pre class="line-numbers language-language-shell"><code class="language-language-shell">lssitepackages
-<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<li><p><strong>site-packages</strong>列表</p>
+<pre class="line-numbers language-shell"><code class="language-shell">lssitepackages<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 </li>
 </ul>
 <p>更多操作见<a target="_blank" rel="noopener" href="https://virtualenvwrapper.readthedocs.io/en/latest/command_ref.html">官网</a></p>
@@ -1179,7 +1137,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">18k</span>&nbsp;字
+                class="white-color">27.3k</span>&nbsp;字
             
             
             
