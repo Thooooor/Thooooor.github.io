@@ -29,8 +29,9 @@
       
         
         
-          &lt;h1 id=&quot;线性规划&quot;&gt;&lt;a href=&quot;#线性规划&quot; class=&quot;headerlink&quot; title=&quot;线性规划&quot;&gt;&lt;/a&gt;线性规划&lt;/h1&gt;&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
-&lt;h2 id=&quot;特征&quot;&gt;&lt;a href=&quot;#特征&quot;
+          &lt;h1&gt;线性规划&lt;/h1&gt;
+&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
+&lt;h2
         
       
     
@@ -57,7 +58,7 @@
       
         
         
-          &lt;pre class=&quot;line-numbers language-python&quot;&gt;&lt;code class=&quot;language-python&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;from&lt;/span&gt; sympy &lt;span class=&quot;token
+          &lt;pre class=&quot;line-numbers language-language-python&quot;&gt;&lt;code class=&quot;language-language-python&quot;&gt;from sympy import
         
       
     
@@ -68,6 +69,66 @@
     
     
       <category term="Python" scheme="https://thooooor.github.io/tags/Python/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>网络最大流</title>
+    <link href="https://thooooor.github.io/2020/05/09/wang-luo-zui-da-liu/"/>
+    <id>https://thooooor.github.io/2020/05/09/wang-luo-zui-da-liu/</id>
+    <published>2020-05-09T07:20:00.000Z</published>
+    <updated>2020-08-24T09:27:14.672Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;流网络&lt;/h1&gt;
+&lt;h2 id=&quot;流网络和流&quot;&gt;流网络和流&lt;/h2&gt;
+&lt;p&gt;流网络$G=(V,E)$，是一个有向图，图中每条边$(u,v)\in E$有一个非负的&lt;strong&gt;容量值&lt;/strong&gt;$c(u,v)\ge
+        
+      
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法设计与分析" scheme="https://thooooor.github.io/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>所有结点对最短路径</title>
+    <link href="https://thooooor.github.io/2020/05/08/suo-you-jie-dian-dui-de-zui-duan-lu-jing/"/>
+    <id>https://thooooor.github.io/2020/05/08/suo-you-jie-dian-dui-de-zui-duan-lu-jing/</id>
+    <published>2020-05-08T07:20:00.000Z</published>
+    <updated>2020-08-24T08:08:09.219Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;Floyd算法&lt;/h1&gt;
+&lt;p&gt;Floyd算法利用&lt;strong&gt;动态规划&lt;/strong&gt;来解决所有结点对最短路径问题，运行时间为$O(V^3)$。假设负权重的边可以存在，但不能存在负权重的环路。&lt;/p&gt;
+&lt;p&gt;使用&lt;strong&gt;邻接矩阵W&lt;/strong&gt;来表示图，
+        
+      
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法设计与分析" scheme="https://thooooor.github.io/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
+    
+      <category term="C/C++" scheme="https://thooooor.github.io/tags/C-C/"/>
     
   </entry>
   
@@ -84,7 +145,8 @@
       
         
         
-          &lt;h1 id=&quot;最短路径问题&quot;&gt;&lt;a href=&quot;#最短路径问题&quot; class=&quot;headerlink&quot; title=&quot;最短路径问题&quot;&gt;&lt;/a&gt;最短路径问题&lt;/h1&gt;&lt;p&gt;在该问题中，给定一个带权重的有向图$G=(V,E)$和权重函数$w:E\to
+          &lt;h1&gt;最短路径问题&lt;/h1&gt;
+&lt;p&gt;在该问题中，给定一个带权重的有向图$G=(V,E)$和权重函数$w:E\to
         
       
     
@@ -167,7 +229,9 @@
       
         
         
-          &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot;
+          &lt;h1&gt;问题描述&lt;/h1&gt;
+&lt;p&gt;有一个n个活动的集合，$S={a_1,a_2,…,a_n}$，这些活动使用同一个资源（一个教室），而这个资源在某个时刻只能供一个活动使用。&lt;/p&gt;
+&lt;p&gt;每个活动都有一个$开始时间s_i$和一个$结束时间f_i$，其中$0\le
         
       
     
@@ -195,7 +259,10 @@
         
         
           &lt;p&gt;贪心算法通过做出一系列选择来求出问题的最优解。在每个决策点，它做出在当时看来最佳的选择。这种启发式策略不能保证总能找到最优解，但对某些问题确实能够得到最优解。&lt;/p&gt;
-&lt;h1 id=&quot;设计步骤&quot;&gt;&lt;a href=&quot;#设计步骤&quot; class=&quot;headerlink&quot;
+&lt;h1&gt;设计步骤&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;转换最优化问题形式：对其做出一次选择后，只剩下一个子
         
       
     
@@ -222,7 +289,15 @@
       
         
         
-          &lt;h1 id=&quot;问题定义&quot;&gt;&lt;a href=&quot;#问题定义&quot; class=&quot;headerlink&quot;
+          &lt;h1&gt;问题定义&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;子序列&lt;/strong&gt;&lt;br&gt;
+$$&lt;br&gt;
+对于给定序列X=&amp;lt;x_1,x_2,…,x_m&amp;gt;，Z=&amp;lt;z_1,z_2,…z_k&amp;gt;&lt;br&gt;
+$$&lt;br&gt;
+$$&lt;br&gt;
+存在一个严格递增的X
         
       
     
@@ -251,7 +326,8 @@
       
         
         
-          &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h1&gt;&lt;p&gt;给定n个矩阵的链$&amp;lt;A_1,A_2,…,A_n&amp;gt;$，矩阵$A_i$的规模为$p_{i-1}\times
+          &lt;h1&gt;问题描述&lt;/h1&gt;
+&lt;p&gt;给定n个矩阵的链$&amp;lt;A_1,A_2,…,A_n&amp;gt;$，矩阵$A_i$的规模为$p_{i-1}\times p_{i}(1\le i\le
         
       
     
@@ -279,9 +355,7 @@
         
         
           &lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;Those who cannot remember the past are condemned to repeat it.&lt;/strong&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot;
+&lt;p&gt;&lt;strong&gt;Those who cannot remember the past are condemned to repeat
         
       
     
@@ -309,7 +383,13 @@
         
         
           &lt;p&gt;&lt;strong&gt;快速排序能够实现原址排序，而且平均性能很好。最基本的快速排序基于分治思想。&lt;/strong&gt;&lt;/p&gt;
-&lt;h1 id=&quot;算法过程&quot;&gt;&lt;a href=&quot;#算法过程&quot; class=&quot;headerlink&quot;
+&lt;h1&gt;算法过程&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;选定分界值，将原数组划分为两个部分&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;左边的值都小于分界值，右边的值
         
       
     
@@ -338,8 +418,18 @@
       
         
         
-          &lt;h1 id=&quot;一-分治算法的设计&quot;&gt;&lt;a href=&quot;#一-分治算法的设计&quot; class=&quot;headerlink&quot; title=&quot;一. 分治算法的设计&quot;&gt;&lt;/a&gt;一. 分治算法的设计&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;&lt;h3 id=&quot;划分&quot;&gt;&lt;a href=&quot;#划分&quot;
+          &lt;h1&gt;一. 分治算法的设计&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;h3 id=&quot;划分&quot;&gt;划分&lt;/h3&gt;
+&lt;p&gt;将整个问题划分为多个子问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h3 id=&quot;求解&quot;&gt;求解&lt;/h3&gt;
+&lt;p&gt;求解各个子问题&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;h3
         
       
     
@@ -366,7 +456,8 @@
       
         
         
-          &lt;h1 id=&quot;2-1-计算复杂性函数的阶&quot;&gt;&lt;a href=&quot;#2-1-计算复杂性函数的阶&quot; class=&quot;headerlink&quot; title=&quot;2.1 计算复杂性函数的阶&quot;&gt;&lt;/a&gt;2.1 计算复杂性函数的阶&lt;/h1&gt;&lt;h2 id=&quot;增长的阶&quot;&gt;&lt;a
+          &lt;h1&gt;2.1 计算复杂性函数的阶&lt;/h1&gt;
+&lt;h2
         
       
     
@@ -385,7 +476,7 @@
     <link href="https://thooooor.github.io/2020/04/25/suan-fa-gai-lun/"/>
     <id>https://thooooor.github.io/2020/04/25/suan-fa-gai-lun/</id>
     <published>2020-04-25T14:25:00.000Z</published>
-    <updated>2020-08-24T06:22:16.046Z</updated>
+    <updated>2020-08-24T06:37:58.550Z</updated>
     
     <summary type="html">
     
@@ -393,7 +484,9 @@
       
         
         
-          &lt;h1 id=&quot;1-1-算法&quot;&gt;&lt;a href=&quot;#1-1-算法&quot; class=&quot;headerlink&quot; title=&quot;1.1 算法&quot;&gt;&lt;/a&gt;1.1 算法&lt;/h1&gt;&lt;h2 id=&quot;（1）计算&quot;&gt;&lt;a href=&quot;#（1）计算&quot; class=&quot;headerlink&quot;
+          &lt;h1&gt;1.1 算法&lt;/h1&gt;
+&lt;h2 id=&quot;（1）计算&quot;&gt;（1）计算&lt;/h2&gt;
+&lt;h3
         
       
     
@@ -420,7 +513,8 @@
       
         
         
-          &lt;h1 id=&quot;开启Gunicorn任务&quot;&gt;&lt;a href=&quot;#开启Gunicorn任务&quot; class=&quot;headerlink&quot; title=&quot;开启Gunicorn任务&quot;&gt;&lt;/a&gt;开启Gunicorn任务&lt;/h1&gt;&lt;pre class=&quot;line-numbers
+          &lt;h1&gt;开启Gunicorn任务&lt;/h1&gt;
+&lt;pre class=&quot;line-numbers language-language-shell&quot;&gt;&lt;code class=&quot;language-language-shell&quot;&gt;gunicorn --bind
         
       
     
@@ -452,7 +546,7 @@
           &lt;blockquote&gt;
 &lt;p&gt;Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h1
+&lt;h1&gt;Anaconda
         
       
     
@@ -481,8 +575,9 @@
       
         
         
-          &lt;h1 id=&quot;安装虚拟环境&quot;&gt;&lt;a href=&quot;#安装虚拟环境&quot; class=&quot;headerlink&quot; title=&quot;安装虚拟环境&quot;&gt;&lt;/a&gt;安装虚拟环境&lt;/h1&gt;&lt;p&gt;输入命令：&lt;/p&gt;
-&lt;pre class=&quot;line-numbers
+          &lt;h1&gt;安装虚拟环境&lt;/h1&gt;
+&lt;p&gt;输入命令：&lt;/p&gt;
+&lt;pre class=&quot;line-numbers language-language-shell&quot;&gt;&lt;code class=&quot;language-language-shell&quot;&gt;sudo pip install
         
       
     
@@ -512,7 +607,8 @@
         
         
           &lt;blockquote&gt;
-&lt;p&gt;IDE：PyCharm 2019.3.3 (Professional Edition)&lt;br&gt;ECS：腾讯云 Ubuntu 18.04.4
+&lt;p&gt;IDE：PyCharm 2019.3.3 (Professional Edition)&lt;br&gt;
+ECS：腾讯云 Ubuntu 18.04.4
         
       
     
@@ -523,33 +619,6 @@
     
     
       <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>利用Channels实现WebSocket协议</title>
-    <link href="https://thooooor.github.io/2020/03/08/li-yong-channels-shi-xian-websocket-xie-yi/"/>
-    <id>https://thooooor.github.io/2020/03/08/li-yong-channels-shi-xian-websocket-xie-yi/</id>
-    <published>2020-03-08T01:25:00.000Z</published>
-    <updated>2020-08-07T08:42:50.119Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;HTTP协议与WebSocket协议&quot;&gt;&lt;a href=&quot;#HTTP协议与WebSocket协议&quot; class=&quot;headerlink&quot; title=&quot;HTTP协议与WebSocket协议&quot;&gt;&lt;/a&gt;HTTP协议与WebSocket协议&lt;/h1&gt;&lt;h2
-        
-      
-    
-    </summary>
-    
-    
-      <category term="技术实战" scheme="https://thooooor.github.io/categories/%E6%8A%80%E6%9C%AF%E5%AE%9E%E6%88%98/"/>
-    
-    
-      <category term="Django" scheme="https://thooooor.github.io/tags/Django/"/>
     
   </entry>
   

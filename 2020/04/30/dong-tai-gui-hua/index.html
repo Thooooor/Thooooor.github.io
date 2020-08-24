@@ -439,73 +439,105 @@
                 <blockquote>
 <p><strong>Those who cannot remember the past are condemned to repeat it.</strong></p>
 </blockquote>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>动态规划同常用来求解<strong>最优化问题</strong>。这类问题通常有很多可行解，每个解都有一个值，我们希望寻找最优值的解。</p>
-<h2 id="动态规划与分治算法"><a href="#动态规划与分治算法" class="headerlink" title="动态规划与分治算法"></a>动态规划与分治算法</h2><p>动态规划与分治算法有相似与不同之处，相似之处为都通过组合子问题的解来求解原问题。不同之处为动态规划应用于子问题重叠的情况，即不同的子问题具有公共的子子问题。这种情况下，分治算法会做很多重复的工作（重复求子问题的解），而动态规划对每个子问题只求解一次，将结果保存在表格当中，避免不必要的计算工作。</p>
+<h1>概述</h1>
+<p>动态规划同常用来求解<strong>最优化问题</strong>。这类问题通常有很多可行解，每个解都有一个值，我们希望寻找最优值的解。</p>
+<h2 id="动态规划与分治算法">动态规划与分治算法</h2>
+<p>动态规划与分治算法有相似与不同之处，相似之处为都通过组合子问题的解来求解原问题。不同之处为动态规划应用于子问题重叠的情况，即不同的子问题具有公共的子子问题。这种情况下，分治算法会做很多重复的工作（重复求子问题的解），而动态规划对每个子问题只求解一次，将结果保存在表格当中，避免不必要的计算工作。</p>
 <table>
 <thead>
 <tr>
-<th align="center"></th>
-<th align="center">分治法</th>
-<th align="center">动态规划</th>
+<th style="text-align:center"></th>
+<th style="text-align:center">分治法</th>
+<th style="text-align:center">动态规划</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">算法思想</td>
-<td align="center">组合子问题</td>
-<td align="center">组合子问题</td>
+<tbody>
+<tr>
+<td style="text-align:center">算法思想</td>
+<td style="text-align:center">组合子问题</td>
+<td style="text-align:center">组合子问题</td>
 </tr>
 <tr>
-<td align="center">计算方式</td>
-<td align="center">自顶向下</td>
-<td align="center">自底向上</td>
+<td style="text-align:center">计算方式</td>
+<td style="text-align:center">自顶向下</td>
+<td style="text-align:center">自底向上</td>
 </tr>
 <tr>
-<td align="center">相同要素</td>
-<td align="center">具有最优子结构</td>
-<td align="center">具有最优子结构</td>
+<td style="text-align:center">相同要素</td>
+<td style="text-align:center">具有最优子结构</td>
+<td style="text-align:center">具有最优子结构</td>
 </tr>
 <tr>
-<td align="center">不同要素</td>
-<td align="center">不包含公共子问题（独立）</td>
-<td align="center">重叠子问题</td>
+<td style="text-align:center">不同要素</td>
+<td style="text-align:center">不包含公共子问题（独立）</td>
+<td style="text-align:center">重叠子问题</td>
 </tr>
-</tbody></table>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
-<li><p><strong>保存已求解子问题的解</strong></p>
+</tbody>
+</table>
+<h2 id="特点">特点</h2>
+<ul>
+<li>
+<p><strong>保存已求解子问题的解</strong></p>
 </li>
-<li><p><strong>将原始问题划分为一系列子问题</strong></p>
+<li>
+<p><strong>将原始问题划分为一系列子问题</strong></p>
 </li>
-<li><p><strong>自底向上计算</strong></p>
+<li>
+<p><strong>自底向上计算</strong></p>
 </li>
 </ul>
-<h2 id="优化问题"><a href="#优化问题" class="headerlink" title="优化问题"></a>优化问题</h2><ul>
-<li><h4 id="给定一组约束条件和一个代价函数，在解空间中搜索具有最小或最大代价的优化解"><a href="#给定一组约束条件和一个代价函数，在解空间中搜索具有最小或最大代价的优化解" class="headerlink" title="给定一组约束条件和一个代价函数，在解空间中搜索具有最小或最大代价的优化解"></a>给定一组约束条件和一个代价函数，在解空间中搜索具有最小或最大代价的优化解</h4></li>
-<li><h4 id="很多优化问题可分为多个子问题，子问题相互关联，子问题的解被重复使用"><a href="#很多优化问题可分为多个子问题，子问题相互关联，子问题的解被重复使用" class="headerlink" title="很多优化问题可分为多个子问题，子问题相互关联，子问题的解被重复使用"></a>很多优化问题可分为多个子问题，子问题相互关联，子问题的解被重复使用</h4></li>
+<h2 id="优化问题">优化问题</h2>
+<ul>
+<li>
+<h4 id="给定一组约束条件和一个代价函数，在解空间中搜索具有最小或最大代价的优化解">给定一组约束条件和一个代价函数，在解空间中搜索具有最小或最大代价的优化解</h4>
+</li>
+<li>
+<h4 id="很多优化问题可分为多个子问题，子问题相互关联，子问题的解被重复使用">很多优化问题可分为多个子问题，子问题相互关联，子问题的解被重复使用</h4>
+</li>
 </ul>
-<h2 id="使用条件"><a href="#使用条件" class="headerlink" title="使用条件"></a>使用条件</h2><ul>
-<li><h4 id="优化子结构"><a href="#优化子结构" class="headerlink" title="优化子结构"></a>优化子结构</h4><ul>
+<h2 id="使用条件">使用条件</h2>
+<ul>
+<li>
+<h4 id="优化子结构">优化子结构</h4>
+<ul>
 <li><strong>一个问题的优化解包含了子问题的优化解</strong></li>
 </ul>
 </li>
-<li><h4 id="重叠子问题"><a href="#重叠子问题" class="headerlink" title="重叠子问题"></a>重叠子问题</h4><ul>
+<li>
+<h4 id="重叠子问题">重叠子问题</h4>
+<ul>
 <li><strong>在问题的求解过程中，很多子问题的解将被多次使用</strong></li>
 </ul>
 </li>
 </ul>
-<h2 id="设计步骤"><a href="#设计步骤" class="headerlink" title="设计步骤"></a>设计步骤</h2><ul>
-<li><h4 id="刻画一个最优解的结构特征"><a href="#刻画一个最优解的结构特征" class="headerlink" title="刻画一个最优解的结构特征"></a>刻画一个最优解的结构特征</h4><p>寻找最优子结构，利用这种子结构从子问题的最优解构造出原问题的最优解</p>
+<h2 id="设计步骤">设计步骤</h2>
+<ul>
+<li>
+<h4 id="刻画一个最优解的结构特征">刻画一个最优解的结构特征</h4>
+<p>寻找最优子结构，利用这种子结构从子问题的最优解构造出原问题的最优解</p>
 </li>
-<li><h4 id="递归定义最优解的值"><a href="#递归定义最优解的值" class="headerlink" title="递归定义最优解的值"></a>递归定义最优解的值</h4></li>
-<li><h4 id="自底向上计算最优解的值"><a href="#自底向上计算最优解的值" class="headerlink" title="自底向上计算最优解的值"></a>自底向上计算最优解的值</h4></li>
-<li><h4 id="根据构造最优解的信息构造优化解"><a href="#根据构造最优解的信息构造优化解" class="headerlink" title="根据构造最优解的信息构造优化解"></a>根据构造最优解的信息构造优化解</h4></li>
+<li>
+<h4 id="递归定义最优解的值">递归定义最优解的值</h4>
+</li>
+<li>
+<h4 id="自底向上计算最优解的值">自底向上计算最优解的值</h4>
+</li>
+<li>
+<h4 id="根据构造最优解的信息构造优化解">根据构造最优解的信息构造优化解</h4>
+</li>
 </ul>
-<h2 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h2><ul>
-<li><h4 id="带备忘的自顶向下法"><a href="#带备忘的自顶向下法" class="headerlink" title="带备忘的自顶向下法"></a>带备忘的自顶向下法</h4><ul>
+<h2 id="实现方法">实现方法</h2>
+<ul>
+<li>
+<h4 id="带备忘的自顶向下法">带备忘的自顶向下法</h4>
+<ul>
 <li>递归求解</li>
 <li>保存每个子问题的解（数组或散列表）</li>
 </ul>
 </li>
-<li><h4 id="自底向上法"><a href="#自底向上法" class="headerlink" title="自底向上法"></a>自底向上法</h4><ul>
+<li>
+<h4 id="自底向上法">自底向上法</h4>
+<ul>
 <li>恰当定义子问题的<strong>规模</strong></li>
 <li>任何子问题的求解都只依赖于<strong>更小的</strong>子问题的解</li>
 <li>按子问题规模<strong>由小到大进行求解</strong></li>
@@ -514,42 +546,58 @@
 </li>
 </ul>
 <p>两种方法的算法的<strong>渐进运行时间相同</strong>，<strong>自底向上的时间复杂性</strong>函数通常具有更小的系数，某些情况下自顶向下无法真正递归考察所有可能的子问题。</p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h2 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h2><ul>
-<li><p><strong>发掘最优子结构的通用模式</strong></p>
+<h1>原理</h1>
+<h2 id="最优子结构">最优子结构</h2>
+<ul>
+<li>
+<p><strong>发掘最优子结构的通用模式</strong></p>
 <ol>
 <li>证明问题最优解的第一个组成部分是做出一个选择，做出这次选择会产生一个或多个待解的子问题</li>
 <li>对于一个给定问题，在其可能的第一步选择中，你<strong>假定已经知道</strong>哪种选择才会得到最优解。并<strong>不关心如何得到，只是假定已经知道</strong></li>
 <li>给定可获得最优解的选择后，你确定这次选择会产生哪些<strong>子问题</strong>，以及如何<strong>最好地刻画子问题空间</strong></li>
 </ol>
 </li>
-<li><p><strong>保持子问题空间尽可能简单，只在必要时才扩展它</strong></p>
+<li>
+<p><strong>保持子问题空间尽可能简单，只在必要时才扩展它</strong></p>
 </li>
-<li><p><strong>不同问题领域，最优子结构的不同</strong>：</p>
+<li>
+<p><strong>不同问题领域，最优子结构的不同</strong>：</p>
 <ul>
 <li>原问题的最优解中涉及多少个子问题</li>
 <li>再确定最优解使用哪些子问题时，我们需要考虑多少种选择</li>
 </ul>
 </li>
-<li><p><strong>粗略分析算法的运行时间：</strong><br>$$<br>O(m\times n)<br>$$</p>
+<li>
+<p><strong>粗略分析算法的运行时间：</strong><br>
+$$<br>
+O(m\times n)<br>
+$$</p>
 </li>
 </ul>
-<p>$$<br>\Theta(n):子问题个数\quad\quad m:考察的选择个数<br>$$</p>
-<h2 id="重叠子问题-1"><a href="#重叠子问题-1" class="headerlink" title="重叠子问题"></a>重叠子问题</h2><p>如果递归算法反复求解相同的子问题，则称最优化问题具有<strong>重叠子问题</strong>。一般来讲， 不同子问题的总数最好是输入规模的多项式函数。</p>
-<h2 id="重构最优解"><a href="#重构最优解" class="headerlink" title="重构最优解"></a>重构最优解</h2><p><strong>将每个子问题所做的选择存在一个表中</strong>：重构每次选择只需$O(1)$时间</p>
-<h2 id="备忘"><a href="#备忘" class="headerlink" title="备忘"></a>备忘</h2><p>维护一个表记录子问题的解，保持递归算法的控制流程：</p>
+<p>$$<br>
+\Theta(n):子问题个数\quad\quad m:考察的选择个数<br>
+$$</p>
+<h2 id="重叠子问题-2">重叠子问题</h2>
+<p>如果递归算法反复求解相同的子问题，则称最优化问题具有<strong>重叠子问题</strong>。一般来讲， 不同子问题的总数最好是输入规模的多项式函数。</p>
+<h2 id="重构最优解">重构最优解</h2>
+<p><strong>将每个子问题所做的选择存在一个表中</strong>：重构每次选择只需$O(1)$时间</p>
+<h2 id="备忘">备忘</h2>
+<p>维护一个表记录子问题的解，保持递归算法的控制流程：</p>
 <ul>
 <li>每个表项的初值设为一个特殊值，表示尚未填入子问题的解</li>
 <li>当递归调用过程中第一次遇到子问题时，计算其解，并存入对应表项</li>
 <li>每次遇到同一个子问题，查表返回解</li>
 </ul>
-<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><ul>
-<li><strong>通常情况</strong>：每个子问题必须至少求解一次<ul>
+<h2 id="对比">对比</h2>
+<ul>
+<li><strong>通常情况</strong>：每个子问题必须至少求解一次
+<ul>
 <li>自底向上动态规划算法比自顶向下备忘算法快（都是$O(n^3)$，相差常量系数）</li>
 <li>自底向上算法没有递归调用的开销，表的维护开销更小</li>
 </ul>
 </li>
-<li><strong>某些问题：</strong>可利用表的访问模式进一步降低时空代价</li>
-<li><strong>某些子问题完全不必求解：</strong>备忘方法更有优势（只求解必要子问题）</li>
+<li>**某些问题：**可利用表的访问模式进一步降低时空代价</li>
+<li>**某些子问题完全不必求解：**备忘方法更有优势（只求解必要子问题）</li>
 </ul>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -1171,7 +1219,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">27.3k</span>&nbsp;字
+                class="white-color">24.7k</span>&nbsp;字
             
             
             

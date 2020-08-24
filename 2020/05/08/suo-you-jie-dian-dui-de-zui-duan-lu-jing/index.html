@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="哈夫曼编码, Thor&#39;s Blog">
+    <meta name="keywords" content="所有结点对最短路径, Thor&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>哈夫曼编码 | Thor&#39;s Blog</title>
+    <title>所有结点对最短路径 | Thor&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -253,12 +253,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">哈夫曼编码</h1>
+                    <h1 class="description center-align post-title">所有结点对最短路径</h1>
                 </div>
             </div>
         </div>
@@ -379,6 +379,10 @@
                                 <span class="chip bg-color">算法设计与分析</span>
                             </a>
                         
+                            <a href="/tags/C-C/">
+                                <span class="chip bg-color">C/C++</span>
+                            </a>
+                        
                     </div>
                     
                 </div>
@@ -400,7 +404,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-05
+                    2020-05-08
                 </div>
                 
 
@@ -414,14 +418,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    4 分
                 </div>
                 
 
@@ -436,77 +440,122 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>哈夫曼编码可以很有效地压缩数据，通常可以节省20%-90%的空间，具体压缩率依赖于数据的特性。我们将带压缩数据看作字符序列，根据每个字符的出现频率，哈夫曼贪心算法构造出字符串的最优二进制表示。</p>
-<blockquote>
-<p><strong>变长编码</strong></p>
-<p>变长编码可以达到比定长编码好得多的压缩率，其思想是赋予高频字符短码字，赋予低频字符长码字。</p>
-<p><strong>前缀码</strong></p>
-<p>即没有任何码字是其他码字的前缀。前缀码的作用是简化解码过程。</p>
-</blockquote>
-<p>解码过程需要前缀码的一种方便的表示方式，以便我们可以容易地截取开始码字。一种二叉树表示可以满足这种要求，其叶节点为给定的字符。字符的二进制码字用从根节点</p>
-<p>到该字符节点的简单路径表示。其中**“0”表示转向“左孩子”，“1”表示转向“右孩子”**。</p>
-<p>文件的最优编码方案总是对应一棵<strong>满二叉树</strong>，即每个非叶节点都有两个孩子节点。所以，若C为字母表且所有字符的出现频率均为正数，则最优前缀码对应的树恰有$|C|$个叶节点，每个叶节点对应字母表中的一个字符，且恰有$|C|-1$个内部节点。</p>
-<p>给定一棵对应前缀码的树T，可以轻易计算出编码一个文件需要多少个二进制位。对于字母表C中的每个字符c，令属性<code>c.freq</code>表示c在文件中出现的频率， 令$d_T©$（$d_T©$也是字符c的码字长度）表示c的叶节点在树中的深度。则编码文件需要：<br>
+                <h1>Floyd算法</h1>
+<p>Floyd算法利用<strong>动态规划</strong>来解决所有结点对最短路径问题，运行时间为$O(V^3)$。假设负权重的边可以存在，但不能存在负权重的环路。</p>
+<p>使用<strong>邻接矩阵W</strong>来表示图，矩阵W是一个$n\times n$的矩阵W，该矩阵代表的是一个有n个结点的有向图$G=(V,E)$的边的权重，即$W=(w_{ij})$其中</p>
+<img src="http://note.lizhihao999.cn/notes/20200824144945.png" style="zoom:67%;">
+<h2 id="最短路径的结构">最短路径的结构</h2>
+<p>Floyd算法考虑一条最短路径上的中间结点，即简单路径$p=&lt;v_1,v_2,…,v_n&gt;$上的中间结点指路径p上除了$v_1,v_n$之外的任意结点，将中间结点作为集合：${v_2,v_3,…,v_{n-1}}$</p>
+<p>假定图G的所有结点为$V={1,2,…,n}$，考虑其中的一个子集${1,2,…,k}$，这里k是某个小于n的整数。对于任意结点对$i,j\in V$，考虑从结点$i$到结点$j$的所有中间结点均取自集合${1,2,…,k}$的路径，并且设$p$为其中权重最小的路径（$p$是简单路径）。Floyd算法利用路径$p$和从$i$到$j$之间中间结点均取自集合${1,2,…,k-1}$的最短路径之间的关系。该关系依赖于结点$k$是否是路径$p$上的一个中间结点。</p>
+<ul>
+<li>
+<p>如果结点$k$不是路径$p$上的一个中间结点，则路径$p$上的所有中间结点都属于集合${1,2,…,k-1}$。因此从结点$i$到结点$j$的中间结点取自集合${1,2,…,k-1}$的一条最短路径也是从结点$i$到结点$j$的中间结点取自集合${1,2,…,k}$的一条最短路径。</p>
+</li>
+<li>
+<p>如果结点$k$是路径$p$上的一个中间结点，则将路径$p$分解为$i\rightsquigarrow^{p_1}k\rightsquigarrow^{p_2}j$，如图所示。</p>
+<img src="http://note.lizhihao999.cn/notes/20200824145123.png" style="zoom:67%;">
+<p>$p_1$是从结点$i$到结点k的中间结点全部取自集合${1,2,…,k}$的一条最短路径。事实上，因为$k$不是路径$p_1$上的中间结点，路径$p_1$上的所有中间结点都属于集合${1,2,…,k-1}$的一条最短路径。类似地，$p_2$是从结点$k$到结点$j$的中间结点全部取自集合${1,2,…,k-1}$的一条最短路径。</p>
+</li>
+</ul>
+<h2 id="所有结点对最短路径问题的一个递归解">所有结点对最短路径问题的一个递归解</h2>
+<p>设$d_{ij}^{(k)}$为从结点$i$到结点$j$的所有中间结点全部取自集合${1,2,…,k}$的一条最短路径的权重。当$k=0$时，从结点$i$到结点$j$的一条不包括编号大于0的中间结点的路径将没有任何中间结点。这样的路径最多只有一条边，因此$d_{ij}^{(0)}=w_{ij}$。根据上面的讨论，递归定义:</p>
+<img src="http://note.lizhihao999.cn/notes/20200824155308.png" style="zoom:67%;">
+<p>因为对于任何路径来说，所有的中间结点都属于集合${1,2,…n}$，矩阵$D^{(n)}=(d_{ij}^{(n)})$给出的就是最终答案：<br>
 $$<br>
-B(T)=\sum_{c\in C}{c.freq*d_{T}©}<br>
-$$<br>
-个二进制位，将$B(T)$定义为<strong>T的代价</strong>。</p>
-<h1>构建哈夫曼编码</h1>
-<p>假定C是一个n个字符的集合，其中每个字符$c\in C$都是一个对象，其属性<code>c.freq</code>给出字符的出现频率。算法自底向上地构造出对应最优编码地二叉树T。从$|C|$个叶节点开始，执行$|C|-1$个<strong>合并</strong>操作，创建出最终的二叉树。算法使用一个以$freq$为关键字的最小优先队列Q，以识别两个最低频率的对象将其合并。当合并两个对象时，得到的新对象的频率设置为原来两个对象的频率之和。</p>
-<pre class="line-numbers language-language-c"><code class="language-language-c">HUFFMAN(C)
-n = |C|
-Q = C
-for i=1 to n-1
-	allocate a new node z
-	z.left = x = EXTRACT-MIN(Q)
-	z.right = y = EXTRACT-MIN(Q)
-	z.freq = x.freq + y.freq
-	INSERT(Q,z)
-return EXTRACT-MIN(Q)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p><img src="http://note.lizhihao999.cn/notes/20200822164521.png" alt="算法过程——《算法导论》"></p>
-<h1>算法正确性</h1>
-<p>为了证明贪心HUFFMAN算法正确，需要证明确定最优前缀码的问题具有贪心选择和最优子结构性质。</p>
-<h2 id="1-贪心选择性质">1. 贪心选择性质</h2>
-<blockquote>
-<p><strong>引理1</strong></p>
-<p>令C为一个字母表，其中每个字符$c\in C$都有一个频率<code>c.freq</code>。令x和y是C中频率最低的两个字符。那么存在C的一个最优前缀码，x和y的码字长度相同，且只有最后一个二进制位不同。</p>
-</blockquote>
-<p>证明思路：令T表示任意一个最优前缀码所对应的编码树（最优前缀码编码树不唯一），对其进行修改，得到表示另外一个最优前缀码的编码树，使得在新树种，x和y是深度最大的兄弟叶结点。这样构造出的树，x和y的码字长度相同，且只有最后一位不同。</p>
-<p>证明：</p>
-<p>令a，b是T中深度最大的兄弟叶结点。不失一般性，假定$a.freq\le b.freq,\quad x.freq\le y.freq$。又因为x，y的频率最低，所以$a.freq\ge x.freq,\quad b.freq\ge y.freq$</p>
-<p>存在可能性，$x.freq=a.freq或y.freq=b.freq$；如果$x.freq=b.freq$，则$x.freq=b.freq=a.freq=y.freq$，此时引理显然成立；故假设$x.freq\ne b.freq$，也即$a.freq=b.freq和a.freq=x.freq$不同时成立。</p>
-<p>在T中交换x和a得到一棵新树T‘，在T’中交换y和b得到新树T"，则在T"中x和y是深度最深的两个兄弟节点。计算T和T’的代价差：</p>
-<p>$B(T)-B(T’)=\sum_{c\in C}{c.freq\cdot d_{T}©}-\sum_{c\in C}{c.freq\cdot d_{T’}©}$</p>
-<p>​                                   $=[x.freq\cdot d_{T}(x)+a.freq\cdot d_{T}(a)]-[x.freq\cdot d_{T’}(x)+a.freq\cdot d_{T’}(a)]$</p>
-<p>​                                   $=[x.freq\cdot d_{T}(x)+a.freq\cdot d_{T}(a)]-[x.freq\cdot d_{T}(a)+a.freq\cdot d_{T}(x)]$	<strong>(x在T’中的位置就是a在T中的位置)</strong></p>
-<p>​                                   $=[x.freq\cdot d_{T}(x)-a.freq\cdot d_{T}(x)]-[x.freq\cdot d_{T}(a)-a.freq\cdot d_{T}(a)]$</p>
-<p>​                                   $=(a.freq-x.freq)(d_{T}(a)-d_{T}(x))$</p>
-<p>​                                   $\ge 0$	($a.freq-x.freq和d_{T}(a)-d_{T}(x)$都非负)</p>
-<p>类似，$B(T’)-B(T’’)\ge 0$，又因为<strong>T是最优的</strong>，所以$B(T)=B(T’)=B(T’’)$，即<strong>T’'也是最优的</strong>，引理成立。</p>
-<p><img src="http://note.lizhihao999.cn/notes/20200822175055.png" alt="《算法导论》图例说明"></p>
-<p>引理1说明，不失一般性，通过合并来构造最优树的过程，可以从合并出现频率最低的两个字符的贪心选择开始。</p>
-<h2 id="2-最优子结构性质">2. 最优子结构性质</h2>
-<blockquote>
-<p><strong>引理2</strong></p>
-<p>令C为一个给定的字母表，其中每个字符$c\in C$都定义了一个频率<code>c.freq</code>。令x和y是C中频率最低的两个字符。令C’为C去掉字符x和y，加入一个新字符z后得到的字母表，即$C’=C-{x,y}\bigcup{z}$。类似C，也为C’定义<code>freq</code>，不同之处只是<code>z.freq=x.freq+y.freq</code>。令T’为字母表C’的任意一个最优前缀码对应的编码树。将T’中叶结点z替换为一个以x和y为孩子的内部节点，得到树T，T表示字母表C的一个最优前缀码。</p>
-</blockquote>
-<p>证明：</p>
-<p>首先表示:<br>
-$$<br>
-B(T’)=B(T)-x.freq-y.freq<br>
-$$<br>
-使用反证法进行证明。假定T对应的前缀码并不是C的最优前缀码。存在最优编码树T’‘满足$B(T’’)&lt;B(T)$。不失一般性（引理1），T’‘包含兄弟节点x和y。令T’’‘为将T’‘中x、y及他们的父节点替换为叶结点z得到的树，其中<code>z.freq=x.freq+y.freq</code>。于是<br>
-$$<br>
-B(T’’’)=B(T’’)-x.freq-y.freq&lt;B(T)-x.freq-y.freq=B(T’)<br>
-$$<br>
-与T’对应C’的一个最优前缀码的假设矛盾。因此，T必然表示字母表C的一个最优前缀码。</p>
-<h2 id="3-最优性质">3. 最优性质</h2>
-<blockquote>
-<p><strong>定理1</strong></p>
-<p>过程HUFFMAN会生成一个最优前缀码。</p>
-</blockquote>
-<p>证明： 由引理1、2可得到。</p>
+对于所有的i,j\in V,d_{ij}^{(n)}=\delta(i,j)<br>
+$$</p>
+<h2 id="自底向上计算最短路径权重">自底向上计算最短路径权重</h2>
+<p>算法输入为一个$n\times n$的矩阵$W$，下面的算法返回的是最短路径权重矩阵$D^{n}$：</p>
+<pre class="line-numbers language-language-c"><code class="language-language-c">FLOYD(W)
+	n = W.rows
+	D^0 = W
+	for k=1 to n
+		let D^k = (d(i,j)^k) be a new n*n matrix
+		for i=1 to n
+			for j=1 to n
+				d(i,j)^k = min(d(i,j)^(k-1), d(i,k)^(k-1)+d(k,j)^(k-1))
+	return D^n
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="构建一条最短路径">构建一条最短路径</h2>
+<p>可以先计算最短路径权重矩阵D然后从D矩阵来构造前驱矩阵$\Pi$，或者在计算矩阵$D^{(k)}$的同时计算前驱矩阵$\Pi$。</p>
+<h2 id="代码实现">代码实现</h2>
+<pre class="line-numbers language-language-cpp"><code class="language-language-cpp">#include <iostream>
+#include <vector>
+using namespace std;
+constexpr auto INFI = 1e9;
+constexpr auto NIL = -1;
+
+
+vector<vector<int>> floyd(vector<vector<int>> W, vector<vector<int>>& P) &#123;
+    int n = W.size();
+    vector<vector<int>> D = W;
+    for (int k = 0; k < n; k++) &#123;
+        for (int i = 0; i < n; i++) &#123;
+            for (int j = 0; j < n; j++) &#123;
+                if (D[i][j] > D[i][k] + D[k][j]) &#123;
+                    D[i][j] = D[i][k] + D[k][j];
+                    P[i][j] = k;
+                &#125;
+            &#125;
+        &#125;
+    &#125;
+    return D;
+&#125;
+
+void print_matrix(vector<vector<int>> W) &#123;
+    for (auto& w : W) &#123;
+        for (auto& item : w) &#123;
+            cout << item << " ";
+        &#125;
+        cout << endl;
+    &#125;
+&#125;
+
+// 打印最短路径
+void print_path(int a, int b, vector<vector<int>> P) &#123;
+    cout << a;
+    while (a != P[a][b]) &#123;
+        if (P[a][b] >= 0) &#123;
+            cout << "->" << P[a][b];
+            a = P[a][b];
+        &#125;
+        else &#123;
+            cout << endl;
+            return;
+        &#125;
+    &#125;
+    cout << endl;
+&#125;
+
+int main()
+&#123;
+    int n;  // 结点数量
+    cin >> n;
+    vector<vector<int>> W(n);
+    vector <vector<int>> P(n);
+    for (int i = 0; i < n; i++) &#123;
+        W[i].resize(n, INFI);
+        W[i][i] = 0;
+        P[i].resize(n, NIL);
+    &#125;
+
+    int a; // 边的数量
+    cin >> a;
+    for (int i = 0; i < a; i++) &#123;
+        int u, v, w;    // u、v：端点，w：边的权重
+        cin >> u >> v >> w;
+        W[u][v] = w;
+        P[u][v] = v;
+    &#125;
+    print_matrix(W);
+    print_matrix(P);
+    
+    vector<vector<int>> D = floyd(W, P);
+    print_matrix(D);
+    print_matrix(P);
+    print_path(0, 1, P);
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -550,7 +599,7 @@ $$<br>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://thooooor.github.io/2020/05/05/ha-fu-man-bian-ma/">https://thooooor.github.io/2020/05/05/ha-fu-man-bian-ma/</a>
+                    <a href="https://thooooor.github.io/2020/05/08/suo-you-jie-dian-dui-de-zui-duan-lu-jing/">https://thooooor.github.io/2020/05/08/suo-you-jie-dian-dui-de-zui-duan-lu-jing/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -590,6 +639,10 @@ $$<br>
                             
                                 <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
                                     <span class="chip bg-color">算法设计与分析</span>
+                                </a>
+                            
+                                <a href="/tags/C-C/">
+                                    <span class="chip bg-color">C/C++</span>
                                 </a>
                             
                         </div>
@@ -760,7 +813,7 @@ $$<br>
         repo: 'blogcomment',
         owner: 'Thooooor',
         admin: "Thooooor",
-        id: '2020-05-05T22-52-00',
+        id: '2020-05-08T15-20-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -788,24 +841,24 @@ $$<br>
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/05/06/zui-xiao-sheng-cheng-shu/">
+                <a href="/2020/05/09/wang-luo-zui-da-liu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="最小生成树">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="网络最大流">
                         
-                        <span class="card-title">最小生成树</span>
+                        <span class="card-title">网络最大流</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            基于贪心策略实现的Kruskal算法和Prim算法以及算法正确性的证明
+                            Ford-Fulkerson算法实现网络最大流
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-06
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-09
                         </span>
                         <span class="publish-author">
                             
@@ -837,24 +890,24 @@ $$<br>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/04/huo-dong-xuan-ze-wen-ti/">
+                <a href="/2020/05/07/dan-yuan-zui-duan-lu-jing/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="活动选择问题">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="单源最短路径">
                         
-                        <span class="card-title">活动选择问题</span>
+                        <span class="card-title">单源最短路径</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            使用贪心算法解决活动选择问题的证明和伪代码
+                            Bellman-Ford算法和Dijkstra算法实现单源最短路问题以及正确性证明
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-04
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-07
                             </span>
                         <span class="publish-author">
                             
