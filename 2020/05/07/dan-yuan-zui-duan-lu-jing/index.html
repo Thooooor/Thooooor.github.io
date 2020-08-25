@@ -436,25 +436,12 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1>最短路径问题</h1>
-<p>在该问题中，给定一个带权重的有向图$G=(V,E)$和权重函数$w:E\to R$，该权重函数将每条边映射到实数值的权重上。图中一条路径$p=&lt;v_0,v_1,…,v_k&gt;$的<strong>权重</strong>$w§$是构成该路径的所有边的权重之和：<br>
-$$<br>
-w§=\sum_{i=1}^{k}{w(v_{i-1},v_i)}<br>
-$$<br>
-定义从结点u到结点v的<strong>最短路径权重</strong>$\delta(u,v)$：</p>
+                <h1 id="最短路径问题"><a href="#最短路径问题" class="headerlink" title="最短路径问题"></a>最短路径问题</h1><p>在该问题中，给定一个带权重的有向图$G=(V,E)$和权重函数$w:E\to R$，该权重函数将每条边映射到实数值的权重上。图中一条路径$p=&lt;v_0,v_1,…,v_k&gt;$的<strong>权重</strong>$w(p)$是构成该路径的所有边的权重之和：<br>$$<br>w(p)=\sum_{i=1}^{k}{w(v_{i-1},v_i)}<br>$$<br>定义从结点u到结点v的<strong>最短路径权重</strong>$\delta(u,v)$：</p>
 <img src="http://note.lizhihao999.cn/notes/20200824000613.png" style="zoom: 80%;">
-<p>从结点u到结点v的<strong>最短路径</strong>则定义为任何一条权重为$w§=\delta(u,v)$的从u到v的路径p</p>
-<h1>最短路径的表示</h1>
-<p>给定图$G=(V,E)$，对于每个结点点v，维持一个<strong>前驱结点$v.\pi$</strong>。该前驱结点可能是另一个结点或者NIL。当给定结点v，且$v.\pi\ne NIL$时，从结点v开始将前驱结点链反转就是从s到v的一条最短路径。</p>
-<p>我们对由$\pi$值引导的<strong>前驱子图</strong>$G_\pi=(V_\pi,E_\pi)$感兴趣。我们定义结点集$V_\pi$为图G中的前驱结点不为NIL的结点的集合，再加上源结点s，即<br>
-$$<br>
-V_\pi={v\in V:v.\pi\ne NIL}\bigcup{s}<br>
-$$<br>
-有向边集合$E_\pi$是由$V_\pi$中的结点的$\pi$值所诱导的边的集合，即<br>
-$$<br>
-E_\pi={(v.\pi,v)\in E:v\in V_\pi-{s}}<br>
-$$<br>
-本章算法所生成的$\pi$值具有以下性质：</p>
+
+<p>从结点u到结点v的<strong>最短路径</strong>则定义为任何一条权重为$w(p)=\delta(u,v)$的从u到v的路径p</p>
+<h1 id="最短路径的表示"><a href="#最短路径的表示" class="headerlink" title="最短路径的表示"></a>最短路径的表示</h1><p>给定图$G=(V,E)$，对于每个结点点v，维持一个**前驱结点$v.\pi$**。该前驱结点可能是另一个结点或者NIL。当给定结点v，且$v.\pi\ne NIL$时，从结点v开始将前驱结点链反转就是从s到v的一条最短路径。</p>
+<p>我们对由$\pi$值引导的<strong>前驱子图</strong>$G_\pi=(V_\pi,E_\pi)$感兴趣。我们定义结点集$V_\pi$为图G中的前驱结点不为NIL的结点的集合，再加上源结点s，即<br>$$<br>V_\pi={v\in V:v.\pi\ne NIL}\bigcup{s}<br>$$<br>有向边集合$E_\pi$是由$V_\pi$中的结点的$\pi$值所诱导的边的集合，即<br>$$<br>E_\pi={(v.\pi,v)\in E:v\in V_\pi-{s}}<br>$$<br>本章算法所生成的$\pi$值具有以下性质：</p>
 <p>在算法终止时，$G_\pi$是一棵“最短路径树”，包括从源结点s到每个可以从s到达的结点的一条最短路径。一棵根结点为s的最短路径树是一个有向子图$G’=(V’,E’)$，这里$V’\subseteq V,E’\subseteq E$，满足：</p>
 <ol>
 <li>V‘是图G中从源结点s可以到达的所有结点的集合；</li>
@@ -462,106 +449,89 @@ $$<br>
 <li>对于所有结点$v\in V’$，图G‘中从结点s到结点v的唯一简单路径是图G中从结点s到结点v的一条最短路径。</li>
 </ol>
 <p>需要指出，最短路径不一定唯一，最短路径树也不一定唯一。</p>
-<h1>松弛(relaxation)操作</h1>
-<blockquote>
+<h1 id="松弛-relaxation-操作"><a href="#松弛-relaxation-操作" class="headerlink" title="松弛(relaxation)操作"></a>松弛(relaxation)操作</h1><blockquote>
 <p>最短路径算法的核心技术是<strong>松弛</strong>。</p>
 </blockquote>
 <p>对于每一个结点v，维持一个属性$v.d$，用来记录从源结点s到结点v的最短路径权重的上界，称$v.d$为s到v的<strong>最短路径估计</strong>。使用下面运行时间为$\Theta(V)$的算法来<strong>对最短路径估计和前驱结点进行初始化</strong>：</p>
-<pre class="line-numbers language-language-pseudocode"><code class="language-language-pseudocode">INITIALIZE-SINGLE-SOURCE(G,s)
-	for each vertex v in G.V
-		v.d = infinit
-		v.pi = NIL
-	s.d = 0
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-pseudocode"><code class="language-pseudocode">INITIALIZE-SINGLE-SOURCE(G,s)
+    for each vertex v in G.V
+        v.d = infinit
+        v.pi = NIL
+    s.d = 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>初始化之后，对于所有结点$v \in V$，我们有$v.\pi=NIL,s.d=0$，对于所有结点$v \in V-{s}$，我们有$v.d=\infin$。</p>
 <p>对一条边的松弛过程为：首先测试是否可以对从s到v的最短路径进行改善。测试方法是：将从结点s到结点u之间的最短路径距离加上结点u与v之间的边权重，并与当前的s到v的最短路径估计进行比较，如果前者更小，则对$v.d$和$v.\pi$进行更新。松弛步骤可能降低最短路径的估计值$v.d$并更新v的前驱属性$v.\pi$。下面的伪代码执行对边$(u,v)$在$O(1)$时间内进行的松弛操作：</p>
-<pre class="line-numbers language-language-pseudocode"><code class="language-language-pseudocode">RELAX(u,v,w)
-	if v.d > u.d+w(u,v)
-		v.d = u.d + w(u,v)
-		v.pi = u
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-pseudocode"><code class="language-pseudocode">RELAX(u,v,w)
+    if v.d > u.d+w(u,v)
+        v.d = u.d + w(u,v)
+        v.pi = u<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="http://note.lizhihao999.cn/notes/20200823225845.png" alt="《算法导论》松弛示例"></p>
-<h1>最短路径和松弛操作的性质</h1>
-<ul>
-<li>
-<p><strong>三角不等式性质</strong></p>
+<h1 id="最短路径和松弛操作的性质"><a href="#最短路径和松弛操作的性质" class="headerlink" title="最短路径和松弛操作的性质"></a>最短路径和松弛操作的性质</h1><ul>
+<li><p><strong>三角不等式性质</strong></p>
 <p>对于任何边$(u,v)\in E$，我们有$\delta (s,v)\le \delta(s,u)+w(u,v)$</p>
 </li>
-<li>
-<p><strong>上界性质</strong></p>
+<li><p><strong>上界性质</strong></p>
 <p>对于所有结点$v\in V$，总是有$v.d\ge\delta(s,v)$。一旦$v.d$的取值到达$\delta(s,v)$，其值不再发生变化。</p>
 </li>
-<li>
-<p><strong>非路径性质</strong></p>
+<li><p><strong>非路径性质</strong></p>
 <p>如果从结点s到结点v之间不存在路径，则总是有$v.d=\delta(s,v)=\infin$</p>
 </li>
-<li>
-<p><strong>收敛性质</strong></p>
+<li><p><strong>收敛性质</strong></p>
 <p>对于某些结点u，$v\in V$，如果$s\rightsquigarrow u\to v$是图G中的一条最短路径，并且在对边$(u,v)$进行松弛前的任意时间有$u.d=\delta(s,u)$，则在之后的所有时间有$v.d=\delta(s,v)$</p>
 </li>
-<li>
-<p><strong>路径松弛性质</strong></p>
+<li><p><strong>路径松弛性质</strong></p>
 <p>如果$p = &lt;v_0,v_1,…,v_k&gt;$是从源结点$s=v_0$到结点$v_k$的一条最短路径，并且我们对p中的边所进行松弛的次序为$(v_0,v_1),(v_1,v_2),…,(v_{k-1},v_k)$，则$v_k.d=\delta(s,v_k)$。</p>
 <p>该性质的成立与其他的松弛操作无关，即使这些操作是对p上的边所进行的松弛操作穿插进行的。</p>
 </li>
-<li>
-<p><strong>前驱子图性质</strong></p>
+<li><p><strong>前驱子图性质</strong></p>
 <p>对于所有的结点$v\in V$，一旦$v.d=\delta(s,v)$，则前驱子图是一棵根结点为s的最短路径树。</p>
 </li>
 </ul>
-<h1>Bellman-Ford算法</h1>
-<p>Bellman-Ford算法解决的是<strong>一般情况下的单源最短路径问题</strong>，在这里，<strong>边的权重可以为负值</strong>。给定带权重的有向图$G=(V,E)$，和权重函数$w:E\to R$，Bellman-Ford算法返回一个布尔值，以表明是否存在一个从源结点可以到达的权重为负值的环路。如果存在这样一个环路，算法将告诉我们不存在解决方案。如果没有这种环路存在，算法将给出最短路径及它们的权重。</p>
+<h1 id="Bellman-Ford算法"><a href="#Bellman-Ford算法" class="headerlink" title="Bellman-Ford算法"></a>Bellman-Ford算法</h1><p>Bellman-Ford算法解决的是<strong>一般情况下的单源最短路径问题</strong>，在这里，<strong>边的权重可以为负值</strong>。给定带权重的有向图$G=(V,E)$，和权重函数$w:E\to R$，Bellman-Ford算法返回一个布尔值，以表明是否存在一个从源结点可以到达的权重为负值的环路。如果存在这样一个环路，算法将告诉我们不存在解决方案。如果没有这种环路存在，算法将给出最短路径及它们的权重。</p>
 <p>Bellman-Ford算法通过对边进行松弛操作来渐进地降低从源结点s到每个结点v的最短路径的估计值$v.d$，直到该估计值与实际最短路径权重$\delta(s,v)$相同为止。该算法返回TRUE值当且仅当输入图不包含可以从源结点到达的权重为负值的环路。</p>
-<pre class="line-numbers language-language-c"><code class="language-language-c">BELLMAN_FORD(G,w,s)
-	INITIALIZE-SINGLE-SOURCE(G,s)	// 对所有结点的d值和pi值进行初始化
-	for i=1 to |G.V|-1
-		for each edge(u,v) in G.E
-			RELAX(u,v,w)
-	for each edge(u,v) in G.E
-		if v.d > u.d+w(u,v)
-			return FALSE
-	return TRUE
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token function">BELLMAN_FORD</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>w<span class="token punctuation">,</span>s<span class="token punctuation">)</span>
+    INITIALIZE<span class="token operator">-</span>SINGLE<span class="token operator">-</span><span class="token function">SOURCE</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>s<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">// 对所有结点的d值和pi值进行初始化</span>
+    <span class="token keyword">for</span> i<span class="token operator">=</span><span class="token number">1</span> to <span class="token operator">|</span>G<span class="token punctuation">.</span>V<span class="token operator">|</span><span class="token operator">-</span><span class="token number">1</span>
+        <span class="token keyword">for</span> each <span class="token function">edge</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span> in G<span class="token punctuation">.</span>E
+            <span class="token function">RELAX</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">,</span>w<span class="token punctuation">)</span>
+    <span class="token keyword">for</span> each <span class="token function">edge</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span> in G<span class="token punctuation">.</span>E
+        <span class="token keyword">if</span> v<span class="token punctuation">.</span>d <span class="token operator">></span> u<span class="token punctuation">.</span>d<span class="token operator">+</span><span class="token function">w</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span>
+            <span class="token keyword">return</span> FALSE
+    <span class="token keyword">return</span> TRUE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol>
 <li>3~5行对图的每条边进行$|V|-1$次处理，每次处理对应一次循环，每次循环对每条边进行一次松弛操作。</li>
 <li>6~8行检查图中是否存在权重为负值的环路并返回与之相适应的布尔值。</li>
 </ol>
 <p><img src="http://note.lizhihao999.cn/notes/20200823230510.png" alt="《算法导论》Bellman-Ford算法示例"></p>
-<h2 id="运行时间">运行时间</h2>
-<ol>
+<h2 id="运行时间"><a href="#运行时间" class="headerlink" title="运行时间"></a>运行时间</h2><ol>
 <li>初始化时间：$\Theta(V)$</li>
 <li>3~5行循环运行时间：一次循环的时间为$\Theta(E)$，一共进行$|V|-1$次循环</li>
 <li>6~8行for循环：$O(E)$</li>
 </ol>
 <p>Bellman-Ford算法的总运行时间：$O(VE)$</p>
-<h1>Dijkstra算法</h1>
-<p>Dijkstra算法解决的是带权重的有向图上单源最短路径问题，该算法要求<strong>所有边的权重都为非负值</strong>，因此，我们假定对于所有的边$(u,v)\in E$，都有$w(u,v)\ge 0$。</p>
+<h1 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h1><p>Dijkstra算法解决的是带权重的有向图上单源最短路径问题，该算法要求<strong>所有边的权重都为非负值</strong>，因此，我们假定对于所有的边$(u,v)\in E$，都有$w(u,v)\ge 0$。</p>
 <p>Dijkstra算法在运行过程中维持的关键信息是一组结点集合$S$。从源结点s到该集合每个结点之间的最短路径已经被找到。算法重复从结点集$V-S$中选择最短路径估计最小的结点$u$，将$u$加入到集合$S$，然后对所有从$u$出发的边进行松弛。</p>
 <p>在下面给出的方法中我们使用一个最小优先队列$Q$来保持结点集合，每个结点的关键值为其d值。</p>
-<pre class="line-numbers language-language-c"><code class="language-language-c">DIJKSTRA(G,w,s)
-	INITIALIZE-SINGLE-SOURCE(G,s)	// 对所有结点的d值和pi值进行初始化
-	S = Empty	// 将集合S初始化为一个空集
-	Q = G.V		// 对最小优先队列Q进行初始化，将所有结点V放入队列
-	while Q != Empty
-		u = EXTRACT-MIN(Q)
-		S = S + &#123;u&#125;
-		for each vertex v in G.Adj[u]
-			RELAX(u,v,w)
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token function">DIJKSTRA</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>w<span class="token punctuation">,</span>s<span class="token punctuation">)</span>
+    INITIALIZE<span class="token operator">-</span>SINGLE<span class="token operator">-</span><span class="token function">SOURCE</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>s<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">// 对所有结点的d值和pi值进行初始化</span>
+    S <span class="token operator">=</span> Empty    <span class="token comment" spellcheck="true">// 将集合S初始化为一个空集</span>
+    Q <span class="token operator">=</span> G<span class="token punctuation">.</span>V        <span class="token comment" spellcheck="true">// 对最小优先队列Q进行初始化，将所有结点V放入队列</span>
+    <span class="token keyword">while</span> Q <span class="token operator">!=</span> Empty
+        u <span class="token operator">=</span> EXTRACT<span class="token operator">-</span><span class="token function">MIN</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span>
+        S <span class="token operator">=</span> S <span class="token operator">+</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>u<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> each vertex v in G<span class="token punctuation">.</span>Adj<span class="token punctuation">[</span>u<span class="token punctuation">]</span>
+            <span class="token function">RELAX</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">,</span>w<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol>
 <li>2行：对所有结点的d值和pi值进行初始化</li>
 <li>3行：将集合S初始化为一个空集</li>
 <li>4行：对最小优先队列Q进行初始化，将所有结点V放入队列</li>
-<li>5~9行：始终维持不变式$Q=V-S$
-<ol>
+<li>5~9行：始终维持不变式$Q=V-S$<ol>
 <li>6行：从$Q=V-S$集合中抽取结点u，<strong>结点u为集合$V-S$中所有结点的最小最短路径估计</strong></li>
 <li>7行：将结点u加入集合S，继续保持不变式</li>
 <li>8~9行：对所有结点u发出的边$(u,v)$进行<strong>松弛操作</strong></li>
 </ol>
 </li>
 </ol>
-<h2 id="算法正确性">算法正确性</h2>
-<p>因为Dijkstra算法总是选择集合V-S中“最轻”或“最近”的结点加入集合S，所以该算法使用的是<strong>贪心策略</strong>。可以证明：使用贪心策略的Dijkstra算法确实可以计算出最短路径。</p>
+<h2 id="算法正确性"><a href="#算法正确性" class="headerlink" title="算法正确性"></a>算法正确性</h2><p>因为Dijkstra算法总是选择集合V-S中“最轻”或“最近”的结点加入集合S，所以该算法使用的是<strong>贪心策略</strong>。可以证明：使用贪心策略的Dijkstra算法确实可以计算出最短路径。</p>
 <p>关键是证明这样一个事实：<strong>该算法在每次选择结点u加入集合S时，有$u.d=\delta(s,u)$.</strong></p>
 <blockquote>
 <p><strong>定理1</strong></p>
@@ -574,31 +544,21 @@ $$<br>
 </blockquote>
 <p>只需要证明对于每个结点$u\in V$，当结点u被加入到集合S时，有$u.d=\delta(s,u)$。一旦证明，则可以使用上界欸性质来证明该等式在后续的所有时间内保持成立。</p>
 <ol>
-<li>
-<p><strong>初始化</strong></p>
+<li><p><strong>初始化</strong></p>
 <p>初始时，$S=\empty$，因此循环不变式直接成立</p>
 </li>
-<li>
-<p><strong>保持</strong></p>
+<li><p><strong>保持</strong></p>
 <p>反证法证明：当结点u被加入到集合S时，有$u.d=\delta(s,u)$。</p>
 <p>假设结点u是第一个加入到集合S时使得该方程不成立的结点，即$u.d\ne \delta(s,u)$</p>
 <p>首先，初始结点s是第一个加入集合S的点，并且$s.d=\delta(s,s)=0$，所以结点s与结点u不同，即$s\ne u$</p>
 <p>所以，当结点u加入集合S时，$S\ne\empty$。此时，一定存在某条从结点s到结点u的路径，否则根据非路径性质，有$u.d=\delta(s,u)=\infin$，违背假设$u.d\ne \delta(s,u)$。因为存在某条从结点s到结点u的路径，所以也存在一条从结点s到结点u的最短路径p。</p>
 <p>将结点u加入集合S之前，路径p连接集合S中的结点s和集合$V-S$中的结点u；假设结点y是路径p上第一个满足$y\in V-S$的结点，设$x\in S$是结点y的前驱结点，如图所示，可以将路径p分解为$s\rightsquigarrow^{p_1}x\to y\rightsquigarrow^{p_2}u$（<strong>路径$p_1$或者$p_2$可能不包含任何边</strong>）</p>
 <img src="http://note.lizhihao999.cn/notes/20200824104537.png" alt="定理1证明" style="zoom:80%;">
+
 <p>因为选择的结点u是第一个加入集合S并且$u.d\ne \delta(s,u)$的结点，所以当结点x加入集合S时，有$x.d=\delta(s,x)$，之后边$(x,y)$会被松弛，根据收敛性质可以得到：结点u加入集合S时，有$y.d=\delta(s,y)$</p>
-<p>因为结点y是最短路径p上位于结点u之前的一个点，并且所有边的权重非负，所以有$\delta(s,y)\le\delta(s,u)$，因此<br>
-$$<br>
-y.d=\delta(s,y)\le\delta(s,u)\le u.d（上界性质）<br>
-$$<br>
-又因为，在选择结点u时，结点u和结点y都在集合$V-S$中，选中结点u，说明$u.d\le y.d$，所以上式的两个不等式都是等式成立，即<br>
-$$<br>
-y.d=\delta(s,y)=\delta(s,u)=u.d<br>
-$$<br>
-得到$u.d=\delta(s,u)$，与假设矛盾。因此，推断在结点u加入到集合S时，有$u.d=\delta(s,u)$，并且该等式在随后的所有时间内都保持成立。</p>
+<p>因为结点y是最短路径p上位于结点u之前的一个点，并且所有边的权重非负，所以有$\delta(s,y)\le\delta(s,u)$，因此<br>$$<br>y.d=\delta(s,y)\le\delta(s,u)\le u.d（上界性质）<br>$$<br>又因为，在选择结点u时，结点u和结点y都在集合$V-S$中，选中结点u，说明$u.d\le y.d$，所以上式的两个不等式都是等式成立，即<br>$$<br>y.d=\delta(s,y)=\delta(s,u)=u.d<br>$$<br>得到$u.d=\delta(s,u)$，与假设矛盾。因此，推断在结点u加入到集合S时，有$u.d=\delta(s,u)$，并且该等式在随后的所有时间内都保持成立。</p>
 </li>
-<li>
-<p><strong>终止</strong></p>
+<li><p><strong>终止</strong></p>
 <p>算法终止时，$Q=\empty$，又因为$Q=V-S$，说明$S=V$。因此，对于所有结点$u\in V$，有$u.d=\delta(s,u)$</p>
 </li>
 </ol>
@@ -606,8 +566,7 @@ $$<br>
 <p><strong>推论1</strong></p>
 <p>如果在带权重的有向图$G=(V,E)$上运行Dijkstra算法，其中权重皆为非负值，源结点为s，则在算法终止时，前驱子图$G_{\pi}$是一棵根结点为s的最短路径树。</p>
 </blockquote>
-<h2 id="运行时间-2">运行时间</h2>
-<p>该算法执行三种优先队列操作来维持最小优先队列：</p>
+<h2 id="运行时间-1"><a href="#运行时间-1" class="headerlink" title="运行时间"></a>运行时间</h2><p>该算法执行三种优先队列操作来维持最小优先队列：</p>
 <ul>
 <li><code>INSERT</code>：$O(1)$</li>
 <li><code>EXTRACT-MIN</code>：$O(V)$，需要搜索整个数组</li>
@@ -1237,7 +1196,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">24.7k</span>&nbsp;字
+                class="white-color">30.5k</span>&nbsp;字
             
             
             

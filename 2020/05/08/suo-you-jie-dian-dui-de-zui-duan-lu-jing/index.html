@@ -418,14 +418,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1k
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    6 分
                 </div>
                 
 
@@ -440,122 +440,112 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1>Floyd算法</h1>
-<p>Floyd算法利用<strong>动态规划</strong>来解决所有结点对最短路径问题，运行时间为$O(V^3)$。假设负权重的边可以存在，但不能存在负权重的环路。</p>
+                <h1 id="Floyd算法"><a href="#Floyd算法" class="headerlink" title="Floyd算法"></a>Floyd算法</h1><p>Floyd算法利用<strong>动态规划</strong>来解决所有结点对最短路径问题，运行时间为$O(V^3)$。假设负权重的边可以存在，但不能存在负权重的环路。</p>
 <p>使用<strong>邻接矩阵W</strong>来表示图，矩阵W是一个$n\times n$的矩阵W，该矩阵代表的是一个有n个结点的有向图$G=(V,E)$的边的权重，即$W=(w_{ij})$其中</p>
 <img src="http://note.lizhihao999.cn/notes/20200824144945.png" style="zoom:67%;">
-<h2 id="最短路径的结构">最短路径的结构</h2>
-<p>Floyd算法考虑一条最短路径上的中间结点，即简单路径$p=&lt;v_1,v_2,…,v_n&gt;$上的中间结点指路径p上除了$v_1,v_n$之外的任意结点，将中间结点作为集合：${v_2,v_3,…,v_{n-1}}$</p>
-<p>假定图G的所有结点为$V={1,2,…,n}$，考虑其中的一个子集${1,2,…,k}$，这里k是某个小于n的整数。对于任意结点对$i,j\in V$，考虑从结点$i$到结点$j$的所有中间结点均取自集合${1,2,…,k}$的路径，并且设$p$为其中权重最小的路径（$p$是简单路径）。Floyd算法利用路径$p$和从$i$到$j$之间中间结点均取自集合${1,2,…,k-1}$的最短路径之间的关系。该关系依赖于结点$k$是否是路径$p$上的一个中间结点。</p>
+
+<h2 id="最短路径的结构"><a href="#最短路径的结构" class="headerlink" title="最短路径的结构"></a>最短路径的结构</h2><p>Floyd算法考虑一条最短路径上的中间结点，即简单路径$p=&lt;v_1,v_2,..,v_n&gt;$上的中间结点指路径p上除了$v_1,v_n$之外的任意结点，将中间结点作为集合：${v_2,v_3,…,v_{n-1}}$</p>
+<p>假定图G的所有结点为$V={1,2,..,n}$，考虑其中的一个子集${1,2,…,k}$，这里k是某个小于n的整数。对于任意结点对$i,j\in V$，考虑从结点$i$到结点$j$的所有中间结点均取自集合${1,2,…,k}$的路径，并且设$p$为其中权重最小的路径（$p$是简单路径）。Floyd算法利用路径$p$和从$i$到$j$之间中间结点均取自集合${1,2,…,k-1}$的最短路径之间的关系。该关系依赖于结点$k$是否是路径$p$上的一个中间结点。</p>
 <ul>
-<li>
-<p>如果结点$k$不是路径$p$上的一个中间结点，则路径$p$上的所有中间结点都属于集合${1,2,…,k-1}$。因此从结点$i$到结点$j$的中间结点取自集合${1,2,…,k-1}$的一条最短路径也是从结点$i$到结点$j$的中间结点取自集合${1,2,…,k}$的一条最短路径。</p>
+<li><p>如果结点$k$不是路径$p$上的一个中间结点，则路径$p$上的所有中间结点都属于集合${1,2,..,k-1}$。因此从结点$i$到结点$j$的中间结点取自集合${1,2,…,k-1}$的一条最短路径也是从结点$i$到结点$j$的中间结点取自集合${1,2,…,k}$的一条最短路径。</p>
 </li>
-<li>
-<p>如果结点$k$是路径$p$上的一个中间结点，则将路径$p$分解为$i\rightsquigarrow^{p_1}k\rightsquigarrow^{p_2}j$，如图所示。</p>
+<li><p>如果结点$k$是路径$p$上的一个中间结点，则将路径$p$分解为$i\rightsquigarrow^{p_1}k\rightsquigarrow^{p_2}j$，如图所示。</p>
 <img src="http://note.lizhihao999.cn/notes/20200824145123.png" style="zoom:67%;">
+
 <p>$p_1$是从结点$i$到结点k的中间结点全部取自集合${1,2,…,k}$的一条最短路径。事实上，因为$k$不是路径$p_1$上的中间结点，路径$p_1$上的所有中间结点都属于集合${1,2,…,k-1}$的一条最短路径。类似地，$p_2$是从结点$k$到结点$j$的中间结点全部取自集合${1,2,…,k-1}$的一条最短路径。</p>
 </li>
 </ul>
-<h2 id="所有结点对最短路径问题的一个递归解">所有结点对最短路径问题的一个递归解</h2>
-<p>设$d_{ij}^{(k)}$为从结点$i$到结点$j$的所有中间结点全部取自集合${1,2,…,k}$的一条最短路径的权重。当$k=0$时，从结点$i$到结点$j$的一条不包括编号大于0的中间结点的路径将没有任何中间结点。这样的路径最多只有一条边，因此$d_{ij}^{(0)}=w_{ij}$。根据上面的讨论，递归定义:</p>
+<h2 id="所有结点对最短路径问题的一个递归解"><a href="#所有结点对最短路径问题的一个递归解" class="headerlink" title="所有结点对最短路径问题的一个递归解"></a>所有结点对最短路径问题的一个递归解</h2><p>设$d_{ij}^{(k)}$为从结点$i$到结点$j$的所有中间结点全部取自集合${1,2,…,k}$的一条最短路径的权重。当$k=0$时，从结点$i$到结点$j$的一条不包括编号大于0的中间结点的路径将没有任何中间结点。这样的路径最多只有一条边，因此$d_{ij}^{(0)}=w_{ij}$。根据上面的讨论，递归定义:</p>
 <img src="http://note.lizhihao999.cn/notes/20200824155308.png" style="zoom:67%;">
-<p>因为对于任何路径来说，所有的中间结点都属于集合${1,2,…n}$，矩阵$D^{(n)}=(d_{ij}^{(n)})$给出的就是最终答案：<br>
-$$<br>
-对于所有的i,j\in V,d_{ij}^{(n)}=\delta(i,j)<br>
-$$</p>
-<h2 id="自底向上计算最短路径权重">自底向上计算最短路径权重</h2>
-<p>算法输入为一个$n\times n$的矩阵$W$，下面的算法返回的是最短路径权重矩阵$D^{n}$：</p>
-<pre class="line-numbers language-language-c"><code class="language-language-c">FLOYD(W)
-	n = W.rows
-	D^0 = W
-	for k=1 to n
-		let D^k = (d(i,j)^k) be a new n*n matrix
-		for i=1 to n
-			for j=1 to n
-				d(i,j)^k = min(d(i,j)^(k-1), d(i,k)^(k-1)+d(k,j)^(k-1))
-	return D^n
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<h2 id="构建一条最短路径">构建一条最短路径</h2>
-<p>可以先计算最短路径权重矩阵D然后从D矩阵来构造前驱矩阵$\Pi$，或者在计算矩阵$D^{(k)}$的同时计算前驱矩阵$\Pi$。</p>
-<h2 id="代码实现">代码实现</h2>
-<pre class="line-numbers language-language-cpp"><code class="language-language-cpp">#include <iostream>
-#include <vector>
-using namespace std;
-constexpr auto INFI = 1e9;
-constexpr auto NIL = -1;
+
+<p>因为对于任何路径来说，所有的中间结点都属于集合${1,2,….n}$，矩阵$D^{(n)}=(d_{ij}^{(n)})$给出的就是最终答案：<br>$$<br>对于所有的i,j\in V,d_{ij}^{(n)}=\delta(i,j)<br>$$</p>
+<h2 id="自底向上计算最短路径权重"><a href="#自底向上计算最短路径权重" class="headerlink" title="自底向上计算最短路径权重"></a>自底向上计算最短路径权重</h2><p>算法输入为一个$n\times n$的矩阵$W$，下面的算法返回的是最短路径权重矩阵$D^{n}$：</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token function">FLOYD</span><span class="token punctuation">(</span>W<span class="token punctuation">)</span>
+    n <span class="token operator">=</span> W<span class="token punctuation">.</span>rows
+    D<span class="token operator">^</span><span class="token number">0</span> <span class="token operator">=</span> W
+    <span class="token keyword">for</span> k<span class="token operator">=</span><span class="token number">1</span> to n
+        let D<span class="token operator">^</span>k <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token function">d</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>j<span class="token punctuation">)</span><span class="token operator">^</span>k<span class="token punctuation">)</span> be a new n<span class="token operator">*</span>n matrix
+        <span class="token keyword">for</span> i<span class="token operator">=</span><span class="token number">1</span> to n
+            <span class="token keyword">for</span> j<span class="token operator">=</span><span class="token number">1</span> to n
+                <span class="token function">d</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>j<span class="token punctuation">)</span><span class="token operator">^</span>k <span class="token operator">=</span> <span class="token function">min</span><span class="token punctuation">(</span><span class="token function">d</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>j<span class="token punctuation">)</span><span class="token operator">^</span><span class="token punctuation">(</span>k<span class="token number">-1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">d</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>k<span class="token punctuation">)</span><span class="token operator">^</span><span class="token punctuation">(</span>k<span class="token number">-1</span><span class="token punctuation">)</span><span class="token operator">+</span><span class="token function">d</span><span class="token punctuation">(</span>k<span class="token punctuation">,</span>j<span class="token punctuation">)</span><span class="token operator">^</span><span class="token punctuation">(</span>k<span class="token number">-1</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token keyword">return</span> D<span class="token operator">^</span>n<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h2 id="构建一条最短路径"><a href="#构建一条最短路径" class="headerlink" title="构建一条最短路径"></a>构建一条最短路径</h2><p>可以先计算最短路径权重矩阵D然后从D矩阵来构造前驱矩阵$\Pi$，或者在计算矩阵$D^{(k)}$的同时计算前驱矩阵$\Pi$。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre class="line-numbers language-cpp"><code class="language-cpp"><span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+<span class="token macro property">#<span class="token directive keyword">include</span> <span class="token string">&lt;vector></span></span>
+<span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+<span class="token keyword">constexpr</span> <span class="token keyword">auto</span> INFI <span class="token operator">=</span> <span class="token number">1e9</span><span class="token punctuation">;</span>
+<span class="token keyword">constexpr</span> <span class="token keyword">auto</span> NIL <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
 
 
-vector<vector<int>> floyd(vector<vector<int>> W, vector<vector<int>>& P) &#123;
-    int n = W.size();
-    vector<vector<int>> D = W;
-    for (int k = 0; k < n; k++) &#123;
-        for (int i = 0; i < n; i++) &#123;
-            for (int j = 0; j < n; j++) &#123;
-                if (D[i][j] > D[i][k] + D[k][j]) &#123;
-                    D[i][j] = D[i][k] + D[k][j];
-                    P[i][j] = k;
-                &#125;
-            &#125;
-        &#125;
-    &#125;
-    return D;
-&#125;
+vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token function">floyd</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> W<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span><span class="token operator">&amp;</span> P<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> n <span class="token operator">=</span> W<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> D <span class="token operator">=</span> W<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> k <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> k <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> k<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                <span class="token keyword">if</span> <span class="token punctuation">(</span>D<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">></span> D<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">+</span> D<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                    D<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> D<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>k<span class="token punctuation">]</span> <span class="token operator">+</span> D<span class="token punctuation">[</span>k<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+                    P<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">=</span> k<span class="token punctuation">;</span>
+                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> D<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-void print_matrix(vector<vector<int>> W) &#123;
-    for (auto& w : W) &#123;
-        for (auto& item : w) &#123;
-            cout << item << " ";
-        &#125;
-        cout << endl;
-    &#125;
-&#125;
+<span class="token keyword">void</span> <span class="token function">print_matrix</span><span class="token punctuation">(</span>vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> W<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> w <span class="token operator">:</span> W<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">auto</span><span class="token operator">&amp;</span> item <span class="token operator">:</span> w<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            cout <span class="token operator">&lt;&lt;</span> item <span class="token operator">&lt;&lt;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-// 打印最短路径
-void print_path(int a, int b, vector<vector<int>> P) &#123;
-    cout << a;
-    while (a != P[a][b]) &#123;
-        if (P[a][b] >= 0) &#123;
-            cout << "->" << P[a][b];
-            a = P[a][b];
-        &#125;
-        else &#123;
-            cout << endl;
-            return;
-        &#125;
-    &#125;
-    cout << endl;
-&#125;
+<span class="token comment" spellcheck="true">// 打印最短路径</span>
+<span class="token keyword">void</span> <span class="token function">print_path</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">,</span> vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> P<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> a<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span>a <span class="token operator">!=</span> P<span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">[</span>b<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>P<span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">[</span>b<span class="token punctuation">]</span> <span class="token operator">>=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            cout <span class="token operator">&lt;&lt;</span> <span class="token string">"->"</span> <span class="token operator">&lt;&lt;</span> P<span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">[</span>b<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            a <span class="token operator">=</span> P<span class="token punctuation">[</span>a<span class="token punctuation">]</span><span class="token punctuation">[</span>b<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    cout <span class="token operator">&lt;&lt;</span> endl<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-int main()
-&#123;
-    int n;  // 结点数量
-    cin >> n;
-    vector<vector<int>> W(n);
-    vector <vector<int>> P(n);
-    for (int i = 0; i < n; i++) &#123;
-        W[i].resize(n, INFI);
-        W[i][i] = 0;
-        P[i].resize(n, NIL);
-    &#125;
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> n<span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 结点数量</span>
+    cin <span class="token operator">>></span> n<span class="token punctuation">;</span>
+    vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token function">W</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    vector <span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token function">P</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        W<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> INFI<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        W<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        P<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">resize</span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> NIL<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
 
-    int a; // 边的数量
-    cin >> a;
-    for (int i = 0; i < a; i++) &#123;
-        int u, v, w;    // u、v：端点，w：边的权重
-        cin >> u >> v >> w;
-        W[u][v] = w;
-        P[u][v] = v;
-    &#125;
-    print_matrix(W);
-    print_matrix(P);
-    
-    vector<vector<int>> D = floyd(W, P);
-    print_matrix(D);
-    print_matrix(P);
-    print_path(0, 1, P);
-&#125;
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">int</span> a<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// 边的数量</span>
+    cin <span class="token operator">>></span> a<span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> a<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">int</span> u<span class="token punctuation">,</span> v<span class="token punctuation">,</span> w<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// u、v：端点，w：边的权重</span>
+        cin <span class="token operator">>></span> u <span class="token operator">>></span> v <span class="token operator">>></span> w<span class="token punctuation">;</span>
+        W<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> w<span class="token punctuation">;</span>
+        P<span class="token punctuation">[</span>u<span class="token punctuation">]</span><span class="token punctuation">[</span>v<span class="token punctuation">]</span> <span class="token operator">=</span> v<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token function">print_matrix</span><span class="token punctuation">(</span>W<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">print_matrix</span><span class="token punctuation">(</span>P<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    vector<span class="token operator">&lt;</span>vector<span class="token operator">&lt;</span><span class="token keyword">int</span><span class="token operator">>></span> D <span class="token operator">=</span> <span class="token function">floyd</span><span class="token punctuation">(</span>W<span class="token punctuation">,</span> P<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">print_matrix</span><span class="token punctuation">(</span>D<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">print_matrix</span><span class="token punctuation">(</span>P<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">print_path</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> P<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1176,7 +1166,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">24.7k</span>&nbsp;字
+                class="white-color">30.5k</span>&nbsp;字
             
             
             
