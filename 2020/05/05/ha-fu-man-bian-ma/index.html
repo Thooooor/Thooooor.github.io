@@ -448,17 +448,16 @@
 <p>文件的最优编码方案总是对应一棵<strong>满二叉树</strong>，即每个非叶节点都有两个孩子节点。所以，若C为字母表且所有字符的出现频率均为正数，则最优前缀码对应的树恰有$|C|$个叶节点，每个叶节点对应字母表中的一个字符，且恰有$|C|-1$个内部节点。</p>
 <p>给定一棵对应前缀码的树T，可以轻易计算出编码一个文件需要多少个二进制位。对于字母表C中的每个字符c，令属性<code>c.freq</code>表示c在文件中出现的频率， 令$d_T(c)$（$d_T(c)$也是字符c的码字长度）表示c的叶节点在树中的深度。则编码文件需要：<br>$$<br>B(T)=\sum_{c\in C}{c.freq*d_{T}(c)}<br>$$<br>个二进制位，将$B(T)$定义为<strong>T的代价</strong>。</p>
 <h1 id="构建哈夫曼编码"><a href="#构建哈夫曼编码" class="headerlink" title="构建哈夫曼编码"></a>构建哈夫曼编码</h1><p>假定C是一个n个字符的集合，其中每个字符$c\in C$都是一个对象，其属性<code>c.freq</code>给出字符的出现频率。算法自底向上地构造出对应最优编码地二叉树T。从$|C|$个叶节点开始，执行$|C|-1$个<strong>合并</strong>操作，创建出最终的二叉树。算法使用一个以$freq$为关键字的最小优先队列Q，以识别两个最低频率的对象将其合并。当合并两个对象时，得到的新对象的频率设置为原来两个对象的频率之和。</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c">HUFFMAN(C)
-n = |C|
-Q = C
-for i=1 to n-1
+<pre class="line-numbers language-c"><code class="language-c"><span class="token function">HUFFMAN</span><span class="token punctuation">(</span>C<span class="token punctuation">)</span>
+n <span class="token operator">=</span> <span class="token operator">|</span>C<span class="token operator">|</span>
+Q <span class="token operator">=</span> C
+<span class="token keyword">for</span> i<span class="token operator">=</span><span class="token number">1</span> to n<span class="token number">-1</span>
     allocate a new node z
-    z.left = x = EXTRACT-MIN(Q)
-    z.right = y = EXTRACT-MIN(Q)
-    z.freq = x.freq + y.freq
-    INSERT(Q,z)
-return EXTRACT-MIN(Q)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+    z<span class="token punctuation">.</span>left <span class="token operator">=</span> x <span class="token operator">=</span> EXTRACT<span class="token operator">-</span><span class="token function">MIN</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span>
+    z<span class="token punctuation">.</span>right <span class="token operator">=</span> y <span class="token operator">=</span> EXTRACT<span class="token operator">-</span><span class="token function">MIN</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span>
+    z<span class="token punctuation">.</span>freq <span class="token operator">=</span> x<span class="token punctuation">.</span>freq <span class="token operator">+</span> y<span class="token punctuation">.</span>freq
+    <span class="token function">INSERT</span><span class="token punctuation">(</span>Q<span class="token punctuation">,</span>z<span class="token punctuation">)</span>
+<span class="token keyword">return</span> EXTRACT<span class="token operator">-</span><span class="token function">MIN</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="http://note.lizhihao999.cn/notes/20200822164521.png" alt="算法过程——《算法导论》"></p>
 <h1 id="算法正确性"><a href="#算法正确性" class="headerlink" title="算法正确性"></a>算法正确性</h1><p>为了证明贪心HUFFMAN算法正确，需要证明确定最优前缀码的问题具有贪心选择和最优子结构性质。</p>
 <h2 id="1-贪心选择性质"><a href="#1-贪心选择性质" class="headerlink" title="1. 贪心选择性质"></a>1. 贪心选择性质</h2><blockquote>
@@ -1106,7 +1105,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">33.2k</span>&nbsp;字
+                class="white-color">30.5k</span>&nbsp;字
             
             
             

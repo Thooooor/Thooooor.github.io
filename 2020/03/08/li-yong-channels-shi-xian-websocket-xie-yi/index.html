@@ -414,7 +414,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2k
+                    2.1k
                 </div>
                 
 
@@ -460,229 +460,207 @@
 <p>​    <strong>Channels</strong>是一个采用Django并将其功能拓展到HTTP以外的项目，以处理WebSocket协议。它基于称为<a target="_blank" rel="noopener" href="http://asgi.readthedocs.io/">ASGI</a>的Python规范构建。</p>
 <p>​    接下来基于官方Tutorial1-2简单介绍Channels的使用。</p>
 <p>​    首先需要安装Django和Channels</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">pip install django
+<pre class="line-numbers language-powershell"><code class="language-powershell">pip install django
 pip install channels<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>​    创建一个Django项目，并进入项目根目录：</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">django-admin startproject mysite
+<pre class="line-numbers language-powershell"><code class="language-powershell">django<span class="token operator">-</span>admin startproject mysite
 cd mysite<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
 <p>​    接下来创建Channels的根路由<code>routing.py</code>，channels的路由配置与Django URLconf相似，它告诉Channels当Channels服务器接收到HTTP请求时要运行什么代码。</p>
 <p>​    首先从一个空的路由配置开始，创建文件<code>mysite/routing.py</code>，包含以下代码：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># mysite/routing.py
-from channels.routing import ProtocolTypeRouter
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># mysite/routing.py</span>
+<span class="token keyword">from</span> channels<span class="token punctuation">.</span>routing <span class="token keyword">import</span> ProtocolTypeRouter
 
-application = ProtocolTypeRouter({
-    # (http-&gt;django views is added by default)
-})<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+application <span class="token operator">=</span> ProtocolTypeRouter<span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>
+    <span class="token comment" spellcheck="true"># (http->django views is added by default)</span>
+<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>​    然后将Channels库在应用列表中进行注册：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># mysite/settings.py
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    # 新添加
-    'channels',
-]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># mysite/settings.py</span>
+INSTALLED_APPS <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">'django.contrib.admin'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.auth'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.contenttypes'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.sessions'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.messages'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.staticfiles'</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true"># 新添加</span>
+    <span class="token string">'channels'</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>​    继续编辑<code>mtsite/settings.py</code>将Channels指向根路由配置，添加以下代码：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># mysite/settings.py
-# Channels
-ASGI_APPLICATION = 'mysite.routing.application'<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># mysite/settings.py</span>
+<span class="token comment" spellcheck="true"># Channels</span>
+ASGI_APPLICATION <span class="token operator">=</span> <span class="token string">'mysite.routing.application'</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <p>​    此时Channels可以控制<code>runserver</code>命令，用Channels开发服务器代替标准的Django开发服务器。</p>
 <p>​    运行Django项目：</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">py manage.py runserver<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre class="line-numbers language-powershell"><code class="language-powershell">py manage<span class="token punctuation">.</span>py runserver<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>​    将会看到以下输出：</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">Performing system checks...
+<pre class="line-numbers language-powershell"><code class="language-powershell">Performing system checks<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 
-System check identified no issues (0 silenced).
+System check identified no issues <span class="token punctuation">(</span>0 silenced<span class="token punctuation">)</span><span class="token punctuation">.</span>
 
-You have 17 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
-Run 'python manage.py migrate' to apply them.
-March 07, 2020 - 22:45:04
-Django version 3.0.2, using settings 'mysite.settings'
-Starting ASGI/Channels version 2.4.0 development server at http://127.0.0.1:8000/
-Quit the server with CTRL-BREAK.
-HTTP GET / 200 [0.04, 127.0.0.1:54871]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+You have 17 unapplied migration<span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">.</span> Your project may not work properly <span class="token keyword">until</span> you apply the migrations <span class="token keyword">for</span> app<span class="token punctuation">(</span>s<span class="token punctuation">)</span>: admin<span class="token punctuation">,</span> auth<span class="token punctuation">,</span> contenttypes<span class="token punctuation">,</span> sessions<span class="token punctuation">.</span>
+Run <span class="token string">'python manage.py migrate'</span> to apply them<span class="token punctuation">.</span>
+March 07<span class="token punctuation">,</span> 2020 <span class="token operator">-</span> 22:45:04
+Django version 3<span class="token punctuation">.</span>0<span class="token punctuation">.</span>2<span class="token punctuation">,</span> <span class="token keyword">using</span> settings <span class="token string">'mysite.settings'</span>
+Starting ASGI<span class="token operator">/</span>Channels version 2<span class="token punctuation">.</span>4<span class="token punctuation">.</span>0 development server at http:<span class="token operator">/</span><span class="token operator">/</span>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:8000<span class="token operator">/</span>
+Quit the server with CTRL<span class="token operator">-</span><span class="token keyword">BREAK</span><span class="token punctuation">.</span>
+HTTP GET <span class="token operator">/</span> 200 <span class="token punctuation">[</span>0<span class="token punctuation">.</span>04<span class="token punctuation">,</span> 127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:54871<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>​    可以看到<code>Starting ASGI/Channels development server at http://127.0.0.1:8000/</code>，说明Channels开发服务器已从Django开发服务器接管项目。打开<a target="_blank" rel="noopener" href="http://127.0.0.1:8000/">初始界面</a>，你将看到熟悉的小火箭：<img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200307225354.png" style="zoom: 80%;"></p>
 <p>​    关闭服务器，创建app<code>event</code>：</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">py manage.py startapp event<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre class="line-numbers language-powershell"><code class="language-powershell">py manage<span class="token punctuation">.</span>py startapp event<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>​    注册app：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># mysite/settings.py
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># mysite/settings.py</span>
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'channels',
-    # 新添加
-    'event',
-]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+INSTALLED_APPS <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token string">'django.contrib.admin'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.auth'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.contenttypes'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.sessions'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.messages'</span><span class="token punctuation">,</span>
+    <span class="token string">'django.contrib.staticfiles'</span><span class="token punctuation">,</span>
+    <span class="token string">'channels'</span><span class="token punctuation">,</span>
+    <span class="token comment" spellcheck="true"># 新添加</span>
+    <span class="token string">'event'</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>​    在<strong>根目录</strong>新建文件夹<code>templates</code>以及<code>templates/event</code>文件夹放置html文件，在<code>mysite/settings.py</code>中添加路径：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># mysite/settings.py
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 修改
-        'DIRS': [os.path.join(BASE_DIR, 'templates').replace('\\', '/')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># mysite/settings.py</span>
+TEMPLATES <span class="token operator">=</span> <span class="token punctuation">[</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>
+        <span class="token string">'BACKEND'</span><span class="token punctuation">:</span> <span class="token string">'django.template.backends.django.DjangoTemplates'</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true"># 修改</span>
+        <span class="token string">'DIRS'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span>join<span class="token punctuation">(</span>BASE_DIR<span class="token punctuation">,</span> <span class="token string">'templates'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>replace<span class="token punctuation">(</span><span class="token string">'\\'</span><span class="token punctuation">,</span> <span class="token string">'/'</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token string">'APP_DIRS'</span><span class="token punctuation">:</span> <span class="token boolean">True</span><span class="token punctuation">,</span>
+        <span class="token string">'OPTIONS'</span><span class="token punctuation">:</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>
+            <span class="token string">'context_processors'</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+                <span class="token string">'django.template.context_processors.debug'</span><span class="token punctuation">,</span>
+                <span class="token string">'django.template.context_processors.request'</span><span class="token punctuation">,</span>
+                <span class="token string">'django.contrib.auth.context_processors.auth'</span><span class="token punctuation">,</span>
+                <span class="token string">'django.contrib.messages.context_processors.messages'</span><span class="token punctuation">,</span>
+            <span class="token punctuation">]</span><span class="token punctuation">,</span>
+        <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;,</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;,</span>
+<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>​    在<code>templates</code>中添加视图文件<code>event/list.html</code>，其中WebSocket请求部分模板如下：</p>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
-    <span class="token keyword">function</span> <span class="token function">Filter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"WebSocket"</span> <span class="token keyword">in</span> window<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token comment">//alert("您的浏览器支持WebSocket!");</span>
-            <span class="token comment">// 重定向URL</span>
+<pre class="line-numbers language-html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>text/javascript<span class="token punctuation">"</span></span><span class="token punctuation">></span></span><span class="token script language-javascript">
+    <span class="token keyword">function</span> <span class="token function">Filter</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token string">"WebSocket"</span> <span class="token keyword">in</span> window<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">//alert("您的浏览器支持WebSocket!");</span>
+            <span class="token comment" spellcheck="true">// 重定向URL</span>
             <span class="token keyword">let</span> ws <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">WebSocket</span><span class="token punctuation">(</span><span class="token string">"ws://"</span><span class="token operator">+</span> window<span class="token punctuation">.</span>location<span class="token punctuation">.</span>host <span class="token operator">+</span> <span class="token string">"/ws/event/list/"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            ws<span class="token punctuation">.</span><span class="token function-variable function">onopen</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                ws<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token punctuation">{</span>
-                    <span class="token string">'message'</span><span class="token operator">:</span> <span class="token string">"测试"</span><span class="token punctuation">,</span>
-                    <span class="token comment">// 需要传输的数据</span>
-                <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
-            ws<span class="token punctuation">.</span><span class="token function-variable function">onmessage</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">evt</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token keyword">let</span> received_msg <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>evt<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            ws<span class="token punctuation">.</span>onopen <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                ws<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span>JSON<span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                    <span class="token string">'message'</span><span class="token punctuation">:</span> <span class="token string">"测试"</span><span class="token punctuation">,</span>
+                    <span class="token comment" spellcheck="true">// 需要传输的数据</span>
+                <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            ws<span class="token punctuation">.</span>onmessage <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span>evt<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                <span class="token keyword">let</span> received_msg <span class="token operator">=</span> JSON<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>evt<span class="token punctuation">.</span>data<span class="token punctuation">)</span><span class="token punctuation">;</span>
                 <span class="token keyword">let</span> feed_back <span class="token operator">=</span> received_msg<span class="token punctuation">[</span><span class="token string">'feedback'</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
                 <span class="token function">alert</span><span class="token punctuation">(</span>feedback<span class="token punctuation">)</span><span class="token punctuation">;</span>
-                <span class="token comment">// 处理接受数据</span>
-            <span class="token punctuation">}</span>
-            ws<span class="token punctuation">.</span><span class="token function-variable function">onclose</span> <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                <span class="token comment">//alert("WebSocket连接已关闭...");</span>
-            <span class="token punctuation">}</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">else</span> <span class="token punctuation">{</span>
+                <span class="token comment" spellcheck="true">// 处理接受数据</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+            ws<span class="token punctuation">.</span>onclose <span class="token operator">=</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">//alert("WebSocket连接已关闭...");</span>
+            <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
             <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">"你的浏览器不支持WebSocket!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+        <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+</span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">></span></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>​    创建视图功能<code>event/views.py</code>：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># event/views.py
-from django.shortcuts import render
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># event/views.py</span>
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>shortcuts <span class="token keyword">import</span> render
 
-def list(request):
-    return render(request, 'event/list.html', {})<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+<span class="token keyword">def</span> <span class="token function">list</span><span class="token punctuation">(</span>request<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">return</span> render<span class="token punctuation">(</span>request<span class="token punctuation">,</span> <span class="token string">'event/list.html'</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;&amp;#125;)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>​    创建路由<code>event/urls.py</code>：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># event/urls.py
-from django.urls import path
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># event/urls.py</span>
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path
 
-from . import views
+<span class="token keyword">from</span> <span class="token punctuation">.</span> <span class="token keyword">import</span> views
 
-urlpatterns = [
-    path('list/', views.list, name='list'),
-]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+    path<span class="token punctuation">(</span><span class="token string">'list/'</span><span class="token punctuation">,</span> views<span class="token punctuation">.</span>list<span class="token punctuation">,</span> name<span class="token operator">=</span><span class="token string">'list'</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>​    将<code>event app</code>的路由添加到项目的根路由中：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># mysite/urls.py
-from django.conf.urls import include
-from django.urls import path
-from django.contrib import admin
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># mysite/urls.py</span>
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>conf<span class="token punctuation">.</span>urls <span class="token keyword">import</span> include
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> path
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>contrib <span class="token keyword">import</span> admin
 
-urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('event/', include('event.urls', namespace='event')),
-]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+    path<span class="token punctuation">(</span><span class="token string">'admin/'</span><span class="token punctuation">,</span> admin<span class="token punctuation">.</span>site<span class="token punctuation">.</span>urls<span class="token punctuation">)</span><span class="token punctuation">,</span>
+    path<span class="token punctuation">(</span><span class="token string">'event/'</span><span class="token punctuation">,</span> include<span class="token punctuation">(</span><span class="token string">'event.urls'</span><span class="token punctuation">,</span> namespace<span class="token operator">=</span><span class="token string">'event'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>Channels处理请求过程：</p>
 <pre><code>1. Channels接受HTTP请求
  2. 查询根URLconf查找**消费者(consumer)**
  3. 在**消费者(consumer)**中调用各种功能来处理连接的事件</code></pre>
 <p>创建**消费者(consumer)**文件<code>event/consumers.py</code>：</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">event/
-    __init__.py
+<pre class="line-numbers language-powershell"><code class="language-powershell">event<span class="token operator">/</span>
+    __init__<span class="token punctuation">.</span>py
     ……
-    consumers.py
+    consumers<span class="token punctuation">.</span>py
     ……
-    urls.py
-    views.py<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+    urls<span class="token punctuation">.</span>py
+    views<span class="token punctuation">.</span>py<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>​    代码模板如下：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># event/consumers.py
-from channels.generic.websocket import WebsocketConsumer
-import json
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># event/consumers.py</span>
+<span class="token keyword">from</span> channels<span class="token punctuation">.</span>generic<span class="token punctuation">.</span>websocket <span class="token keyword">import</span> WebsocketConsumer
+<span class="token keyword">import</span> json
 
-class ListDataConsumer(WebsocketConsumer):
-    def connect(self):
-        self.accept()
+<span class="token keyword">class</span> <span class="token class-name">ListDataConsumer</span><span class="token punctuation">(</span>WebsocketConsumer<span class="token punctuation">)</span><span class="token punctuation">:</span>
+    <span class="token keyword">def</span> <span class="token function">connect</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        self<span class="token punctuation">.</span>accept<span class="token punctuation">(</span><span class="token punctuation">)</span>
 
-    def disconnect(self, close_code):
-        pass
+    <span class="token keyword">def</span> <span class="token function">disconnect</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> close_code<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token keyword">pass</span>
 
-    def receive(self, text_data):
-        # 字典化接收数据
-        text_data_json = json.loads(text_data)
-        message = text_data_json['message']
-        # 数据处理
-        self.send(text_data=json.dumps({
-        'feedback': "Accept",
-        # 返回数据
-    }))<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    <span class="token keyword">def</span> <span class="token function">receive</span><span class="token punctuation">(</span>self<span class="token punctuation">,</span> text_data<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment" spellcheck="true"># 字典化接收数据</span>
+        text_data_json <span class="token operator">=</span> json<span class="token punctuation">.</span>loads<span class="token punctuation">(</span>text_data<span class="token punctuation">)</span>
+        message <span class="token operator">=</span> text_data_json<span class="token punctuation">[</span><span class="token string">'message'</span><span class="token punctuation">]</span>
+        <span class="token comment" spellcheck="true"># 数据处理</span>
+        self<span class="token punctuation">.</span>send<span class="token punctuation">(</span>text_data<span class="token operator">=</span>json<span class="token punctuation">.</span>dumps<span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>
+        <span class="token string">'feedback'</span><span class="token punctuation">:</span> <span class="token string">"Accept"</span><span class="token punctuation">,</span>
+        <span class="token comment" spellcheck="true"># 返回数据</span>
+    <span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;))</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>​    为<code>consumers.py</code>配置路由，新建<code>event/routing.py</code>：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># event/routing.py
-from django.urls import re_path
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># event/routing.py</span>
+<span class="token keyword">from</span> django<span class="token punctuation">.</span>urls <span class="token keyword">import</span> re_path
 
-from . import consumers
+<span class="token keyword">from</span> <span class="token punctuation">.</span> <span class="token keyword">import</span> consumers
 
-websocket_urlpatterns = [
-    re_path(r'ws/event/list/$', consumers.ListDataConsumer),
-]
+websocket_urlpatterns <span class="token operator">=</span> <span class="token punctuation">[</span>
+    re_path<span class="token punctuation">(</span>r<span class="token string">'ws/event/list/$'</span><span class="token punctuation">,</span> consumers<span class="token punctuation">.</span>ListDataConsumer<span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token punctuation">]</span>
 <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <p>​    接下来将根路由指向<code>event/routing.py</code>文件：</p>
-<pre class="line-numbers language-python" data-language="python"><code class="language-python"># mysite/routing.py
-from channels.auth import AuthMiddlewareStack
-from channels.routing import ProtocolTypeRouter, URLRouter
+<pre class="line-numbers language-python"><code class="language-python"><span class="token comment" spellcheck="true"># mysite/routing.py</span>
+<span class="token keyword">from</span> channels<span class="token punctuation">.</span>auth <span class="token keyword">import</span> AuthMiddlewareStack
+<span class="token keyword">from</span> channels<span class="token punctuation">.</span>routing <span class="token keyword">import</span> ProtocolTypeRouter<span class="token punctuation">,</span> URLRouter
 
-import event.routing
+<span class="token keyword">import</span> event<span class="token punctuation">.</span>routing
 
-application = ProtocolTypeRouter({
-    # (http-&gt;django views is added by default)
-    'websocket': AuthMiddlewareStack(
-        URLRouter(
-            event.routing.websocket_urlpatterns
-        )
-    ),
-})<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
+application <span class="token operator">=</span> ProtocolTypeRouter<span class="token punctuation">(</span><span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#123;</span>
+    <span class="token comment" spellcheck="true"># (http->django views is added by default)</span>
+    <span class="token string">'websocket'</span><span class="token punctuation">:</span> AuthMiddlewareStack<span class="token punctuation">(</span>
+        URLRouter<span class="token punctuation">(</span>
+            event<span class="token punctuation">.</span>routing<span class="token punctuation">.</span>websocket_urlpatterns
+        <span class="token punctuation">)</span>
+    <span class="token punctuation">)</span><span class="token punctuation">,</span>
+<span class="token operator">&amp;</span><span class="token comment" spellcheck="true">#125;)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <p>​    此根路由配置指定当与Channels开发服务器建立连接时，<code>ProtocolTypeRouter</code>将首先检查连接的类型。如果它是WebSocket连接（<strong>ws：//**或</strong>wss：//**），则该连接将分配给<code>AuthMiddlewareStack</code>。</p>
 <p>​    在<code>AuthMiddlewareStack</code>将填充的连接的<strong>范围</strong>覆盖到当前认证的用户，然后将连接到<code>URLRouter</code>。该<code>URLRouter</code>会研究基础上，提供连接到路由到特定消费者的HTTP路径，基于<code>url</code>模式。</p>
 <p>​    之后进行数据库模型迁移：</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">py manage.py makemigrations
-py manage.py migrate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
+<pre class="line-numbers language-powershell"><code class="language-powershell">py manage<span class="token punctuation">.</span>py makemigrations
+py manage<span class="token punctuation">.</span>py migrate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>​    运行项目：</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">py manage.py runserver<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
+<pre class="line-numbers language-powershell"><code class="language-powershell">py manage<span class="token punctuation">.</span>py runserver<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>​    如果连接建立成功，后台应该有如下显示：</p>
-<pre class="line-numbers language-powershell" data-language="powershell"><code class="language-powershell">HTTP GET /event/list/ 200 [0.06, 127.0.0.1:58855]
-WebSocket HANDSHAKING /ws/event/list/ [127.0.0.1:58906]
-WebSocket CONNECT /ws/event/list/ [127.0.0.1:58906]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-
-
+<pre class="line-numbers language-powershell"><code class="language-powershell">HTTP GET <span class="token operator">/</span>event<span class="token operator">/</span>list<span class="token operator">/</span> 200 <span class="token punctuation">[</span>0<span class="token punctuation">.</span>06<span class="token punctuation">,</span> 127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:58855<span class="token punctuation">]</span>
+WebSocket HANDSHAKING <span class="token operator">/</span>ws<span class="token operator">/</span>event<span class="token operator">/</span>list<span class="token operator">/</span> <span class="token punctuation">[</span>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:58906<span class="token punctuation">]</span>
+WebSocket CONNECT <span class="token operator">/</span>ws<span class="token operator">/</span>event<span class="token operator">/</span>list<span class="token operator">/</span> <span class="token punctuation">[</span>127<span class="token punctuation">.</span>0<span class="token punctuation">.</span>0<span class="token punctuation">.</span>1:58906<span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>​    使用Channels的一般流程如上，在配置ASGI之后，Channels的服务器会替代原有的Django服务器处理请求。</p>
 <p>​    只有在需要使用WebSocket协议进行实时通信时需要配置<code>routing.py</code>和<code>consumers.py</code>，由<code>routing.py</code>指向<code>consumers.py</code>处理WebSocket请求，其余仅使用HTTP协议请求的使用方式与之前并<strong>没有任何区别</strong>。</p>
 <p>​    因为只是在一个项目中的某个app中使用了Channels，可以参考该<a target="_blank" rel="noopener" href="https://github.com/Thooooor/GovermentDataAdmin">项目代码</a>中的<code>event</code>.</p>
@@ -1294,7 +1272,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">33.2k</span>&nbsp;字
+                class="white-color">30.5k</span>&nbsp;字
             
             
             

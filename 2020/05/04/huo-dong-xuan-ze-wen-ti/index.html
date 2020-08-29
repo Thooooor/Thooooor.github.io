@@ -414,14 +414,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    817
+                    718
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    2 分
                 </div>
                 
 
@@ -478,27 +478,23 @@
 </ul>
 </li>
 </ul>
-<h2 id="递归贪心算法"><a href="#递归贪心算法" class="headerlink" title="递归贪心算法"></a>递归贪心算法</h2><pre class="line-numbers language-pseudocode" data-language="pseudocode"><code class="language-pseudocode">RECURSIVE-ACTIVITY-SELECTOR(s,f,k,n)
+<h2 id="递归贪心算法"><a href="#递归贪心算法" class="headerlink" title="递归贪心算法"></a>递归贪心算法</h2><pre class="line-numbers language-pseudocode"><code class="language-pseudocode">RECURSIVE-ACTIVITY-SELECTOR(s,f,k,n)
     m = k+1
-    while m&lt;=n and s[m]&lt;f[k] do
+    while m<=n and s[m]<f[k] do
         m = m+1
-        if m &lt;= n do
-            return {a[m]} and RECURSIVE-ACTIVITY-SELECTOR(s,f,m,n)
+        if m <= n do
+            return &#123;a[m]&#125; and RECURSIVE-ACTIVITY-SELECTOR(s,f,m,n)
         else 
             return<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h2 id="迭代贪心算法"><a href="#迭代贪心算法" class="headerlink" title="迭代贪心算法"></a>迭代贪心算法</h2><pre class="line-numbers language-pseudocode" data-language="pseudocode"><code class="language-pseudocode">GREEDY-ACTIVITY-SELECTOR(s,f)
+<h2 id="迭代贪心算法"><a href="#迭代贪心算法" class="headerlink" title="迭代贪心算法"></a>迭代贪心算法</h2><pre class="line-numbers language-pseudocode"><code class="language-pseudocode">GREEDY-ACTIVITY-SELECTOR(s,f)
     n = s.length
-    A={a[1]}
+    A=&#123;a[1]&#125;
     k=1
     for m=2 to n do
-        if s[m]&gt;=f[k] do
-            A.append{a[m]}
+        if s[m]>=f[k] do
+            A.append&#123;a[m]&#125;
             k = m
     return A<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1115,7 +1111,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">33.2k</span>&nbsp;字
+                class="white-color">30.5k</span>&nbsp;字
             
             
             

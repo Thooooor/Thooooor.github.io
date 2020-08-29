@@ -454,14 +454,11 @@
 <p>一个流$f$的值$|f|$定义如下：<br>$$<br>|f|=\sum_{v\in V}{f(s,v)}-\sum_{v\in V}{f(v,s)}<br>$$<br>流$f$的值是从源结点流出的总流量减去流入源结点的总流量。</p>
 <p><strong>最大流问题</strong>中，给定一个流网络G，一个源结点s，一个汇点t，希望找到值最大的一个流。</p>
 <h1 id="Ford-Fulkerson方法"><a href="#Ford-Fulkerson方法" class="headerlink" title="Ford-Fulkerson方法"></a>Ford-Fulkerson方法</h1><p>Ford-Fulkerson方法循环增加流的值，在开始的时候，对于所有结点$u,v\in V,f(u,v)=0$，给出的初始流值为0。在每一次迭代中，我们将图G的流值进行增加，方法就是在一个关联的“残存网络”$G_f$中寻找一条“增广路径”。一旦知道图$G_f$中一条增广路径的边，就可以很容易辨识出G中的一些具体的边，我们可以对这些边上的流量进行修改，从而增加流的值。虽然Ford-Fulkerson方法每次迭代都能增加流的值，但是对于图G的一条特定边来说，其流量可能增加也可能减少；对于某些边的流进行缩减可能是必要的，以便让算法可以将更多的流从源结点发送到汇点。重复对流进行这一过程，直到残存网络中不再存在增广路径为止。最大流最小切割定理将说明在算法终结时，该算法将获得一个最大流。</p>
-<pre class="line-numbers language-c" data-language="c"><code class="language-c">FORD-FILKERSON-METHOD(G,s,t)
-    initial flow f to 0
-    while there exists an augmenting path p in the residual network Gf
+<pre class="line-numbers language-c"><code class="language-c">FORD<span class="token operator">-</span>FILKERSON<span class="token operator">-</span><span class="token function">METHOD</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>s<span class="token punctuation">,</span>t<span class="token punctuation">)</span>
+    initial flow f to <span class="token number">0</span>
+    <span class="token keyword">while</span> there exists an augmenting path p in the residual network Gf
         augment flow f along p
-    return f<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
+    <span class="token keyword">return</span> f<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <h2 id="残存网络"><a href="#残存网络" class="headerlink" title="残存网络"></a>残存网络</h2><p>给定流网络G和流量f，残存网络$G_f$由那些仍有空间对流量进行调整的边构成。流网络的一条边可以允许的额外容量等于该边的容量减去该边上的流量。如果差值为正，则将该条边置于图$G_f$中，并将其残存容量设置为$c_f(u,v)=c(u,v)-f(u,v)$。对于图G中的边来说，只有能够允许额外流量的边才能加入到图$G_f$中。如果边$(u,v)$的流量等于其容量，则$c_f(u,v)=0$，该条边将不属于图$G_f$</p>
 <p>假定有一个流网络$G=(V,E)$，其源结点为s，汇点为t。设f为图G中的一个流，考虑结点对$u,v\in V$，定义残存容量$c_f(u,v)$如下：</p>
 <img src="http://note.lizhihao999.cn/notes/20200824161054.png" style="zoom:67%;">
@@ -483,20 +480,19 @@
 </ol>
 </blockquote>
 <h1 id="基本Ford-Fulkerson算法"><a href="#基本Ford-Fulkerson算法" class="headerlink" title="基本Ford-Fulkerson算法"></a>基本Ford-Fulkerson算法</h1><p>假设流网络的容量$c(u,v)$都已经给出，如果边$(u,v)\notin  E$，则$c(u,v)=0$。</p>
-<pre class="line-numbers language-pseudocode" data-language="pseudocode"><code class="language-pseudocode">FORD-FILKERSON(G,s,t)
+<pre class="line-numbers language-pseudocode"><code class="language-pseudocode">FORD-FILKERSON(G,s,t)
     /* 将流f初始化为0 */
     for each edge(u,v) in G.E
         (u,v).f = 0
     /* 重复在残存网络Gf中寻找一条增广路径p */
     while there exsits a path p from s to t in the residual network Gf
-        cf(p) = min{cf(u,v): (u,v) is in p}
+        cf(p) = min&#123;cf(u,v): (u,v) is in p&#125;
         /* 使用残存容量cf(p)对路径p上的流f进行加赠 */
         for each edge(u,v) in p
             if (u,v) in E
                 (u,v).f = (u,v).f + cf(p)
             else
                 (v,u).f = (v,u).f - cf(p)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
 <ol>
 <li>2~3行：将流$f$初始化为0</li>
 <li>4~9行while循环：重复在残存网络$G_f$中寻找一条增广路径p，然后使用残存容量$c_{f}(p)$来对路径p上的流$f$进行加增。路径p上每条残存边要么是原来网络中的一条边，要么是原来网络中的边的反向边。<ol>
@@ -1129,7 +1125,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">33.2k</span>&nbsp;字
+                class="white-color">30.5k</span>&nbsp;字
             
             
             
