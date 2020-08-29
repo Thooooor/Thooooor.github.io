@@ -453,17 +453,19 @@
 <p>最短路径算法的核心技术是<strong>松弛</strong>。</p>
 </blockquote>
 <p>对于每一个结点v，维持一个属性$v.d$，用来记录从源结点s到结点v的最短路径权重的上界，称$v.d$为s到v的<strong>最短路径估计</strong>。使用下面运行时间为$\Theta(V)$的算法来<strong>对最短路径估计和前驱结点进行初始化</strong>：</p>
-<pre class="line-numbers language-pseudocode"><code class="language-pseudocode">INITIALIZE-SINGLE-SOURCE(G,s)
+<pre class="line-numbers language-pseudocode" data-language="pseudocode"><code class="language-pseudocode">INITIALIZE-SINGLE-SOURCE(G,s)
     for each vertex v in G.V
         v.d = infinit
         v.pi = NIL
     s.d = 0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p>初始化之后，对于所有结点$v \in V$，我们有$v.\pi=NIL,s.d=0$，对于所有结点$v \in V-{s}$，我们有$v.d=\infin$。</p>
 <p>对一条边的松弛过程为：首先测试是否可以对从s到v的最短路径进行改善。测试方法是：将从结点s到结点u之间的最短路径距离加上结点u与v之间的边权重，并与当前的s到v的最短路径估计进行比较，如果前者更小，则对$v.d$和$v.\pi$进行更新。松弛步骤可能降低最短路径的估计值$v.d$并更新v的前驱属性$v.\pi$。下面的伪代码执行对边$(u,v)$在$O(1)$时间内进行的松弛操作：</p>
-<pre class="line-numbers language-pseudocode"><code class="language-pseudocode">RELAX(u,v,w)
-    if v.d > u.d+w(u,v)
+<pre class="line-numbers language-pseudocode" data-language="pseudocode"><code class="language-pseudocode">RELAX(u,v,w)
+    if v.d &gt; u.d+w(u,v)
         v.d = u.d + w(u,v)
         v.pi = u<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
 <p><img src="http://note.lizhihao999.cn/notes/20200823225845.png" alt="《算法导论》松弛示例"></p>
 <h1 id="最短路径和松弛操作的性质"><a href="#最短路径和松弛操作的性质" class="headerlink" title="最短路径和松弛操作的性质"></a>最短路径和松弛操作的性质</h1><ul>
 <li><p><strong>三角不等式性质</strong></p>
@@ -488,15 +490,16 @@
 </ul>
 <h1 id="Bellman-Ford算法"><a href="#Bellman-Ford算法" class="headerlink" title="Bellman-Ford算法"></a>Bellman-Ford算法</h1><p>Bellman-Ford算法解决的是<strong>一般情况下的单源最短路径问题</strong>，在这里，<strong>边的权重可以为负值</strong>。给定带权重的有向图$G=(V,E)$，和权重函数$w:E\to R$，Bellman-Ford算法返回一个布尔值，以表明是否存在一个从源结点可以到达的权重为负值的环路。如果存在这样一个环路，算法将告诉我们不存在解决方案。如果没有这种环路存在，算法将给出最短路径及它们的权重。</p>
 <p>Bellman-Ford算法通过对边进行松弛操作来渐进地降低从源结点s到每个结点v的最短路径的估计值$v.d$，直到该估计值与实际最短路径权重$\delta(s,v)$相同为止。该算法返回TRUE值当且仅当输入图不包含可以从源结点到达的权重为负值的环路。</p>
-<pre class="line-numbers language-c"><code class="language-c"><span class="token function">BELLMAN_FORD</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>w<span class="token punctuation">,</span>s<span class="token punctuation">)</span>
-    INITIALIZE<span class="token operator">-</span>SINGLE<span class="token operator">-</span><span class="token function">SOURCE</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>s<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">// 对所有结点的d值和pi值进行初始化</span>
-    <span class="token keyword">for</span> i<span class="token operator">=</span><span class="token number">1</span> to <span class="token operator">|</span>G<span class="token punctuation">.</span>V<span class="token operator">|</span><span class="token operator">-</span><span class="token number">1</span>
-        <span class="token keyword">for</span> each <span class="token function">edge</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span> in G<span class="token punctuation">.</span>E
-            <span class="token function">RELAX</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">,</span>w<span class="token punctuation">)</span>
-    <span class="token keyword">for</span> each <span class="token function">edge</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span> in G<span class="token punctuation">.</span>E
-        <span class="token keyword">if</span> v<span class="token punctuation">.</span>d <span class="token operator">></span> u<span class="token punctuation">.</span>d<span class="token operator">+</span><span class="token function">w</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span>
-            <span class="token keyword">return</span> FALSE
-    <span class="token keyword">return</span> TRUE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">BELLMAN_FORD(G,w,s)
+    INITIALIZE-SINGLE-SOURCE(G,s)    // 对所有结点的d值和pi值进行初始化
+    for i=1 to |G.V|-1
+        for each edge(u,v) in G.E
+            RELAX(u,v,w)
+    for each edge(u,v) in G.E
+        if v.d &gt; u.d+w(u,v)
+            return FALSE
+    return TRUE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <ol>
 <li>3~5行对图的每条边进行$|V|-1$次处理，每次处理对应一次循环，每次循环对每条边进行一次松弛操作。</li>
 <li>6~8行检查图中是否存在权重为负值的环路并返回与之相适应的布尔值。</li>
@@ -511,15 +514,16 @@
 <h1 id="Dijkstra算法"><a href="#Dijkstra算法" class="headerlink" title="Dijkstra算法"></a>Dijkstra算法</h1><p>Dijkstra算法解决的是带权重的有向图上单源最短路径问题，该算法要求<strong>所有边的权重都为非负值</strong>，因此，我们假定对于所有的边$(u,v)\in E$，都有$w(u,v)\ge 0$。</p>
 <p>Dijkstra算法在运行过程中维持的关键信息是一组结点集合$S$。从源结点s到该集合每个结点之间的最短路径已经被找到。算法重复从结点集$V-S$中选择最短路径估计最小的结点$u$，将$u$加入到集合$S$，然后对所有从$u$出发的边进行松弛。</p>
 <p>在下面给出的方法中我们使用一个最小优先队列$Q$来保持结点集合，每个结点的关键值为其d值。</p>
-<pre class="line-numbers language-c"><code class="language-c"><span class="token function">DIJKSTRA</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>w<span class="token punctuation">,</span>s<span class="token punctuation">)</span>
-    INITIALIZE<span class="token operator">-</span>SINGLE<span class="token operator">-</span><span class="token function">SOURCE</span><span class="token punctuation">(</span>G<span class="token punctuation">,</span>s<span class="token punctuation">)</span>    <span class="token comment" spellcheck="true">// 对所有结点的d值和pi值进行初始化</span>
-    S <span class="token operator">=</span> Empty    <span class="token comment" spellcheck="true">// 将集合S初始化为一个空集</span>
-    Q <span class="token operator">=</span> G<span class="token punctuation">.</span>V        <span class="token comment" spellcheck="true">// 对最小优先队列Q进行初始化，将所有结点V放入队列</span>
-    <span class="token keyword">while</span> Q <span class="token operator">!=</span> Empty
-        u <span class="token operator">=</span> EXTRACT<span class="token operator">-</span><span class="token function">MIN</span><span class="token punctuation">(</span>Q<span class="token punctuation">)</span>
-        S <span class="token operator">=</span> S <span class="token operator">+</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>u<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
-        <span class="token keyword">for</span> each vertex v in G<span class="token punctuation">.</span>Adj<span class="token punctuation">[</span>u<span class="token punctuation">]</span>
-            <span class="token function">RELAX</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">,</span>w<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-c" data-language="c"><code class="language-c">DIJKSTRA(G,w,s)
+    INITIALIZE-SINGLE-SOURCE(G,s)    // 对所有结点的d值和pi值进行初始化
+    S = Empty    // 将集合S初始化为一个空集
+    Q = G.V        // 对最小优先队列Q进行初始化，将所有结点V放入队列
+    while Q != Empty
+        u = EXTRACT-MIN(Q)
+        S = S + {u}
+        for each vertex v in G.Adj[u]
+            RELAX(u,v,w)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 <ol>
 <li>2行：对所有结点的d值和pi值进行初始化</li>
 <li>3行：将集合S初始化为一个空集</li>
@@ -1196,7 +1200,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">30.5k</span>&nbsp;字
+                class="white-color">33.2k</span>&nbsp;字
             
             
             
