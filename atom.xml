@@ -72,6 +72,33 @@
   </entry>
   
   <entry>
+    <title>计算机系统概论</title>
+    <link href="https://thooooor.github.io/2020/06/01/ji-suan-ji-xi-tong-gai-lun/"/>
+    <id>https://thooooor.github.io/2020/06/01/ji-suan-ji-xi-tong-gai-lun/</id>
+    <published>2020-06-01T07:20:00.000Z</published>
+    <updated>2020-08-30T02:06:29.167Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;1-1-计算机系统简介&quot;&gt;&lt;a href=&quot;#1-1-计算机系统简介&quot; class=&quot;headerlink&quot; title=&quot;1.1 计算机系统简介&quot;&gt;&lt;/a&gt;1.1 计算机系统简介&lt;/h1&gt;&lt;h2 id=&quot;一、计算机软硬件概念&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="计算机组成原理" scheme="https://thooooor.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
     <title>网络最大流</title>
     <link href="https://thooooor.github.io/2020/05/09/wang-luo-zui-da-liu/"/>
     <id>https://thooooor.github.io/2020/05/09/wang-luo-zui-da-liu/</id>
@@ -551,34 +578,6 @@
       <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
     
       <category term="Ubuntu" scheme="https://thooooor.github.io/tags/Ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pycharm远程调试</title>
-    <link href="https://thooooor.github.io/2020/03/28/pycharm-yuan-cheng-diao-shi/"/>
-    <id>https://thooooor.github.io/2020/03/28/pycharm-yuan-cheng-diao-shi/</id>
-    <published>2020-03-28T01:25:00.000Z</published>
-    <updated>2020-08-07T09:02:45.771Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;blockquote&gt;
-&lt;p&gt;IDE：PyCharm 2019.3.3 (Professional Edition)&lt;br&gt;ECS：腾讯云 Ubuntu 18.04.4
-        
-      
-    
-    </summary>
-    
-    
-      <category term="脱坑实录" scheme="https://thooooor.github.io/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/"/>
-    
-    
-      <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
     
   </entry>
   
