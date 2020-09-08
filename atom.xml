@@ -99,6 +99,33 @@
   </entry>
   
   <entry>
+    <title>摊还分析</title>
+    <link href="https://thooooor.github.io/2020/05/10/tan-huan-fen-xi/"/>
+    <id>https://thooooor.github.io/2020/05/10/tan-huan-fen-xi/</id>
+    <published>2020-05-10T07:20:00.000Z</published>
+    <updated>2020-09-08T08:22:25.099Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在摊还分析中，我们求数据结构的一个操作序列中所执行的所有操作的&lt;strong&gt;平均时间&lt;/strong&gt;，来评价操作的代价。摊还分析不同于平均情况分析，不涉及概率，保证&lt;strong&gt;最坏情况下每个操作的平均性能&lt;/strong&gt;。通过做摊还分析，通常可以获得对某种特定数据
+        
+      
+    
+    </summary>
+    
+    
+      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="算法设计与分析" scheme="https://thooooor.github.io/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>网络最大流</title>
     <link href="https://thooooor.github.io/2020/05/09/wang-luo-zui-da-liu/"/>
     <id>https://thooooor.github.io/2020/05/09/wang-luo-zui-da-liu/</id>
@@ -536,36 +563,6 @@
 &lt;p&gt;Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h1
-        
-      
-    
-    </summary>
-    
-    
-      <category term="脱坑实录" scheme="https://thooooor.github.io/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/"/>
-    
-    
-      <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
-    
-      <category term="Ubuntu" scheme="https://thooooor.github.io/tags/Ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Linux配置虚拟环境</title>
-    <link href="https://thooooor.github.io/2020/03/29/linux-pei-zhi-xu-ni-huan-jing/"/>
-    <id>https://thooooor.github.io/2020/03/29/linux-pei-zhi-xu-ni-huan-jing/</id>
-    <published>2020-03-29T01:25:00.000Z</published>
-    <updated>2020-08-07T09:05:27.708Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;安装虚拟环境&quot;&gt;&lt;a href=&quot;#安装虚拟环境&quot; class=&quot;headerlink&quot; title=&quot;安装虚拟环境&quot;&gt;&lt;/a&gt;安装虚拟环境&lt;/h1&gt;&lt;p&gt;输入命令：&lt;/p&gt;
-&lt;pre class=&quot;line-numbers
         
       
     
