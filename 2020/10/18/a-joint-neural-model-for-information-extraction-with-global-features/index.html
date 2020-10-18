@@ -479,7 +479,7 @@
 <p>之后使用CRF层捕捉标签之间的联系，计算tag path： $\hat{z}={\hat{z_1},…,\hat{z}_L}$ 的分数:</p>
 <img src="http://note.lizhihao999.cn/notes/20201018231804.png" style="zoom:80%;">
 
-<p>其中$X={x_1,…,x_L}$是输入语句中每个词的向量表示，$\hat{y}<em>{i,\hat{z_i}}$是分数向量$\hat{y}_i$在第$\hat{z}<em>i$条路径的组合，$A</em>{\hat{z}</em>{i-1},\hat{z}<em>{i}}$是矩阵A中$\hat{z}</em>{i-1}$到$\hat{z}_i$的转移分数。同时，我们在A中添加两个特殊的标签$<start>,<end>$分别作为$\hat{z}<em>0$和$\hat{z}</em>{L+1}$来表示词语序列的开始和结束。</end></start></p>
+<p>其中$X={x_1,…,x_L}$是输入语句中每个词的向量表示，$\hat{y}<em>{i,\hat{z_i}}$ 是分数向量 $\hat{y}_i$在第 $\hat{z}<em>i$条路径的组合，$A</em>{\hat{z}</em>{i-1},\hat{z}<em>{i}}$是矩阵A中$\hat{z}</em>{i-1}$到$\hat{z}_i$的转移分数。同时，我们在A中添加两个特殊的标签$<start>,<end>$分别作为$\hat{z}<em>0$和$\hat{z}</em>{L+1}$来表示词语序列的开始和结束。</end></start></p>
 <p>训练阶段时，我们最大化标准标签路径的对数似然估计：<br>$$<br>\log{p(z|X)}=s(X,z)-log{\sum_{\hat{z}\in Z}{e^{s(X.\hat{z})}}}<br>$$</p>
 <p>其中$Z$是输入语句中所有可能标签路径的集合。</p>
 <p>所以我们定义实体识别阶段的损失函数为：<br>$$<br>L^I=-\log{p(z|X)}<br>$$</p>
