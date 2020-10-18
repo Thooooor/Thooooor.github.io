@@ -476,13 +476,18 @@
 <h1 id="3-Approach"><a href="#3-Approach" class="headerlink" title="3. Approach"></a>3. Approach</h1><p>ONEIE框架对给定的语句进行信息网络提取，分为以下四步：encoding，identification，classification和decoding。我们使用预训练的BERT模型进行编码，然后对语句中的实体和事件触发器进行识别。之后计算所有的结点和相关的边的类型标签分数（Type label scores）。在解码阶段，我们使用束搜索（Beam Search）探索输入语句可能的信息网络。</p>
 <h2 id="3-1-Encoding"><a href="#3-1-Encoding" class="headerlink" title="3.1 Encoding"></a>3.1 Encoding</h2><p>输入一句包含$L$个词的语句，使用预训练的BERT模型将每个词表示为$x_i$。实验发现使用最后三层BERT在大多数的子任务上表现较好。</p>
 <h2 id="3-2-Identification"><a href="#3-2-Identification" class="headerlink" title="3.2 Identification"></a>3.2 Identification</h2><p>这一阶段将识别句中的实体提及和事件触发器，并表示为信息网络中的结点。我们使用前馈神经网络FFN计算每个词的分数向量$\hat{y}_i=FFN(x_i)$，$\hat{y}_i$表示一个标签在目标标签集（Target tag set）中的分数。</p>
-<p>之后使用CRF层捕捉标签之间的联系，计算tag path$\hat{z}={\hat{z_1},…,\hat{z}<em>L}$的分数:<br>$$<br>s(X,\hat{z})=\sum</em>{i=1}^{L}{\hat{y}<em>{i,\hat{z_i}}}+\sum_{i=1}^{L+1}{A</em>{\hat{z}<em>{i-1},\hat{z}</em>{i}}}<br>$$</p>
+<p>之后使用CRF层捕捉标签之间的联系，计算tag path$\hat{z}={\hat{z_1},…,\hat{z}<em>L}$ 的分数:<br>$$<br>s(X,\hat{z})=\sum</em>{i=1}^{L}{\hat{y}<em>{i,\hat{z_i}}}+\sum_{i=1}^{L+1}{A</em>{\hat{z}<em>{i-1},\hat{z}</em>{i}}}<br>$$</p>
 <p>其中$X={x_1,…,x_L}$是输入语句中每个词的向量表示，$\hat{y}<em>{i,\hat{z_i}}$是分数向量$\hat{y}_i$在第$\hat{z}<em>i$条路径的组合，$A</em>{\hat{z}</em>{i-1},\hat{z}<em>{i}}$是矩阵A中$\hat{z}</em>{i-1}$到$\hat{z}_i$的转移分数。同时，我们在A中添加两个特殊的标签$<start>,<end>$分别作为$\hat{z}<em>0$和$\hat{z}</em>{L+1}$来表示词语序列的开始和结束。</end></start></p>
-<p>训练阶段时，我们最大化标准标签路径的对数似然估计：<br>$$<br>\log{p(z|X)}=s(X,z)-log{\sum_{\hat{z}\in Z}{e^{s(X.\hat{z})}}}<br>$$<br>其中$Z$是输入语句中所有可能标签路径的集合。</p>
+<p>训练阶段时，我们最大化标准标签路径的对数似然估计：<br>$$<br>\log{p(z|X)}=s(X,z)-log{\sum_{\hat{z}\in Z}{e^{s(X.\hat{z})}}}<br>$$</p>
+<p>其中$Z$是输入语句中所有可能标签路径的集合。</p>
 <p>所以我们定义实体识别阶段的损失函数为：<br>$$<br>L^I=-\log{p(z|X)}<br>$$</p>
-<h2 id="3-3-Classification"><a href="#3-3-Classification" class="headerlink" title="3.3 Classification"></a>3.3 Classification</h2><p>将每个识别出的结点表示为$v_i$，之后使用分离的针对特定任务的前馈神经网络来计算每个结点的标签分数：<br>$$<br>\hat{y}_{i}^{t}=FFN^t(v_i)<br>$$<br>其中$t$表示一个特定的任务。</p>
-<p>为了获得$i-th$和$j-th$结点之间边的标签分数，我们连接它们的跨度表示（Span Representation），将向量表示为：<br>$$<br>\hat{y}<em>{k}^{t}=FFN^t(v_i,v_j)<br>$$<br>对于每个任务，训练目标是最小化以下交叉熵损失：<br>$$<br>L^{t}=-\frac{1}{N^t}\sum</em>{i=1}^{N^t}{y_i^{t}\log{\hat{y}^{t}_{i}}}<br>$$<br>其中，$y_i^{t}$是向量的正确标签，$N^t$是任务$t$中的实体数量。</p>
-<p>如果忽略结点和边的内在依赖关系（Inter-dependencies），我们可以直接通过每个任务的最高分数来预测标签，之后生成局部的最佳图$\hat{G}$。最佳图$\hat{G}$分数的计算方法为：<br>$$<br>s’(\hat{G})=\sum_{t\in T}\sum_{i=1}^{N^t}{\max{\hat{y}_i^t}}<br>$$<br>其中，$T$是任务的集合，将$s’(\hat{G})$作为$\hat{G}$的局部分数参考。</p>
+<h2 id="3-3-Classification"><a href="#3-3-Classification" class="headerlink" title="3.3 Classification"></a>3.3 Classification</h2><p>将每个识别出的结点表示为$v_i$，之后使用分离的针对特定任务的前馈神经网络来计算每个结点的标签分数：<br>$$<br>\hat{y}_{i}^{t}=FFN^t(v_i)<br>$$</p>
+<p>其中$t$表示一个特定的任务。</p>
+<p>为了获得$i-th$和$j-th$结点之间边的标签分数，我们连接它们的跨度表示（Span Representation），将向量表示为：<br>$$<br>\hat{y}_{k}^{t}=FFN^t(v_i,v_j)<br>$$</p>
+<p>对于每个任务，训练目标是最小化以下交叉熵损失：<br>$$<br>L^{t}=-\frac{1}{N^t}\sum_{i=1}^{N^t}{y_i^{t}\log{\hat{y}^{t}_{i}}}<br>$$</p>
+<p>其中，$y_i^{t}$是向量的正确标签，$N^t$是任务$t$中的实体数量。</p>
+<p>如果忽略结点和边的内在依赖关系（Inter-dependencies），我们可以直接通过每个任务的最高分数来预测标签，之后生成局部的最佳图$\hat{G}$。最佳图$\hat{G}$分数的计算方法为：<br>$$<br>s’(\hat{G})=\sum_{t\in T}\sum_{i=1}^{N^t}{\max{\hat{y}_i^t}}<br>$$</p>
+<p>其中，$T$是任务的集合，将$s’(\hat{G})$作为$\hat{G}$的局部分数参考。</p>
 <h2 id="3-4-Global-Features"><a href="#3-4-Global-Features" class="headerlink" title="3.4 Global Features"></a>3.4 Global Features</h2><p>我们考虑框架中的两种类型的内部依赖：</p>
 <ol>
 <li><p>子任务间的作用 Cross-subtask interactions</p>
