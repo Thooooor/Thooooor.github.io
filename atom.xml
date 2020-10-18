@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2020-08-15T14:28:13.969Z</updated>
+  <updated>2020-10-18T15:00:40.753Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>A Joint Neural Model for Information Extraction with Global Features</title>
+    <link href="https://thooooor.github.io/2020/10/18/a-joint-neural-model-for-information-extraction-with-global-features/"/>
+    <id>https://thooooor.github.io/2020/10/18/a-joint-neural-model-for-information-extraction-with-global-features/</id>
+    <published>2020-10-18T14:58:00.000Z</published>
+    <updated>2020-10-18T15:00:40.753Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;2020 ACL会议《A Joint Neural Model for Information Extraction with Global Features》&lt;/p&gt;
+&lt;p&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="NLP" scheme="https://thooooor.github.io/categories/NLP/"/>
+    
+    
+      <category term="NER" scheme="https://thooooor.github.io/tags/NER/"/>
+    
+      <category term="论文笔记" scheme="https://thooooor.github.io/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="ACL" scheme="https://thooooor.github.io/tags/ACL/"/>
+    
+  </entry>
   
   <entry>
     <title>优化（规划）问题</title>
@@ -531,38 +564,6 @@
         
         
           &lt;h1 id=&quot;开启Gunicorn任务&quot;&gt;&lt;a href=&quot;#开启Gunicorn任务&quot; class=&quot;headerlink&quot; title=&quot;开启Gunicorn任务&quot;&gt;&lt;/a&gt;开启Gunicorn任务&lt;/h1&gt;&lt;pre class=&quot;line-numbers
-        
-      
-    
-    </summary>
-    
-    
-      <category term="脱坑实录" scheme="https://thooooor.github.io/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/"/>
-    
-    
-      <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
-    
-      <category term="Ubuntu" scheme="https://thooooor.github.io/tags/Ubuntu/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Ubuntu服务器安装Anaconda</title>
-    <link href="https://thooooor.github.io/2020/04/03/ubuntu-fu-wu-qi-an-zhuang-anaconda/"/>
-    <id>https://thooooor.github.io/2020/04/03/ubuntu-fu-wu-qi-an-zhuang-anaconda/</id>
-    <published>2020-04-03T01:25:00.000Z</published>
-    <updated>2020-08-07T08:52:07.841Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;blockquote&gt;
-&lt;p&gt;Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h1
         
       
     
