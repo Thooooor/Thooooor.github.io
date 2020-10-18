@@ -429,7 +429,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    9 分
+                    8 分
                 </div>
                 
 
@@ -477,7 +477,8 @@
 <h2 id="3-1-Encoding"><a href="#3-1-Encoding" class="headerlink" title="3.1 Encoding"></a>3.1 Encoding</h2><p>输入一句包含$L$个词的语句，使用预训练的BERT模型将每个词表示为$x_i$。实验发现使用最后三层BERT在大多数的子任务上表现较好。</p>
 <h2 id="3-2-Identification"><a href="#3-2-Identification" class="headerlink" title="3.2 Identification"></a>3.2 Identification</h2><p>这一阶段将识别句中的实体提及和事件触发器，并表示为信息网络中的结点。我们使用前馈神经网络FFN计算每个词的分数向量$\hat{y}_i=FFN(x_i)$，$\hat{y}_i$表示一个标签在目标标签集（Target tag set）中的分数。</p>
 <p>之后使用CRF层捕捉标签之间的联系，计算tag path： $\hat{z}={\hat{z_1},…,\hat{z}_L}$ 的分数:</p>
-<p>$$<br>s(X,\hat{z})=\sum_{i=1}^{L}{\hat{y}<em>{i,\hat{z_i}}}+\sum_{i=1}^{L+1}{A</em>{\hat{z}<em>{i-1},\hat{z}</em>{i}}}<br>$$</p>
+<img src="http://note.lizhihao999.cn/notes/20201018231804.png" style="zoom:80%;">
+
 <p>其中$X={x_1,…,x_L}$是输入语句中每个词的向量表示，$\hat{y}<em>{i,\hat{z_i}}$是分数向量$\hat{y}_i$在第$\hat{z}<em>i$条路径的组合，$A</em>{\hat{z}</em>{i-1},\hat{z}<em>{i}}$是矩阵A中$\hat{z}</em>{i-1}$到$\hat{z}_i$的转移分数。同时，我们在A中添加两个特殊的标签$<start>,<end>$分别作为$\hat{z}<em>0$和$\hat{z}</em>{L+1}$来表示词语序列的开始和结束。</end></start></p>
 <p>训练阶段时，我们最大化标准标签路径的对数似然估计：<br>$$<br>\log{p(z|X)}=s(X,z)-log{\sum_{\hat{z}\in Z}{e^{s(X.\hat{z})}}}<br>$$</p>
 <p>其中$Z$是输入语句中所有可能标签路径的集合。</p>
