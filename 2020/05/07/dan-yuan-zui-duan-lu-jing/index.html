@@ -461,7 +461,7 @@
 <p>初始化之后，对于所有结点$v \in V$，我们有$v.\pi=NIL,s.d=0$，对于所有结点$v \in V-{s}$，我们有$v.d=\infin$。</p>
 <p>对一条边的松弛过程为：首先测试是否可以对从s到v的最短路径进行改善。测试方法是：将从结点s到结点u之间的最短路径距离加上结点u与v之间的边权重，并与当前的s到v的最短路径估计进行比较，如果前者更小，则对$v.d$和$v.\pi$进行更新。松弛步骤可能降低最短路径的估计值$v.d$并更新v的前驱属性$v.\pi$。下面的伪代码执行对边$(u,v)$在$O(1)$时间内进行的松弛操作：</p>
 <pre class="line-numbers language-pseudocode"><code class="language-pseudocode">RELAX(u,v,w)
-    if v.d > u.d+w(u,v)
+    if v.d &gt; u.d+w(u,v)
         v.d = u.d + w(u,v)
         v.pi = u<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p><img src="http://note.lizhihao999.cn/notes/20200823225845.png" alt="《算法导论》松弛示例"></p>
@@ -494,7 +494,7 @@
         <span class="token keyword">for</span> each <span class="token function">edge</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span> in G<span class="token punctuation">.</span>E
             <span class="token function">RELAX</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">,</span>w<span class="token punctuation">)</span>
     <span class="token keyword">for</span> each <span class="token function">edge</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span> in G<span class="token punctuation">.</span>E
-        <span class="token keyword">if</span> v<span class="token punctuation">.</span>d <span class="token operator">></span> u<span class="token punctuation">.</span>d<span class="token operator">+</span><span class="token function">w</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span>
+        <span class="token keyword">if</span> v<span class="token punctuation">.</span>d <span class="token operator">&gt;</span> u<span class="token punctuation">.</span>d<span class="token operator">+</span><span class="token function">w</span><span class="token punctuation">(</span>u<span class="token punctuation">,</span>v<span class="token punctuation">)</span>
             <span class="token keyword">return</span> FALSE
     <span class="token keyword">return</span> TRUE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 <ol>
@@ -1196,7 +1196,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">35.5k</span>&nbsp;字
+                class="white-color">40.2k</span>&nbsp;字
             
             
             

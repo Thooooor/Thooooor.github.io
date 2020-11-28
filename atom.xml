@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2020-10-18T15:23:32.206Z</updated>
+  <updated>2020-11-28T08:58:31.435Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -17,11 +17,40 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Graph Embedding 图嵌入简述</title>
+    <link href="https://thooooor.github.io/2020/11/28/tu-qian-ru-graph-embedding/"/>
+    <id>https://thooooor.github.io/2020/11/28/tu-qian-ru-graph-embedding/</id>
+    <published>2020-11-28T08:57:00.000Z</published>
+    <updated>2020-11-28T08:58:31.435Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;图嵌入-Graph-Embedding&quot;&gt;&lt;a href=&quot;#图嵌入-Graph-Embedding&quot; class=&quot;headerlink&quot; title=&quot;图嵌入 Graph Embedding&quot;&gt;&lt;/a&gt;图嵌入 Graph
+        
+      
+    
+    </summary>
+    
+    
+      <category term="NLP" scheme="https://thooooor.github.io/categories/NLP/"/>
+    
+    
+      <category term="GE" scheme="https://thooooor.github.io/tags/GE/"/>
+    
+      <category term="知识图谱" scheme="https://thooooor.github.io/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
+    
+  </entry>
+  
+  <entry>
     <title>A Joint Neural Model for Information Extraction with Global Features</title>
     <link href="https://thooooor.github.io/2020/10/18/a-joint-neural-model-for-information-extraction-with-global-features/"/>
     <id>https://thooooor.github.io/2020/10/18/a-joint-neural-model-for-information-extraction-with-global-features/</id>
     <published>2020-10-18T14:58:00.000Z</published>
-    <updated>2020-10-18T15:23:32.206Z</updated>
+    <updated>2020-10-19T14:11:07.026Z</updated>
     
     <summary type="html">
     
@@ -547,35 +576,6 @@
     
     
       <category term="算法设计与分析" scheme="https://thooooor.github.io/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Gunicorn基本使用</title>
-    <link href="https://thooooor.github.io/2020/04/03/gunicorn-ji-ben-shi-yong/"/>
-    <id>https://thooooor.github.io/2020/04/03/gunicorn-ji-ben-shi-yong/</id>
-    <published>2020-04-03T01:25:00.000Z</published>
-    <updated>2020-08-07T10:04:01.665Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;开启Gunicorn任务&quot;&gt;&lt;a href=&quot;#开启Gunicorn任务&quot; class=&quot;headerlink&quot; title=&quot;开启Gunicorn任务&quot;&gt;&lt;/a&gt;开启Gunicorn任务&lt;/h1&gt;&lt;pre class=&quot;line-numbers
-        
-      
-    
-    </summary>
-    
-    
-      <category term="脱坑实录" scheme="https://thooooor.github.io/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/"/>
-    
-    
-      <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
-    
-      <category term="Ubuntu" scheme="https://thooooor.github.io/tags/Ubuntu/"/>
     
   </entry>
   

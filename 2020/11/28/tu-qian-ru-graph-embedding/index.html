@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="动态规划, Thor&#39;s Blog">
+    <meta name="keywords" content="Graph Embedding 图嵌入简述, Thor&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>动态规划 | Thor&#39;s Blog</title>
+    <title>Graph Embedding 图嵌入简述 | Thor&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -253,12 +253,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">动态规划</h1>
+                    <h1 class="description center-align post-title">Graph Embedding 图嵌入简述</h1>
                 </div>
             </div>
         </div>
@@ -375,8 +375,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
-                                <span class="chip bg-color">算法设计与分析</span>
+                            <a href="/tags/GE/">
+                                <span class="chip bg-color">GE</span>
+                            </a>
+                        
+                            <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
+                                <span class="chip bg-color">知识图谱</span>
                             </a>
                         
                     </div>
@@ -387,8 +391,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                学习笔记
+                            <a href="/categories/NLP/" class="post-category">
+                                NLP
                             </a>
                         
                     </div>
@@ -400,28 +404,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-30
+                    2020-11-28
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-08-19
+                    2020-11-28
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    1.7k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    4 分
+                    6 分
                 </div>
                 
 
@@ -436,121 +440,80 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p><strong>Those who cannot remember the past are condemned to repeat it.</strong></p>
-</blockquote>
-<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>动态规划同常用来求解<strong>最优化问题</strong>。这类问题通常有很多可行解，每个解都有一个值，我们希望寻找最优值的解。</p>
-<h2 id="动态规划与分治算法"><a href="#动态规划与分治算法" class="headerlink" title="动态规划与分治算法"></a>动态规划与分治算法</h2><p>动态规划与分治算法有相似与不同之处，相似之处为都通过组合子问题的解来求解原问题。不同之处为动态规划应用于子问题重叠的情况，即不同的子问题具有公共的子子问题。这种情况下，分治算法会做很多重复的工作（重复求子问题的解），而动态规划对每个子问题只求解一次，将结果保存在表格当中，避免不必要的计算工作。</p>
-<table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center">分治法</th>
-<th align="center">动态规划</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">算法思想</td>
-<td align="center">组合子问题</td>
-<td align="center">组合子问题</td>
-</tr>
-<tr>
-<td align="center">计算方式</td>
-<td align="center">自顶向下</td>
-<td align="center">自底向上</td>
-</tr>
-<tr>
-<td align="center">相同要素</td>
-<td align="center">具有最优子结构</td>
-<td align="center">具有最优子结构</td>
-</tr>
-<tr>
-<td align="center">不同要素</td>
-<td align="center">不包含公共子问题（独立）</td>
-<td align="center">重叠子问题</td>
-</tr>
-</tbody></table>
-<h2 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h2><ul>
-<li><p><strong>保存已求解子问题的解</strong></p>
-</li>
-<li><p><strong>将原始问题划分为一系列子问题</strong></p>
-</li>
-<li><p><strong>自底向上计算</strong></p>
-</li>
-</ul>
-<h2 id="优化问题"><a href="#优化问题" class="headerlink" title="优化问题"></a>优化问题</h2><ul>
-<li><h4 id="给定一组约束条件和一个代价函数，在解空间中搜索具有最小或最大代价的优化解"><a href="#给定一组约束条件和一个代价函数，在解空间中搜索具有最小或最大代价的优化解" class="headerlink" title="给定一组约束条件和一个代价函数，在解空间中搜索具有最小或最大代价的优化解"></a>给定一组约束条件和一个代价函数，在解空间中搜索具有最小或最大代价的优化解</h4></li>
-<li><h4 id="很多优化问题可分为多个子问题，子问题相互关联，子问题的解被重复使用"><a href="#很多优化问题可分为多个子问题，子问题相互关联，子问题的解被重复使用" class="headerlink" title="很多优化问题可分为多个子问题，子问题相互关联，子问题的解被重复使用"></a>很多优化问题可分为多个子问题，子问题相互关联，子问题的解被重复使用</h4></li>
-</ul>
-<h2 id="使用条件"><a href="#使用条件" class="headerlink" title="使用条件"></a>使用条件</h2><ul>
-<li><h4 id="优化子结构"><a href="#优化子结构" class="headerlink" title="优化子结构"></a>优化子结构</h4><ul>
-<li><strong>一个问题的优化解包含了子问题的优化解</strong></li>
-</ul>
-</li>
-<li><h4 id="重叠子问题"><a href="#重叠子问题" class="headerlink" title="重叠子问题"></a>重叠子问题</h4><ul>
-<li><strong>在问题的求解过程中，很多子问题的解将被多次使用</strong></li>
-</ul>
-</li>
-</ul>
-<h2 id="设计步骤"><a href="#设计步骤" class="headerlink" title="设计步骤"></a>设计步骤</h2><ul>
-<li><h4 id="刻画一个最优解的结构特征"><a href="#刻画一个最优解的结构特征" class="headerlink" title="刻画一个最优解的结构特征"></a>刻画一个最优解的结构特征</h4><p>寻找最优子结构，利用这种子结构从子问题的最优解构造出原问题的最优解</p>
-</li>
-<li><h4 id="递归定义最优解的值"><a href="#递归定义最优解的值" class="headerlink" title="递归定义最优解的值"></a>递归定义最优解的值</h4></li>
-<li><h4 id="自底向上计算最优解的值"><a href="#自底向上计算最优解的值" class="headerlink" title="自底向上计算最优解的值"></a>自底向上计算最优解的值</h4></li>
-<li><h4 id="根据构造最优解的信息构造优化解"><a href="#根据构造最优解的信息构造优化解" class="headerlink" title="根据构造最优解的信息构造优化解"></a>根据构造最优解的信息构造优化解</h4></li>
-</ul>
-<h2 id="实现方法"><a href="#实现方法" class="headerlink" title="实现方法"></a>实现方法</h2><ul>
-<li><h4 id="带备忘的自顶向下法"><a href="#带备忘的自顶向下法" class="headerlink" title="带备忘的自顶向下法"></a>带备忘的自顶向下法</h4><ul>
-<li>递归求解</li>
-<li>保存每个子问题的解（数组或散列表）</li>
-</ul>
-</li>
-<li><h4 id="自底向上法"><a href="#自底向上法" class="headerlink" title="自底向上法"></a>自底向上法</h4><ul>
-<li>恰当定义子问题的<strong>规模</strong></li>
-<li>任何子问题的求解都只依赖于<strong>更小的</strong>子问题的解</li>
-<li>按子问题规模<strong>由小到大进行求解</strong></li>
-<li>第一次求解一个问题时，它的所有前提子问题都已求解完成且<strong>保存结果</strong></li>
-</ul>
-</li>
-</ul>
-<p>两种方法的算法的<strong>渐进运行时间相同</strong>，<strong>自底向上的时间复杂性</strong>函数通常具有更小的系数，某些情况下自顶向下无法真正递归考察所有可能的子问题。</p>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h2 id="最优子结构"><a href="#最优子结构" class="headerlink" title="最优子结构"></a>最优子结构</h2><ul>
-<li><p><strong>发掘最优子结构的通用模式</strong></p>
+                <h1 id="图嵌入-Graph-Embedding"><a href="#图嵌入-Graph-Embedding" class="headerlink" title="图嵌入 Graph Embedding"></a>图嵌入 Graph Embedding</h1><p>图嵌入是将图中的结点、边、关系映射到更低维度的向量空间，同时最大化地保留特征信息，例如图结构以及信息。由于图的规模、特征和主题不同，同时，图类型的数据是离散的，所以对于图的处理是很困难的。</p>
+<blockquote>
+<p>理由：</p>
 <ol>
-<li>证明问题最优解的第一个组成部分是做出一个选择，做出这次选择会产生一个或多个待解的子问题</li>
-<li>对于一个给定问题，在其可能的第一步选择中，你<strong>假定已经知道</strong>哪种选择才会得到最优解。并<strong>不关心如何得到，只是假定已经知道</strong></li>
-<li>给定可获得最优解的选择后，你确定这次选择会产生哪些<strong>子问题</strong>，以及如何<strong>最好地刻画子问题空间</strong></li>
+<li>用于图的机器学习算法有限</li>
+<li>编码能够压缩数据</li>
+<li>向量运算更简单、快速</li>
 </ol>
+</blockquote>
+<p>如果将嵌入（Embedding）看作一种向低维的变换（transformation），则嵌入方法本身并不是一种神经网络模型（neural network model）。相反，嵌入是一种将图转换为可计算形式（computationally）的预处理算法（pre-processing algorithm）。</p>
+<blockquote>
+<p>挑战：</p>
+<ol>
+<li><p>确保嵌入能够保留足够图的信息</p>
+<p>图形拓扑、节点连接和节点邻域</p>
 </li>
-<li><p><strong>保持子问题空间尽可能简单，只在必要时才扩展它</strong></p>
+<li><p>网络的大小不能减慢嵌入速度</p>
+<p>高效处理大型图表</p>
 </li>
-<li><p><strong>不同问题领域，最优子结构的不同</strong>：</p>
-<ul>
-<li>原问题的最优解中涉及多少个子问题</li>
-<li>再确定最优解使用哪些子问题时，我们需要考虑多少种选择</li>
-</ul>
+<li><p>确定嵌入维度</p>
+<p>高维能够保留更多信息但是增加时间和空间复杂度，需要折中考虑</p>
 </li>
-<li><p><strong>粗略分析算法的运行时间：</strong><br>$$<br>O(m\times n)<br>$$</p>
-</li>
-</ul>
-<p>$$<br>\Theta(n):子问题个数\quad\quad m:考察的选择个数<br>$$</p>
-<h2 id="重叠子问题-1"><a href="#重叠子问题-1" class="headerlink" title="重叠子问题"></a>重叠子问题</h2><p>如果递归算法反复求解相同的子问题，则称最优化问题具有<strong>重叠子问题</strong>。一般来讲， 不同子问题的总数最好是输入规模的多项式函数。</p>
-<h2 id="重构最优解"><a href="#重构最优解" class="headerlink" title="重构最优解"></a>重构最优解</h2><p><strong>将每个子问题所做的选择存在一个表中</strong>：重构每次选择只需$O(1)$时间</p>
-<h2 id="备忘"><a href="#备忘" class="headerlink" title="备忘"></a>备忘</h2><p>维护一个表记录子问题的解，保持递归算法的控制流程：</p>
-<ul>
-<li>每个表项的初值设为一个特殊值，表示尚未填入子问题的解</li>
-<li>当递归调用过程中第一次遇到子问题时，计算其解，并存入对应表项</li>
-<li>每次遇到同一个子问题，查表返回解</li>
-</ul>
-<h2 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h2><ul>
-<li><strong>通常情况</strong>：每个子问题必须至少求解一次<ul>
-<li>自底向上动态规划算法比自顶向下备忘算法快（都是$O(n^3)$，相差常量系数）</li>
-<li>自底向上算法没有递归调用的开销，表的维护开销更小</li>
-</ul>
-</li>
-<li><strong>某些问题：</strong>可利用表的访问模式进一步降低时空代价</li>
-<li><strong>某些子问题完全不必求解：</strong>备忘方法更有优势（只求解必要子问题）</li>
-</ul>
+</ol>
+</blockquote>
+<p>现在有多种方式实现图嵌入，每种方法都有不同的粒度等级。嵌入能够实施于结点层级、子图层级或者通过图遍历这样的策略进行实施。</p>
+<h1 id="遍历嵌入法-Walk-embedding"><a href="#遍历嵌入法-Walk-embedding" class="headerlink" title="遍历嵌入法 Walk embedding"></a>遍历嵌入法 Walk embedding</h1><h2 id="DeepWalk"><a href="#DeepWalk" class="headerlink" title="DeepWalk"></a>DeepWalk</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1403.6652.pdf">论文地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/phanein/deepwalk">代码地址</a></p>
+</blockquote>
+<p>DeepWalk是第一个被广泛用作基准（Benchmark）的图学习方法。DeepWalk通过遍历（walk）来实现嵌入。如果用任意表示向量来表示图中的每个节点，则可以遍历该图。该遍历的步骤可以通过在矩阵中排列相邻的节点表示向量来进行聚合。</p>
+<p>DeepWalk使用以下公式来完成一系列的随机遍历：<br>$$<br>Pr(v_i|(\Phi(v_1),\Phi(v_2),…,\Phi(v_{i-1})))<br>$$<br>目标是估计观察结点$v_i$的可能性，其中$Pr()$代表概率，$\Phi$表示图中每个结点$v$的潜在表示。潜在表示将会成为神经网络的输入，神经网络建立在结点的特点和行走过程中遇见结点的概率，能够预测结点的特征或分类。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20201109110934.png"></p>
+<p>预测的方法为<strong>skip-gram</strong>（与Word2vec相同）。DeepWalk通过遍历整个图来学习得到一个嵌入。模型可以通过一个靶结点来进行预测“context”，即一张图的关联性，结构规则和节点特征。</p>
+<p>DeepWalk是直推式（transductive）的方法，即每添加一个新结点都需要重新训练模型。</p>
+<h2 id="Node2vec"><a href="#Node2vec" class="headerlink" title="Node2vec"></a>Node2vec</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://cs.stanford.edu/people/jure/pubs/node2vec-kdd16.pdf">论文地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/aditya-grover/node2vec">代码地址</a></p>
+</blockquote>
+<p>Node2vec和DeepWalk的之间的区别差之毫厘，却谬以千里。Node2vec通过变量α决定（bias）遍历路径，其中α由参数p和q决定。参数p优先考虑BFS的过程，参数q优先考虑DFS的过程。下一步路径的决定由概率$1/p$或$1/q$决定。</p>
+<img src="http://note.lizhihao999.cn/notes/20201105173741.png" style="zoom:80%;">
+
+<p>如图所示，BFS可以更多地学习本地邻居结点的信息(local neighbors)，DFS可以学习到更多的全局变量（global variables）。Node2vec可以根据任务不同来切换两种优先级，即对于不同的参数值，会产生不同的结果。与DeepWalk相同，Node2vec同样使用潜在嵌入并作为神经网络的输入来分类结点。</p>
+<p>BFS更擅长根据结构部分(枢纽、桥梁、离群点等)进行分类，而DFS返回的是更具社区驱动的分类方案。</p>
+<h2 id="Graph2vec"><a href="#Graph2vec" class="headerlink" title="Graph2vec"></a>Graph2vec</h2><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1707.05005">论文地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/benedekrozemberczki/graph2vec">代码地址</a></p>
+</blockquote>
+<p>Graph2vec是对Node2vec变体的一种修改，本质上是学习嵌入图的子图。Doc2vec中使用的一个方程证明了这一点，这是一个密切相关的变体，也是本文的一个灵感点。<br>$$<br>Pr(w_j|d)=\frac{exp(d\cdot w_j)}{\sum_{w\in v}{exp(d\cdot w)}}<br>$$<br>该等式可写为：单词（$w_j$）出现在给定文档（d）的上下文中的概率等于文档嵌入矩阵（d〜）的指数乘以单词嵌入矩阵（w〜j从文档中取样），然后除以文档嵌入矩阵的所有指数之和再乘以所有文档中词汇表（V）中每个单词的单词嵌入矩阵。</p>
+<p>与word2vec进行类比，如果文档由句子组成（然后由单词组成），则图由子图组成（然后由节点组成）。这些预定的子图具有用户指定的一组边数，同样的，将潜在的子图嵌入传递到神经网络中进行分类。</p>
+<h1 id="相似度嵌入法-Proximity-embedding"><a href="#相似度嵌入法-Proximity-embedding" class="headerlink" title="相似度嵌入法 Proximity embedding"></a>相似度嵌入法 Proximity embedding</h1><h2 id="SDNE"><a href="#SDNE" class="headerlink" title="SDNE"></a>SDNE</h2><blockquote>
+<p><strong>Structural Deep Network embedding</strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.kdd.org/kdd2016/papers/files/rfp0191-wangAemb.pdf">论文地址</a></p>
+<p>[代码地址](<a target="_blank" rel="noopener" href="https://github.com/suanrong/SDNE">suanrong/SDNE: This is a implementation of SDNE (Structural Deep Network embedding) (github.com)</a>)</p>
+</blockquote>
+<p>与遍历嵌入法不同，SDNE尝试学习两类独立的指标：</p>
+<ol>
+<li>一阶相似：两个节点具有相似性，如果它们共享同一条边（pairwise similarity）；</li>
+<li>二阶相似：两个节点具有相似性，如果它们共享很多相邻节点。</li>
+</ol>
+<p>最终目标是捕捉高阶的非线性结构。通过使用深度自编码器（半监督）来保留一阶（监督）和二阶（无监督）网络邻近度来实现。</p>
+<blockquote>
+<p>深度自编码器 Deep Autoencoders</p>
+<p>自编码器是只有一层隐藏节点，输入和输出具有相同节点数的神经网络，可以用于数据压缩、降维，预训练神经网络，生成数据等等。</p>
+</blockquote>
+<p>为了保留一阶相似度，模型还使用了Laplacian特征图的一种变体，这是一种图形嵌入/降维技术。 当相似节点在嵌入式空间中彼此远离地映射时，拉普拉斯特征映射嵌入算法会施加惩罚，从而允许通过最小化相似节点之间的空间来进行优化。</p>
+<p>为了保留二阶相似度，将邻接矩阵传递给一个无监督自编码器，该编码器需要最小化重构损失函数。</p>
+<img src="http://note.lizhihao999.cn/1_44eDEuZBEsmG_TCAKRI3Kw%402x.png" style="zoom: 50%;">
+
+<p>将一阶接近损失函数和二阶重构损失函数联合最小化以返回图嵌入，其中嵌入是通过神经网络学习的。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在将表示形式通过机器学习模型之前，图嵌入技术先将图嵌入到低维连续潜空间中。主要有两类方法：遍历嵌入（walk embedding）和相似度嵌入（proximity embedding）。</p>
+<p>遍历嵌入方法执行图的遍历，目的是保持结构和特征，并将这些遍历集合起来，然后通过递归神经网络进行遍历。</p>
+<p>相似度嵌入方法使用深度学习方法和/或接近度损失函数来优化接近度，以使原始图中彼此靠近的节点也同样在嵌入中。</p>
+<p><strong>参考资料：</strong><br><a target="_blank" rel="noopener" href="https://towardsdatascience.com/overview-of-deep-learning-on-graph-embeddings-4305c10ad4a4">Graph Embedding for Deep Learning</a></p>
+<p><a target="_blank" rel="noopener" href="https://towardsdatascience.com/graph-embeddings-the-summary-cc6075aba007">Graph Embeddings — The Summary</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -594,7 +557,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://thooooor.github.io/2020/04/30/dong-tai-gui-hua/">https://thooooor.github.io/2020/04/30/dong-tai-gui-hua/</a>
+                    <a href="https://thooooor.github.io/2020/11/28/tu-qian-ru-graph-embedding/">https://thooooor.github.io/2020/11/28/tu-qian-ru-graph-embedding/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -632,8 +595,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
-                                    <span class="chip bg-color">算法设计与分析</span>
+                                <a href="/tags/GE/">
+                                    <span class="chip bg-color">GE</span>
+                                </a>
+                            
+                                <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
+                                    <span class="chip bg-color">知识图谱</span>
                                 </a>
                             
                         </div>
@@ -804,7 +771,7 @@
         repo: 'blogcomment',
         owner: 'Thooooor',
         admin: "Thooooor",
-        id: '2020-04-30T16-20-00',
+        id: '2020-11-28T16-57-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -828,46 +795,52 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/05/01/ju-zhen-lian-cheng-fa/">
+                <a href="/2020/11/28/tu-qian-ru-graph-embedding/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="矩阵链乘法">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Graph Embedding 图嵌入简述">
                         
-                        <span class="card-title">矩阵链乘法</span>
+                        <span class="card-title">Graph Embedding 图嵌入简述</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            基于动态规划算法实现矩阵链乘法
+                            图嵌入概念以及主要方法总结
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-28
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    学习笔记
+                            <a href="/categories/NLP/" class="post-category">
+                                    NLP
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
-                        <span class="chip bg-color">算法设计与分析</span>
+                    <a href="/tags/GE/">
+                        <span class="chip bg-color">GE</span>
+                    </a>
+                    
+                    <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
+                        <span class="chip bg-color">知识图谱</span>
                     </a>
                     
                 </div>
@@ -881,31 +854,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/28/kuai-su-pai-xu/">
+                <a href="/2020/10/18/a-joint-neural-model-for-information-extraction-with-global-features/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="快速排序">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="A Joint Neural Model for Information Extraction with Global Features">
                         
-                        <span class="card-title">快速排序</span>
+                        <span class="card-title">A Joint Neural Model for Information Extraction with Global Features</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            基于分治思想的快速排序、复杂度分析和C/C++代码实现
+                            2020 ACL会议《A Joint Neural Model for Information Extraction with Global Features》论文笔记
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-18
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    学习笔记
+                            <a href="/categories/NLP/" class="post-category">
+                                    NLP
                                 </a>
                             
                             
@@ -915,12 +888,16 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
-                        <span class="chip bg-color">算法设计与分析</span>
+                    <a href="/tags/NER/">
+                        <span class="chip bg-color">NER</span>
                     </a>
                     
-                    <a href="/tags/C-C/">
-                        <span class="chip bg-color">C/C++</span>
+                    <a href="/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">论文笔记</span>
+                    </a>
+                    
+                    <a href="/tags/ACL/">
+                        <span class="chip bg-color">ACL</span>
                     </a>
                     
                 </div>
