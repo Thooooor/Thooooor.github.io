@@ -56,7 +56,7 @@
       
         
         
-          &lt;h1 id=&quot;图嵌入-Graph-Embedding&quot;&gt;&lt;a href=&quot;#图嵌入-Graph-Embedding&quot; class=&quot;headerlink&quot; title=&quot;图嵌入 Graph Embedding&quot;&gt;&lt;/a&gt;图嵌入 Graph
+          &lt;h1&gt;图嵌入 Graph
         
       
     
@@ -234,8 +234,9 @@
       
         
         
-          &lt;h1 id=&quot;线性规划&quot;&gt;&lt;a href=&quot;#线性规划&quot; class=&quot;headerlink&quot; title=&quot;线性规划&quot;&gt;&lt;/a&gt;线性规划&lt;/h1&gt;&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
-&lt;h2 id=&quot;特征&quot;&gt;&lt;a href=&quot;#特征&quot;
+          &lt;h1&gt;线性规划&lt;/h1&gt;
+&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
+&lt;h2
         
       
     
@@ -262,8 +263,9 @@
       
         
         
-          &lt;pre&gt;&lt;code class=&quot;python&quot;&gt;from sympy import *
-init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
+          &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from sympy import *
+init_printing(use_unicode=True)
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a
         
       
@@ -291,7 +293,9 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
       
         
         
-          &lt;h1 id=&quot;1-1-计算机系统简介&quot;&gt;&lt;a href=&quot;#1-1-计算机系统简介&quot; class=&quot;headerlink&quot; title=&quot;1.1 计算机系统简介&quot;&gt;&lt;/a&gt;1.1 计算机系统简介&lt;/h1&gt;&lt;h2 id=&quot;一、计算机软硬件概念&quot;&gt;&lt;a
+          &lt;h1&gt;1.1 计算机系统简介&lt;/h1&gt;
+&lt;h2 id=&quot;一、计算机软硬件概念&quot;&gt;一、计算机软硬件概念&lt;/h2&gt;
+&lt;h3
         
       
     
@@ -345,7 +349,9 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
       
         
         
-          &lt;h1 id=&quot;流网络&quot;&gt;&lt;a href=&quot;#流网络&quot; class=&quot;headerlink&quot; title=&quot;流网络&quot;&gt;&lt;/a&gt;流网络&lt;/h1&gt;&lt;h2 id=&quot;流网络和流&quot;&gt;&lt;a href=&quot;#流网络和流&quot; class=&quot;headerlink&quot;
+          &lt;h1&gt;流网络&lt;/h1&gt;
+&lt;h2 id=&quot;流网络和流&quot;&gt;流网络和流&lt;/h2&gt;
+&lt;p&gt;流网络$G=(V,E)$，是一个有向图，图中每条边$(u,v)\in E$有一个非负的&lt;strong&gt;容量值&lt;/strong&gt;$c(u,v)\ge
         
       
     
@@ -372,7 +378,9 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
       
         
         
-          &lt;h1 id=&quot;Floyd算法&quot;&gt;&lt;a href=&quot;#Floyd算法&quot; class=&quot;headerlink&quot;
+          &lt;h1&gt;Floyd算法&lt;/h1&gt;
+&lt;p&gt;Floyd算法利用&lt;strong&gt;动态规划&lt;/strong&gt;来解决所有结点对最短路径问题，运行时间为$O(V^3)$。假设负权重的边可以存在，但不能存在负权重的环路。&lt;/p&gt;
+&lt;p&gt;使用&lt;strong&gt;邻接矩阵W&lt;/strong&gt;来表示图，
         
       
     
@@ -401,7 +409,8 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
       
         
         
-          &lt;h1 id=&quot;最短路径问题&quot;&gt;&lt;a href=&quot;#最短路径问题&quot; class=&quot;headerlink&quot; title=&quot;最短路径问题&quot;&gt;&lt;/a&gt;最短路径问题&lt;/h1&gt;&lt;p&gt;在该问题中，给定一个带权重的有向图$G=(V,E)$和权重函数$w:E\to
+          &lt;h1&gt;最短路径问题&lt;/h1&gt;
+&lt;p&gt;在该问题中，给定一个带权重的有向图$G=(V,E)$和权重函数$w:E\to
         
       
     
@@ -484,7 +493,9 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
       
         
         
-          &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot;
+          &lt;h1&gt;问题描述&lt;/h1&gt;
+&lt;p&gt;有一个n个活动的集合，$S={a_1,a_2,…,a_n}$，这些活动使用同一个资源（一个教室），而这个资源在某个时刻只能供一个活动使用。&lt;/p&gt;
+&lt;p&gt;每个活动都有一个$开始时间s_i$和一个$结束时间f_i$，其中$0\le
         
       
     
@@ -512,7 +523,10 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
         
         
           &lt;p&gt;贪心算法通过做出一系列选择来求出问题的最优解。在每个决策点，它做出在当时看来最佳的选择。这种启发式策略不能保证总能找到最优解，但对某些问题确实能够得到最优解。&lt;/p&gt;
-&lt;h1 id=&quot;设计步骤&quot;&gt;&lt;a href=&quot;#设计步骤&quot; class=&quot;headerlink&quot;
+&lt;h1&gt;设计步骤&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;转换最优化问题形式：对其做出一次选择后，只剩下一个子
         
       
     
@@ -539,7 +553,15 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
       
         
         
-          &lt;h1 id=&quot;问题定义&quot;&gt;&lt;a href=&quot;#问题定义&quot; class=&quot;headerlink&quot;
+          &lt;h1&gt;问题定义&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;子序列&lt;/strong&gt;&lt;br&gt;
+$$&lt;br&gt;
+对于给定序列X=&amp;lt;x_1,x_2,…,x_m&amp;gt;，Z=&amp;lt;z_1,z_2,…z_k&amp;gt;&lt;br&gt;
+$$&lt;br&gt;
+$$&lt;br&gt;
+存在一个严格递增的X
         
       
     
@@ -568,7 +590,8 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
       
         
         
-          &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot; title=&quot;问题描述&quot;&gt;&lt;/a&gt;问题描述&lt;/h1&gt;&lt;p&gt;给定n个矩阵的链$&amp;lt;A_1,A_2,…,A_n&amp;gt;$，矩阵$A_i$的规模为$p_{i-1}\times
+          &lt;h1&gt;问题描述&lt;/h1&gt;
+&lt;p&gt;给定n个矩阵的链$&amp;lt;A_1,A_2,…,A_n&amp;gt;$，矩阵$A_i$的规模为$p_{i-1}\times p_{i}(1\le i\le
         
       
     

@@ -439,37 +439,46 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="Floyd算法"><a href="#Floyd算法" class="headerlink" title="Floyd算法"></a>Floyd算法</h1><p>Floyd算法利用<strong>动态规划</strong>来解决所有结点对最短路径问题，运行时间为$O(V^3)$。假设负权重的边可以存在，但不能存在负权重的环路。</p>
+                <h1>Floyd算法</h1>
+<p>Floyd算法利用<strong>动态规划</strong>来解决所有结点对最短路径问题，运行时间为$O(V^3)$。假设负权重的边可以存在，但不能存在负权重的环路。</p>
 <p>使用<strong>邻接矩阵W</strong>来表示图，矩阵W是一个$n\times n$的矩阵W，该矩阵代表的是一个有n个结点的有向图$G=(V,E)$的边的权重，即$W=(w_{ij})$其中</p>
 <img src="http://note.lizhihao999.cn/notes/20200824144945.png" style="zoom:67%;">
-
-<h2 id="最短路径的结构"><a href="#最短路径的结构" class="headerlink" title="最短路径的结构"></a>最短路径的结构</h2><p>Floyd算法考虑一条最短路径上的中间结点，即简单路径$p=&lt;v_1,v_2,..,v_n&gt;$上的中间结点指路径p上除了$v_1,v_n$之外的任意结点，将中间结点作为集合：${v_2,v_3,…,v_{n-1}}$</p>
-<p>假定图G的所有结点为$V={1,2,..,n}$，考虑其中的一个子集${1,2,…,k}$，这里k是某个小于n的整数。对于任意结点对$i,j\in V$，考虑从结点$i$到结点$j$的所有中间结点均取自集合${1,2,…,k}$的路径，并且设$p$为其中权重最小的路径（$p$是简单路径）。Floyd算法利用路径$p$和从$i$到$j$之间中间结点均取自集合${1,2,…,k-1}$的最短路径之间的关系。该关系依赖于结点$k$是否是路径$p$上的一个中间结点。</p>
+<h2 id="最短路径的结构">最短路径的结构</h2>
+<p>Floyd算法考虑一条最短路径上的中间结点，即简单路径$p=&lt;v_1,v_2,…,v_n&gt;$上的中间结点指路径p上除了$v_1,v_n$之外的任意结点，将中间结点作为集合：${v_2,v_3,…,v_{n-1}}$</p>
+<p>假定图G的所有结点为$V={1,2,…,n}$，考虑其中的一个子集${1,2,…,k}$，这里k是某个小于n的整数。对于任意结点对$i,j\in V$，考虑从结点$i$到结点$j$的所有中间结点均取自集合${1,2,…,k}$的路径，并且设$p$为其中权重最小的路径（$p$是简单路径）。Floyd算法利用路径$p$和从$i$到$j$之间中间结点均取自集合${1,2,…,k-1}$的最短路径之间的关系。该关系依赖于结点$k$是否是路径$p$上的一个中间结点。</p>
 <ul>
-<li><p>如果结点$k$不是路径$p$上的一个中间结点，则路径$p$上的所有中间结点都属于集合${1,2,..,k-1}$。因此从结点$i$到结点$j$的中间结点取自集合${1,2,…,k-1}$的一条最短路径也是从结点$i$到结点$j$的中间结点取自集合${1,2,…,k}$的一条最短路径。</p>
+<li>
+<p>如果结点$k$不是路径$p$上的一个中间结点，则路径$p$上的所有中间结点都属于集合${1,2,…,k-1}$。因此从结点$i$到结点$j$的中间结点取自集合${1,2,…,k-1}$的一条最短路径也是从结点$i$到结点$j$的中间结点取自集合${1,2,…,k}$的一条最短路径。</p>
 </li>
-<li><p>如果结点$k$是路径$p$上的一个中间结点，则将路径$p$分解为$i\rightsquigarrow^{p_1}k\rightsquigarrow^{p_2}j$，如图所示。</p>
+<li>
+<p>如果结点$k$是路径$p$上的一个中间结点，则将路径$p$分解为$i\rightsquigarrow^{p_1}k\rightsquigarrow^{p_2}j$，如图所示。</p>
 <img src="http://note.lizhihao999.cn/notes/20200824145123.png" style="zoom:67%;">
-
 <p>$p_1$是从结点$i$到结点k的中间结点全部取自集合${1,2,…,k}$的一条最短路径。事实上，因为$k$不是路径$p_1$上的中间结点，路径$p_1$上的所有中间结点都属于集合${1,2,…,k-1}$的一条最短路径。类似地，$p_2$是从结点$k$到结点$j$的中间结点全部取自集合${1,2,…,k-1}$的一条最短路径。</p>
 </li>
 </ul>
-<h2 id="所有结点对最短路径问题的一个递归解"><a href="#所有结点对最短路径问题的一个递归解" class="headerlink" title="所有结点对最短路径问题的一个递归解"></a>所有结点对最短路径问题的一个递归解</h2><p>设$d_{ij}^{(k)}$为从结点$i$到结点$j$的所有中间结点全部取自集合${1,2,…,k}$的一条最短路径的权重。当$k=0$时，从结点$i$到结点$j$的一条不包括编号大于0的中间结点的路径将没有任何中间结点。这样的路径最多只有一条边，因此$d_{ij}^{(0)}=w_{ij}$。根据上面的讨论，递归定义:</p>
+<h2 id="所有结点对最短路径问题的一个递归解">所有结点对最短路径问题的一个递归解</h2>
+<p>设$d_{ij}^{(k)}$为从结点$i$到结点$j$的所有中间结点全部取自集合${1,2,…,k}$的一条最短路径的权重。当$k=0$时，从结点$i$到结点$j$的一条不包括编号大于0的中间结点的路径将没有任何中间结点。这样的路径最多只有一条边，因此$d_{ij}^{(0)}=w_{ij}$。根据上面的讨论，递归定义:</p>
 <img src="http://note.lizhihao999.cn/notes/20200824155308.png" style="zoom:67%;">
-
-<p>因为对于任何路径来说，所有的中间结点都属于集合${1,2,….n}$，矩阵$D^{(n)}=(d_{ij}^{(n)})$给出的就是最终答案：<br>$$<br>对于所有的i,j\in V,d_{ij}^{(n)}=\delta(i,j)<br>$$</p>
-<h2 id="自底向上计算最短路径权重"><a href="#自底向上计算最短路径权重" class="headerlink" title="自底向上计算最短路径权重"></a>自底向上计算最短路径权重</h2><p>算法输入为一个$n\times n$的矩阵$W$，下面的算法返回的是最短路径权重矩阵$D^{n}$：</p>
-<pre><code class="c">FLOYD(W)
-    n = W.rows
-    D^0 = W
-    for k=1 to n
-        let D^k = (d(i,j)^k) be a new n*n matrix
-        for i=1 to n
-            for j=1 to n
-                d(i,j)^k = min(d(i,j)^(k-1), d(i,k)^(k-1)+d(k,j)^(k-1))
-    return D^n</code></pre>
-<h2 id="构建一条最短路径"><a href="#构建一条最短路径" class="headerlink" title="构建一条最短路径"></a>构建一条最短路径</h2><p>可以先计算最短路径权重矩阵D然后从D矩阵来构造前驱矩阵$\Pi$，或者在计算矩阵$D^{(k)}$的同时计算前驱矩阵$\Pi$。</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre><code class="cpp">#include &lt;iostream&gt;
+<p>因为对于任何路径来说，所有的中间结点都属于集合${1,2,…n}$，矩阵$D^{(n)}=(d_{ij}^{(n)})$给出的就是最终答案：<br>
+$$<br>
+对于所有的i,j\in V,d_{ij}^{(n)}=\delta(i,j)<br>
+$$</p>
+<h2 id="自底向上计算最短路径权重">自底向上计算最短路径权重</h2>
+<p>算法输入为一个$n\times n$的矩阵$W$，下面的算法返回的是最短路径权重矩阵$D^{n}$：</p>
+<pre><code class="language-c">FLOYD(W)
+	n = W.rows
+	D^0 = W
+	for k=1 to n
+		let D^k = (d(i,j)^k) be a new n*n matrix
+		for i=1 to n
+			for j=1 to n
+				d(i,j)^k = min(d(i,j)^(k-1), d(i,k)^(k-1)+d(k,j)^(k-1))
+	return D^n
+</code></pre>
+<h2 id="构建一条最短路径">构建一条最短路径</h2>
+<p>可以先计算最短路径权重矩阵D然后从D矩阵来构造前驱矩阵$\Pi$，或者在计算矩阵$D^{(k)}$的同时计算前驱矩阵$\Pi$。</p>
+<h2 id="代码实现">代码实现</h2>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
 #include &lt;vector&gt;
 using namespace std;
 constexpr auto INFI = 1e9;
@@ -539,12 +548,13 @@ int main()
     }
     print_matrix(W);
     print_matrix(P);
-
+    
     vector&lt;vector&lt;int&gt;&gt; D = floyd(W, P);
     print_matrix(D);
     print_matrix(P);
     print_path(0, 1, P);
-}</code></pre>
+}
+</code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
