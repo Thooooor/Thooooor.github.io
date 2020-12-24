@@ -30,8 +30,7 @@
     <script src="/libs/jquery/jquery.min.js"></script>
 
 <meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+</head>
 
 
 <body>
@@ -414,7 +413,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    855
+                    862
                 </div>
                 
 
@@ -483,7 +482,7 @@
 <p><img src="http://note.lizhihao999.cn/notes/20200819160530.png" alt="计算顺序"></p>
 </li>
 </ul>
-<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><pre class="line-numbers language-pseudocode"><code class="language-pseudocode">MATRIX-CHAIN-ORDER(p)
+<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><pre><code class="pseudocode">MATRIX-CHAIN-ORDER(p)
 n = p.length-1
 let m[1..n,1..n]and s[1..n-1,2..n] be new tables
 for i = 1 to n
@@ -493,11 +492,11 @@ for l = 2 to n
         j = i+l-1
         m[i,j] = ∞
         for k = i to j-1
-            q = m[i,k]+m[k+1,j]+p_&#123;i-1&#125;p_&#123;k&#125;p_&#123;j&#125;
-            if q < m[i,j]
+            q = m[i,k]+m[k+1,j]+p_&amp;#123;i-1&amp;#125;p_&amp;#123;k&amp;#125;p_&amp;#123;j&amp;#125;
+            if q &lt; m[i,j]
                 m[i,j] = q
                 s[i,j] = k
-return m and s<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+return m and s</code></pre>
 <h2 id="4-构造最优解"><a href="#4-构造最优解" class="headerlink" title="4. 构造最优解"></a>4. 构造最优解</h2><ul>
 <li>$s[1..n-1,2..n]$记录了构造最优解所需的信息<ul>
 <li>$s[i,j]$记录一个k值，指出$A_iA_{i+1}…A_j$的最优括号化方案的分割点位置</li>
@@ -507,14 +506,14 @@ return m and s<span aria-hidden="true" class="line-numbers-rows"><span></span><s
 </li>
 <li>递归可输出最优括号法方案</li>
 </ul>
-<h3 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h3><pre class="line-numbers language-pseudocode"><code class="language-pseudocode">PRINT-OPTIMAT-PARENS(s,i,j)
+<h3 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h3><pre><code class="pseudocode">PRINT-OPTIMAT-PARENS(s,i,j)
 if i==j
     print("A")
 else
     print("(")
     PRINT-OPTIMAT_PARENS(s,i,s[i,j])
     PRINT_OPTIMAT_PARENS(s,s[i,j]+1,j)
-    print(")")<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    print(")")</code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1135,7 +1134,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">48.5k</span>&nbsp;字
+                class="white-color">51.7k</span>&nbsp;字
             
             
             
