@@ -1,0 +1,1492 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="MIT 6.S081/Fall 2019 Lab7 locks, Thor&#39;s Blog">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>MIT 6.S081/Fall 2019 Lab7 locks | Thor&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
+<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"></head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Thor&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Thor&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Thooooor" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">MIT 6.S081/Fall 2019 Lab7 locks</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                <span class="chip bg-color">操作系统</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/MIT-6-S081-Fall-2019-Lab/" class="post-category">
+                                MIT 6.S081/Fall 2019 Lab
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-11-24
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-12-25
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    11 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>MIT 6.S081/Fall 2019实验 <a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2019/labs/lock.html">Lab: locks</a>，多核计算机上并行性差的一个常见症状是高锁争用。为了减少争用，提高并行性通常需要同时改变数据结构和锁定策略。在这个实验中，分为两部分内容：为xv6内存分配器和磁盘缓存buffer cache重新设计代码提高并行性。</p>
+<p>本文对主要思路和关键部分的代码实现进行说明，<a target="_blank" rel="noopener" href="https://github.com/Thooooor/xv6-riscv-fall19/tree/lock">完整代码</a>实现可以参考我的GitHub仓库.</p>
+<h1 id="1-内存分配器"><a href="#1-内存分配器" class="headerlink" title="1. 内存分配器"></a>1. 内存分配器</h1><h2 id="1-1-基本原理"><a href="#1-1-基本原理" class="headerlink" title="1.1 基本原理"></a>1.1 基本原理</h2><p>xv6对上层提供<code>kalloc</code>和<code>kfree</code>接口来管理物理内存。通过<code>kalloc</code>和<code>kfree</code>，屏蔽了对物理内存的管理，使得调用者只需要关心虚拟地址空间，在需要使用新内存空间的时候调用<code>kalloc</code>，在需要释放内存空间的时候调用<code>kfree</code>。</p>
+<p>在系统启动时，<code>main()</code>函数（见<code>kernel/main.c</code>）调用<code>kinit()</code>来初始化分配器。<code>kinit</code>通过保存所有空闲页来初始化链表。<code>kinit</code>调用<code>freerange</code>来把空闲内存加到链表里，<code>freerange</code>是把每个空闲页逐一加到链表里来实现此功能的。</p>
+<h2 id="1-2-链表操作"><a href="#1-2-链表操作" class="headerlink" title="1.2 链表操作"></a>1.2 链表操作</h2><h3 id="释放内存"><a href="#释放内存" class="headerlink" title="释放内存"></a>释放内存</h3><p>释放内存的函数是<code>kfree(char *v)</code>，首先将 <code>char *v</code> 开始的页物理内存初始化为1，这是为了让之前使用它的代码不能再读取到有效的内容，期望这些代码能尽早崩溃以发现问题所在。然后将这空闲页物理内存加到链表头。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20201225000930.png"></p>
+<h3 id="申请内存"><a href="#申请内存" class="headerlink" title="申请内存"></a>申请内存</h3><p><code>kalloc(void *)</code>用来分配内存，移除并返回空闲链表头的第一个元素，即给调用者分配1页物理内存。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20201225000947.png"></p>
+<p>由于物理内存是在多进程之间共享的，所以不管是分配还是释放页面，每次操作<code>kmem.freelist</code>时都需要先申请<code>kmem.lock</code>，此后再进行内存页面的操作。</p>
+<h2 id="1-3-Lock"><a href="#1-3-Lock" class="headerlink" title="1.3 Lock"></a>1.3 Lock</h2><p><code>kalloc.c</code>中调用<code>acquire()</code>和<code>release()</code>来获取锁和释放锁，kalloc只在<code>kalloc()</code>和<code>kfree()</code>中使用了锁，都是把对freelist的操作锁了起来。<code>kfree()</code>在向freelist里加节点前锁了一下，操作完之后解锁。<code>kalloc()</code>在移除freelist第一个元素时也加锁，操作完成再释放锁。所以对于内存分配器中需要锁保护的只有对freelist的操作。</p>
+<h2 id="1-4-具体步骤"><a href="#1-4-具体步骤" class="headerlink" title="1.4 具体步骤"></a>1.4 具体步骤</h2><ol>
+<li><p>将kalloc的共享freelist改为每个CPU独立的freelist；</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> run <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> run <span class="token operator">*</span>next<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> kmem<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> spinlock lock<span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> run <span class="token operator">*</span>freelist<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+
+<span class="token keyword">struct</span> kmem kmems<span class="token punctuation">[</span>NCPU<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">kinit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">char</span> <span class="token operator">*</span>lockname <span class="token operator">=</span> <span class="token string">"kmem 0"</span><span class="token punctuation">;</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> NCPU<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    lockname<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token string">'0'</span> <span class="token operator">+</span> i<span class="token punctuation">;</span>
+    <span class="token function">initlock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>kmems<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>lock<span class="token punctuation">,</span> lockname<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token function">freerange</span><span class="token punctuation">(</span>end<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span>PHYSTOP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>获取内存块时，优先分配当前CPU的freelist中的内存块；</p>
+</li>
+<li><p>当前CPU没有空闲内存块，则从其他CPU的freelist中窃取内存块；</p>
+</li>
+<li><p>所有CPU都没有空闲块时，返回0；</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token operator">*</span><span class="token function">kalloc</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> run <span class="token operator">*</span>r<span class="token punctuation">;</span>
+  <span class="token function">push_off</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> cpu_num <span class="token operator">=</span> <span class="token function">cpuid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>kmems<span class="token punctuation">[</span>cpu_num<span class="token punctuation">]</span><span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 加锁</span>
+  r <span class="token operator">=</span> kmems<span class="token punctuation">[</span>cpu_num<span class="token punctuation">]</span><span class="token punctuation">.</span>freelist<span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 优先分配freelist里面的内存块</span>
+    kmems<span class="token punctuation">[</span>cpu_num<span class="token punctuation">]</span><span class="token punctuation">.</span>freelist <span class="token operator">=</span> r<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>kmems<span class="token punctuation">[</span>cpu_num<span class="token punctuation">]</span><span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> <span class="token keyword">else</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 从其他CPU的freelist进行窃取</span>
+    <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>kmems<span class="token punctuation">[</span>cpu_num<span class="token punctuation">]</span><span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> NCPU<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>kmems<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      r <span class="token operator">=</span> kmems<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>freelist<span class="token punctuation">;</span>
+      <span class="token keyword">if</span> <span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span> 
+        kmems<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>freelist <span class="token operator">=</span> r<span class="token operator">-></span>next<span class="token punctuation">;</span>
+        <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>kmems<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+      <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>kmems<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 解锁</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token function">pop_off</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span><span class="token punctuation">(</span>r<span class="token punctuation">)</span> <span class="token function">memset</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span>r<span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> PGSIZE<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// fill with junk</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span><span class="token keyword">void</span><span class="token operator">*</span><span class="token punctuation">)</span>r<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>释放内存块时，将内存块放入当前CPU的freelist中；</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">kfree</span><span class="token punctuation">(</span><span class="token keyword">void</span> <span class="token operator">*</span>pa<span class="token punctuation">)</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> run <span class="token operator">*</span>r<span class="token punctuation">;</span>
+
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">(</span>uint64<span class="token punctuation">)</span>pa <span class="token operator">%</span> PGSIZE<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token operator">||</span> <span class="token punctuation">(</span><span class="token keyword">char</span><span class="token operator">*</span><span class="token punctuation">)</span>pa <span class="token operator">&lt;</span> end <span class="token operator">||</span> <span class="token punctuation">(</span>uint64<span class="token punctuation">)</span>pa <span class="token operator">>=</span> PHYSTOP<span class="token punctuation">)</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"kfree"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// Fill with junk to catch dangling refs.</span>
+  <span class="token function">memset</span><span class="token punctuation">(</span>pa<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> PGSIZE<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  r <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">struct</span> run<span class="token operator">*</span><span class="token punctuation">)</span>pa<span class="token punctuation">;</span>
+  <span class="token function">push_off</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> cpu_num <span class="token operator">=</span> <span class="token function">cpuid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>kmems<span class="token punctuation">[</span>cpu_num<span class="token punctuation">]</span><span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 加锁</span>
+  r<span class="token operator">-></span>next <span class="token operator">=</span> kmems<span class="token punctuation">[</span>cpu_num<span class="token punctuation">]</span><span class="token punctuation">.</span>freelist<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// 加入freelist</span>
+  kmems<span class="token punctuation">[</span>cpu_num<span class="token punctuation">]</span><span class="token punctuation">.</span>freelist <span class="token operator">=</span> r<span class="token punctuation">;</span>
+  <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>kmems<span class="token punctuation">[</span>cpu_num<span class="token punctuation">]</span><span class="token punctuation">.</span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment" spellcheck="true">// 解锁</span>
+  <span class="token function">pop_off</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>为2-5步的过程合理加锁，保证每个freelist的一致性；</p>
+</li>
+</ol>
+<h1 id="2-磁盘缓存"><a href="#2-磁盘缓存" class="headerlink" title="2. 磁盘缓存"></a>2. 磁盘缓存</h1><h2 id="2-1-bcache"><a href="#2-1-bcache" class="headerlink" title="2.1 bcache"></a>2.1 bcache</h2><p>数据结构<code>bcache</code>（见<code>kernel/bio.c</code>）维护了一个由静态数组<code>struct buf buf[NBUF]</code>组成的双向链表，它以块为单位，每次读入或写出一个磁盘块，放到一个内存缓存块中（<code>bcache.buf</code>），同时自旋锁<code>bcache.lock</code>用于用户互斥访问。所有对缓存块的访问都是通过<code>bcache.head</code>引用链表来实现的，而不是<code>buf</code>数组。</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> spinlock lock<span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> buf buf<span class="token punctuation">[</span>NBUF<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// Linked list of all buffers, through prev/next.</span>
+  <span class="token comment" spellcheck="true">// head.next is most recently used.</span>
+  <span class="token keyword">struct</span> buf head<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> bcache<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>每个缓存块都由三个部分组成，其中data字段标示了它的内容，指针字段（<em>prev，</em>next）用于组成链表，数值字段用于标示它的属性，如，字段<code>valid</code>的意思是缓存区包含了一个块的复制（即该buffer包含对应磁盘块的数据），字段<code>disk</code>的意思是缓存区的内容已经被提交到了磁盘，字段<code>dev</code>是设备号，字段<code>blockno</code>是缓存数据块号，字段<code>refcnt</code>是被引用次数，<code>lock</code>是睡眠锁。</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">struct</span> buf <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> valid<span class="token punctuation">;</span>   <span class="token comment" spellcheck="true">// has data been read from disk?</span>
+  <span class="token keyword">int</span> disk<span class="token punctuation">;</span>    <span class="token comment" spellcheck="true">// does disk "own" buf?</span>
+  uint dev<span class="token punctuation">;</span>
+  uint blockno<span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> sleeplock lock<span class="token punctuation">;</span>
+  uint refcnt<span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> buf <span class="token operator">*</span>prev<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// LRU cache list</span>
+  <span class="token keyword">struct</span> buf <span class="token operator">*</span>next<span class="token punctuation">;</span>
+  uchar data<span class="token punctuation">[</span>BSIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>对<code>bcache</code>的操作如下：</p>
+<ul>
+<li>在系统启动时，<code>main()</code>函数（见<code>kernel/main.c</code>）调用<code>binit()</code>来初始化缓存，随即调用<code>initlock()</code>初始化<code>bcache.lock</code>，然后循环遍历<code>buf</code>数组，采用头插法逐个链接到<code>bcache.head</code>后面。</li>
+<li>上层文件系统读磁盘时，调用<code>bread()</code>，随即调用<code>bget()</code>检查请求的磁盘块是否在缓存中，如果命中，返回缓存命令结果。如果未命中，转到底层的<code>virtio_disk_rw()</code>函数先此磁盘块从磁盘加载进缓存中，再返回此磁盘块。</li>
+<li>上层文件写磁盘时，调用<code>bwrite()</code>，随即调用<code>virtio_disk_rw()</code>函数直接将缓存中的数据写入磁盘。</li>
+<li>上层文件系统可通过调用<code>brelse()</code>释放一块不再使用的缓存块。</li>
+</ul>
+<h2 id="2-2-锁"><a href="#2-2-锁" class="headerlink" title="2.2 锁"></a>2.2 锁</h2><p>在<code>bio.c</code>中，一共使用两种类型的锁：自旋锁<code>spinlock</code>（<code>bcache.lock</code>）和睡眠锁<code>sleeplock</code>（<code>b.lock</code>）。</p>
+<h3 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h3><p><code>bcache.lock</code>用于表示当前访问的bcache缓存块数据结构的是否被锁住。 当<code>bcache.lock</code>为0时表示为锁住，能够访问当前数据结构bcache，如果为1，即暂时无法获得锁，则不断循环、自旋、等待锁重新可用。</p>
+<p><code>bget()</code>在操作bcache数据结构（修改<code>refcnt</code>、<code>dev</code>、<code>blockno</code>、<code>valid</code>）时，需要获取到自旋锁<code>bcache.lock</code>，操作完成后再释放该锁。</p>
+<p><code>brelse()</code>需要获取到自旋锁<code>bcache.lock</code>，才能将<code>refcnt</code>（引用计数）减1，且只有在<code>refcnt</code>为0时，将该数据缓存块插入到<code>bcache.head</code>链表后面，操作完成后再释放该锁。</p>
+<p><code>bpin()</code>和<code>bunpin()</code>获取到锁后，才能修改<code>refcnt</code>，操作完成后再释放该锁。</p>
+<h3 id="睡眠锁"><a href="#睡眠锁" class="headerlink" title="睡眠锁"></a>睡眠锁</h3><p><code>b.lock</code>用于表示bcache缓存块数据结构中的当前缓存数据块buf是否被锁住，当<code>b.lock</code>为1时，则调用<code>sleep()</code>睡眠等待锁重新可用，为0则表示锁已经被释放。睡眠锁的三个接口函数如下：</p>
+<ul>
+<li><code>acquiresleep()</code>：查询<code>b.lock</code>是否被锁，如果被锁了，就睡眠，让出CPU，直到<code>wakeup()</code>唤醒后，获取到锁，并将<code>b.lock</code>置1。</li>
+<li><code>releasesleep()</code>：释放锁，并调用wakeup()</li>
+<li><code>holdingsleep()</code>：返回锁的状态（1：锁住或0：未锁）</li>
+</ul>
+<p><code>bget()</code>在获取到缓存块（命中的缓存块，或者，未命中时通过LRU算法替换出来缓存中的缓存块）后，调用<code>acquiresleep()</code>获取睡眠锁。</p>
+<p><code>bwrite()</code>在写入到磁盘之前，先调用<code>holdingsleep()</code>查询是否已经获取到该睡眠锁，确保有带锁而入。</p>
+<p><code>brelse()</code>也先调用<code>holdingsleep()</code>查询是否已经获取到该睡眠锁，确保有带锁后，才调用<code>releasesleep()</code>释放该锁。</p>
+<h2 id="2-3-具体步骤"><a href="#2-3-具体步骤" class="headerlink" title="2.3 具体步骤"></a>2.3 具体步骤</h2><ol>
+<li><p>构建<code>bcache</code>数据结构哈希表；</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token macro property">#<span class="token directive keyword">define</span> HashSize 17</span>
+<span class="token keyword">struct</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> spinlock lock<span class="token punctuation">[</span>HashSize<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> buf buf<span class="token punctuation">[</span>NBUF<span class="token punctuation">]</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// Linked list of all buffers, through prev/next.</span>
+  <span class="token comment" spellcheck="true">// head.next is most recently used.</span>
+  <span class="token comment" spellcheck="true">// struct buf head;</span>
+  <span class="token keyword">struct</span> buf hashbucket<span class="token punctuation">[</span>HashSize<span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span> bcache<span class="token punctuation">;</span>
+
+<span class="token keyword">int</span> <span class="token function">hashconflict</span><span class="token punctuation">(</span><span class="token keyword">int</span> number<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>number <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> HashSize<span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">binit</span><span class="token punctuation">(</span><span class="token keyword">void</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> buf <span class="token operator">*</span>b<span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// initial every lock</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> HashSize<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>lockname <span class="token operator">=</span> <span class="token string">"bcache 00"</span><span class="token punctuation">;</span>
+    <span class="token function">initlock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>lock<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> lockname<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// Create linked list of buffers</span>
+    bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>prev <span class="token operator">=</span> <span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// use bcache.hashbucket[0] to store temporally， made a mistake there (put it in the loop above)</span>
+  <span class="token keyword">for</span> <span class="token punctuation">(</span>b <span class="token operator">=</span> bcache<span class="token punctuation">.</span>buf<span class="token punctuation">;</span> b <span class="token operator">&lt;</span> bcache<span class="token punctuation">.</span>buf<span class="token operator">+</span>NBUF<span class="token punctuation">;</span> b<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    b<span class="token operator">-></span>next <span class="token operator">=</span> bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+    b<span class="token operator">-></span>prev <span class="token operator">=</span> <span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">initsleeplock</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>b<span class="token operator">-></span>lock<span class="token punctuation">,</span> <span class="token string">"buffer"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>next<span class="token operator">-></span>prev <span class="token operator">=</span> b<span class="token punctuation">;</span>
+    bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>next <span class="token operator">=</span> b<span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>修改<code>bget()</code>和<code>brelse()</code>使得查找和释放缓存中的不同块时，锁之间的冲突更少；</p>
+<ul>
+<li>首先在硬件层面寻找空闲的缓存块，如果没有则分配一个新的缓存块；</li>
+</ul>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">static</span> <span class="token keyword">struct</span> buf<span class="token operator">*</span> <span class="token function">bget</span><span class="token punctuation">(</span>uint dev<span class="token punctuation">,</span> uint blockno<span class="token punctuation">)</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// get the hash index of blockno</span>
+  <span class="token keyword">int</span> locknumber <span class="token operator">=</span> blockno <span class="token operator">%</span> HashSize<span class="token punctuation">;</span>
+  <span class="token keyword">struct</span> buf <span class="token operator">*</span>b<span class="token punctuation">;</span>
+  <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>lock<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token comment" spellcheck="true">// Is the block already cached?</span>
+  <span class="token keyword">for</span><span class="token punctuation">(</span>b <span class="token operator">=</span> bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">.</span>next<span class="token punctuation">;</span> b <span class="token operator">!=</span> <span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">;</span> b <span class="token operator">=</span> b<span class="token operator">-></span>next<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span>b<span class="token operator">-></span>dev <span class="token operator">==</span> dev <span class="token operator">&amp;&amp;</span> b<span class="token operator">-></span>blockno <span class="token operator">==</span> blockno<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      b<span class="token operator">-></span>refcnt<span class="token operator">++</span><span class="token punctuation">;</span>
+      <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>lock<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token function">acquiresleep</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>b<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token keyword">return</span> b<span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token keyword">int</span> hashnumber <span class="token operator">=</span> <span class="token function">hashconflict</span><span class="token punctuation">(</span>locknumber<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token comment" spellcheck="true">// Not cached; recycle an unused buffer.</span>
+  <span class="token keyword">while</span> <span class="token punctuation">(</span>hashnumber <span class="token operator">!=</span> locknumber<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>lock<span class="token punctuation">[</span>hashnumber<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span><span class="token punctuation">(</span>b <span class="token operator">=</span> bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>hashnumber<span class="token punctuation">]</span><span class="token punctuation">.</span>prev<span class="token punctuation">;</span> b <span class="token operator">!=</span> <span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>hashnumber<span class="token punctuation">]</span><span class="token punctuation">;</span> b <span class="token operator">=</span> b<span class="token operator">-></span>prev<span class="token punctuation">)</span><span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+      <span class="token keyword">if</span><span class="token punctuation">(</span>b<span class="token operator">-></span>refcnt <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+        b<span class="token operator">-></span>dev <span class="token operator">=</span> dev<span class="token punctuation">;</span>
+        b<span class="token operator">-></span>blockno <span class="token operator">=</span> blockno<span class="token punctuation">;</span>
+        b<span class="token operator">-></span>valid <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        b<span class="token operator">-></span>refcnt <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// take out the buf</span>
+        b<span class="token operator">-></span>next<span class="token operator">-></span>prev <span class="token operator">=</span> b<span class="token operator">-></span>prev<span class="token punctuation">;</span>
+        b<span class="token operator">-></span>prev<span class="token operator">-></span>next <span class="token operator">=</span> b<span class="token operator">-></span>next<span class="token punctuation">;</span>
+
+        <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>lock<span class="token punctuation">[</span>hashnumber<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// put the buf in locknumber bcache</span>
+        b<span class="token operator">-></span>next <span class="token operator">=</span> bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+        b<span class="token operator">-></span>prev <span class="token operator">=</span> <span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">;</span>
+        bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">.</span>next<span class="token operator">-></span>prev <span class="token operator">=</span> b<span class="token punctuation">;</span>
+        bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">.</span>next <span class="token operator">=</span> b<span class="token punctuation">;</span>
+
+        <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>lock<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">acquiresleep</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>b<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> b<span class="token punctuation">;</span>
+      <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+    <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>lock<span class="token punctuation">[</span>hashnumber<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    hashnumber <span class="token operator">=</span> <span class="token function">hashconflict</span><span class="token punctuation">(</span>hashnumber<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"bget: no buffers"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<ul>
+<li><p>释放一个已经锁住的缓存块，将其移到MRU list的头部</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">brelse</span><span class="token punctuation">(</span><span class="token keyword">struct</span> buf <span class="token operator">*</span>b<span class="token punctuation">)</span>
+<span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  uint blockno <span class="token operator">=</span> b<span class="token operator">-></span>blockno<span class="token punctuation">;</span>
+  <span class="token keyword">int</span> locknumber <span class="token operator">=</span> blockno <span class="token operator">%</span> HashSize<span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">!</span><span class="token function">holdingsleep</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>b<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token function">panic</span><span class="token punctuation">(</span><span class="token string">"brelse"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">releasesleep</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>b<span class="token operator">-></span>lock<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>lock<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  b<span class="token operator">-></span>refcnt<span class="token operator">--</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span> <span class="token punctuation">(</span>b<span class="token operator">-></span>refcnt <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+    <span class="token comment" spellcheck="true">// no one is waiting for it.</span>
+    b<span class="token operator">-></span>next<span class="token operator">-></span>prev <span class="token operator">=</span> b<span class="token operator">-></span>prev<span class="token punctuation">;</span>
+    b<span class="token operator">-></span>prev<span class="token operator">-></span>next <span class="token operator">=</span> b<span class="token operator">-></span>next<span class="token punctuation">;</span>
+    b<span class="token operator">-></span>next <span class="token operator">=</span> bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+    b<span class="token operator">-></span>prev <span class="token operator">=</span> <span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">.</span>next<span class="token operator">-></span>prev <span class="token operator">=</span> b<span class="token punctuation">;</span>
+    bcache<span class="token punctuation">.</span>hashbucket<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">.</span>next <span class="token operator">=</span> b<span class="token punctuation">;</span>
+  <span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+  <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>lock<span class="token punctuation">[</span>locknumber<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ul>
+</li>
+<li><p>修改<code>bpin()</code>和<code>bunpin()</code>增加或减少<code>refcnt</code>之前获取对应数据缓存块的锁，操作完成之后再释放锁。</p>
+<pre class="line-numbers language-c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">bpin</span><span class="token punctuation">(</span><span class="token keyword">struct</span> buf <span class="token operator">*</span>b<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  uint blockno <span class="token operator">=</span> b<span class="token operator">-></span>blockno <span class="token operator">%</span> HashSize<span class="token punctuation">;</span>
+  <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>lock<span class="token punctuation">[</span>blockno<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  b<span class="token operator">-></span>refcnt<span class="token operator">++</span><span class="token punctuation">;</span>
+  <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>lock<span class="token punctuation">[</span>blockno<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">bunpin</span><span class="token punctuation">(</span><span class="token keyword">struct</span> buf <span class="token operator">*</span>b<span class="token punctuation">)</span> <span class="token operator">&amp;</span>#<span class="token number">123</span><span class="token punctuation">;</span>
+  uint blockno <span class="token operator">=</span> b<span class="token operator">-></span>blockno <span class="token operator">%</span> HashSize<span class="token punctuation">;</span>
+  <span class="token function">acquire</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>lock<span class="token punctuation">[</span>blockno<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  b<span class="token operator">-></span>refcnt<span class="token operator">--</span><span class="token punctuation">;</span>
+  <span class="token function">release</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>bcache<span class="token punctuation">.</span>lock<span class="token punctuation">[</span>blockno<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token operator">&amp;</span>#<span class="token number">125</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+</ol>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://thooooor.github.io" rel="external nofollow noreferrer">Thor</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-3-bi-ji/">https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-3-bi-ji/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://thooooor.github.io" target="_blank">Thor</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                                    <span class="chip bg-color">操作系统</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '1a30df6a52a387695989',
+        clientSecret: '2459b6662ab3f7094c591e42b4babded0135c466',
+        repo: 'blogcomment',
+        owner: 'Thooooor',
+        admin: "Thooooor",
+        id: '2020-11-24T14-32-00',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/11/24/mit-6.s081-fall-2019/shi-yan-2-bi-ji/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell">
+                        
+                        <span class="card-title">MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell 实验思路和代码实现
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-11-24
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/MIT-6-S081-Fall-2019-Lab/" class="post-category">
+                                    MIT 6.S081/Fall 2019 Lab
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/11/24/mit-6.s081-fall-2019/shi-yan-4-bi-ji/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="MIT 6.S081/Fall 2019 Lab3 Allocator for xv6">
+                        
+                        <span class="card-title">MIT 6.S081/Fall 2019 Lab3 Allocator for xv6</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            MIT 6.S081/Fall 2019 Lab3 Allocator for xv6 实验思路和代码实现
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-24
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/MIT-6-S081-Fall-2019-Lab/" class="post-category">
+                                    MIT 6.S081/Fall 2019 Lab
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+                        <span class="chip bg-color">操作系统</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Thor&#39;s Blog<br />'
+            + '文章作者: Thor<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="4932737014"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="/about" target="_blank">Thor</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">48.5k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备19090631号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Thooooor" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:554475362@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=554475362" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 554475362" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?9e1951c963cab63ff40f6c2658b6d6d8";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
