@@ -435,68 +435,40 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1>流网络</h1>
-<h2 id="流网络和流">流网络和流</h2>
-<p>流网络$G=(V,E)$，是一个有向图，图中每条边$(u,v)\in E$有一个非负的<strong>容量值</strong>$c(u,v)\ge 0$。而且不存在平行反向边，即如果存在边$(u,v)$，便不存在反方向的边$(v,u)$。如果$(u,v)\notin E$，定义$c(u,v)=0$，并且在图中不允许自循环。</p>
+                <h1 id="流网络"><a href="#流网络" class="headerlink" title="流网络"></a>流网络</h1><h2 id="流网络和流"><a href="#流网络和流" class="headerlink" title="流网络和流"></a>流网络和流</h2><p>流网络$G=(V,E)$，是一个有向图，图中每条边$(u,v)\in E$有一个非负的<strong>容量值</strong>$c(u,v)\ge 0$。而且不存在平行反向边，即如果存在边$(u,v)$，便不存在反方向的边$(v,u)$。如果$(u,v)\notin E$，定义$c(u,v)=0$，并且在图中不允许自循环。</p>
 <p>所有结点中定义两个特殊结点：<strong>源结点s</strong>和<strong>汇点t</strong>。假定每个结点都在从源结点到汇点的某条路径上。所以，对于每个结点$v\in V$，流网络都包括一条路径$s\rightsquigarrow v\rightsquigarrow t$。因此，流网络是连通的，$|E|\ge |V|-1$。</p>
 <img src="http://note.lizhihao999.cn/notes/20200824164601.png" alt="《算法导论》流网络示例" style="zoom: 67%;">
+
 <p>设流网络$G=(V,E)$，其容量函数为c。设s为网络的源结点，t为汇点。G中的流是一个实值函数$f:V\times V\to R$，满足：</p>
 <ul>
-<li>
-<p><strong>容量限制</strong></p>
+<li><p><strong>容量限制</strong></p>
 <p>对于所有的结点$u,v\in V$，要求$0\le f(u,v)\le c(u,v)$</p>
 </li>
-<li>
-<p><strong>流量守恒</strong></p>
-<p>对于所有的结点$u\in V-{s,t}$，要求<br>
-$$<br>
-\sum_{v\in V}{f(v,u)}=\sum_{v\in V}{f(u,v)}<br>
-$$</p>
+<li><p><strong>流量守恒</strong></p>
+<p>对于所有的结点$u\in V-{s,t}$，要求<br>$$<br>\sum_{v\in V}{f(v,u)}=\sum_{v\in V}{f(u,v)}<br>$$</p>
 </li>
 </ul>
 <p>当$(u,v)\notin E$时，从结点u到结点v之间没有流，因此$f(u,v)=0$。</p>
 <p>称非负值$f(u,v)$为从结点u到结点v的流。</p>
-<p>一个流$f$的值$|f|$定义如下：<br>
-$$<br>
-|f|=\sum_{v\in V}{f(s,v)}-\sum_{v\in V}{f(v,s)}<br>
-$$<br>
-流$f$的值是从源结点流出的总流量减去流入源结点的总流量。</p>
+<p>一个流$f$的值$|f|$定义如下：<br>$$<br>|f|=\sum_{v\in V}{f(s,v)}-\sum_{v\in V}{f(v,s)}<br>$$<br>流$f$的值是从源结点流出的总流量减去流入源结点的总流量。</p>
 <p><strong>最大流问题</strong>中，给定一个流网络G，一个源结点s，一个汇点t，希望找到值最大的一个流。</p>
-<h1>Ford-Fulkerson方法</h1>
-<p>Ford-Fulkerson方法循环增加流的值，在开始的时候，对于所有结点$u,v\in V,f(u,v)=0$，给出的初始流值为0。在每一次迭代中，我们将图G的流值进行增加，方法就是在一个关联的“残存网络”$G_f$中寻找一条“增广路径”。一旦知道图$G_f$中一条增广路径的边，就可以很容易辨识出G中的一些具体的边，我们可以对这些边上的流量进行修改，从而增加流的值。虽然Ford-Fulkerson方法每次迭代都能增加流的值，但是对于图G的一条特定边来说，其流量可能增加也可能减少；对于某些边的流进行缩减可能是必要的，以便让算法可以将更多的流从源结点发送到汇点。重复对流进行这一过程，直到残存网络中不再存在增广路径为止。最大流最小切割定理将说明在算法终结时，该算法将获得一个最大流。</p>
-<pre><code class="language-c">FORD-FILKERSON-METHOD(G,s,t)
-	initial flow f to 0
-	while there exists an augmenting path p in the residual network Gf
-		augment flow f along p
-	return f
-</code></pre>
-<h2 id="残存网络">残存网络</h2>
-<p>给定流网络G和流量f，残存网络$G_f$由那些仍有空间对流量进行调整的边构成。流网络的一条边可以允许的额外容量等于该边的容量减去该边上的流量。如果差值为正，则将该条边置于图$G_f$中，并将其残存容量设置为$c_f(u,v)=c(u,v)-f(u,v)$。对于图G中的边来说，只有能够允许额外流量的边才能加入到图$G_f$中。如果边$(u,v)$的流量等于其容量，则$c_f(u,v)=0$，该条边将不属于图$G_f$</p>
+<h1 id="Ford-Fulkerson方法"><a href="#Ford-Fulkerson方法" class="headerlink" title="Ford-Fulkerson方法"></a>Ford-Fulkerson方法</h1><p>Ford-Fulkerson方法循环增加流的值，在开始的时候，对于所有结点$u,v\in V,f(u,v)=0$，给出的初始流值为0。在每一次迭代中，我们将图G的流值进行增加，方法就是在一个关联的“残存网络”$G_f$中寻找一条“增广路径”。一旦知道图$G_f$中一条增广路径的边，就可以很容易辨识出G中的一些具体的边，我们可以对这些边上的流量进行修改，从而增加流的值。虽然Ford-Fulkerson方法每次迭代都能增加流的值，但是对于图G的一条特定边来说，其流量可能增加也可能减少；对于某些边的流进行缩减可能是必要的，以便让算法可以将更多的流从源结点发送到汇点。重复对流进行这一过程，直到残存网络中不再存在增广路径为止。最大流最小切割定理将说明在算法终结时，该算法将获得一个最大流。</p>
+<pre><code class="c">FORD-FILKERSON-METHOD(G,s,t)
+    initial flow f to 0
+    while there exists an augmenting path p in the residual network Gf
+        augment flow f along p
+    return f</code></pre>
+<h2 id="残存网络"><a href="#残存网络" class="headerlink" title="残存网络"></a>残存网络</h2><p>给定流网络G和流量f，残存网络$G_f$由那些仍有空间对流量进行调整的边构成。流网络的一条边可以允许的额外容量等于该边的容量减去该边上的流量。如果差值为正，则将该条边置于图$G_f$中，并将其残存容量设置为$c_f(u,v)=c(u,v)-f(u,v)$。对于图G中的边来说，只有能够允许额外流量的边才能加入到图$G_f$中。如果边$(u,v)$的流量等于其容量，则$c_f(u,v)=0$，该条边将不属于图$G_f$</p>
 <p>假定有一个流网络$G=(V,E)$，其源结点为s，汇点为t。设f为图G中的一个流，考虑结点对$u,v\in V$，定义残存容量$c_f(u,v)$如下：</p>
 <img src="http://note.lizhihao999.cn/notes/20200824161054.png" style="zoom:67%;">
-<p>给定一个流网络$G=(V,E)$，和一个流$f$，则由$f$所诱导的图G的残存网络为$G_f=(V,E_f)$，其中<br>
-$$<br>
-E_f={(u,v)\in V\times V:c_f(u,v)&gt;0}<br>
-$$<br>
-如果$f$是G的一个流，$f’$是对应的残存网络$G_f$中的一个流，定义$f\uparrow f’$为流$f’$对流$f$的递增，他是一个从$V\times V$到R的函数：</p>
+
+<p>给定一个流网络$G=(V,E)$，和一个流$f$，则由$f$所诱导的图G的残存网络为$G_f=(V,E_f)$，其中<br>$$<br>E_f={(u,v)\in V\times V:c_f(u,v)&gt;0}<br>$$<br>如果$f$是G的一个流，$f’$是对应的残存网络$G_f$中的一个流，定义$f\uparrow f’$为流$f’$对流$f$的递增，他是一个从$V\times V$到R的函数：</p>
 <img src="http://note.lizhihao999.cn/notes/20200824161132.png" style="zoom: 80%;">
+
 <p>因为在残存网络中将流量发送到反向边上等同于在原来的网络中缩减流量，所以将边$(u,v)$的流量增加$f’(u,v)$，但减少$f’(v,u)$。在残存网络中将流量推送回去也称为<strong>抵消操作</strong>。</p>
-<h2 id="增广路径">增广路径</h2>
-<p>给定流网络$G=(V,E)$和流$f$，增广路径p是残存网络$G_f$中一条从源结点s到汇点t的简单路径。根据残存网络的定义，对于一条增广路径上的边$(u,v)$，我们可以增加其流量的幅度最大为$c_f(u,v)$，而不会违反原始流网络G对边$(u,v)$或$(v,u)$的容量限制。</p>
-<p>称在一条增广路径p上能够为每条边增加的流量的最大值为路径p的残存容量：<br>
-$$<br>
-c_f§=\min{c_f(u,v):(u,v)属于路径p}<br>
-$$</p>
-<h2 id="流网络的切割">流网络的切割</h2>
-<p>流网络$G=(V,E)$中的一个切割$(S,T)$将结点集合V划分为S和$T=V-S$两个集合，使得$s\in S,t\in T$，若$f$是一个流，则定义横跨切割$(S,T)$的净流量$f(S,T)$：<br>
-$$<br>
-f(S,T)=\sum_{u\in S}{\sum_{v\in T}{f(u,v)}}-\sum_{u\in S}{\sum_{v\in T}f(v,u)}<br>
-$$<br>
-切割$(S,T)$的容量是：<br>
-$$<br>
-c(S,T)=\sum_{u\in S}{\sum_{v\in T}{c(u,v)}}<br>
-$$<br>
-一个网络的最小切割是整个网络中容量最小的切割。</p>
+<h2 id="增广路径"><a href="#增广路径" class="headerlink" title="增广路径"></a>增广路径</h2><p>给定流网络$G=(V,E)$和流$f$，增广路径p是残存网络$G_f$中一条从源结点s到汇点t的简单路径。根据残存网络的定义，对于一条增广路径上的边$(u,v)$，我们可以增加其流量的幅度最大为$c_f(u,v)$，而不会违反原始流网络G对边$(u,v)$或$(v,u)$的容量限制。</p>
+<p>称在一条增广路径p上能够为每条边增加的流量的最大值为路径p的残存容量：<br>$$<br>c_f(p)=\min{c_f(u,v):(u,v)属于路径p}<br>$$</p>
+<h2 id="流网络的切割"><a href="#流网络的切割" class="headerlink" title="流网络的切割"></a>流网络的切割</h2><p>流网络$G=(V,E)$中的一个切割$(S,T)$将结点集合V划分为S和$T=V-S$两个集合，使得$s\in S,t\in T$，若$f$是一个流，则定义横跨切割$(S,T)$的净流量$f(S,T)$：<br>$$<br>f(S,T)=\sum_{u\in S}{\sum_{v\in T}{f(u,v)}}-\sum_{u\in S}{\sum_{v\in T}f(v,u)}<br>$$<br>切割$(S,T)$的容量是：<br>$$<br>c(S,T)=\sum_{u\in S}{\sum_{v\in T}{c(u,v)}}<br>$$<br>一个网络的最小切割是整个网络中容量最小的切割。</p>
 <blockquote>
 <p><strong>最大流最小切割定理</strong></p>
 <p>设$f$为流网络$G=(V,E)$中的一个流，该流网络的源结点为$s$，汇点为$t$，则下面的条件是等价的：</p>
@@ -506,28 +478,24 @@ $$<br>
 <li>$|f|=c(S,T)$，其中$(S,T)$是流网络G的某个切割</li>
 </ol>
 </blockquote>
-<h1>基本Ford-Fulkerson算法</h1>
-<p>假设流网络的容量$c(u,v)$都已经给出，如果边$(u,v)\notin  E$，则$c(u,v)=0$。</p>
-<pre><code class="language-pseudocode">FORD-FILKERSON(G,s,t)
-	/* 将流f初始化为0 */
-	for each edge(u,v) in G.E
-		(u,v).f = 0
-	/* 重复在残存网络Gf中寻找一条增广路径p */
-	while there exsits a path p from s to t in the residual network Gf
-		cf(p) = min{cf(u,v): (u,v) is in p}
-		/* 使用残存容量cf(p)对路径p上的流f进行加赠 */
-		for each edge(u,v) in p
-			if (u,v) in E
-				(u,v).f = (u,v).f + cf(p)
-			else
-				(v,u).f = (v,u).f - cf(p)
-</code></pre>
+<h1 id="基本Ford-Fulkerson算法"><a href="#基本Ford-Fulkerson算法" class="headerlink" title="基本Ford-Fulkerson算法"></a>基本Ford-Fulkerson算法</h1><p>假设流网络的容量$c(u,v)$都已经给出，如果边$(u,v)\notin  E$，则$c(u,v)=0$。</p>
+<pre><code class="pseudocode">FORD-FILKERSON(G,s,t)
+    /* 将流f初始化为0 */
+    for each edge(u,v) in G.E
+        (u,v).f = 0
+    /* 重复在残存网络Gf中寻找一条增广路径p */
+    while there exsits a path p from s to t in the residual network Gf
+        cf(p) = min{cf(u,v): (u,v) is in p}
+        /* 使用残存容量cf(p)对路径p上的流f进行加赠 */
+        for each edge(u,v) in p
+            if (u,v) in E
+                (u,v).f = (u,v).f + cf(p)
+            else
+                (v,u).f = (v,u).f - cf(p)</code></pre>
 <ol>
 <li>2~3行：将流$f$初始化为0</li>
-<li>4~9行while循环：重复在残存网络$G_f$中寻找一条增广路径p，然后使用残存容量$c_{f}§$来对路径p上的流$f$进行加增。路径p上每条残存边要么是原来网络中的一条边，要么是原来网络中的边的反向边。
-<ol>
-<li>7~9行：针对每种情况对流进行相应的更新：
-<ul>
+<li>4~9行while循环：重复在残存网络$G_f$中寻找一条增广路径p，然后使用残存容量$c_{f}(p)$来对路径p上的流$f$进行加增。路径p上每条残存边要么是原来网络中的一条边，要么是原来网络中的边的反向边。<ol>
+<li>7~9行：针对每种情况对流进行相应的更新：<ul>
 <li>如果残存边是原来网络中的一条边，则增加流量，否则缩减流量</li>
 <li>当不再有增广路径时，流$f$就是最大流</li>
 </ul>
@@ -535,8 +503,7 @@ $$<br>
 </ol>
 </li>
 </ol>
-<h2 id="运行时间">运行时间</h2>
-<p>Ford-Fulkerson算法的运行时间取决于算法第4行如何寻找增广路径。while循环的次数最多为$|f^<em>|$次，因为流量值在每次迭代中最少增加一个单位；每执行一次的时间为$O(E)$。从而整个Ford-Fulkerson算法的运行时间为$O(E|f^</em>|)$</p>
+<h2 id="运行时间"><a href="#运行时间" class="headerlink" title="运行时间"></a>运行时间</h2><p>Ford-Fulkerson算法的运行时间取决于算法第4行如何寻找增广路径。while循环的次数最多为$|f^*|$次，因为流量值在每次迭代中最少增加一个单位；每执行一次的时间为$O(E)$。从而整个Ford-Fulkerson算法的运行时间为$O(E|f^*|)$</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

@@ -417,7 +417,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    131
+                    127
                 </div>
                 
 
@@ -439,23 +439,15 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1>开启Gunicorn任务</h1>
-<pre><code class="language-shell">gunicorn --bind unix:/tmp/域名.socket projectname.wsgi:application
-</code></pre>
-<h1>查找masterpid</h1>
-<p>首先获取Gunicorn进程树，获取进程pid</p>
-<pre><code class="language-shell">pstree -ap|grep gunicorn
-</code></pre>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402234636.png" alt=""></p>
+                <h1 id="开启Gunicorn任务"><a href="#开启Gunicorn任务" class="headerlink" title="开启Gunicorn任务"></a>开启Gunicorn任务</h1><pre><code class="shell">gunicorn --bind unix:/tmp/域名.socket projectname.wsgi:application</code></pre>
+<h1 id="查找masterpid"><a href="#查找masterpid" class="headerlink" title="查找masterpid"></a>查找masterpid</h1><p>首先获取Gunicorn进程树，获取进程pid</p>
+<pre><code class="shell">pstree -ap|grep gunicorn</code></pre>
+<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402234636.png"></p>
 <p>可以看到，29585为主进程</p>
-<h1>重启Gunicorn任务</h1>
-<pre><code class="language-shell">kill -HUP pid
-</code></pre>
-<h1>退出Gunicorn任务</h1>
-<pre><code class="language-shell">kill -9 pid
-</code></pre>
+<h1 id="重启Gunicorn任务"><a href="#重启Gunicorn任务" class="headerlink" title="重启Gunicorn任务"></a>重启Gunicorn任务</h1><pre><code class="shell">kill -HUP pid</code></pre>
+<h1 id="退出Gunicorn任务"><a href="#退出Gunicorn任务" class="headerlink" title="退出Gunicorn任务"></a>退出Gunicorn任务</h1><pre><code class="shell">kill -9 pid</code></pre>
 <p>再次查看Gunicorn进程树，可以看到主进程已经停止</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402234859.png" alt=""></p>
+<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402234859.png"></p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

@@ -435,54 +435,45 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1>HTTP协议与WebSocket协议</h1>
-<h2 id="HTTP协议简介">HTTP协议简介</h2>
-<p>​	HTTP协议指超文本传输协议（<strong>H</strong>yper<strong>T</strong>ext <strong>T</strong>ransfer <strong>P</strong>rotocol），是用于从万维网服务器传输超文本到本地浏览器的传送协议，是基于TCP/IP协议之上的应用层协议。</p>
-<h3 id="主要特点">主要特点</h3>
-<ol>
+                <h1 id="HTTP协议与WebSocket协议"><a href="#HTTP协议与WebSocket协议" class="headerlink" title="HTTP协议与WebSocket协议"></a>HTTP协议与WebSocket协议</h1><h2 id="HTTP协议简介"><a href="#HTTP协议简介" class="headerlink" title="HTTP协议简介"></a>HTTP协议简介</h2><p>​    HTTP协议指超文本传输协议（<strong>H</strong>yper<strong>T</strong>ext <strong>T</strong>ransfer <strong>P</strong>rotocol），是用于从万维网服务器传输超文本到本地浏览器的传送协议，是基于TCP/IP协议之上的应用层协议。</p>
+<h3 id="主要特点"><a href="#主要特点" class="headerlink" title="主要特点"></a>主要特点</h3><ol>
 <li><strong>简单快速</strong>：客户向服务器请求服务时，只需传送请求方法和路径，通信速度很快。</li>
 <li><strong>灵活</strong>：HTTP允许传输任意类型的数据对象。</li>
 <li><strong>无连接</strong>：限制每次连接只处理<strong>一个</strong>请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间。</li>
 <li><strong>无状态</strong>：HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。</li>
 <li><strong>支持客户端/服务器模型</strong></li>
 </ol>
-<h3 id="工作原理">工作原理</h3>
-<p>HTTP是基于客户/服务器模式，且面向连接的。典型的HTTP事务处理有如下的过程：</p>
+<h3 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h3><p>HTTP是基于客户/服务器模式，且面向连接的。典型的HTTP事务处理有如下的过程：</p>
 <ol>
 <li>客户与服务器建立连接；</li>
 <li>客户向服务器提出请求；</li>
 <li>服务器接受请求，并根据请求返回相应的文件作为应答；</li>
 <li>客户与服务器关闭连接。</li>
 </ol>
-<h2 id="WebSocket协议简介">WebSocket协议简介</h2>
-<p>​	现在，很多网站为了实现推送技术，所用的技术都是 Ajax 轮询。轮询是在特定的的时间间隔（如每1秒），由浏览器对服务器发出HTTP请求，然后由服务器返回最新的数据给客户端的浏览器。这种传统的模式带来很明显的缺点，即浏览器需要不断的向服务器发出请求，然而HTTP请求可能包含较长的头部，其中真正有效的数据可能只是很小的一部分，显然这样会浪费很多的带宽等资源。</p>
-<p>​	HTML5 定义的 WebSocket 协议，能更好的节省服务器资源和带宽，并且能够更实时地进行通讯。</p>
-<p>​	<strong>WebSocket</strong>是一种在单个TCP连接上进行全双工通信的协议。WebSocket使得客户端和服务器之间的数据交换变得更加简单，<strong>允许服务端主动向客户端推送数据</strong>。在WebSocket API中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建<strong>持久性的连接</strong>，并进行<strong>双向数据传输</strong>。</p>
-<h1>Django Channels实现WebSocket实时通讯</h1>
-<blockquote>
+<h2 id="WebSocket协议简介"><a href="#WebSocket协议简介" class="headerlink" title="WebSocket协议简介"></a>WebSocket协议简介</h2><p>​    现在，很多网站为了实现推送技术，所用的技术都是 Ajax 轮询。轮询是在特定的的时间间隔（如每1秒），由浏览器对服务器发出HTTP请求，然后由服务器返回最新的数据给客户端的浏览器。这种传统的模式带来很明显的缺点，即浏览器需要不断的向服务器发出请求，然而HTTP请求可能包含较长的头部，其中真正有效的数据可能只是很小的一部分，显然这样会浪费很多的带宽等资源。</p>
+<p>​    HTML5 定义的 WebSocket 协议，能更好的节省服务器资源和带宽，并且能够更实时地进行通讯。    </p>
+<p>​    <strong>WebSocket</strong>是一种在单个TCP连接上进行全双工通信的协议。WebSocket使得客户端和服务器之间的数据交换变得更加简单，<strong>允许服务端主动向客户端推送数据</strong>。在WebSocket API中，浏览器和服务器只需要完成一次握手，两者之间就直接可以创建<strong>持久性的连接</strong>，并进行<strong>双向数据传输</strong>。</p>
+<h1 id="Django-Channels实现WebSocket实时通讯"><a href="#Django-Channels实现WebSocket实时通讯" class="headerlink" title="Django Channels实现WebSocket实时通讯"></a>Django Channels实现WebSocket实时通讯</h1><blockquote>
 <p><a target="_blank" rel="noopener" href="https://channels.readthedocs.io/en/latest/">官方文档</a></p>
 </blockquote>
-<p>​	<strong>Channels</strong>是一个采用Django并将其功能拓展到HTTP以外的项目，以处理WebSocket协议。它基于称为<a target="_blank" rel="noopener" href="http://asgi.readthedocs.io/">ASGI</a>的Python规范构建。</p>
-<p>​	接下来基于官方Tutorial1-2简单介绍Channels的使用。</p>
-<p>​	首先需要安装Django和Channels</p>
-<pre><code class="language-powershell">pip install django
-pip install channels
-</code></pre>
-<p>​	创建一个Django项目，并进入项目根目录：</p>
-<pre><code class="language-powershell">django-admin startproject mysite
-cd mysite
-</code></pre>
-<p>​	接下来创建Channels的根路由<code>routing.py</code>，channels的路由配置与Django URLconf相似，它告诉Channels当Channels服务器接收到HTTP请求时要运行什么代码。</p>
-<p>​	首先从一个空的路由配置开始，创建文件<code>mysite/routing.py</code>，包含以下代码：</p>
-<pre><code class="language-python"># mysite/routing.py
+<p>​    <strong>Channels</strong>是一个采用Django并将其功能拓展到HTTP以外的项目，以处理WebSocket协议。它基于称为<a target="_blank" rel="noopener" href="http://asgi.readthedocs.io/">ASGI</a>的Python规范构建。</p>
+<p>​    接下来基于官方Tutorial1-2简单介绍Channels的使用。</p>
+<p>​    首先需要安装Django和Channels</p>
+<pre><code class="powershell">pip install django
+pip install channels</code></pre>
+<p>​    创建一个Django项目，并进入项目根目录：</p>
+<pre><code class="powershell">django-admin startproject mysite
+cd mysite</code></pre>
+<p>​    接下来创建Channels的根路由<code>routing.py</code>，channels的路由配置与Django URLconf相似，它告诉Channels当Channels服务器接收到HTTP请求时要运行什么代码。</p>
+<p>​    首先从一个空的路由配置开始，创建文件<code>mysite/routing.py</code>，包含以下代码：</p>
+<pre><code class="python"># mysite/routing.py
 from channels.routing import ProtocolTypeRouter
 
 application = ProtocolTypeRouter({
     # (http-&gt;django views is added by default)
-})
-</code></pre>
-<p>​	然后将Channels库在应用列表中进行注册：</p>
-<pre><code class="language-python"># mysite/settings.py
+})</code></pre>
+<p>​    然后将Channels库在应用列表中进行注册：</p>
+<pre><code class="python"># mysite/settings.py
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -492,19 +483,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 新添加
     'channels',
-]
-</code></pre>
-<p>​	继续编辑<code>mtsite/settings.py</code>将Channels指向根路由配置，添加以下代码：</p>
-<pre><code class="language-python"># mysite/settings.py
+]</code></pre>
+<p>​    继续编辑<code>mtsite/settings.py</code>将Channels指向根路由配置，添加以下代码：</p>
+<pre><code class="python"># mysite/settings.py
 # Channels
-ASGI_APPLICATION = 'mysite.routing.application'
-</code></pre>
-<p>​	此时Channels可以控制<code>runserver</code>命令，用Channels开发服务器代替标准的Django开发服务器。</p>
-<p>​	运行Django项目：</p>
-<pre><code class="language-powershell">py manage.py runserver
-</code></pre>
-<p>​	将会看到以下输出：</p>
-<pre><code class="language-powershell">Performing system checks...
+ASGI_APPLICATION = 'mysite.routing.application'</code></pre>
+<p>​    此时Channels可以控制<code>runserver</code>命令，用Channels开发服务器代替标准的Django开发服务器。</p>
+<p>​    运行Django项目：</p>
+<pre><code class="powershell">py manage.py runserver</code></pre>
+<p>​    将会看到以下输出：</p>
+<pre><code class="powershell">Performing system checks...
 
 System check identified no issues (0 silenced).
 
@@ -514,14 +502,12 @@ March 07, 2020 - 22:45:04
 Django version 3.0.2, using settings 'mysite.settings'
 Starting ASGI/Channels version 2.4.0 development server at http://127.0.0.1:8000/
 Quit the server with CTRL-BREAK.
-HTTP GET / 200 [0.04, 127.0.0.1:54871]
-</code></pre>
-<p>​	可以看到<code>Starting ASGI/Channels development server at http://127.0.0.1:8000/</code>，说明Channels开发服务器已从Django开发服务器接管项目。打开<a target="_blank" rel="noopener" href="http://127.0.0.1:8000/">初始界面</a>，你将看到熟悉的小火箭：<img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200307225354.png" style="zoom: 80%;"></p>
-<p>​	关闭服务器，创建app<code>event</code>：</p>
-<pre><code class="language-powershell">py manage.py startapp event
-</code></pre>
-<p>​	注册app：</p>
-<pre><code class="language-python"># mysite/settings.py
+HTTP GET / 200 [0.04, 127.0.0.1:54871]</code></pre>
+<p>​    可以看到<code>Starting ASGI/Channels development server at http://127.0.0.1:8000/</code>，说明Channels开发服务器已从Django开发服务器接管项目。打开<a target="_blank" rel="noopener" href="http://127.0.0.1:8000/">初始界面</a>，你将看到熟悉的小火箭：<img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200307225354.png" style="zoom: 80%;"></p>
+<p>​    关闭服务器，创建app<code>event</code>：</p>
+<pre><code class="powershell">py manage.py startapp event</code></pre>
+<p>​    注册app：</p>
+<pre><code class="python"># mysite/settings.py
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -533,10 +519,9 @@ INSTALLED_APPS = [
     'channels',
     # 新添加
     'event',
-]
-</code></pre>
-<p>​	在<strong>根目录</strong>新建文件夹<code>templates</code>以及<code>templates/event</code>文件夹放置html文件，在<code>mysite/settings.py</code>中添加路径：</p>
-<pre><code class="language-python"># mysite/settings.py
+]</code></pre>
+<p>​    在<strong>根目录</strong>新建文件夹<code>templates</code>以及<code>templates/event</code>文件夹放置html文件，在<code>mysite/settings.py</code>中添加路径：</p>
+<pre><code class="python"># mysite/settings.py
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -552,11 +537,10 @@ TEMPLATES = [
             ],
         },
     },
-]
-</code></pre>
-<p>​	在<code>templates</code>中添加视图文件<code>event/list.html</code>，其中WebSocket请求部分模板如下：</p>
-<pre><code class="language-html">&lt;script type="text/javascript"&gt;
-	function Filter() {
+]</code></pre>
+<p>​    在<code>templates</code>中添加视图文件<code>event/list.html</code>，其中WebSocket请求部分模板如下：</p>
+<pre><code class="html">&lt;script type="text/javascript"&gt;
+    function Filter() {
         if ("WebSocket" in window) {
             //alert("您的浏览器支持WebSocket!");
             // 重定向URL
@@ -581,27 +565,24 @@ TEMPLATES = [
             alert("你的浏览器不支持WebSocket!");
         }
     }
-&lt;/script&gt;
-</code></pre>
-<p>​	创建视图功能<code>event/views.py</code>：</p>
-<pre><code class="language-python"># event/views.py
+&lt;/script&gt;</code></pre>
+<p>​    创建视图功能<code>event/views.py</code>：</p>
+<pre><code class="python"># event/views.py
 from django.shortcuts import render
 
 def list(request):
-    return render(request, 'event/list.html', {})
-</code></pre>
-<p>​	创建路由<code>event/urls.py</code>：</p>
-<pre><code class="language-python"># event/urls.py
+    return render(request, 'event/list.html', {})</code></pre>
+<p>​    创建路由<code>event/urls.py</code>：</p>
+<pre><code class="python"># event/urls.py
 from django.urls import path
 
 from . import views
 
 urlpatterns = [
     path('list/', views.list, name='list'),
-]
-</code></pre>
-<p>​	将<code>event app</code>的路由添加到项目的根路由中：</p>
-<pre><code class="language-python"># mysite/urls.py
+]</code></pre>
+<p>​    将<code>event app</code>的路由添加到项目的根路由中：</p>
+<pre><code class="python"># mysite/urls.py
 from django.conf.urls import include
 from django.urls import path
 from django.contrib import admin
@@ -609,24 +590,21 @@ from django.contrib import admin
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('event/', include('event.urls', namespace='event')),
-]
-</code></pre>
+]</code></pre>
 <p>Channels处理请求过程：</p>
 <pre><code>1. Channels接受HTTP请求
-2. 查询根URLconf查找**消费者(consumer)**
-3. 在**消费者(consumer)**中调用各种功能来处理连接的事件
-</code></pre>
+ 2. 查询根URLconf查找**消费者(consumer)**
+ 3. 在**消费者(consumer)**中调用各种功能来处理连接的事件</code></pre>
 <p>创建**消费者(consumer)**文件<code>event/consumers.py</code>：</p>
-<pre><code class="language-powershell">event/
+<pre><code class="powershell">event/
     __init__.py
     ……
     consumers.py
     ……
     urls.py
-    views.py
-</code></pre>
-<p>​	代码模板如下：</p>
-<pre><code class="language-python"># event/consumers.py
+    views.py</code></pre>
+<p>​    代码模板如下：</p>
+<pre><code class="python"># event/consumers.py
 from channels.generic.websocket import WebsocketConsumer
 import json
 
@@ -638,17 +616,16 @@ class ListDataConsumer(WebsocketConsumer):
         pass
 
     def receive(self, text_data):
-    	# 字典化接收数据
+        # 字典化接收数据
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
         # 数据处理
         self.send(text_data=json.dumps({
         'feedback': "Accept",
         # 返回数据
-    }))
-</code></pre>
-<p>​	为<code>consumers.py</code>配置路由，新建<code>event/routing.py</code>：</p>
-<pre><code class="language-python"># event/routing.py
+    }))</code></pre>
+<p>​    为<code>consumers.py</code>配置路由，新建<code>event/routing.py</code>：</p>
+<pre><code class="python"># event/routing.py
 from django.urls import re_path
 
 from . import consumers
@@ -656,10 +633,9 @@ from . import consumers
 websocket_urlpatterns = [
     re_path(r'ws/event/list/$', consumers.ListDataConsumer),
 ]
-
 </code></pre>
-<p>​	接下来将根路由指向<code>event/routing.py</code>文件：</p>
-<pre><code class="language-python"># mysite/routing.py
+<p>​    接下来将根路由指向<code>event/routing.py</code>文件：</p>
+<pre><code class="python"># mysite/routing.py
 from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 
@@ -672,26 +648,21 @@ application = ProtocolTypeRouter({
             event.routing.websocket_urlpatterns
         )
     ),
-})
-</code></pre>
-<p>​	此根路由配置指定当与Channels开发服务器建立连接时，<code>ProtocolTypeRouter</code>将首先检查连接的类型。如果它是WebSocket连接（<strong>ws：//<strong>或</strong>wss：//</strong>），则该连接将分配给<code>AuthMiddlewareStack</code>。</p>
-<p>​	在<code>AuthMiddlewareStack</code>将填充的连接的<strong>范围</strong>覆盖到当前认证的用户，然后将连接到<code>URLRouter</code>。该<code>URLRouter</code>会研究基础上，提供连接到路由到特定消费者的HTTP路径，基于<code>url</code>模式。</p>
-<p>​	之后进行数据库模型迁移：</p>
-<pre><code class="language-powershell">py manage.py makemigrations
-py manage.py migrate
-</code></pre>
-<p>​	运行项目：</p>
-<pre><code class="language-powershell">py manage.py runserver
-</code></pre>
-<p>​	如果连接建立成功，后台应该有如下显示：</p>
-<pre><code class="language-powershell">HTTP GET /event/list/ 200 [0.06, 127.0.0.1:58855]
+})</code></pre>
+<p>​    此根路由配置指定当与Channels开发服务器建立连接时，<code>ProtocolTypeRouter</code>将首先检查连接的类型。如果它是WebSocket连接（<strong>ws：//**或</strong>wss：//**），则该连接将分配给<code>AuthMiddlewareStack</code>。</p>
+<p>​    在<code>AuthMiddlewareStack</code>将填充的连接的<strong>范围</strong>覆盖到当前认证的用户，然后将连接到<code>URLRouter</code>。该<code>URLRouter</code>会研究基础上，提供连接到路由到特定消费者的HTTP路径，基于<code>url</code>模式。</p>
+<p>​    之后进行数据库模型迁移：</p>
+<pre><code class="powershell">py manage.py makemigrations
+py manage.py migrate</code></pre>
+<p>​    运行项目：</p>
+<pre><code class="powershell">py manage.py runserver</code></pre>
+<p>​    如果连接建立成功，后台应该有如下显示：</p>
+<pre><code class="powershell">HTTP GET /event/list/ 200 [0.06, 127.0.0.1:58855]
 WebSocket HANDSHAKING /ws/event/list/ [127.0.0.1:58906]
-WebSocket CONNECT /ws/event/list/ [127.0.0.1:58906]
-</code></pre>
-<h1>总结</h1>
-<p>​	使用Channels的一般流程如上，在配置ASGI之后，Channels的服务器会替代原有的Django服务器处理请求。</p>
-<p>​	只有在需要使用WebSocket协议进行实时通信时需要配置<code>routing.py</code>和<code>consumers.py</code>，由<code>routing.py</code>指向<code>consumers.py</code>处理WebSocket请求，其余仅使用HTTP协议请求的使用方式与之前并<strong>没有任何区别</strong>。</p>
-<p>​	因为只是在一个项目中的某个app中使用了Channels，可以参考该<a target="_blank" rel="noopener" href="https://github.com/Thooooor/GovermentDataAdmin">项目代码</a>中的<code>event</code>.</p>
+WebSocket CONNECT /ws/event/list/ [127.0.0.1:58906]</code></pre>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>​    使用Channels的一般流程如上，在配置ASGI之后，Channels的服务器会替代原有的Django服务器处理请求。</p>
+<p>​    只有在需要使用WebSocket协议进行实时通信时需要配置<code>routing.py</code>和<code>consumers.py</code>，由<code>routing.py</code>指向<code>consumers.py</code>处理WebSocket请求，其余仅使用HTTP协议请求的使用方式与之前并<strong>没有任何区别</strong>。</p>
+<p>​    因为只是在一个项目中的某个app中使用了Channels，可以参考该<a target="_blank" rel="noopener" href="https://github.com/Thooooor/GovermentDataAdmin">项目代码</a>中的<code>event</code>.</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

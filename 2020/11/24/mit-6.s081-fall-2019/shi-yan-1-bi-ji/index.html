@@ -447,9 +447,8 @@
 <p>需要注意，默认第一个参数<code>argv[0]</code>为指令名称。</p>
 </blockquote>
 <p>本文对思路和重要函数作分析，具体完整的实现可以查看我<a target="_blank" rel="noopener" href="https://github.com/Thooooor/xv6-riscv-fall19/tree/util">Github仓库</a>上的代码.</p>
-<h1>1. sleep函数</h1>
-<p>从shell获取参数（sleep的时间），因为参数是字符串，需要通过<code>atoi</code>将字符串转换为数值，然后调用<code>sleep</code>函数执行操作。</p>
-<pre><code class="language-c">int main(int argc, char *argv[]) {
+<h1 id="1-sleep函数"><a href="#1-sleep函数" class="headerlink" title="1. sleep函数"></a>1. sleep函数</h1><p>从shell获取参数（sleep的时间），因为参数是字符串，需要通过<code>atoi</code>将字符串转换为数值，然后调用<code>sleep</code>函数执行操作。</p>
+<pre><code class="c">int main(int argc, char *argv[]) {
     // 判断参数数量是否符合
     if (argc != 2) {
         printf("Please enter only ONE INT PARAMETER!\n");
@@ -463,14 +462,11 @@
         }
     }
     exit();
-}
-</code></pre>
-<h1>2. pingpong函数</h1>
-<p>两个进程在管道两侧来回通信。父进程通过将”ping”写入parent_fd [1]来发送子进程，而子进程则通过从parent_fd [0]读取来接收字节。子进程从父进程收到后，通过将“pong”写入child_fd [1]来回复，然后由父进程从child_fd[0]读取。</p>
-<h2 id="2-1-进程-pid">2.1 进程 pid</h2>
-<p>需要创建一个子进程，创建进程的接口为<code>int fork()</code>，该函数会复制父进程，从而创建一个新的进程，创建失败会返回-1。该函数调用一次会有两次返回值，在子进程中会返回0，父进程中会返回子进程的pid号，可以据此判断是父进程还是子进程，进行不同的操作。</p>
+}</code></pre>
+<h1 id="2-pingpong函数"><a href="#2-pingpong函数" class="headerlink" title="2. pingpong函数"></a>2. pingpong函数</h1><p>两个进程在管道两侧来回通信。父进程通过将”ping”写入parent_fd [1]来发送子进程，而子进程则通过从parent_fd [0]读取来接收字节。子进程从父进程收到后，通过将“pong”写入child_fd [1]来回复，然后由父进程从child_fd[0]读取。</p>
+<h2 id="2-1-进程-pid"><a href="#2-1-进程-pid" class="headerlink" title="2.1 进程 pid"></a>2.1 进程 pid</h2><p>需要创建一个子进程，创建进程的接口为<code>int fork()</code>，该函数会复制父进程，从而创建一个新的进程，创建失败会返回-1。该函数调用一次会有两次返回值，在子进程中会返回0，父进程中会返回子进程的pid号，可以据此判断是父进程还是子进程，进行不同的操作。</p>
 <p>使用示例:</p>
-<pre><code class="language-c">int pid, child_pid, parent_pid;
+<pre><code class="c">int pid, child_pid, parent_pid;
 
 // 创建子进程，判断是否创建成功
 if ((pid = fork()) &lt; 0 ) {
@@ -478,19 +474,17 @@ if ((pid = fork()) &lt; 0 ) {
     exit();
 }
 
-if (pid == 0) {	// 子进程
+if (pid == 0) {    // 子进程
     child_pid = getpid();
     ...
-} else {	// 父进程
+} else {    // 父进程
     parent_pid = getpid();
     ...
-}
-</code></pre>
+}</code></pre>
 <p>可以通过<code>getpid()</code>获取当前的进程号。要确保子进程先退出，父进程再退出。</p>
-<h2 id="2-2-管道-pipe">2.2 管道 pipe</h2>
-<p>需要创建两个管道，一个用于父进程写和子进程读，另一个用于子进程写和父进程读。创建管道的接口为<code>int pipe(pipe_name[2])</code>，成功返回0，不成功返回-1，正常创建后，<code>p[1]</code>为管道写入端，<code>p[0]</code>为管道读出端。</p>
+<h2 id="2-2-管道-pipe"><a href="#2-2-管道-pipe" class="headerlink" title="2.2 管道 pipe"></a>2.2 管道 pipe</h2><p>需要创建两个管道，一个用于父进程写和子进程读，另一个用于子进程写和父进程读。创建管道的接口为<code>int pipe(pipe_name[2])</code>，成功返回0，不成功返回-1，正常创建后，<code>p[1]</code>为管道写入端，<code>p[0]</code>为管道读出端。</p>
 <p>使用方法示例：</p>
-<pre><code class="language-c">int p1[2], p2[2];
+<pre><code class="c">int p1[2], p2[2];
 // 创建两个管道
 if (pipe(p1) != 0 || pipe(p2) != 0) {
     printf("Pipe failed.\n");
@@ -498,14 +492,13 @@ if (pipe(p1) != 0 || pipe(p2) != 0) {
 }
 // 从p1中读入
 read(p1[0], buf, sizeof(buf));
-close(p1[0]);	// 使用后需要关闭管道
+close(p1[0]);    // 使用后需要关闭管道
 // 写入p2
 write(p2[1], "pong", 4);
-close(p2[1]);	// 使用后需要关闭管道
-</code></pre>
+close(p2[1]);    // 使用后需要关闭管道</code></pre>
 <p>需要注意，管道read是一直阻塞的，直到管道有数据写入；如果绑定在这个管道的写端口关闭了，read返回0。需要及时关闭管道的写端，否则读出端无法判断传输是否结束。</p>
 <p><code>pingpong</code>函数实现如下：</p>
-<pre><code class="language-c">int main(int argc, char *argv[]) {
+<pre><code class="c">int main(int argc, char *argv[]) {
     if (argc != 1) {    // 判断参数数量
         printf("Please don't add any PARAMTERS!\n");
     } else {
@@ -545,20 +538,17 @@ close(p2[1]);	// 使用后需要关闭管道
         }
     }
     exit();
-}
-</code></pre>
-<h1>3. 素数筛选 primes</h1>
-<p>在xv6上使用管道实现“质数筛选”， 输出2~35之间的而所有质数。</p>
+}</code></pre>
+<h1 id="3-素数筛选-primes"><a href="#3-素数筛选-primes" class="headerlink" title="3. 素数筛选 primes"></a>3. 素数筛选 primes</h1><p>在xv6上使用管道实现“质数筛选”， 输出2~35之间的而所有质数。</p>
 <p>筛选思路为：主进程将所有数据（例2~11）输入到管道的左侧，第一个子进程从管道读出并筛选出2，排除掉2的倍数，其他数字再写入下一管道；第二个子进程读出并筛选出3，排除掉3的倍数，其他数字写入到下一管道；第三个子进程读出筛选出5，以此类推……如下图所示：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20201225000824.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20201225000824.png"></p>
 <p>因为需要创建多个子进程和管道，但是多个进程和管道之间不会交替使用，即同一时间只有一对进程和管道在使用，所以使用一个<code>close_pipe</code>函数关闭使用过的pipe和进程文件。要确保子进程先退出，父进程再退出。</p>
-<pre><code class="language-c">void my_close(int port, int pd[]) {
+<pre><code class="c">void my_close(int port, int pd[]) {
     close(port);
     dup(pd[port]);
     close(pd[0]);
     close(pd[1]);
-}
-</code></pre>
+}</code></pre>
 <blockquote>
 <p><strong>相关函数</strong></p>
 <p><strong>dup</strong></p>
@@ -568,7 +558,7 @@ close(p2[1]);	// 使用后需要关闭管道
 <p>用来关闭已打开的文件，任何有关该文件描述符上的记录锁和使用该文件的进程都会被关闭和移除。用法为<code> int close(int fd)</code>，参数fd为<code>open()</code>或<code>create()</code>打开的文件。</p>
 </blockquote>
 <p>每次筛选的操作在函数<code>primes</code>中实现，递归调用，直到筛选完所有的数。</p>
-<pre><code class="language-c">void primes() {
+<pre><code class="c">void primes() {
     int pid;
     int pd[2];
     int number;
@@ -590,16 +580,15 @@ close(p2[1]);	// 使用后需要关闭管道
     }
     // 子进程筛选素数
     if (pid == 0) {
-        my_close(1, pd);	// 关闭当前子进程的文件和管道
+        my_close(1, pd);    // 关闭当前子进程的文件和管道
         pipe_number(number);
     } else {    // 父进程继续调用primes()
-        my_close(0, pd);	// 关闭当前父进程的文件和管道
+        my_close(0, pd);    // 关闭当前父进程的文件和管道
         primes();
     }
-}
-</code></pre>
+}</code></pre>
 <p>当前进程需要筛选管道中的数字，将筛选后的数字写入管道传给下一个子进程，在函数<code>pipe_number</code>中实现：</p>
-<pre><code class="language-c">void pipe_number(int number) {
+<pre><code class="c">void pipe_number(int number) {
     int recieved;
     // 从管道中读出数字，写入recieved
     while (read(0, &amp;recieved, sizeof(recieved))) {
@@ -607,10 +596,9 @@ close(p2[1]);	// 使用后需要关闭管道
             write(1, &amp;recieved, sizeof(recieved));
         }
     }
-}
-</code></pre>
+}</code></pre>
 <p>对于<code>main</code>函数，需要对输入进行判断，初始化输入的数字，调用<code>primes</code>进行筛选。</p>
-<pre><code class="language-c">int main(int argc, char *argv) {
+<pre><code class="c">int main(int argc, char *argv) {
     if (argc != 1) {
         printf("Please enter No PARAMETERS.\n");
     }
@@ -637,17 +625,15 @@ close(p2[1]);	// 使用后需要关闭管道
         primes();
     }
     exit();
-}
-</code></pre>
-<h1>4. 文件找寻函数 find</h1>
-<p>在xv6上实现UNIX函数<code>find(argv1 argv2)</code>，即在目录树<code>argv1</code>中查找名称与字符串<code>argv2</code>匹配的所有文件。参照<code>user/ls.c</code>和<code>user/grep.c</code>的实现逻辑。</p>
+}</code></pre>
+<h1 id="4-文件找寻函数-find"><a href="#4-文件找寻函数-find" class="headerlink" title="4. 文件找寻函数 find"></a>4. 文件找寻函数 find</h1><p>在xv6上实现UNIX函数<code>find(argv1 argv2)</code>，即在目录树<code>argv1</code>中查找名称与字符串<code>argv2</code>匹配的所有文件。参照<code>user/ls.c</code>和<code>user/grep.c</code>的实现逻辑。</p>
 <p>思路为划分路径，递归处理每一步的文件夹下的所有文件，依次判断当前文件类型是文件还是文件夹，如果：</p>
 <ul>
 <li>文件，则判断名称是否匹配，结束递归；</li>
 <li>文件夹，递归进入该文件夹，继续处理；</li>
 </ul>
 <p>主要函数为<code>find(char *path, char *name)</code>，实现如下：</p>
-<pre><code class="language-c">void find(char *path, char *name){
+<pre><code class="c">void find(char *path, char *name){
     // from ls.c
     char buf[512], *p;
     int fd;
@@ -698,10 +684,9 @@ close(p2[1]);	// 使用后需要关闭管道
         }
     }
     close(fd);
-}
-</code></pre>
+}</code></pre>
 <p>另一个主要函数为判断匹配函数<code>int match(char *re, char *text)</code>，主要参考<code>user/grep.c</code>文件：</p>
-<pre><code class="language-c">int match(char *re, char *text)
+<pre><code class="c">int match(char *re, char *text)
 {
   if(re[0] == '^')
     return matchhere(re+1, text);
@@ -734,12 +719,10 @@ int matchstar(int c, char *re, char *text)
       return 1;
   }while(*text!='\0' &amp;&amp; (*text++==c || c=='.'));
   return 0;
-}
-</code></pre>
-<h1>5. xargs函数</h1>
-<p>在xv6上实现UNIX函数xargs，即从标准输入中读取行并为每行运行一个命令，且将该行作为命令的参数。</p>
+}</code></pre>
+<h1 id="5-xargs函数"><a href="#5-xargs函数" class="headerlink" title="5. xargs函数"></a>5. xargs函数</h1><p>在xv6上实现UNIX函数xargs，即从标准输入中读取行并为每行运行一个命令，且将该行作为命令的参数。</p>
 <p>思路为依次处理每行，根据空格符和换行符分割参数，调用子进程执行指令，需要注意的是，父进程需要等待子进程执行结束后再继续处理。</p>
-<pre><code class="language-c">int main(int argc, char *argv[]) {
+<pre><code class="c">int main(int argc, char *argv[]) {
     char buf2[512];
     char buf[32][32];
     char *pass[32];
@@ -776,8 +759,7 @@ int matchstar(int c, char *re, char *text)
     }
 
     exit();
-}
-</code></pre>
+}</code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {

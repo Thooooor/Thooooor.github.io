@@ -442,67 +442,46 @@
                 <blockquote>
 <p>Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。</p>
 </blockquote>
-<h1>Anaconda 下载</h1>
-<ul>
-<li>
-<h2 id="Anaconda官网"><a target="_blank" rel="noopener" href="https://www.anaconda.com/">Anaconda官网</a></h2>
-<p>如果有梯子的话速度会比较快，如果没有梯子的话，速度可能会<strong>很慢</strong>。</p>
+<h1 id="Anaconda-下载"><a href="#Anaconda-下载" class="headerlink" title="Anaconda 下载"></a>Anaconda 下载</h1><ul>
+<li><h2 id="Anaconda官网"><a href="#Anaconda官网" class="headerlink" title="Anaconda官网"></a><a target="_blank" rel="noopener" href="https://www.anaconda.com/">Anaconda官网</a></h2><p>如果有梯子的话速度会比较快，如果没有梯子的话，速度可能会<strong>很慢</strong>。</p>
 </li>
-<li>
-<h2 id="清华大学开源软件镜像站"><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">清华大学开源软件镜像站</a></h2>
-<p>建议使用这种方式下载（<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">下载地址</a>），按时间排序，选择合适的最新版：<code>64位Linux版</code></p>
+<li><h2 id="清华大学开源软件镜像站"><a href="#清华大学开源软件镜像站" class="headerlink" title="清华大学开源软件镜像站"></a><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">清华大学开源软件镜像站</a></h2><p>建议使用这种方式下载（<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">下载地址</a>），按时间排序，选择合适的最新版：<code>64位Linux版</code></p>
 <p>可以先下载到本地，通过<code>Xftp</code>传到Ubuntu服务器，也可以直接下载到服务器端。</p>
 </li>
 </ul>
-<h1>Anaconda 安装</h1>
-<ol>
-<li>
-<p>在终端中进到<code>.sh</code>文件所在文件夹</p>
+<h1 id="Anaconda-安装"><a href="#Anaconda-安装" class="headerlink" title="Anaconda 安装"></a>Anaconda 安装</h1><ol>
+<li><p>在终端中进到<code>.sh</code>文件所在文件夹</p>
 </li>
-<li>
-<p>运行<code>.sh</code>文件</p>
-<pre><code class="language-shell">bash Anaconda3-2020.02-Linux-x86_64.sh
-</code></pre>
+<li><p>运行<code>.sh</code>文件</p>
+<pre><code class="shell">bash Anaconda3-2020.02-Linux-x86_64.sh</code></pre>
 </li>
-<li>
-<p>一路<code>Enter</code>，然后输入<code>yes</code>，接受协议</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/%E6%89%B9%E6%B3%A8%202020-04-02%20230506.png" alt=""></p>
+<li><p>一路<code>Enter</code>，然后输入<code>yes</code>，接受协议</p>
+<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/%E6%89%B9%E6%B3%A8%202020-04-02%20230506.png"></p>
 </li>
-<li>
-<p>选择安装路径，<code>Enter</code>选择默认路径，也可以自己更改</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402231106.png" alt=""></p>
+<li><p>选择安装路径，<code>Enter</code>选择默认路径，也可以自己更改</p>
+<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402231106.png"></p>
 <p>选择完成后，开始安装</p>
 </li>
-<li>
-<p>安装完成后，选择使用<code>conda</code></p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402232510.png" alt=""></p>
+<li><p>安装完成后，选择使用<code>conda</code></p>
+<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402232510.png"></p>
 </li>
-<li>
-<p>安装成功</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402232718.png" alt=""></p>
+<li><p>安装成功</p>
+<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402232718.png"></p>
 </li>
 </ol>
-<h1>配置环境变量</h1>
-<ol>
-<li>
-<p>打开配置文件</p>
-<pre><code class="language-shell">vim ~/.bashrc
-</code></pre>
+<h1 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h1><ol>
+<li><p>打开配置文件</p>
+<pre><code class="shell">vim ~/.bashrc</code></pre>
 </li>
-<li>
-<p>添加环境路径</p>
-<pre><code>export PATH=/home/XXX/anaconda3/bin:$PATH
-</code></pre>
+<li><p>添加环境路径</p>
+<pre><code>export PATH=/home/XXX/anaconda3/bin:$PATH</code></pre>
 <p>填入自己的安装路径</p>
 </li>
-<li>
-<p>激活环境</p>
-<pre><code class="language-shell">source ~/.bashrc
-</code></pre>
+<li><p>激活环境</p>
+<pre><code class="shell">source ~/.bashrc</code></pre>
 </li>
-<li>
-<p>查看Anaconda和python版本</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402233509.png" alt=""></p>
+<li><p>查看Anaconda和python版本</p>
+<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402233509.png"></p>
 </li>
 </ol>
 <script>
