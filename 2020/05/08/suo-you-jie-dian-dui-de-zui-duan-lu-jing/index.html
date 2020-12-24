@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
 </head>
 
 
@@ -417,14 +417,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.4k
+                    1.3k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    6 分
+                    5 分
                 </div>
                 
 
@@ -476,67 +476,67 @@ constexpr auto INFI = 1e9;
 constexpr auto NIL = -1;
 
 
-vector&lt;vector&lt;int&gt;&gt; floyd(vector&lt;vector&lt;int&gt;&gt; W, vector&lt;vector&lt;int&gt;&gt;&amp; P) &amp;#123;
+vector&lt;vector&lt;int&gt;&gt; floyd(vector&lt;vector&lt;int&gt;&gt; W, vector&lt;vector&lt;int&gt;&gt;&amp; P) {
     int n = W.size();
     vector&lt;vector&lt;int&gt;&gt; D = W;
-    for (int k = 0; k &lt; n; k++) &amp;#123;
-        for (int i = 0; i &lt; n; i++) &amp;#123;
-            for (int j = 0; j &lt; n; j++) &amp;#123;
-                if (D[i][j] &gt; D[i][k] + D[k][j]) &amp;#123;
+    for (int k = 0; k &lt; n; k++) {
+        for (int i = 0; i &lt; n; i++) {
+            for (int j = 0; j &lt; n; j++) {
+                if (D[i][j] &gt; D[i][k] + D[k][j]) {
                     D[i][j] = D[i][k] + D[k][j];
                     P[i][j] = k;
-                &amp;#125;
-            &amp;#125;
-        &amp;#125;
-    &amp;#125;
+                }
+            }
+        }
+    }
     return D;
-&amp;#125;
+}
 
-void print_matrix(vector&lt;vector&lt;int&gt;&gt; W) &amp;#123;
-    for (auto&amp; w : W) &amp;#123;
-        for (auto&amp; item : w) &amp;#123;
+void print_matrix(vector&lt;vector&lt;int&gt;&gt; W) {
+    for (auto&amp; w : W) {
+        for (auto&amp; item : w) {
             cout &lt;&lt; item &lt;&lt; " ";
-        &amp;#125;
+        }
         cout &lt;&lt; endl;
-    &amp;#125;
-&amp;#125;
+    }
+}
 
 // 打印最短路径
-void print_path(int a, int b, vector&lt;vector&lt;int&gt;&gt; P) &amp;#123;
+void print_path(int a, int b, vector&lt;vector&lt;int&gt;&gt; P) {
     cout &lt;&lt; a;
-    while (a != P[a][b]) &amp;#123;
-        if (P[a][b] &gt;= 0) &amp;#123;
+    while (a != P[a][b]) {
+        if (P[a][b] &gt;= 0) {
             cout &lt;&lt; "-&gt;" &lt;&lt; P[a][b];
             a = P[a][b];
-        &amp;#125;
-        else &amp;#123;
+        }
+        else {
             cout &lt;&lt; endl;
             return;
-        &amp;#125;
-    &amp;#125;
+        }
+    }
     cout &lt;&lt; endl;
-&amp;#125;
+}
 
 int main()
-&amp;#123;
+{
     int n;  // 结点数量
     cin &gt;&gt; n;
     vector&lt;vector&lt;int&gt;&gt; W(n);
     vector &lt;vector&lt;int&gt;&gt; P(n);
-    for (int i = 0; i &lt; n; i++) &amp;#123;
+    for (int i = 0; i &lt; n; i++) {
         W[i].resize(n, INFI);
         W[i][i] = 0;
         P[i].resize(n, NIL);
-    &amp;#125;
+    }
 
     int a; // 边的数量
     cin &gt;&gt; a;
-    for (int i = 0; i &lt; a; i++) &amp;#123;
+    for (int i = 0; i &lt; a; i++) {
         int u, v, w;    // u、v：端点，w：边的权重
         cin &gt;&gt; u &gt;&gt; v &gt;&gt; w;
         W[u][v] = w;
         P[u][v] = v;
-    &amp;#125;
+    }
     print_matrix(W);
     print_matrix(P);
 
@@ -544,7 +544,7 @@ int main()
     print_matrix(D);
     print_matrix(P);
     print_path(0, 1, P);
-&amp;#125;</code></pre>
+}</code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1165,7 +1165,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">51.7k</span>&nbsp;字
+                class="white-color">50.8k</span>&nbsp;字
             
             
             

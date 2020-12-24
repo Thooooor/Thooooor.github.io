@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
 </head>
 
 
@@ -413,7 +413,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.1k
+                    2k
                 </div>
                 
 
@@ -469,9 +469,9 @@ cd mysite</code></pre>
 <pre><code class="python"># mysite/routing.py
 from channels.routing import ProtocolTypeRouter
 
-application = ProtocolTypeRouter(&amp;#123;
+application = ProtocolTypeRouter({
     # (http-&gt;django views is added by default)
-&amp;#125;)</code></pre>
+})</code></pre>
 <p>​    然后将Channels库在应用列表中进行注册：</p>
 <pre><code class="python"># mysite/settings.py
 INSTALLED_APPS = [
@@ -523,55 +523,55 @@ INSTALLED_APPS = [
 <p>​    在<strong>根目录</strong>新建文件夹<code>templates</code>以及<code>templates/event</code>文件夹放置html文件，在<code>mysite/settings.py</code>中添加路径：</p>
 <pre><code class="python"># mysite/settings.py
 TEMPLATES = [
-    &amp;#123;
+    {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         # 修改
         'DIRS': [os.path.join(BASE_DIR, 'templates').replace('\\', '/')],
         'APP_DIRS': True,
-        'OPTIONS': &amp;#123;
+        'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-        &amp;#125;,
-    &amp;#125;,
+        },
+    },
 ]</code></pre>
 <p>​    在<code>templates</code>中添加视图文件<code>event/list.html</code>，其中WebSocket请求部分模板如下：</p>
 <pre><code class="html">&lt;script type="text/javascript"&gt;
-    function Filter() &amp;#123;
-        if ("WebSocket" in window) &amp;#123;
+    function Filter() {
+        if ("WebSocket" in window) {
             //alert("您的浏览器支持WebSocket!");
             // 重定向URL
             let ws = new WebSocket("ws://"+ window.location.host + "/ws/event/list/");
-            ws.onopen = function () &amp;#123;
-                ws.send(JSON.stringify(&amp;#123;
+            ws.onopen = function () {
+                ws.send(JSON.stringify({
                     'message': "测试",
                     // 需要传输的数据
-                &amp;#125;));
-            &amp;#125;
-            ws.onmessage = function (evt) &amp;#123;
+                }));
+            }
+            ws.onmessage = function (evt) {
                 let received_msg = JSON.parse(evt.data);
                 let feed_back = received_msg['feedback'];
                 alert(feedback);
                 // 处理接受数据
-            &amp;#125;
-            ws.onclose = function () &amp;#123;
+            }
+            ws.onclose = function () {
                 //alert("WebSocket连接已关闭...");
-            &amp;#125;
-        &amp;#125;
-        else &amp;#123;
+            }
+        }
+        else {
             alert("你的浏览器不支持WebSocket!");
-        &amp;#125;
-    &amp;#125;
+        }
+    }
 &lt;/script&gt;</code></pre>
 <p>​    创建视图功能<code>event/views.py</code>：</p>
 <pre><code class="python"># event/views.py
 from django.shortcuts import render
 
 def list(request):
-    return render(request, 'event/list.html', &amp;#123;&amp;#125;)</code></pre>
+    return render(request, 'event/list.html', {})</code></pre>
 <p>​    创建路由<code>event/urls.py</code>：</p>
 <pre><code class="python"># event/urls.py
 from django.urls import path
@@ -620,10 +620,10 @@ class ListDataConsumer(WebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
         # 数据处理
-        self.send(text_data=json.dumps(&amp;#123;
+        self.send(text_data=json.dumps({
         'feedback': "Accept",
         # 返回数据
-    &amp;#125;))</code></pre>
+    }))</code></pre>
 <p>​    为<code>consumers.py</code>配置路由，新建<code>event/routing.py</code>：</p>
 <pre><code class="python"># event/routing.py
 from django.urls import re_path
@@ -641,14 +641,14 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 
 import event.routing
 
-application = ProtocolTypeRouter(&amp;#123;
+application = ProtocolTypeRouter({
     # (http-&gt;django views is added by default)
     'websocket': AuthMiddlewareStack(
         URLRouter(
             event.routing.websocket_urlpatterns
         )
     ),
-&amp;#125;)</code></pre>
+})</code></pre>
 <p>​    此根路由配置指定当与Channels开发服务器建立连接时，<code>ProtocolTypeRouter</code>将首先检查连接的类型。如果它是WebSocket连接（<strong>ws：//**或</strong>wss：//**），则该连接将分配给<code>AuthMiddlewareStack</code>。</p>
 <p>​    在<code>AuthMiddlewareStack</code>将填充的连接的<strong>范围</strong>覆盖到当前认证的用户，然后将连接到<code>URLRouter</code>。该<code>URLRouter</code>会研究基础上，提供连接到路由到特定消费者的HTTP路径，基于<code>url</code>模式。</p>
 <p>​    之后进行数据库模型迁移：</p>
@@ -1271,7 +1271,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">51.7k</span>&nbsp;字
+                class="white-color">50.8k</span>&nbsp;字
             
             
             

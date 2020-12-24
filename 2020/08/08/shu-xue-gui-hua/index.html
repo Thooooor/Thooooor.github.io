@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
 </head>
 
 
@@ -449,8 +449,7 @@
 <li>$c,b_{ub},b_{eq},l,u$：向量</li>
 <li>$A_{ub},A_{eq}$：矩阵</li>
 </ul>
-<p>##　使用</p>
-<pre><code class="python">scipy.optimize.linprog(
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><pre><code class="python">scipy.optimize.linprog(
     c,    # 一维向量，要最小化的线性目标函数的系数
     A_ub=None,    # 不等式约束矩阵，每一行指定x上线性不等式约束的系数
     b_ub=None,     # 不等式约束向量，每一个元素代表一个对应的值的上限
@@ -459,7 +458,7 @@
     bounds=None, # sequence，x中每个元素的（min，max）对序列，定义该决策变量的最小值和最大值。
                 # 默认情况下，边界是（0，None）（所有决策变量都是非负的）。                
     method='interior-point',    # 用于解决标准格式问题的算法，
-                              # &amp;#123;‘interior-point’, ‘revised simplex’, ‘simplex’&amp;#125;
+                              # {‘interior-point’, ‘revised simplex’, ‘simplex’}
     callback=None,    # 如果提供了回调函数，则每次算法迭代将至少调用一次回调函数 
     options=None,     
     x0=None     # 决策变量的猜测值，通过优化算法对其进行优化。
@@ -728,7 +727,7 @@ x1 - x2 &gt;= -2
 x1 - 3*x2 &lt;= 2
 4 - (x3 - 3)**2 - x4 &gt;= 0
 (x5 - 3)**2 + x4 - 4 &gt;= 0
-x1,x2,x3,x4,x5 ∈ &amp;#123;0,1,2,3,4,5,6,7,8,9,10&amp;#125;
+x1,x2,x3,x4,x5 ∈ {0,1,2,3,4,5,6,7,8,9,10}
 """
 
 
@@ -1503,7 +1502,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">51.7k</span>&nbsp;字
+                class="white-color">50.8k</span>&nbsp;字
             
             
             

@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
 </head>
 
 
@@ -413,7 +413,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    829
+                    817
                 </div>
                 
 
@@ -446,8 +446,8 @@
 </ul>
 <p>设$A_{ij}$包含活动$a_k$，$S_{ij}$中最大兼容任务子集</p>
 <ul>
-<li>$A_{ij}$包含$|A_{ij}|=|A_{ik}|+|A_{kj}|+1$个活动</li>
-<li>$A_{ij}=A_{ik}\bigcup{a_k}\bigcup A_{kj}$</li>
+<li> $A_{ij}$包含$|A_{ij}|=|A_{ik}|+|A_{kj}|+1$个活动</li>
+<li> $A_{ij}=A_{ik}\bigcup{a_k}\bigcup A_{kj}$</li>
 </ul>
 <h2 id="贪心选择"><a href="#贪心选择" class="headerlink" title="贪心选择"></a>贪心选择</h2><ul>
 <li><p><strong>选择所有可选活动中，最早结束的活动</strong></p>
@@ -482,16 +482,16 @@
     while m&lt;=n and s[m]&lt;f[k] do
         m = m+1
         if m &lt;= n do
-            return &amp;#123;a[m]&amp;#125; and RECURSIVE-ACTIVITY-SELECTOR(s,f,m,n)
+            return {a[m]} and RECURSIVE-ACTIVITY-SELECTOR(s,f,m,n)
         else 
             return</code></pre>
 <h2 id="迭代贪心算法"><a href="#迭代贪心算法" class="headerlink" title="迭代贪心算法"></a>迭代贪心算法</h2><pre><code class="pseudocode">GREEDY-ACTIVITY-SELECTOR(s,f)
     n = s.length
-    A=&amp;#123;a[1]&amp;#125;
+    A={a[1]}
     k=1
     for m=2 to n do
         if s[m]&gt;=f[k] do
-            A.append&amp;#123;a[m]&amp;#125;
+            A.append{a[m]}
             k = m
     return A</code></pre>
 <script>
@@ -1110,7 +1110,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">51.7k</span>&nbsp;字
+                class="white-color">50.8k</span>&nbsp;字
             
             
             

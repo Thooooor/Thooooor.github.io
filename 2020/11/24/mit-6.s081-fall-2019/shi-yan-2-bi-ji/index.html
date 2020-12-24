@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
 </head>
 
 
@@ -417,14 +417,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.7k
+                    1.5k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    7 分
                 </div>
                 
 
@@ -462,29 +462,29 @@ find . b | xargs grep hello</code></pre>
     get cmd -&gt; cd? -&gt; fork -&gt; parse cmd -&gt; run cmd -&gt; get cmd
                    -&gt; cd
 */
-int main(void) &amp;#123;
+int main(void) {
     init_index();
     static char buf[MAXBUF];
     int fd;
 
-    while ((fd = open("console", O_RDWR)) &gt;= 0)&amp;#123;
-        if (fd &gt;= 3) &amp;#123;
+    while ((fd = open("console", O_RDWR)) &gt;= 0){
+        if (fd &gt;= 3) {
             close(fd);
             break;
-        &amp;#125;
-    &amp;#125;
+        }
+    }
 
-    while (getcmd(buf, sizeof(buf)) &gt;= 0) &amp;#123;
-        if (buf[0] == 'c' &amp;&amp; buf[1] == 'd' &amp;&amp; buf[2] == ' ') &amp;#123;
+    while (getcmd(buf, sizeof(buf)) &gt;= 0) {
+        if (buf[0] == 'c' &amp;&amp; buf[1] == 'd' &amp;&amp; buf[2] == ' ') {
             buf[strlen(buf) - 1] = 0;
             if (chdir(buf+3) &lt; 0) fprintf(2, "cannot cd %s\n", buf+3);
             continue;
-        &amp;#125;
+        }
         if(fork() == 0) runcmd(parsecmd(buf));
         wait(0);
-    &amp;#125;
+    }
     exit(0);
-&amp;#125;</code></pre>
+}</code></pre>
 <p>其中<code>cd</code>指令较为特殊，需要进行特判。</p>
 <h1 id="2-parsecmd解析指令"><a href="#2-parsecmd解析指令" class="headerlink" title="2. parsecmd解析指令"></a>2. parsecmd解析指令</h1><p>指令解析函数<code>parsecmd</code>执行的核心函数的<code>parseline</code>，这个函数是递归执行的，其执行流程如下：</p>
 <ol>
@@ -498,36 +498,36 @@ int main(void) &amp;#123;
 </li>
 </ol>
 <p>据此编写以下解析cmd的函数：</p>
-<pre><code class="c">struct cmd* parsecmd(char *s) &amp;#123;
+<pre><code class="c">struct cmd* parsecmd(char *s) {
     struct cmd *cmd;
     char *es;
     es = s + strlen(s);
     cmd = parsepipe(&amp;s, es);
-    if (s != es) &amp;#123;
+    if (s != es) {
         fprintf(2, "leftovers: %s", s);
         exit(-1);
-    &amp;#125;
+    }
     return cmd;
-&amp;#125;
+}
 
 /*
     pipe cmd? -&gt; left_cmd | right_cmd -&gt; parseexec(left_cmd) -&gt; pipecmd(left_cmd, parsepipe(right_cmd))
               -&gt; parseexec(cmd)
 */
-struct cmd* parsepipe(char **ps, char *es) &amp;#123;
+struct cmd* parsepipe(char **ps, char *es) {
     struct cmd *cmd;
     char *q, *eq;
-    if (1 == scan(ps, es, "|", &amp;q, &amp;eq)) &amp;#123;
+    if (1 == scan(ps, es, "|", &amp;q, &amp;eq)) {
         cmd = parseexec(&amp;q, eq);
         (*ps)++;
         cmd = pipecmd(cmd, parsepipe(ps, es));
-    &amp;#125; else &amp;#123;
+    } else {
         cmd = parseexec(&amp;q, eq);
-    &amp;#125;
+    }
     return cmd;
-&amp;#125;
+}
 
-struct cmd* parseexec(char **ps, char *es)&amp;#123;
+struct cmd* parseexec(char **ps, char *es){
     char *q, *eq;
     int token, argc;
     struct execcmd *cmd;
@@ -539,45 +539,45 @@ struct cmd* parseexec(char **ps, char *es)&amp;#123;
     argc = 0;
     ret = parseredirs(ret, ps, es);
 
-    while(*ps &lt; es) &amp;#123;
+    while(*ps &lt; es) {
         if((token=gettoken(ps, es, &amp;q, &amp;eq)) == 0) break;
 
-        if(token != 'a') &amp;#123;
+        if(token != 'a') {
             fprintf(2, "syntax error.\n");
             exit(-1);
-        &amp;#125;
+        }
 
         cmd-&gt;argv[argc] = copy(q, eq);
         argc++;
 
-        if(argc &gt;= MAXARGS) &amp;#123;
+        if(argc &gt;= MAXARGS) {
             fprintf(2, "too many args.\n");
             exit(-1);
-        &amp;#125;
+        }
 
         ret = parseredirs(ret, ps, es);
-    &amp;#125;
+    }
     cmd-&gt;argv[argc] = 0;
     return ret;
-&amp;#125;
+}
 
 /*
     cmd &gt; file -&gt;                                       -&gt; redircmd(cmd, file)
                   cmd -&gt; parseexec(cmd) -&gt; execcmd(cmd)
                   file -&gt; file
 */
-struct cmd* parseredirs(struct cmd *cmd, char **ps, char *es) &amp;#123;
+struct cmd* parseredirs(struct cmd *cmd, char **ps, char *es) {
     int token;
     char *q, *eq;
 
-    while(peek(ps, es, "&lt;&gt;")) &amp;#123;
+    while(peek(ps, es, "&lt;&gt;")) {
         token = gettoken(ps, es, 0, 0);
-        if (gettoken(ps, es, &amp;q, &amp;eq) != 'a') &amp;#123;
+        if (gettoken(ps, es, &amp;q, &amp;eq) != 'a') {
             fprintf(2, "missing file for redirection.\n");
             exit(-1);
-        &amp;#125;
+        }
 
-        switch(token) &amp;#123;
+        switch(token) {
             case '&lt;':
                 // fprintf(2, "&lt; cmd\n");
                 cmd = redircmd(cmd, copy(q, eq), REDIR, O_RDONLY, 0);
@@ -586,19 +586,19 @@ struct cmd* parseredirs(struct cmd *cmd, char **ps, char *es) &amp;#123;
                 // fprintf(2, "&gt; cmd\n");
                 cmd = redircmd(cmd, copy(q, eq), REDIR, O_WRONLY|O_CREATE, 1);
                 break;
-        &amp;#125;
-    &amp;#125;
+        }
+    }
     return cmd;
-&amp;#125;
+}
 
 /*
     create pipecmd and convert it to cmd
 */
-struct cmd *pipecmd(struct cmd *left, struct cmd *right) &amp;#123;
-    if (++cmd_index[PIPE] &gt;= MAXCMDS) &amp;#123;
+struct cmd *pipecmd(struct cmd *left, struct cmd *right) {
+    if (++cmd_index[PIPE] &gt;= MAXCMDS) {
         fprintf(2, "Too many commands.\n");
         exit(-1);
-    &amp;#125;
+    }
     struct pipecmd *cmd = &amp;mypipecmd[cmd_index[PIPE]];
 
     cmd-&gt;type = PIPE;
@@ -606,31 +606,31 @@ struct cmd *pipecmd(struct cmd *left, struct cmd *right) &amp;#123;
     cmd-&gt;right = right;
 
     return (struct cmd*) cmd;
-&amp;#125;
+}
 
 /*
     create execcmd and convert it to cmd
 */
-struct cmd *execcmd(void) &amp;#123;
-    if (++cmd_index[EXEC] &gt;= MAXCMDS) &amp;#123;
+struct cmd *execcmd(void) {
+    if (++cmd_index[EXEC] &gt;= MAXCMDS) {
         fprintf(2, "Too many commands.\n");
         exit(-1);
-    &amp;#125;
+    }
     struct execcmd *cmd = &amp;myexeccmd[cmd_index[EXEC]];
 
     cmd-&gt;type = EXEC;
 
     return (struct cmd*)cmd;
-&amp;#125;
+}
 
 /*
     create redircmd and convert it to cmd
 */
-struct cmd *redircmd(struct cmd *subcmd, char *file, int type, int mode, int fd) &amp;#123;
-    if (++cmd_index[REDIR] &gt;= MAXCMDS) &amp;#123;
+struct cmd *redircmd(struct cmd *subcmd, char *file, int type, int mode, int fd) {
+    if (++cmd_index[REDIR] &gt;= MAXCMDS) {
         fprintf(2, "Too many commands.\n");
         exit(-1);
-    &amp;#125;
+    }
     struct redircmd *cmd = &amp;myredircmd[cmd_index[REDIR]];
 
     cmd-&gt;type = type;
@@ -640,33 +640,33 @@ struct cmd *redircmd(struct cmd *subcmd, char *file, int type, int mode, int fd)
     cmd-&gt;fd = fd;
 
     return (struct cmd*)cmd;
-&amp;#125;
+}
 </code></pre>
 <h1 id="3-cmd执行"><a href="#3-cmd执行" class="headerlink" title="3. cmd执行"></a>3. cmd执行</h1><h2 id="3-1-cmd结构体"><a href="#3-1-cmd结构体" class="headerlink" title="3.1 cmd结构体"></a>3.1 cmd结构体</h2><p>参考<code>sh.c</code>中的cmd结构体定义，定义不同指令的结构体：</p>
-<pre><code class="c">struct cmd &amp;#123;
+<pre><code class="c">struct cmd {
   int type;
-&amp;#125;;
+};
 
-struct execcmd &amp;#123;
+struct execcmd {
   int type;
   char *argv[MAXARGS];
   char *eargv[MAXARGS];
-&amp;#125;;
+};
 
-struct redircmd &amp;#123;
+struct redircmd {
   int type;
   struct cmd *cmd;
   char *file;
   char *efile;
   int mode;
   int fd;
-&amp;#125;;
+};
 
-struct pipecmd &amp;#123;
+struct pipecmd {
   int type;
   struct cmd *left;
   struct cmd *right;
-&amp;#125;;</code></pre>
+};</code></pre>
 <p>由于不能使用动态分配函数，所以事先定义指令数组，分配好空间：</p>
 <pre><code class="c">/*
     not allowed to use m a l l o c()
@@ -682,7 +682,7 @@ char mybuf[MAXBUF];
 char cmdbuff[MAXBUF];
 int index = 0;</code></pre>
 <h2 id="3-2-cmd执行"><a href="#3-2-cmd执行" class="headerlink" title="3.2 cmd执行"></a>3.2 cmd执行</h2><p>不同类型的指令，最终都会使用<code>exec</code>进行执行，根据指令的不同类型，递归调用<code>runcmd</code>完成对不同指令的执行。</p>
-<pre><code class="c">void runcmd(struct cmd *cmd) &amp;#123;
+<pre><code class="c">void runcmd(struct cmd *cmd) {
     int p[2];
     struct execcmd *ecmd;
     struct pipecmd *pcmd;
@@ -690,7 +690,7 @@ int index = 0;</code></pre>
 
     if (cmd == 0) exit(0);
 
-    switch(cmd-&gt;type) &amp;#123;
+    switch(cmd-&gt;type) {
         default:
             fprintf(2, "error cmd.\n");
             exit(-1);
@@ -704,37 +704,37 @@ int index = 0;</code></pre>
             rcmd = (struct redircmd*)cmd;
             close(rcmd-&gt;fd);
 
-            if (open(rcmd-&gt;file, rcmd-&gt;mode) &lt; 0) &amp;#123;
+            if (open(rcmd-&gt;file, rcmd-&gt;mode) &lt; 0) {
                 fprintf(2, "open %s failed.\n", rcmd-&gt;file);
                 exit(-1);
-            &amp;#125;
+            }
             runcmd(rcmd-&gt;cmd);
             break;
         case PIPE:
             pcmd = (struct pipecmd*)cmd;
             if (pipe(p) &lt; 0) exit(-1);
-            if (fork() == 0) &amp;#123;
+            if (fork() == 0) {
                 close(1);
                 dup(p[1]);
                 close(p[0]);
                 close(p[1]);
                 runcmd(pcmd-&gt;left);
-            &amp;#125;
-            if (fork() == 0) &amp;#123;
+            }
+            if (fork() == 0) {
                 close(0);
                 dup(p[0]);
                 close(p[0]);
                 close(p[1]);
                 runcmd(pcmd-&gt;right);
-            &amp;#125;
+            }
             close(p[0]);
             close(p[1]);
             wait(0);
             wait(0);
             break;
-    &amp;#125;
+    }
     exit(0);
-&amp;#125;</code></pre>
+}</code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1363,7 +1363,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">51.7k</span>&nbsp;字
+                class="white-color">50.8k</span>&nbsp;字
             
             
             

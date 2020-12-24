@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
 </head>
 
 
@@ -497,37 +497,37 @@ return i+1</code></pre>
 
 
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre><code class="cpp">void swap(int *a, int *b)
-&amp;#123;
+{
     int temp = *a;
     *a = *b;
     *b = temp;
-&amp;#125;
+}
 
 int partition(int *A, int low, int high)
-&amp;#123;
+{
     int x = A[high];
     int i = low - 1;
     for (int j = low; j &lt;= high - 1; j++)
-    &amp;#123;
+    {
         if (A[j] &lt;= x)
-        &amp;#123;
+        {
             i++;
             swap(&amp;A[i], &amp;A[j]);
-        &amp;#125;
-    &amp;#125;
+        }
+    }
     swap(&amp;A[i+1], &amp;A[high]);
     return i+1;
-&amp;#125;
+}
 
 void quicksort(int *A, int low, int high)
-&amp;#123;
+{
     if (low &lt; high)
-    &amp;#123;
+    {
         int q = partition(A, low, high);
         quicksort(A, low, q - 1);
         quicksort(A, q + 1, high);
-    &amp;#125;
-&amp;#125;</code></pre>
+    }
+}</code></pre>
 <h2 id="随机化版本"><a href="#随机化版本" class="headerlink" title="随机化版本"></a>随机化版本</h2><p>输入的数组的元素分布不一定是均衡的，采用<strong>随机取样</strong>的方法期望在平均情况下划分是比较均衡的，即随机选取主元元素。</p>
 <pre><code class="cpp">#include &lt;iostream&gt;
 #include &lt;ctime&gt;
@@ -537,52 +537,52 @@ using namespace std;
 
 //随机选择一个分界值
 int random(int low, int high)
-&amp;#123;
+{
     srand(1);
     int len = high - low + 1;
     return rand() % len + low;
-&amp;#125;
+}
 
 void swap(int* a, int* b)
-&amp;#123;
+{
     int temp = *a;
     *a = *b;
     *b = temp;
-&amp;#125;
+}
 
 int partition(int* A, int low, int high)
-&amp;#123;
+{
     int i = low - 1;
     int x = A[high];
     for (int j = low; j &lt; high; j++)
-    &amp;#123;
+    {
         if (A[j] &lt;= x)
-        &amp;#123;
+        {
             i++;
             swap(&amp;A[i], &amp;A[j]);
-        &amp;#125;
-    &amp;#125;
+        }
+    }
     swap(&amp;A[i + 1], &amp;A[high]);
     return i + 1;
-&amp;#125;
+}
 
 int random_partition(int* A, int low, int high)
-&amp;#123;
+{
     int i = random(low, high);
     //将分界值交换到最后一位
     swap(&amp;A[high], &amp;A[i]);
     return partition(A, low, high);
-&amp;#125;
+}
 
 void random_quicksort(int* A, int low, int high)
-&amp;#123;
+{
     if (low &lt; high)
-    &amp;#123;
+    {
         int q = random_partition(A, low, high);
         random_quicksort(A, low, q - 1);
         random_quicksort(A, q + 1, high);
-    &amp;#125;
-&amp;#125;</code></pre>
+    }
+}</code></pre>
 <h1 id="快速排序的性能"><a href="#快速排序的性能" class="headerlink" title="快速排序的性能"></a>快速排序的性能</h1><p>快速排序的运行时间依赖于<strong>划分是否平衡</strong>，平衡与否依赖于<strong>划分的元素</strong>。</p>
 <h2 id="划分的复杂度"><a href="#划分的复杂度" class="headerlink" title="划分的复杂度"></a>划分的复杂度</h2><p>$$<br>T(n)=\Theta(n)<br>$$</p>
 <p>$$<br>n=high-low+1<br>$$</p>
@@ -1230,7 +1230,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">51.7k</span>&nbsp;字
+                class="white-color">50.8k</span>&nbsp;字
             
             
             

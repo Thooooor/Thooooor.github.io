@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
 </head>
 
 
@@ -417,14 +417,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.6k
+                    2.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    12 分
+                    10 分
                 </div>
                 
 
@@ -448,48 +448,48 @@
 </blockquote>
 <p>本文对思路和重要函数作分析，具体完整的实现可以查看我<a target="_blank" rel="noopener" href="https://github.com/Thooooor/xv6-riscv-fall19/tree/util">Github仓库</a>上的代码.</p>
 <h1 id="1-sleep函数"><a href="#1-sleep函数" class="headerlink" title="1. sleep函数"></a>1. sleep函数</h1><p>从shell获取参数（sleep的时间），因为参数是字符串，需要通过<code>atoi</code>将字符串转换为数值，然后调用<code>sleep</code>函数执行操作。</p>
-<pre><code class="c">int main(int argc, char *argv[]) &amp;#123;
+<pre><code class="c">int main(int argc, char *argv[]) {
     // 判断参数数量是否符合
-    if (argc != 2) &amp;#123;
+    if (argc != 2) {
         printf("Please enter only ONE INT PARAMETER!\n");
-    &amp;#125; else &amp;#123;
+    } else {
         int time = atoi(argv[1]);   // 将char转换为int
-        if (time) &amp;#123;
+        if (time) {
             printf("Sleep time = %d\n", time);
             sleep(time);
-        &amp;#125; else &amp;#123;
+        } else {
             printf("Please enter An INT &gt; 0.\n");
-        &amp;#125;
-    &amp;#125;
+        }
+    }
     exit();
-&amp;#125;</code></pre>
+}</code></pre>
 <h1 id="2-pingpong函数"><a href="#2-pingpong函数" class="headerlink" title="2. pingpong函数"></a>2. pingpong函数</h1><p>两个进程在管道两侧来回通信。父进程通过将”ping”写入parent_fd [1]来发送子进程，而子进程则通过从parent_fd [0]读取来接收字节。子进程从父进程收到后，通过将“pong”写入child_fd [1]来回复，然后由父进程从child_fd[0]读取。</p>
 <h2 id="2-1-进程-pid"><a href="#2-1-进程-pid" class="headerlink" title="2.1 进程 pid"></a>2.1 进程 pid</h2><p>需要创建一个子进程，创建进程的接口为<code>int fork()</code>，该函数会复制父进程，从而创建一个新的进程，创建失败会返回-1。该函数调用一次会有两次返回值，在子进程中会返回0，父进程中会返回子进程的pid号，可以据此判断是父进程还是子进程，进行不同的操作。</p>
 <p>使用示例:</p>
 <pre><code class="c">int pid, child_pid, parent_pid;
 
 // 创建子进程，判断是否创建成功
-if ((pid = fork()) &lt; 0 ) &amp;#123;
+if ((pid = fork()) &lt; 0 ) {
     printf("Fork error!\n");
     exit();
-&amp;#125;
+}
 
-if (pid == 0) &amp;#123;    // 子进程
+if (pid == 0) {    // 子进程
     child_pid = getpid();
     ...
-&amp;#125; else &amp;#123;    // 父进程
+} else {    // 父进程
     parent_pid = getpid();
     ...
-&amp;#125;</code></pre>
+}</code></pre>
 <p>可以通过<code>getpid()</code>获取当前的进程号。要确保子进程先退出，父进程再退出。</p>
 <h2 id="2-2-管道-pipe"><a href="#2-2-管道-pipe" class="headerlink" title="2.2 管道 pipe"></a>2.2 管道 pipe</h2><p>需要创建两个管道，一个用于父进程写和子进程读，另一个用于子进程写和父进程读。创建管道的接口为<code>int pipe(pipe_name[2])</code>，成功返回0，不成功返回-1，正常创建后，<code>p[1]</code>为管道写入端，<code>p[0]</code>为管道读出端。</p>
 <p>使用方法示例：</p>
 <pre><code class="c">int p1[2], p2[2];
 // 创建两个管道
-if (pipe(p1) != 0 || pipe(p2) != 0) &amp;#123;
+if (pipe(p1) != 0 || pipe(p2) != 0) {
     printf("Pipe failed.\n");
     exit();
-&amp;#125;
+}
 // 从p1中读入
 read(p1[0], buf, sizeof(buf));
 close(p1[0]);    // 使用后需要关闭管道
@@ -498,24 +498,24 @@ write(p2[1], "pong", 4);
 close(p2[1]);    // 使用后需要关闭管道</code></pre>
 <p>需要注意，管道read是一直阻塞的，直到管道有数据写入；如果绑定在这个管道的写端口关闭了，read返回0。需要及时关闭管道的写端，否则读出端无法判断传输是否结束。</p>
 <p><code>pingpong</code>函数实现如下：</p>
-<pre><code class="c">int main(int argc, char *argv[]) &amp;#123;
-    if (argc != 1) &amp;#123;    // 判断参数数量
+<pre><code class="c">int main(int argc, char *argv[]) {
+    if (argc != 1) {    // 判断参数数量
         printf("Please don't add any PARAMTERS!\n");
-    &amp;#125; else &amp;#123;
+    } else {
         int p1[2], p2[2];
         int pid, child_pid, parent_pid;
         // 创建两个管道
-        if (pipe(p1) != 0 || pipe(p2) != 0) &amp;#123;
+        if (pipe(p1) != 0 || pipe(p2) != 0) {
             printf("Pipe failed.\n");
             exit();
-        &amp;#125;
+        }
         // 创建子进程
-        if ((pid = fork()) &lt; 0 ) &amp;#123;
+        if ((pid = fork()) &lt; 0 ) {
             printf("Fork error!\n");
             exit();
-        &amp;#125; 
+        } 
         // 子进程
-        if (pid == 0) &amp;#123;
+        if (pid == 0) {
             child_pid = getpid();
             // 从p1[0]中读出父进程传来的ping
             read(p1[0], buf, sizeof(buf));
@@ -525,7 +525,7 @@ close(p2[1]);    // 使用后需要关闭管道</code></pre>
             write(p2[1], "pong", 4);
             close(p2[1]);
             exit();
-        &amp;#125; else &amp;#123;    // 父进程
+        } else {    // 父进程
             parent_pid = getpid();
             // 写入p1[1]
             write(p1[1], "ping", 4);
@@ -535,20 +535,20 @@ close(p2[1]);    // 使用后需要关闭管道</code></pre>
             close(p2[0]);
             printf("%d: received %s\n", parent_pid ,buf);
             exit();
-        &amp;#125;
-    &amp;#125;
+        }
+    }
     exit();
-&amp;#125;</code></pre>
+}</code></pre>
 <h1 id="3-素数筛选-primes"><a href="#3-素数筛选-primes" class="headerlink" title="3. 素数筛选 primes"></a>3. 素数筛选 primes</h1><p>在xv6上使用管道实现“质数筛选”， 输出2~35之间的而所有质数。</p>
 <p>筛选思路为：主进程将所有数据（例2~11）输入到管道的左侧，第一个子进程从管道读出并筛选出2，排除掉2的倍数，其他数字再写入下一管道；第二个子进程读出并筛选出3，排除掉3的倍数，其他数字写入到下一管道；第三个子进程读出筛选出5，以此类推……如下图所示：</p>
 <p><img src="http://note.lizhihao999.cn/notes/20201225000824.png"></p>
 <p>因为需要创建多个子进程和管道，但是多个进程和管道之间不会交替使用，即同一时间只有一对进程和管道在使用，所以使用一个<code>close_pipe</code>函数关闭使用过的pipe和进程文件。要确保子进程先退出，父进程再退出。</p>
-<pre><code class="c">void my_close(int port, int pd[]) &amp;#123;
+<pre><code class="c">void my_close(int port, int pd[]) {
     close(port);
     dup(pd[port]);
     close(pd[0]);
     close(pd[1]);
-&amp;#125;</code></pre>
+}</code></pre>
 <blockquote>
 <p><strong>相关函数</strong></p>
 <p><strong>dup</strong></p>
@@ -558,74 +558,74 @@ close(p2[1]);    // 使用后需要关闭管道</code></pre>
 <p>用来关闭已打开的文件，任何有关该文件描述符上的记录锁和使用该文件的进程都会被关闭和移除。用法为<code> int close(int fd)</code>，参数fd为<code>open()</code>或<code>create()</code>打开的文件。</p>
 </blockquote>
 <p>每次筛选的操作在函数<code>primes</code>中实现，递归调用，直到筛选完所有的数。</p>
-<pre><code class="c">void primes() &amp;#123;
+<pre><code class="c">void primes() {
     int pid;
     int pd[2];
     int number;
     // 读入管道中的第一个数，为素数
-    if (read(0, &amp;number, sizeof(number))) &amp;#123;
+    if (read(0, &amp;number, sizeof(number))) {
         printf("prime %d\n", number);
-    &amp;#125; else &amp;#123;
+    } else {
         exit();
-    &amp;#125;
+    }
     // 创建管道
-    if (pipe(pd) != 0) &amp;#123;
+    if (pipe(pd) != 0) {
         printf("Pipe failed.\n");
         exit();
-    &amp;#125;
+    }
     // 创建子进程
-    if ((pid = fork()) &lt; 0) &amp;#123;
+    if ((pid = fork()) &lt; 0) {
         printf("Fork error!\n");
         exit();
-    &amp;#125;
+    }
     // 子进程筛选素数
-    if (pid == 0) &amp;#123;
+    if (pid == 0) {
         my_close(1, pd);    // 关闭当前子进程的文件和管道
         pipe_number(number);
-    &amp;#125; else &amp;#123;    // 父进程继续调用primes()
+    } else {    // 父进程继续调用primes()
         my_close(0, pd);    // 关闭当前父进程的文件和管道
         primes();
-    &amp;#125;
-&amp;#125;</code></pre>
+    }
+}</code></pre>
 <p>当前进程需要筛选管道中的数字，将筛选后的数字写入管道传给下一个子进程，在函数<code>pipe_number</code>中实现：</p>
-<pre><code class="c">void pipe_number(int number) &amp;#123;
+<pre><code class="c">void pipe_number(int number) {
     int recieved;
     // 从管道中读出数字，写入recieved
-    while (read(0, &amp;recieved, sizeof(recieved))) &amp;#123;
-        if (recieved % number != 0) &amp;#123;   // 过滤掉能被number整除的数
+    while (read(0, &amp;recieved, sizeof(recieved))) {
+        if (recieved % number != 0) {   // 过滤掉能被number整除的数
             write(1, &amp;recieved, sizeof(recieved));
-        &amp;#125;
-    &amp;#125;
-&amp;#125;</code></pre>
+        }
+    }
+}</code></pre>
 <p>对于<code>main</code>函数，需要对输入进行判断，初始化输入的数字，调用<code>primes</code>进行筛选。</p>
-<pre><code class="c">int main(int argc, char *argv) &amp;#123;
-    if (argc != 1) &amp;#123;
+<pre><code class="c">int main(int argc, char *argv) {
+    if (argc != 1) {
         printf("Please enter No PARAMETERS.\n");
-    &amp;#125;
+    }
     int pd[2];
     int pid;
 
-    if (pipe(pd) != 0) &amp;#123;
+    if (pipe(pd) != 0) {
         printf("Pipe failed.\n");
         exit();
-    &amp;#125;
+    }
 
-    if ((pid = fork()) &lt; 0) &amp;#123;
+    if ((pid = fork()) &lt; 0) {
         printf("Fork error!\n");
         exit();
-    &amp;#125;
+    }
 
-    if (pid == 0) &amp;#123; // 对子进程输入2-35
+    if (pid == 0) { // 对子进程输入2-35
         my_close(1, pd);
-        for (int i = 2; i &lt;= 35; i++) &amp;#123;
+        for (int i = 2; i &lt;= 35; i++) {
             write(1, &amp;i, sizeof(i));
-        &amp;#125;
-    &amp;#125; else &amp;#123;
+        }
+    } else {
         my_close(0, pd);
         primes();
-    &amp;#125;
+    }
     exit();
-&amp;#125;</code></pre>
+}</code></pre>
 <h1 id="4-文件找寻函数-find"><a href="#4-文件找寻函数-find" class="headerlink" title="4. 文件找寻函数 find"></a>4. 文件找寻函数 find</h1><p>在xv6上实现UNIX函数<code>find(argv1 argv2)</code>，即在目录树<code>argv1</code>中查找名称与字符串<code>argv2</code>匹配的所有文件。参照<code>user/ls.c</code>和<code>user/grep.c</code>的实现逻辑。</p>
 <p>思路为划分路径，递归处理每一步的文件夹下的所有文件，依次判断当前文件类型是文件还是文件夹，如果：</p>
 <ul>
@@ -633,73 +633,73 @@ close(p2[1]);    // 使用后需要关闭管道</code></pre>
 <li>文件夹，递归进入该文件夹，继续处理；</li>
 </ul>
 <p>主要函数为<code>find(char *path, char *name)</code>，实现如下：</p>
-<pre><code class="c">void find(char *path, char *name)&amp;#123;
+<pre><code class="c">void find(char *path, char *name){
     // from ls.c
     char buf[512], *p;
     int fd;
     struct dirent de;
     struct stat st;
     // 打开当前路径的文件
-    if((fd = open(path, 0)) &lt; 0)&amp;#123;
+    if((fd = open(path, 0)) &lt; 0){
         fprintf(2, "find: cannot open %s\n", path);
         return;
-    &amp;#125;
+    }
     // 将文件转换为结构体
-    if(fstat(fd, &amp;st) &lt; 0)&amp;#123;
+    if(fstat(fd, &amp;st) &lt; 0){
         fprintf(2, "find: cannot stat %s\n", path);
         close(fd);
         return;
-    &amp;#125;
+    }
     // 判断当前文件类型是文件还是文件夹
-    switch(st.type)&amp;#123;
+    switch(st.type){
         case T_FILE:  // 判断名字是否匹配
             if(match(name, fmtname(path)))
             printf("%s\n", path);
             break;
-        case T_DIR: &amp;#123;
-            if(strlen(path) + 1 + DIRSIZ + 1 &gt; sizeof buf) &amp;#123;
+        case T_DIR: {
+            if(strlen(path) + 1 + DIRSIZ + 1 &gt; sizeof buf) {
                 printf("find: path too long\n");
                 break;
-            &amp;#125;
+            }
             strcpy(buf, path);
             p = buf+strlen(buf);
             *p++ = '/';
             // 对文件夹下的文件/文件夹依次进行判断
-            while(read(fd, &amp;de, sizeof(de)) == sizeof(de)) &amp;#123;
+            while(read(fd, &amp;de, sizeof(de)) == sizeof(de)) {
                 if(de.inum == 0)
                     continue;
                 memmove(p, de.name, DIRSIZ);
                 p[DIRSIZ] = 0;
-                if(stat(buf, &amp;st) &lt; 0)&amp;#123;
+                if(stat(buf, &amp;st) &lt; 0){
                     printf("find: cannot stat %s\n", buf);
                     continue;
-                &amp;#125;
+                }
                 // avoid recursing into "." and ".."
                 if(strlen(de.name) == 1 &amp;&amp; de.name[0] == '.') continue;
                 if(strlen(de.name) == 2 &amp;&amp; de.name[0] == '.' &amp;&amp; de.name[1] == '.') continue;
                 // 继续递归
                 find(buf, name);
-            &amp;#125;
+            }
             break;
-        &amp;#125;
-    &amp;#125;
+        }
+    }
     close(fd);
-&amp;#125;</code></pre>
+}</code></pre>
 <p>另一个主要函数为判断匹配函数<code>int match(char *re, char *text)</code>，主要参考<code>user/grep.c</code>文件：</p>
 <pre><code class="c">int match(char *re, char *text)
-&amp;#123;
+{
   if(re[0] == '^')
     return matchhere(re+1, text);
-  do&amp;#123;  // must look at empty string
+  do{  // must look at empty string
     if(matchhere(re, text))
       return 1;
-  &amp;#125;while(*text++ != '\0');
+  }while(*text++ != '\0');
   return 0;
-&amp;#125;
+}
 
 // matchhere: search for re at beginning of text
 int matchhere(char *re, char *text)
-&amp;#123;
+{
   if(re[0] == '\0')
     return 1;
   if(re[1] == '*')
@@ -709,20 +709,20 @@ int matchhere(char *re, char *text)
   if(*text!='\0' &amp;&amp; (re[0]=='.' || re[0]==*text))
     return matchhere(re+1, text+1);
   return 0;
-&amp;#125;
+}
 
 // matchstar: search for c*re at beginning of text
 int matchstar(int c, char *re, char *text)
-&amp;#123;
-  do&amp;#123;  // a * matches zero or more instances
+{
+  do{  // a * matches zero or more instances
     if(matchhere(re, text))
       return 1;
-  &amp;#125;while(*text!='\0' &amp;&amp; (*text++==c || c=='.'));
+  }while(*text!='\0' &amp;&amp; (*text++==c || c=='.'));
   return 0;
-&amp;#125;</code></pre>
+}</code></pre>
 <h1 id="5-xargs函数"><a href="#5-xargs函数" class="headerlink" title="5. xargs函数"></a>5. xargs函数</h1><p>在xv6上实现UNIX函数xargs，即从标准输入中读取行并为每行运行一个命令，且将该行作为命令的参数。</p>
 <p>思路为依次处理每行，根据空格符和换行符分割参数，调用子进程执行指令，需要注意的是，父进程需要等待子进程执行结束后再继续处理。</p>
-<pre><code class="c">int main(int argc, char *argv[]) &amp;#123;
+<pre><code class="c">int main(int argc, char *argv[]) {
     char buf2[512];
     char buf[32][32];
     char *pass[32];
@@ -733,17 +733,17 @@ int matchstar(int c, char *re, char *text)
     for (int i = 1; i &lt; argc; i++) strcpy(buf[i - 1], argv[i]);
     // 依次处理
     int n;
-    while ((n = read(0, buf2, sizeof(buf2))) &gt; 0) &amp;#123;
+    while ((n = read(0, buf2, sizeof(buf2))) &gt; 0) {
         int pos = argc - 1; // 参数数量
         char *c = buf[pos];
         // 根据空行或者换行符分割参数和指令
-        for (char *p = buf2; *p; p++) &amp;#123;
-            if (*p == ' ' || *p == '\n') &amp;#123;
+        for (char *p = buf2; *p; p++) {
+            if (*p == ' ' || *p == '\n') {
                 *c = '\0';
                 pos++;
                 c = buf[pos];
-            &amp;#125; else *c++ = *p;
-        &amp;#125;
+            } else *c++ = *p;
+        }
 
         *c = '\0';
         pos++;
@@ -751,15 +751,15 @@ int matchstar(int c, char *re, char *text)
 
         if (fork()) wait(); // 父进程等待子进程执行结束
         else exec(pass[0], pass);   // 子进程执行命令
-    &amp;#125;
+    }
 
-    if (n &lt; 0) &amp;#123;
+    if (n &lt; 0) {
         printf("xargs: read error\n");
         exit();
-    &amp;#125;
+    }
 
     exit();
-&amp;#125;</code></pre>
+}</code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1392,7 +1392,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">51.7k</span>&nbsp;字
+                class="white-color">50.8k</span>&nbsp;字
             
             
             

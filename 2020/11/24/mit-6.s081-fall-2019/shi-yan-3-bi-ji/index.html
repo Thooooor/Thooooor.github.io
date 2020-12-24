@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
 </head>
 
 
@@ -417,14 +417,14 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    2.7k
+                    2.6k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    12 分
+                    11 分
                 </div>
                 
 
@@ -451,26 +451,26 @@
 <h2 id="1-3-Lock"><a href="#1-3-Lock" class="headerlink" title="1.3 Lock"></a>1.3 Lock</h2><p><code>kalloc.c</code>中调用<code>acquire()</code>和<code>release()</code>来获取锁和释放锁，kalloc只在<code>kalloc()</code>和<code>kfree()</code>中使用了锁，都是把对freelist的操作锁了起来。<code>kfree()</code>在向freelist里加节点前锁了一下，操作完之后解锁。<code>kalloc()</code>在移除freelist第一个元素时也加锁，操作完成再释放锁。所以对于内存分配器中需要锁保护的只有对freelist的操作。</p>
 <h2 id="1-4-具体步骤"><a href="#1-4-具体步骤" class="headerlink" title="1.4 具体步骤"></a>1.4 具体步骤</h2><ol>
 <li><p>将kalloc的共享freelist改为每个CPU独立的freelist；</p>
-<pre><code class="c">struct run &amp;#123;
+<pre><code class="c">struct run {
   struct run *next;
-&amp;#125;;
+};
 
-struct kmem&amp;#123;
+struct kmem{
   struct spinlock lock;
   struct run *freelist;
-&amp;#125;;
+};
 
 struct kmem kmems[NCPU];
 
 void kinit()
-&amp;#123;
+{
   char *lockname = "kmem 0";
-  for (int i = 0; i &lt; NCPU; i++) &amp;#123;
+  for (int i = 0; i &lt; NCPU; i++) {
     lockname[5] = '0' + i;
     initlock(&amp;kmems[i].lock, lockname);
-  &amp;#125;
+  }
   freerange(end, (void*)PHYSTOP);
-&amp;#125;</code></pre>
+}</code></pre>
 </li>
 <li><p>获取内存块时，优先分配当前CPU的freelist中的内存块；</p>
 </li>
@@ -478,38 +478,38 @@ void kinit()
 </li>
 <li><p>所有CPU都没有空闲块时，返回0；</p>
 <pre><code class="c">void *kalloc(void)
-&amp;#123;
+{
   struct run *r;
   push_off();
   int cpu_num = cpuid();
   acquire(&amp;kmems[cpu_num].lock);  // 加锁
   r = kmems[cpu_num].freelist;
-  if (r) &amp;#123;  // 优先分配freelist里面的内存块
+  if (r) {  // 优先分配freelist里面的内存块
     kmems[cpu_num].freelist = r-&gt;next;
     release(&amp;kmems[cpu_num].lock);
-  &amp;#125; else &amp;#123;  // 从其他CPU的freelist进行窃取
+  } else {  // 从其他CPU的freelist进行窃取
     release(&amp;kmems[cpu_num].lock);
-    for (int i = 0; i &lt; NCPU; i++) &amp;#123;
+    for (int i = 0; i &lt; NCPU; i++) {
       acquire(&amp;kmems[i].lock);
       r = kmems[i].freelist;
-      if (r) &amp;#123; 
+      if (r) { 
         kmems[i].freelist = r-&gt;next;
         release(&amp;kmems[i].lock);
         break;
-      &amp;#125;
+      }
       release(&amp;kmems[i].lock);  // 解锁
-    &amp;#125;
-  &amp;#125;
+    }
+  }
   pop_off();
 
   if(r) memset((char*)r, 5, PGSIZE); // fill with junk
 
   return (void*)r;
-&amp;#125;</code></pre>
+}</code></pre>
 </li>
 <li><p>释放内存块时，将内存块放入当前CPU的freelist中；</p>
 <pre><code class="c">void kfree(void *pa)
-&amp;#123;
+{
   struct run *r;
 
   if(((uint64)pa % PGSIZE) != 0 || (char*)pa &lt; end || (uint64)pa &gt;= PHYSTOP)
@@ -526,22 +526,22 @@ void kinit()
   kmems[cpu_num].freelist = r;
   release(&amp;kmems[cpu_num].lock);  // 解锁
   pop_off();
-&amp;#125;</code></pre>
+}</code></pre>
 </li>
 <li><p>为2-5步的过程合理加锁，保证每个freelist的一致性；</p>
 </li>
 </ol>
 <h1 id="2-磁盘缓存"><a href="#2-磁盘缓存" class="headerlink" title="2. 磁盘缓存"></a>2. 磁盘缓存</h1><h2 id="2-1-bcache"><a href="#2-1-bcache" class="headerlink" title="2.1 bcache"></a>2.1 bcache</h2><p>数据结构<code>bcache</code>（见<code>kernel/bio.c</code>）维护了一个由静态数组<code>struct buf buf[NBUF]</code>组成的双向链表，它以块为单位，每次读入或写出一个磁盘块，放到一个内存缓存块中（<code>bcache.buf</code>），同时自旋锁<code>bcache.lock</code>用于用户互斥访问。所有对缓存块的访问都是通过<code>bcache.head</code>引用链表来实现的，而不是<code>buf</code>数组。</p>
-<pre><code class="c">struct &amp;#123;
+<pre><code class="c">struct {
   struct spinlock lock;
   struct buf buf[NBUF];
 
   // Linked list of all buffers, through prev/next.
   // head.next is most recently used.
   struct buf head;
-&amp;#125; bcache;</code></pre>
+} bcache;</code></pre>
 <p>每个缓存块都由三个部分组成，其中data字段标示了它的内容，指针字段（<em>prev，</em>next）用于组成链表，数值字段用于标示它的属性，如，字段<code>valid</code>的意思是缓存区包含了一个块的复制（即该buffer包含对应磁盘块的数据），字段<code>disk</code>的意思是缓存区的内容已经被提交到了磁盘，字段<code>dev</code>是设备号，字段<code>blockno</code>是缓存数据块号，字段<code>refcnt</code>是被引用次数，<code>lock</code>是睡眠锁。</p>
-<pre><code class="c">struct buf &amp;#123;
+<pre><code class="c">struct buf {
   int valid;   // has data been read from disk?
   int disk;    // does disk "own" buf?
   uint dev;
@@ -551,7 +551,7 @@ void kinit()
   struct buf *prev; // LRU cache list
   struct buf *next;
   uchar data[BSIZE];
-&amp;#125;;</code></pre>
+};</code></pre>
 <p>对<code>bcache</code>的操作如下：</p>
 <ul>
 <li>在系统启动时，<code>main()</code>函数（见<code>kernel/main.c</code>）调用<code>binit()</code>来初始化缓存，随即调用<code>initlock()</code>初始化<code>bcache.lock</code>，然后循环遍历<code>buf</code>数组，采用头插法逐个链接到<code>bcache.head</code>后面。</li>
@@ -576,7 +576,7 @@ void kinit()
 <h2 id="2-3-具体步骤"><a href="#2-3-具体步骤" class="headerlink" title="2.3 具体步骤"></a>2.3 具体步骤</h2><ol>
 <li><p>构建<code>bcache</code>数据结构哈希表；</p>
 <pre><code class="c">#define HashSize 17
-struct &amp;#123;
+struct {
   struct spinlock lock[HashSize];
   struct buf buf[NBUF];
 
@@ -584,58 +584,58 @@ struct &amp;#123;
   // head.next is most recently used.
   // struct buf head;
   struct buf hashbucket[HashSize];
-&amp;#125; bcache;
+} bcache;
 
-int hashconflict(int number) &amp;#123;
+int hashconflict(int number) {
   return (number + 1) % HashSize;
-&amp;#125;
+}
 
-void binit(void) &amp;#123;
+void binit(void) {
   struct buf *b;
   // initial every lock
-  for (int i = 0; i &lt; HashSize; i++) &amp;#123;
+  for (int i = 0; i &lt; HashSize; i++) {
     char *lockname = "bcache 00";
     initlock(&amp;bcache.lock[i], lockname);
     // Create linked list of buffers
     bcache.hashbucket[i].prev = &amp;bcache.hashbucket[i];
     bcache.hashbucket[i].next = &amp;bcache.hashbucket[i];
-  &amp;#125;
+  }
   // use bcache.hashbucket[0] to store temporally， made a mistake there (put it in the loop above)
-  for (b = bcache.buf; b &lt; bcache.buf+NBUF; b++) &amp;#123;
+  for (b = bcache.buf; b &lt; bcache.buf+NBUF; b++) {
     b-&gt;next = bcache.hashbucket[0].next;
     b-&gt;prev = &amp;bcache.hashbucket[0];
     initsleeplock(&amp;b-&gt;lock, "buffer");
     bcache.hashbucket[0].next-&gt;prev = b;
     bcache.hashbucket[0].next = b;
-  &amp;#125;
-&amp;#125;</code></pre>
+  }
+}</code></pre>
 </li>
 <li><p>修改<code>bget()</code>和<code>brelse()</code>使得查找和释放缓存中的不同块时，锁之间的冲突更少；</p>
 <ul>
 <li>首先在硬件层面寻找空闲的缓存块，如果没有则分配一个新的缓存块；</li>
 </ul>
 <pre><code class="c">static struct buf* bget(uint dev, uint blockno)
-&amp;#123;
+{
   // get the hash index of blockno
   int locknumber = blockno % HashSize;
   struct buf *b;
   acquire(&amp;bcache.lock[locknumber]);
 
   // Is the block already cached?
-  for(b = bcache.hashbucket[locknumber].next; b != &amp;bcache.hashbucket[locknumber]; b = b-&gt;next)&amp;#123;
-    if(b-&gt;dev == dev &amp;&amp; b-&gt;blockno == blockno)&amp;#123;
+  for(b = bcache.hashbucket[locknumber].next; b != &amp;bcache.hashbucket[locknumber]; b = b-&gt;next){
+    if(b-&gt;dev == dev &amp;&amp; b-&gt;blockno == blockno){
       b-&gt;refcnt++;
       release(&amp;bcache.lock[locknumber]);
       acquiresleep(&amp;b-&gt;lock);
       return b;
-    &amp;#125;
-  &amp;#125;
+    }
+  }
   int hashnumber = hashconflict(locknumber);
   // Not cached; recycle an unused buffer.
-  while (hashnumber != locknumber) &amp;#123;
+  while (hashnumber != locknumber) {
     acquire(&amp;bcache.lock[hashnumber]);
-    for(b = bcache.hashbucket[hashnumber].prev; b != &amp;bcache.hashbucket[hashnumber]; b = b-&gt;prev)&amp;#123;
-      if(b-&gt;refcnt == 0) &amp;#123;
+    for(b = bcache.hashbucket[hashnumber].prev; b != &amp;bcache.hashbucket[hashnumber]; b = b-&gt;prev){
+      if(b-&gt;refcnt == 0) {
         b-&gt;dev = dev;
         b-&gt;blockno = blockno;
         b-&gt;valid = 0;
@@ -654,17 +654,17 @@ void binit(void) &amp;#123;
         release(&amp;bcache.lock[locknumber]);
         acquiresleep(&amp;b-&gt;lock);
         return b;
-      &amp;#125;
-    &amp;#125;
+      }
+    }
     release(&amp;bcache.lock[hashnumber]);
     hashnumber = hashconflict(hashnumber);
-  &amp;#125;
+  }
   panic("bget: no buffers");
-&amp;#125;</code></pre>
+}</code></pre>
 <ul>
 <li><p>释放一个已经锁住的缓存块，将其移到MRU list的头部</p>
 <pre><code class="c">void brelse(struct buf *b)
-&amp;#123;
+{
   uint blockno = b-&gt;blockno;
   int locknumber = blockno % HashSize;
   if(!holdingsleep(&amp;b-&gt;lock))
@@ -674,7 +674,7 @@ void binit(void) &amp;#123;
 
   acquire(&amp;bcache.lock[locknumber]);
   b-&gt;refcnt--;
-  if (b-&gt;refcnt == 0) &amp;#123;
+  if (b-&gt;refcnt == 0) {
     // no one is waiting for it.
     b-&gt;next-&gt;prev = b-&gt;prev;
     b-&gt;prev-&gt;next = b-&gt;next;
@@ -682,26 +682,26 @@ void binit(void) &amp;#123;
     b-&gt;prev = &amp;bcache.hashbucket[locknumber];
     bcache.hashbucket[locknumber].next-&gt;prev = b;
     bcache.hashbucket[locknumber].next = b;
-  &amp;#125;
+  }
   release(&amp;bcache.lock[locknumber]);
-&amp;#125;</code></pre>
+}</code></pre>
 </li>
 </ul>
 </li>
 <li><p>修改<code>bpin()</code>和<code>bunpin()</code>增加或减少<code>refcnt</code>之前获取对应数据缓存块的锁，操作完成之后再释放锁。</p>
-<pre><code class="c">void bpin(struct buf *b) &amp;#123;
+<pre><code class="c">void bpin(struct buf *b) {
   uint blockno = b-&gt;blockno % HashSize;
   acquire(&amp;bcache.lock[blockno]);
   b-&gt;refcnt++;
   release(&amp;bcache.lock[blockno]);
-&amp;#125;
+}
 
-void bunpin(struct buf *b) &amp;#123;
+void bunpin(struct buf *b) {
   uint blockno = b-&gt;blockno % HashSize;
   acquire(&amp;bcache.lock[blockno]);
   b-&gt;refcnt--;
   release(&amp;bcache.lock[blockno]);
-&amp;#125;</code></pre>
+}</code></pre>
 </li>
 </ol>
 <script>
@@ -1332,7 +1332,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">51.7k</span>&nbsp;字
+                class="white-color">50.8k</span>&nbsp;字
             
             
             

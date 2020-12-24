@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
 </head>
 
 
@@ -417,7 +417,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.6k
+                    1.5k
                 </div>
                 
 
@@ -474,7 +474,7 @@ for i&lt;-1 to m do
         if X[i]==Y[j] do
             c[i][j] &lt;- c[i-1][j-1] + 1
         else 
-            c[i][j] &lt;- max&amp;#123;c[i-1][j], c[i][j-1]&amp;#125;
+            c[i][j] &lt;- max{c[i-1][j], c[i][j-1]}
  return c</code></pre>
 <h2 id="4-构造LCS"><a href="#4-构造LCS" class="headerlink" title="4. 构造LCS"></a>4. 构造LCS</h2><p>这里没有使用多余的表来存储顺序，而是通过$c[i-1][j],c[i][j-1],c[i-1][j-1]$的大小关系来判断顺序</p>
 <ul>
@@ -501,59 +501,59 @@ else
 #include &lt;cstring&gt;
 using namespace std;
 
-int my_max(int a, int b) &amp;#123;
+int my_max(int a, int b) {
     return (a &gt;= b) ? a : b;
-&amp;#125;
+}
 
 vector&lt;vector&lt;int&gt;&gt; lcs_length(string X, string Y)
-&amp;#123;
+{
     int m = X.size();
     int n = Y.size();
     vector&lt;vector&lt;int&gt;&gt;c(m+1);
-    for (int i = 0; i &lt;= m; i++) &amp;#123;
+    for (int i = 0; i &lt;= m; i++) {
         c[i].resize(n+1);
-    &amp;#125;
-    for (int i = 1; i &lt;= m; i++) &amp;#123;
+    }
+    for (int i = 1; i &lt;= m; i++) {
         c[i][0] = 0;
-    &amp;#125;
-    for (int j = 1; j &lt;= n; j++) &amp;#123;
+    }
+    for (int j = 1; j &lt;= n; j++) {
         c[0][j] = 0;
-    &amp;#125;
-    for (int i = 1; i &lt;= m; i++) &amp;#123;
-        for (int j = 1; j &lt;= n; j++) &amp;#123;
+    }
+    for (int i = 1; i &lt;= m; i++) {
+        for (int j = 1; j &lt;= n; j++) {
             /* 注意对应X和Y的索引 */
-            if (X[i-1] == Y[j-1]) &amp;#123;
+            if (X[i-1] == Y[j-1]) {
                 c[i][j] = c[i - 1][j - 1] + 1;
-            &amp;#125;
-            else &amp;#123;
+            }
+            else {
                 c[i][j] = my_max(c[i][j - 1], c[i - 1][j]);
-            &amp;#125;
-        &amp;#125;
-    &amp;#125;
+            }
+        }
+    }
 
     return c;
-&amp;#125;
+}
 
 void print_lcs(string X, vector&lt;vector&lt;int&gt;&gt; c, int i, int j)
-&amp;#123;
-    if (c[i][j] == 0) &amp;#123;
+{
+    if (c[i][j] == 0) {
         return;
-    &amp;#125;
+    }
 
-    if (c[i-1][j] == c[i][j]) &amp;#123;
+    if (c[i-1][j] == c[i][j]) {
         print_lcs(X, c, i - 1, j);
-    &amp;#125;
-    else if (c[i][j - 1] == c[i][j]) &amp;#123;
+    }
+    else if (c[i][j - 1] == c[i][j]) {
         print_lcs(X, c, i, j - 1);
-    &amp;#125;
-    else &amp;#123;
+    }
+    else {
         print_lcs(X, c, i - 1, j - 1);
         cout &lt;&lt; X[i - 1];
-    &amp;#125;
-&amp;#125;
+    }
+}
 
 int main()
-&amp;#123;
+{
     string X;
     string Y;
     cin &gt;&gt; X;
@@ -564,7 +564,7 @@ int main()
 
     cout &lt;&lt; c[m][n] &lt;&lt; endl;
     print_lcs(X, c, m, n);
-&amp;#125;</code></pre>
+}</code></pre>
 <h1 id="算法改进"><a href="#算法改进" class="headerlink" title="算法改进"></a>算法改进</h1><h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><p>对于计算某个位置的$c[i][j]$只需要三个表项：$c[i-1][j-1],c[i-1][j],c[i][j-1]$，所以其实只需要当前一行和上一行的表项数值，故利用利用一个二维数组记录当前行和上一行的数值即可</p>
 <table>
 <thead>
@@ -588,29 +588,29 @@ for i&lt;-1 to n do
         if X[j] == Y[i] do
             c[(i+1)%2][j] &lt;- c[i%2][j-1]+1
         else
-            c[(i+1)%2][j] &lt;- max&amp;#123;c[(i+1)%2][j-1], c[i%2][j]&amp;#125;
+            c[(i+1)%2][j] &lt;- max{c[(i+1)%2][j-1], c[i%2][j]}
 
 return c[n%2][m]</code></pre>
 <h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code class="cpp">int lcs_pro(string X, string Y)
-&amp;#123;
+{
     int m = X.size();
     int n = Y.size();
     vector&lt;vector&lt;int&gt;&gt; c(2);
     c[1].resize(m + 1);
     c[0].resize(m + 1);
-    for (int i = 1; i &lt;= n; i++) &amp;#123;
-        for (int j = 1; j &lt;= m; j++) &amp;#123;
-            if (X[j - 1] == Y[i - 1]) &amp;#123;
+    for (int i = 1; i &lt;= n; i++) {
+        for (int j = 1; j &lt;= m; j++) {
+            if (X[j - 1] == Y[i - 1]) {
                 c[i%2][j] = c[(i-1)%2][j - 1] + 1;
-            &amp;#125;
-            else &amp;#123;
+            }
+            else {
                 c[i%2][j] = my_max(c[i%2][j - 1], c[(i-1)%2][j]);
-            &amp;#125;
-        &amp;#125;
-    &amp;#125;
+            }
+        }
+    }
 
     return c[(n-1)%2][m];
-&amp;#125;</code></pre>
+}</code></pre>
 <h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><p>对于计算某个位置的$c[i][j]$需要三个表项：<br>$$<br>c[i-1][j-1],c[i-1][j],c[i][j-1]<br>$$<br>如果在一行中表示，对于某个待计算的$c[j]$其中：<br>$$<br>c[i-1][j]=未覆盖前的c[j]<br>$$<br>$$<br>c[i][j-1]=c[j]<br>$$</p>
 <p>$$<br>c[i-1][j-1]=覆盖之前的c[j-1]<br>$$</p>
 <p>所以在一行中$c[i-1][j]和c[i]][j-1]$已经存在，只需要额外一个空间保存被覆盖的$c[i-1][j-1]$即可</p>
@@ -644,31 +644,31 @@ for i&lt;-1 to n do
         if X[j] == Y[i] do
             c[j] = pre+1
         else
-            c[j] = max&amp;#123;c[j], c[j-1]&amp;#125;
+            c[j] = max{c[j], c[j-1]}
         pre &lt;- tmp
 
 return c[m]</code></pre>
 <h3 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code class="c++">int lcs_plus(string X, string Y)
-&amp;#123;
+{
     int m = X.size();
     int n = Y.size();
     int pre = 0;
     vector&lt;int&gt; c(m + 1);
-    for (int i = 1; i &lt;= n; i++) &amp;#123;
-        for (int j = 1; j &lt;= m; j++) &amp;#123;
+    for (int i = 1; i &lt;= n; i++) {
+        for (int j = 1; j &lt;= m; j++) {
             int tmp = c[j];
-            if (X[j - 1] == Y[i - 1]) &amp;#123;
+            if (X[j - 1] == Y[i - 1]) {
                 c[j] = pre + 1;
-            &amp;#125;
-            else &amp;#123;
+            }
+            else {
                 c[j] = my_max(c[j - 1], c[j]);
-            &amp;#125;
+            }
             pre = tmp;
-        &amp;#125;
-    &amp;#125;
+        }
+    }
 
     return c[m];
-&amp;#125;</code></pre>
+}</code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1289,7 +1289,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">51.7k</span>&nbsp;字
+                class="white-color">50.8k</span>&nbsp;字
             
             
             
