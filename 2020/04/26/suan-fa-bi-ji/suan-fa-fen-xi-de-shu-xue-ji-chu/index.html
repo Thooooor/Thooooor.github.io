@@ -1,0 +1,1486 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="算法分析的数学基础, Thor&#39;s Blog">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>算法分析的数学基础 | Thor&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Thor&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Thor&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Thooooor" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">算法分析的数学基础</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
+                                <span class="chip bg-color">算法设计与分析</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                学习笔记
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2020-04-26
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2020-08-24
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    3.6k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    18 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h1 id="2-1-计算复杂性函数的阶"><a href="#2-1-计算复杂性函数的阶" class="headerlink" title="2.1 计算复杂性函数的阶"></a>2.1 计算复杂性函数的阶</h1><h2 id="增长的阶"><a href="#增长的阶" class="headerlink" title="增长的阶"></a>增长的阶</h2><p>算法的实际运行时间受除算法设计本身以外很多其他因素的影响，如：指令集、操作系统、编译器…… </p>
+<ul>
+<li>如何描述算法的效率$\to$只与<strong>输入问题的规模</strong>有关<ul>
+<li>增长率</li>
+<li>时间复杂度</li>
+</ul>
+</li>
+<li>忽略低阶项</li>
+<li>保留最高阶项</li>
+<li>忽略常系数</li>
+<li>常见增长阶：$\Theta(1)$, $\Theta(lg,n)$, $\Theta(\sqrt[]{n})$, $\Theta(n)$, $\Theta(nlg,n)$, $\Theta(n^2)$, $\Theta(n^3)$, $\Theta(2^n)$, $\Theta(n!)$<ul>
+<li>利用$\Theta(n^2)$表示插入排序的<strong>最坏</strong>运行时间</li>
+</ul>
+</li>
+<li>增长记号$O, \Theta, \Omega, o, \omega$<ul>
+<li>$O$表示<strong>渐进上界</strong></li>
+<li>$\Theta$表示<strong>渐进紧界</strong></li>
+<li>$\Omega$表示<strong>渐进下界</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="同阶函数集合-Theta"><a href="#同阶函数集合-Theta" class="headerlink" title="同阶函数集合 $\Theta$"></a>同阶函数集合 $\Theta$</h2><p>$$<br>\Theta(g(n))={,f(n)|\exists c_1,c_2 &gt;0,\forall n&gt;n_0,c_1g(n)\le f(n) \le c_2g(n) ,}<br>$$</p>
+<p>称为与g(n)<strong>同阶的函数集合</strong></p>
+<ul>
+<li>若$f(n)\in \Theta(g(n))$, $g(n)$与$f(n)$同阶, 记作$f(n) = \Theta(g(n))$</li>
+</ul>
+<p>$\Theta(g(n))$例子：</p>
+<ul>
+<li>通常$f(n)=an^2+bn+c=\Theta(n^2)$，其中a,b,c是常数且$a&gt;0$</li>
+<li>若$p(n)=\sum_{i=0}^{d}a_in^i$，其中$a_i$是常数且$a_d&gt;0$，则$p(n)=\Theta(n^d)$</li>
+<li>$\Theta(n^0)$或者$\Theta(1)$为<strong>常数时间复杂性</strong></li>
+</ul>
+<h2 id="低阶函数集合-O"><a href="#低阶函数集合-O" class="headerlink" title="低阶函数集合 $O$"></a>低阶函数集合 $O$</h2><p>对于给定函数$g(n)$:<br>$$<br>O(g(n))=f{(n) 存在正常数c和n_0 满足对于所有n\ge n_0, 0 \le f(n) \le cg(n),}<br>$$<br>记作$f(n)\in O(g(n))$, 或简记为$f(n)=O(g(n))$</p>
+<p>$\Theta(g(n))$与$O(g(n))$的关系：</p>
+<ul>
+<li>$f(n)=\Theta(g(n))\implies f(n)=O(g(n))$</li>
+<li>$\Theta$强于$O$</li>
+<li>$\Theta(g(n)) \subseteq O(g(n))$<ul>
+<li>$an^2+bn+c=\Theta(n^2)$并且$an^2+bn+c=O(n^2)$</li>
+<li>$an+b=O(n^2)$</li>
+<li>$n=O(n^2)$</li>
+</ul>
+</li>
+</ul>
+<p><strong>如果 $f(n)=O(n^k)$ ，则称$f(n)$是多项式界限的​</strong></p>
+<h2 id="严格低阶函数-o"><a href="#严格低阶函数-o" class="headerlink" title="严格低阶函数 $o$"></a>严格低阶函数 $o$</h2><p>对于给定函数$g(n)$:<br>$$<br>o(g(n))=f{(n) 存在任意正常数c,存在一个正数n_0 满足对于所有n\ge n_0, 0 \le f(n) &lt; cg(n),}<br>$$<br>记作$f(n)\in o(g(n))$, 或简记为$f(n)=o(g(n))$</p>
+<p>$o$<strong>与$O$的关系：</strong></p>
+<ul>
+<li>$O$<strong>可能</strong>是或不是紧的<pre><code>- $2n^2=O(n^2)$是紧的，但$2n=O(n^2)$不是紧的</code></pre>
+</li>
+<li>$o$标记上界且<strong>不紧</strong><pre><code>- $2n=o(n^2)$，但是$2n^2\ne o(n^2)$</code></pre>
+<ul>
+<li>区别：$\cases{O:\exist,c,某个正常数\o:\forall,c,任意正常数}$</li>
+</ul>
+</li>
+</ul>
+<h2 id="高阶函数集合-Omega"><a href="#高阶函数集合-Omega" class="headerlink" title="高阶函数集合 $\Omega$"></a>高阶函数集合 $\Omega$</h2><p>对于给定函数$g(n)$:<br>$$<br>\Omega(g(n))=f{(n) ,存在正常数c和n_0 满足对于所有n\ge n_0, 0 \le cg(n) \le f(n),}<br>$$<br>记作$f(n)\in \Omega(g(n))$, 或简记为$f(n)=\Omega(g(n))$</p>
+<p>$\Omega$用来描述运行时间的<strong>最好情况</strong>，对<strong>所有输入</strong>都正确</p>
+<p>例如，对于插入排序：</p>
+<ul>
+<li>最好运行情况为$\Omega(n)$</li>
+<li>运行时间为$\Omega(n)$ ($\Omega(n^2)$[<strong>x</strong>])</li>
+<li>最坏运行时间为$\Omega(n^2)$</li>
+</ul>
+<p>也可以用来<strong>描述问题</strong>：</p>
+<p>​    - 排序问题的时间复杂性为$\bold{\Omega(n)}$ $\to$ <strong>最好情况</strong></p>
+<p><strong>$\bold{O,\Theta,\Omega}$的关系：</strong><br>$$<br>对于f(n)和g(n),f(n)=\Theta(g(n))当且仅当<br>f(n)=O(g(n))且f(n)=\Omega(g(n))<br>$$</p>
+<h2 id="严格高阶函数集合-omega"><a href="#严格高阶函数集合-omega" class="headerlink" title="严格高阶函数集合 $\omega$"></a>严格高阶函数集合 $\omega$</h2><p>对于给定函数$g(n)$:<br>$$<br>\omega(g(n))=f{(n) \quad对于任意正常数c，存在正数n_0 满足对于所有n\ge n_0, 0 \le cg(n) \le f(n),}<br>$$<br>记作$f(n)\in \omega(g(n))$, 或简记为$f(n)=\omega(g(n))$</p>
+<p>$$<br>\lim_{n\to \infty}\frac{f(n)}{g(n)}=\infty<br>$$</p>
+<p>$\omega$表示<strong>不紧</strong>的下界</p>
+<p>$$<br>\frac{n^2}{2}=\omega(n)，但\frac{n^2}{2}\ne \omega(n^2)<br>$$</p>
+<p><strong>$\omega$与 $\Omega$ 的区别</strong>:$\cases{ \omega:,\exists,c存在正常数\ \Omega:,\forall,c,任意正常数 }$</p>
+<p><strong>$\omega$与$o$的关系：</strong><br>$$<br>f(n)=\omega(g(n)) \iff g(n)=o(f(n))<br>$$</p>
+<h2 id="渐进符号的性质"><a href="#渐进符号的性质" class="headerlink" title="渐进符号的性质"></a>渐进符号的性质</h2><ul>
+<li><p><strong>传递性</strong>：$O, \Theta, \Omega, o, \omega$<br>$$<br>f(n)=\Theta(g(n))\and g(n)=\Theta(h(n)) \implies f(n)=\Theta(h(n))<br>$$</p>
+</li>
+<li><p><strong>自反性</strong>：$O,\Theta,\Omega $<br>$$<br>f(n)=\Theta(f(n))<br>$$</p>
+</li>
+<li><p><strong>对称性</strong>：$\Theta$<br>$$<br>f(n)=\Theta(g(n)) \iff g(n)=\Theta(f(n))<br>$$</p>
+</li>
+<li><p><strong>反对称性</strong>：$O, \Omega, o, \omega$<br>$$<br>f(n)=O(g(n)) \iff g(n)=\Omega(f(n))<br>$$</p>
+</li>
+</ul>
+<p>$$<br>  f(n)=o(g(n)) \iff g(n)=\omega(f(n))<br>$$</p>
+<ul>
+<li><p><strong>等价性</strong>$\cases{\text{传递性}\自反性\对称性} $$\implies $ $\Theta$</p>
+</li>
+<li><p><strong>并非所有函数都可比</strong></p>
+</li>
+</ul>
+<h1 id="2-2-和式的估计与界限"><a href="#2-2-和式的估计与界限" class="headerlink" title="2.2 和式的估计与界限"></a>2.2 和式的估计与界限</h1><h2 id="求和公式"><a href="#求和公式" class="headerlink" title="求和公式"></a>求和公式</h2><ol>
+<li>线性和<br>$$<br>\sum_{k=1}^{n}(ca_k+b_k) = c\sum_{k=1}^{n}a_k+\sum_{k=1}^{n}b_k<br>$$</li>
+</ol>
+<p>   线性性质对于无限收敛级数同样适用。</p>
+<p>   线性性质可以用来对项中包含渐进符号的和式求和，例如：</p>
+<p>$$<br>\sum_{k=1}^{n}\Theta(f(k))=\Theta(\sum_{k=1}^{n}f(k))<br>$$</p>
+<pre><code>       等式中，左边的\Theta符号作用于变量k，而右边的\Theta则作用于n。这种处理方法同样适用于无限收敛级数。</code></pre>
+<ol start="2">
+<li>级数</li>
+</ol>
+<ul>
+<li>等差级数：$\sum_{i=1}^{n}i=\frac{n(n+1)}{2}=\Theta(n^2)$</li>
+<li>几何级数：$\sum_{k=0}^{n}x^k=1+x+x^2+…+x^n=\frac{x^{n+1}-1}{x-1}\quad(x\ne1)$</li>
+<li>无限递减几何级数：$\sum_{k=0}^{\infin}x^k=\frac{1}{1-x}\quad|x|&lt;1$</li>
+<li>裂项级数：$\sum_{k=1}^{n}(a_k-a_{k-1})=a_n-a_0$<ul>
+<li>$\sum_{k=0}^{n-1}(a_k-a_{k+1})=a_0-a_n$</li>
+<li> $\sum_{k=1}^{n-1}\frac{1}{k(k+1)}=\sum_{k=1}^{n-1}(\frac{1}{k}-\frac{1}{k+1})=1-\frac{1}{n}$</li>
+</ul>
+</li>
+<li>调和级数：$H_n=\sum_{k=1}^{n}\frac{1}{k}=\ln{n}+O(1)$</li>
+</ul>
+<ol start="3">
+<li><p>常用公式</p>
+<p>乘积：$lg(\prod_{k=1}^{n}a_k)=\sum_{k=1}^{n}\lg{a_k}$<br>平方和：$\sum_{k=0}^{n}k^2=\frac{n(n+1)(2n+1)}{6}$<br>立方和：$\sum_{k=0}^{n}=\frac{n^2(n+1)^2}{4}$</p>
+</li>
+</ol>
+<ol start="4">
+<li><p>和的界限</p>
+<p><strong>利用公式和定义</strong></p>
+<p>例1：证明$\sum_{k=0}^{n}3^k=O(3^n)$<br>证：证明对于$c\ge\frac{3}{2}$存在一个$n_0，当n\ge n_0时\sum_{k=0}^{n}3^k\le c3^n$<br>当n=0时，$\sum_{k=0}^{n}3^k=1\le c=c3^n$<br>设$n\le m$时成立,令n=m+1,则<br>$\sum_{k=0}^{m+1}3^k=\sum_{k=0}^{m}3^k+3^{m+1}\le c3^m+3^{m+1}=c3^{m+1}(\frac{1}{3}+\frac{1}{c})\le c3^{m+1}$</p>
+</li>
+</ol>
+<h2 id="求和的界限"><a href="#求和的界限" class="headerlink" title="求和的界限"></a>求和的界限</h2><ol>
+<li><h4 id="放大法"><a href="#放大法" class="headerlink" title="放大法"></a>放大法</h4><p>例1：$\sum_{k=1}^{n}k\le\sum_{k=1}^{n}n=n^2$ $\impliedby\bold{\sum_{k=1}^{n}a_i\le n\times \max{a_k}}$</p>
+</li>
+</ol>
+<ol start="2">
+<li><h4 id="前后项之比"><a href="#前后项之比" class="headerlink" title="前后项之比"></a>前后项之比</h4></li>
+</ol>
+<p>例2：设对于所有$k\ge0,\frac{a_{k+1}}{a_k}\le r\le1,求\sum_{k=0}^{n}a_k$的上界.<br>   解：$\frac{a_1}{a_0}\le r \implies a_1 \le a_0r,$<br>   $\frac{a_2}{a_1} \le r\implies a_2\le a_1r\le a_0r^2,$<br>   $\frac{a_3}{a_2}\le r\implies a_3\le a_2r \le a_0r^3,……$<br>   $\frac{a_k}{a_{k-1}}\le r\implies a_k\le a_{k-1}r \le a_0r^k$<br>   $\therefore \sum_{k=0}^{n}a_k\le \sum_{k=0}^{\infin}a_0r^k=a_0\sum_{k=0}^{\infin}r^k=\frac{a_0}{1-r}$</p>
+<ol start="3">
+<li><h4 id="分裂和"><a href="#分裂和" class="headerlink" title="分裂和"></a>分裂和</h4><p>例4：用分裂和的方法求$\sum_{k=1}^{n}k$的下界.<br>解：$\sum_{k=1}^{n}k=\sum_{k=1}^{\frac{n}{2}}k+\sum_{k=\frac{n}{2}+1}^{n}k\ge\sum_{k=1}^{\frac{n}{2}}0+\sum_{k=\frac{n}{2}+1}^{n}\frac{n}{2}\ge(\frac{n}{2})^2=\Omega(n^2)$</p>
+</li>
+</ol>
+<p>例5：求$\sum_{k=0}^{\infin}\frac{k^2}{2^k}$的上界.<br>   解：当$k\ge3$时，$\frac{\frac{(k+1)^2}{2^{k+1}}}{\frac{k^2}{2^k}}=\frac{(k+1)^2}{2k^2}\le\frac{8}{9}$<br>   于是$\quad \sum_{k=0}^{\infin}\frac{k^2}{2^k}=\sum_{k=0}^{2}\frac{k^2}{2^k}+\sum_{k=3}^{\infin}\frac{k^2}{2^k}\le\theta(1)+\sum_{k=3}^{\infin}\frac{9}{8}\cdot(\frac{8}{9})^k=O(1)$</p>
+<p> (调和级数上界)例6：求$H_n=\sum_{k=1}^{n}\frac{1}{k}$的上界.<br>   解：$\sum_{k=1}^{n}\frac{1}{k}=\frac{1}{1}+(\frac{1}{2}+\frac{1}{3})+(\frac{1}{4}+\frac{1}{5}+\frac{1}{6}+\frac{1}{7})+…$<br>                       $\le \sum_{i=1}^{\lceil\log{n}\rceil}\sum_{j=0}^{2^i-1}\frac{1}{2^i+j}\le\sum_{i=0}^{\lceil\log{n}\rceil}1\le\log{n}+1=O(\log{n})$</p>
+<ol start="4">
+<li><h4 id="单调函数"><a href="#单调函数" class="headerlink" title="单调函数"></a>单调函数</h4></li>
+</ol>
+<p>f(k)单调递增，则$\int_{m-1}^{n}f(x)dx\le\sum_{k=m}^{n}f(k)\le\int_{m}^{n+1}f(x)dx$<br>f(k)单调递减，则$\int_{m}^{n+1}f(x)dx\le\sum_{k=m}^{n}f(k)\le\int_{m-1}^{n}f(x)dx$</p>
+<p>例7：调和级数：<br>$\sum_{k=1}^{n}\frac{1}{k}\ge\int_{1}^{n+1}\frac{dx}{x}=\ln{(n+1)}$ </p>
+<p>$\quad\sum_{k=2}^{n}\cdot\frac{1}{k}\le\int_{1}^{n}\frac{dx}{x}=\ln{n}$</p>
+<ol start="5">
+<li><h4 id="分割求和"><a href="#分割求和" class="headerlink" title="分割求和"></a>分割求和</h4></li>
+</ol>
+<p>$$<br>\sum_{k=1}^{n}k=\sum_{k=0}^{k_0-1}a_k+\sum_{k=k_0}^{n}a_k=\Theta(1)+\sum_{k=k_0}^{n}a_k<br>$$</p>
+<p>对于算法分析中的和式，通常可以将和式分割。并忽略其常数个起始项。</p>
+<p>一般情况下，该技巧适用于和式$\sum_{k=0}^{n}a_k$中每一项$a_k$均独立于n的情况。之后，对于任意常数k_0&gt;0，有<br>$$<br>\sum_{k=k_0}^{n}a_k=\sum_{k=0}^{k_0-1}a_k+\sum_{k=k_0}^{n}a_k=\Theta(1)+\sum_{k=k_0}^{n}a_k<br>$$</p>
+<p>​    </p>
+<h1 id="2-3-递归方程"><a href="#2-3-递归方程" class="headerlink" title="2.3 递归方程"></a>2.3 递归方程</h1><p>递归方程是使用小的输入值来描述一个函数的方程或不等式</p>
+<h2 id="替换法"><a href="#替换法" class="headerlink" title="替换法"></a>替换法</h2><ol>
+<li><strong>首先猜想</strong></li>
+<li><strong>数学归纳法证明</strong></li>
+</ol>
+<h4 id="替换方法："><a href="#替换方法：" class="headerlink" title="替换方法："></a>替换方法：</h4><ul>
+<li><p><strong>联想已知的$T(n)$</strong></p>
+<p>例1：求解$2T(\frac{n}{2}+17)+n$</p>
+<p>解：猜测：$T(n)=2T(\frac{n}{2}+17)+n$与$T(n)=2T(\frac{n}{2})+n$只相差一个$17$</p>
+<p>​    当n充分大时$T(\frac{n}{2}+17)$与$T(\frac{n}{2})$的差别并不大，因为$\frac{n}{2}+17$与$\frac{n}{2}$相差小</p>
+<p>​    我们可以猜$T(n)=O(n\lg{n})$</p>
+<hr>
+</li>
+<li><p><strong>猜测上下界，减少不确定性范围</strong></p>
+<p>例2：求解$T(n)=2T(\frac{n}{2})+n$</p>
+<p>解：首先证明$T(n)=\Omega(n),T(n)=O(n^2)$</p>
+<p>​    然后逐阶降低上界，提高上界</p>
+<p>​    $\Omega(n)$的上一个阶是$\Omega(n\lg(n))$</p>
+<p>​    $O(n^2)$的下一个阶是$O(n\lg{n})$</p>
+<hr>
+<p><strong>细微差别的处理</strong></p>
+<ul>
+<li>问题：猜测正确，数学归纳法的归纳步骤似乎证不出来</li>
+<li>解决方法：从“猜想”中减去一个低阶项，可能会成功</li>
+</ul>
+<p>例3：求解$T(n)=T(\lfloor\frac{n}{2}\rfloor)+T(\lceil\frac{n}{2}\rceil)+1$</p>
+<p>解：（1）我们猜$T(n)=O(n)$</p>
+<p>​        证：$T(n)\le c\lfloor\frac{n}{2}\rfloor+c\lceil\frac{n}{2}\rceil+1=cn+1\ne cn$</p>
+<p>​        <strong>证不出</strong>$T(n)=O(cn)$</p>
+<p>​       （2）减去一个低阶项，猜$T(n)\le cn-b$，$b\ge0$是常数</p>
+<p>​        证：设当$\le n-1$时成立<br>$$<br>T(n)=T(\lfloor\frac{n}{2}\rfloor+T(\lceil\frac{n}{2}\rceil)+1\le c\lfloor\frac{n}{2}\rfloor-b+c\lfloor\frac{n}{2}\rfloor-b+1)<br>$$</p>
+<p>$$<br>=cn-2b+1=cn-b-b+1\le cn-b（只要b\ge1）<br>$$</p>
+</li>
+</ul>
+<hr>
+<p>  <strong>避免陷阱</strong></p>
+<p>  例4：求解$T(n)=2T(\lfloor\frac{n}{2}\rfloor)+n$</p>
+<p>  解：猜$T(n)=O(n)$</p>
+<p>  ​    证：用数学归纳法证明$T(n)\le cn$<br>  $$<br>  T(n)\le2(c\lfloor\frac{n}{2}\rfloor)+n\le cn+n=O(n)\quad\color{red}{错误}<br>  $$<br>  错误之处：过早地使用了$O(n)$而陷入了陷阱应该在证明了$T(n)\le cn$才可用。从$T(n)\le cn+n$不可能得到$T(n)\le cn$，因为对于任何$c&gt;0$，我们都得不到$cn+n\le cn$</p>
+<hr>
+<ul>
+<li><p>变量替换法：<strong>经变量替换把递归方程变换为熟悉的方程</strong></p>
+<p>例5：求解$T(n)=2T(\sqrt{n})+\lg{n}$</p>
+<p>解：令$m=\lg{n}$，则$n=2^m$，$T(2^m)=2T(2^{\frac{m}{2}})+m$</p>
+<p>​        令$S(m)=T(2^m)$，则$T(2^{\frac{m}{2}})=S(\frac{m}{2})$</p>
+<p>​        于是，$S(m)=2S(\frac{m}{2})+m$</p>
+<p>​        显然，$S(m)=O(m\lg{m})$，即$T(2^m)=\Theta(m\lg{m})$</p>
+<p>​        由于$2^m=n$，$m=\lg{n}$，$T(n)=\Theta(\lg{n}\times\lg(\lg{n}))$</p>
+</li>
+</ul>
+<h2 id="迭代方法"><a href="#迭代方法" class="headerlink" title="迭代方法"></a>迭代方法</h2><ol>
+<li>循环地展开递归方程（画出递归树）</li>
+<li>将递归方程转化为和式</li>
+<li>使用求和技术解之</li>
+</ol>
+<hr>
+<p><strong>递归树</strong></p>
+<ul>
+<li>根结点表示递归调用顶层的代价</li>
+<li>内部节点，表示合并其子问题的代价</li>
+<li>树的分支数量取决于子问题的数量</li>
+<li>叶节点表示边界条件值</li>
+</ul>
+<p>例：$T(n)=3T(\frac{n}{4})+cn^2$，用递归法确定一个渐近上界，画出递归树。</p>
+<p>解：</p>
+<p>$T(n)=3T(\frac{n}{4})+cn^2$</p>
+<p>$=cn^2+3[c\frac{n^2}{16}+3T(\frac{n}{16})]$</p>
+<p>$=cn^2+3[c\frac{n^2}{16}+3[c\frac{n^2}{256}+3T(\frac{n}{64})]]$</p>
+<p>……</p>
+<p>$=3^0cn^2+3^1(\frac{n}{4})^2+3^2c(\frac{n}{4^2})^2+…+3^iT(\frac{n}{4^i})$</p>
+<p>令$\frac{n}{4^i}=1\implies4^i=n\implies i=\log_4{n}$</p>
+<p>$=3^0cn^2+3^1(\frac{n}{4})^2+3^2c(\frac{n}{4^2})^2+…+3^iT(1)$</p>
+<p>$\le\sum_{i=0}^{\log_4{n}}{3^i(\frac{n}{4^i})^2+O(n)}\le n^2\sum_{i=0}^{\infin}{(\frac{3}{16})^i}$</p>
+<p>$=n^2\times\frac{1}{1-\frac{3}{16}}=\frac{16}{13}n^2=O(n^2)$</p>
+<p><img src="http://note.lizhihao999.cn/notes/20200818113634.png" alt="递归树"></p>
+<hr>
+<p>例6：$T(n)=n+3T(\lfloor\frac{n}{4}\rfloor)$</p>
+<p>解：</p>
+<img src="http://note.lizhihao999.cn/notes/20200819093653.png" style="zoom: 80%;">
+
+
+
+<h2 id="Master定理法"><a href="#Master定理法" class="headerlink" title="Master定理法"></a>Master定理法</h2><ul>
+<li><strong>目的</strong>：求解$T(n)=aT(\frac{n}{b})+f(n)$型方程，$a\ge1,b&gt;0$是常数，$f(n)$是正函数</li>
+<li><strong>方法</strong>：记住三种情况，不用纸笔直接求解</li>
+</ul>
+<hr>
+<p><strong>Master定理</strong></p>
+<p>设$a\ge1$和$b\ge1$是常数，$f(n)$是一个函数，$T(n)$是定义在非负整数集上的函数$T(n)=aT(\frac{n}{b})+f(n)$. $T(n)$可以如下求解：</p>
+<ol>
+<li>若$f(n)=O(n^{\log_b{a}-\epsilon}),\epsilon&gt;0$是常数，则$T(n)=\Theta(n^{\log_b{a}})$</li>
+<li>若$f(n)=\Theta(n^{\log_b{a}})$，则$T(n)=\Theta(n^{\log_b{a}}\lg{n})$</li>
+<li>若$f(n)=\Omega(n^{\log_b{a}+\epsilon}),\epsilon&gt;0$是常数，且对所有充分大的$n,af(\frac{n}{b})\le cf(n),c&gt;1$是常数，则$T(n)=\Theta(f(n))$</li>
+</ol>
+<p><strong>直观地：</strong>用$f(n)$与$n^{\log_b{a}}$比较</p>
+<ol>
+<li><p>若$n^{\log_b{a}}$大，则$T(n)=\Theta(n^{\log_b{a}})$</p>
+<ol start="2">
+<li>若$f(n)$大，则$T(n)=\Theta(f(n))$</li>
+<li>若$f(n)$与$n^{\log_b{a}}$同阶，则$T(n)=\Theta(n^{\log_b{a}}\lg{n})=\Theta(f(n)\lg{n})$</li>
+</ol>
+</li>
+</ol>
+<p><img src="http://note.lizhihao999.cn/notes/20200818115456.png"><br>$$<br>\color{red}{对于红色部分，Master定理无能为力}<br>$$<br><strong>更进一步</strong>：</p>
+<ol>
+<li><p>在第一种情况，$f(n)$不仅小于$n^{\log_b{a}}$，必须多项式地小于，即对于一个常数$\epsilon&gt;0,;f(n)=O(\frac{n^{\log_b{a}}}{n^\epsilon})$</p>
+</li>
+<li><p>在第三种情况，$f(n)$不仅大于$n^{\log_b{a}}$，必须多项式地大于，即对于一个常数$\epsilon&gt;0,;f(n)=\Omega(n^{\log_b{a}}\cdot n^\epsilon)$</p>
+</li>
+</ol>
+<hr>
+<p>例7：求解$T(n)=9T(\frac{n}{3})+n$</p>
+<p>解：$a=9,;b=3,;f(n)=n,;n^{\log_b{a}}=\Theta(n^2)$</p>
+<p>​        $\because f(n)=n=O(n^{\log_b{a}-\epsilon}),;\epsilon=1$</p>
+<p>​        $\therefore T(n)=\Theta(n^{\log_b{a}})=\Theta(n^2)$</p>
+<p>例8：求解$T(n)=T(\frac{2n}{3})+1$</p>
+<p>解：$a=1,;b=\frac{3}{2},;f(n)=1,;n^{log_{\frac{3}{2}}1}=n^0=1$</p>
+<p>​        $f(n)=1=\Theta(1)=\Theta(n^{\log_b{a}}),;T(n)=\Theta(n^{\log_b{a}}\cdot\lg{n})=\Theta(\lg{n})$</p>
+<p>例9：求解$T(n)=3T(\frac{n}{4})+n\lg{n}$</p>
+<p>解：$a=3,;b=4,;f(n)=n\lg{n},;n^{\log_b{a}}=n^{\log_4{3}}=O(n^{0.793})$</p>
+<p>​        （1）$f(n)=n\lg{n}\ge n=n^{\log_b{a}+\epsilon},;\epsilon\approx0.2$</p>
+<p>​        （2）对所有$n,;af(\frac{n}{b})=3\times\frac{n}{4}\lg{\frac{n}{4}}=\frac{3}{4}n\lg{\frac{n}{4}}\le\frac{3}{4}n\lg{n}=cf(n),;c=\frac{3}{4}$</p>
+<p>​        于是，$T(n)=\Theta(f(n))=\Theta(n\lg{n})$</p>
+<p>例10：求解$T(n)=2T(\frac{n}{2})+n\lg{n}$</p>
+<p>解：$a=2,;b=2,;f(n)=n\lg{n},;n^{log_b{a}}=n$</p>
+<p>​        $f(n)=n\lg{n}$大于$n^{\log_b{a}}=n$</p>
+<p>​        但<strong>不是多项式地大于</strong>，Master定理<strong>不适用</strong>于该$T(n)$</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://thooooor.github.io" rel="external nofollow noreferrer">Thor</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://thooooor.github.io/2020/04/26/suan-fa-bi-ji/suan-fa-fen-xi-de-shu-xue-ji-chu/">https://thooooor.github.io/2020/04/26/suan-fa-bi-ji/suan-fa-fen-xi-de-shu-xue-ji-chu/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://thooooor.github.io" target="_blank">Thor</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
+                                    <span class="chip bg-color">算法设计与分析</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '1a30df6a52a387695989',
+        clientSecret: '2459b6662ab3f7094c591e42b4babded0135c466',
+        repo: 'blogcomment',
+        owner: 'Thooooor',
+        admin: "Thooooor",
+        id: '2020-04-26T22-25-00',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2020/04/27/suan-fa-bi-ji/fen-zhi-suan-fa/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="分治算法">
+                        
+                        <span class="card-title">分治算法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            分治算法的设计与分析、大数乘法和棋盘覆盖问题
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-27
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    学习笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
+                        <span class="chip bg-color">算法设计与分析</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/04/25/suan-fa-bi-ji/suan-fa-gai-lun/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.png" class="responsive-img" alt="算法概论">
+                        
+                        <span class="card-title">算法概论</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            算法设计与分析概论
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-25
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    学习笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
+                        <span class="chip bg-color">算法设计与分析</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Thor&#39;s Blog<br />'
+            + '文章作者: Thor<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="4932737014"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="/about" target="_blank">Thor</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">49.1k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备19090631号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Thooooor" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:554475362@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=554475362" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 554475362" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?9e1951c963cab63ff40f6c2658b6d6d8";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>

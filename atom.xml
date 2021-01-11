@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2020-12-18T03:24:55.907Z</updated>
+  <updated>2021-01-11T11:25:25.247Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Matplotlib中文显示</title>
+    <link href="https://thooooor.github.io/2021/01/11/tuo-keng-ji-lu/matplotlib-zhong-wen-xian-shi/"/>
+    <id>https://thooooor.github.io/2021/01/11/tuo-keng-ji-lu/matplotlib-zhong-wen-xian-shi/</id>
+    <published>2021-01-11T11:23:00.000Z</published>
+    <updated>2021-01-11T11:25:25.247Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在脚本开始处进行如下设置：&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;plt.rcParams[&#39;font.family&#39;] = [&#39;sans-serif&#39;]
+plt.rcParams[&#39;font.sans-serif&#39;] =
+        
+      
+    
+    </summary>
+    
+    
+      <category term="数学建模" scheme="https://thooooor.github.io/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/"/>
+    
+    
+      <category term="Python" scheme="https://thooooor.github.io/tags/Python/"/>
+    
+  </entry>
   
   <entry>
     <title>卷积神经网络CNN</title>
@@ -190,8 +219,8 @@
   
   <entry>
     <title>A Joint Neural Model for Information Extraction with Global Features</title>
-    <link href="https://thooooor.github.io/2020/10/18/a-joint-neural-model-for-information-extraction-with-global-features/"/>
-    <id>https://thooooor.github.io/2020/10/18/a-joint-neural-model-for-information-extraction-with-global-features/</id>
+    <link href="https://thooooor.github.io/2020/10/18/lun-wen-bi-ji/a-joint-neural-model-for-information-extraction-with-global-features/"/>
+    <id>https://thooooor.github.io/2020/10/18/lun-wen-bi-ji/a-joint-neural-model-for-information-extraction-with-global-features/</id>
     <published>2020-10-18T14:58:00.000Z</published>
     <updated>2020-11-30T08:15:47.103Z</updated>
     
@@ -223,8 +252,8 @@
   
   <entry>
     <title>优化（规划）问题</title>
-    <link href="https://thooooor.github.io/2020/08/08/shu-xue-gui-hua/"/>
-    <id>https://thooooor.github.io/2020/08/08/shu-xue-gui-hua/</id>
+    <link href="https://thooooor.github.io/2020/08/08/suan-fa-bi-ji/shu-xue-gui-hua/"/>
+    <id>https://thooooor.github.io/2020/08/08/suan-fa-bi-ji/shu-xue-gui-hua/</id>
     <published>2020-08-08T02:25:00.000Z</published>
     <updated>2020-08-15T14:28:13.969Z</updated>
     
@@ -251,8 +280,8 @@
   
   <entry>
     <title>Sympy的基本使用</title>
-    <link href="https://thooooor.github.io/2020/08/08/sympy/"/>
-    <id>https://thooooor.github.io/2020/08/08/sympy/</id>
+    <link href="https://thooooor.github.io/2020/08/08/suan-fa-bi-ji/sympy/"/>
+    <id>https://thooooor.github.io/2020/08/08/suan-fa-bi-ji/sympy/</id>
     <published>2020-08-08T02:02:00.000Z</published>
     <updated>2020-08-08T02:03:33.782Z</updated>
     
@@ -279,36 +308,9 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
   </entry>
   
   <entry>
-    <title>计算机系统概论</title>
-    <link href="https://thooooor.github.io/2020/06/01/ji-suan-ji-xi-tong-gai-lun/"/>
-    <id>https://thooooor.github.io/2020/06/01/ji-suan-ji-xi-tong-gai-lun/</id>
-    <published>2020-06-01T07:20:00.000Z</published>
-    <updated>2020-08-30T02:06:29.167Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;1-1-计算机系统简介&quot;&gt;&lt;a href=&quot;#1-1-计算机系统简介&quot; class=&quot;headerlink&quot; title=&quot;1.1 计算机系统简介&quot;&gt;&lt;/a&gt;1.1 计算机系统简介&lt;/h1&gt;&lt;h2 id=&quot;一、计算机软硬件概念&quot;&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="学习笔记" scheme="https://thooooor.github.io/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="计算机组成原理" scheme="https://thooooor.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
     <title>摊还分析</title>
-    <link href="https://thooooor.github.io/2020/05/10/tan-huan-fen-xi/"/>
-    <id>https://thooooor.github.io/2020/05/10/tan-huan-fen-xi/</id>
+    <link href="https://thooooor.github.io/2020/05/10/suan-fa-bi-ji/tan-huan-fen-xi/"/>
+    <id>https://thooooor.github.io/2020/05/10/suan-fa-bi-ji/tan-huan-fen-xi/</id>
     <published>2020-05-10T07:20:00.000Z</published>
     <updated>2020-09-08T08:22:25.099Z</updated>
     
@@ -334,8 +336,8 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>网络最大流</title>
-    <link href="https://thooooor.github.io/2020/05/09/wang-luo-zui-da-liu/"/>
-    <id>https://thooooor.github.io/2020/05/09/wang-luo-zui-da-liu/</id>
+    <link href="https://thooooor.github.io/2020/05/09/suan-fa-bi-ji/wang-luo-zui-da-liu/"/>
+    <id>https://thooooor.github.io/2020/05/09/suan-fa-bi-ji/wang-luo-zui-da-liu/</id>
     <published>2020-05-09T07:20:00.000Z</published>
     <updated>2020-08-24T09:27:14.672Z</updated>
     
@@ -361,8 +363,8 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>所有结点对最短路径</title>
-    <link href="https://thooooor.github.io/2020/05/08/suo-you-jie-dian-dui-de-zui-duan-lu-jing/"/>
-    <id>https://thooooor.github.io/2020/05/08/suo-you-jie-dian-dui-de-zui-duan-lu-jing/</id>
+    <link href="https://thooooor.github.io/2020/05/08/suan-fa-bi-ji/suo-you-jie-dian-dui-de-zui-duan-lu-jing/"/>
+    <id>https://thooooor.github.io/2020/05/08/suan-fa-bi-ji/suo-you-jie-dian-dui-de-zui-duan-lu-jing/</id>
     <published>2020-05-08T07:20:00.000Z</published>
     <updated>2020-08-24T08:08:09.219Z</updated>
     
@@ -390,8 +392,8 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>单源最短路径</title>
-    <link href="https://thooooor.github.io/2020/05/07/dan-yuan-zui-duan-lu-jing/"/>
-    <id>https://thooooor.github.io/2020/05/07/dan-yuan-zui-duan-lu-jing/</id>
+    <link href="https://thooooor.github.io/2020/05/07/suan-fa-bi-ji/dan-yuan-zui-duan-lu-jing/"/>
+    <id>https://thooooor.github.io/2020/05/07/suan-fa-bi-ji/dan-yuan-zui-duan-lu-jing/</id>
     <published>2020-05-07T07:20:00.000Z</published>
     <updated>2020-08-24T06:35:58.598Z</updated>
     
@@ -417,8 +419,8 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>最小生成树</title>
-    <link href="https://thooooor.github.io/2020/05/06/zui-xiao-sheng-cheng-shu/"/>
-    <id>https://thooooor.github.io/2020/05/06/zui-xiao-sheng-cheng-shu/</id>
+    <link href="https://thooooor.github.io/2020/05/06/suan-fa-bi-ji/zui-xiao-sheng-cheng-shu/"/>
+    <id>https://thooooor.github.io/2020/05/06/suan-fa-bi-ji/zui-xiao-sheng-cheng-shu/</id>
     <published>2020-05-06T07:20:00.000Z</published>
     <updated>2020-08-24T06:32:49.977Z</updated>
     
@@ -444,8 +446,8 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>哈夫曼编码</title>
-    <link href="https://thooooor.github.io/2020/05/05/ha-fu-man-bian-ma/"/>
-    <id>https://thooooor.github.io/2020/05/05/ha-fu-man-bian-ma/</id>
+    <link href="https://thooooor.github.io/2020/05/05/suan-fa-bi-ji/ha-fu-man-bian-ma/"/>
+    <id>https://thooooor.github.io/2020/05/05/suan-fa-bi-ji/ha-fu-man-bian-ma/</id>
     <published>2020-05-05T14:52:00.000Z</published>
     <updated>2020-08-24T06:30:54.378Z</updated>
     
@@ -473,8 +475,8 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>活动选择问题</title>
-    <link href="https://thooooor.github.io/2020/05/04/huo-dong-xuan-ze-wen-ti/"/>
-    <id>https://thooooor.github.io/2020/05/04/huo-dong-xuan-ze-wen-ti/</id>
+    <link href="https://thooooor.github.io/2020/05/04/suan-fa-bi-ji/huo-dong-xuan-ze-wen-ti/"/>
+    <id>https://thooooor.github.io/2020/05/04/suan-fa-bi-ji/huo-dong-xuan-ze-wen-ti/</id>
     <published>2020-05-04T14:31:00.000Z</published>
     <updated>2020-08-24T06:30:35.154Z</updated>
     
@@ -500,8 +502,8 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>贪心算法</title>
-    <link href="https://thooooor.github.io/2020/05/03/tan-xin-suan-fa/"/>
-    <id>https://thooooor.github.io/2020/05/03/tan-xin-suan-fa/</id>
+    <link href="https://thooooor.github.io/2020/05/03/suan-fa-bi-ji/tan-xin-suan-fa/"/>
+    <id>https://thooooor.github.io/2020/05/03/suan-fa-bi-ji/tan-xin-suan-fa/</id>
     <published>2020-05-03T07:20:00.000Z</published>
     <updated>2020-08-24T06:30:21.418Z</updated>
     
@@ -528,8 +530,8 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>最长公共子序列</title>
-    <link href="https://thooooor.github.io/2020/05/02/zui-chang-gong-gong-zi-xu-lie/"/>
-    <id>https://thooooor.github.io/2020/05/02/zui-chang-gong-gong-zi-xu-lie/</id>
+    <link href="https://thooooor.github.io/2020/05/02/suan-fa-bi-ji/zui-chang-gong-gong-zi-xu-lie/"/>
+    <id>https://thooooor.github.io/2020/05/02/suan-fa-bi-ji/zui-chang-gong-gong-zi-xu-lie/</id>
     <published>2020-05-02T07:20:00.000Z</published>
     <updated>2020-08-24T06:25:34.010Z</updated>
     
@@ -557,8 +559,8 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
   
   <entry>
     <title>矩阵链乘法</title>
-    <link href="https://thooooor.github.io/2020/05/01/ju-zhen-lian-cheng-fa/"/>
-    <id>https://thooooor.github.io/2020/05/01/ju-zhen-lian-cheng-fa/</id>
+    <link href="https://thooooor.github.io/2020/05/01/suan-fa-bi-ji/ju-zhen-lian-cheng-fa/"/>
+    <id>https://thooooor.github.io/2020/05/01/suan-fa-bi-ji/ju-zhen-lian-cheng-fa/</id>
     <published>2020-05-01T10:20:00.000Z</published>
     <updated>2020-08-24T06:24:54.242Z</updated>
     
