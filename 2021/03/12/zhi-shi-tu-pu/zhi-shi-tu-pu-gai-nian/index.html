@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Sympy的基本使用, Thor&#39;s Blog">
+    <meta name="keywords" content="知识图谱概念被, Thor&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Sympy的基本使用 | Thor&#39;s Blog</title>
+    <title>知识图谱概念被 | Thor&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -252,12 +252,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Sympy的基本使用</h1>
+                    <h1 class="description center-align post-title">知识图谱概念被</h1>
                 </div>
             </div>
         </div>
@@ -374,8 +374,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Python/">
-                                <span class="chip bg-color">Python</span>
+                            <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
+                                <span class="chip bg-color">知识图谱</span>
                             </a>
                         
                     </div>
@@ -386,8 +386,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="post-category">
-                                数学建模
+                            <a href="/categories/Knowledge-Graph/" class="post-category">
+                                Knowledge Graph
                             </a>
                         
                     </div>
@@ -399,21 +399,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-08-08
+                    2021-03-12
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-08-08
+                    2021-03-12
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    650
+                    934
                 </div>
                 
 
@@ -435,94 +435,16 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <pre><code class="python">from sympy import *
-init_printing(use_unicode=True)</code></pre>
-<p><a target="_blank" rel="noopener" href="https://docs.sympy.org/latest/tutorial/index.html"><code>Sympy</code></a>是一个用于符号计算的python库，可以完成多项式求值、求极限、解方程、求积分、微分方程等符号计算问题，介绍一些常用功能。</p>
-<h1 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h1><h2 id="1-定义变量"><a href="#1-定义变量" class="headerlink" title="1. 定义变量"></a>1. 定义变量</h2><pre><code class="python">x, y, z = symbols("x y z")    # 多个变量
-t = Symbol('t')    # 单个变量</code></pre>
-<h2 id="2-运算符"><a href="#2-运算符" class="headerlink" title="2. 运算符"></a>2. 运算符</h2><h3 id="导数diff"><a href="#导数diff" class="headerlink" title="导数diff"></a>导数<code>diff</code></h3><pre><code class="python">In[1]: diff(cos(x), x)
-Out[1]: -sin(x)
-# 高阶导数两种写法
-In[2]: diff(x**4, x, 3)
-Out[2]: 24⋅x
-
-In[3]: diff(x**4, x, x, x)
-Out[3]: 24⋅x
-
-# 偏导数
-In[4]:     expr = exp(x*y*z) 
-        diff(expr, x, y, 2, z, 4)
-Out[4]: 
- 3  2 ⎛ 3  3  3       2  2  2                ⎞  x⋅y⋅z
-x ⋅y ⋅⎝x ⋅y ⋅z  + 14⋅x ⋅y ⋅z  + 52⋅x⋅y⋅z + 48⎠⋅ℯ
-</code></pre>
-<h3 id="积分intergrate"><a href="#积分intergrate" class="headerlink" title="积分intergrate"></a>积分<code>intergrate</code></h3><p><code>intergrate(integration_variable, lower_limit, upper_limit)</code></p>
-<pre><code class="python">In[5]: integrate(sin(x), x)
-Out[5]: -cos(x)
-
-In[6]: integrate(exp(-x), (x, 0, oo))
-Out[6]: 1
-# 多重积分
-In[7]: integrate(exp(-x**2-y**2), (x,-oo,oo), (y, -oo, oo))
-Out[7]: π</code></pre>
-<h3 id="极限limit"><a href="#极限limit" class="headerlink" title="极限limit"></a>极限<code>limit</code></h3><p><code>limit(f(x), x, x0)</code></p>
-<pre><code class="python">In[8]: limit(sin(x)/x, x, 0)
-Out[8]: 1
-# 单侧极限
-In[9]: limit(1/x, x, 0, '+')
-Out[9]: ∞</code></pre>
-<h3 id="等式Eq"><a href="#等式Eq" class="headerlink" title="等式Eq"></a>等式<code>Eq</code></h3><pre><code class="python">In[10]: Eq(x, y)
-Out[10]: x = y</code></pre>
-<h2 id="3-方程"><a href="#3-方程" class="headerlink" title="3. 方程"></a>3. 方程</h2><h3 id="代数方程solveset"><a href="#代数方程solveset" class="headerlink" title="代数方程solveset"></a>代数方程<code>solveset</code></h3><p><code>solveset(f, symbol=None, domain=S.Complexes)</code></p>
-<pre><code class="python">In[11]: solveset(x**2-x, x)
-Out[11]: {0, 1}
-
-In[12]: solveset(exp(x), x)
-Out[12]: ∅</code></pre>
-<h3 id="线性方程组linsolve"><a href="#线性方程组linsolve" class="headerlink" title="线性方程组linsolve"></a>线性方程组<code>linsolve</code></h3><p><code>linsolve(system, *symbols)</code></p>
-<pre><code class="python">In[13]: linsolve([x+y+z-1,x+y+2*z-3], (x,y,z))
-Out[13]: {(-y - 1, y, 2)}
-
-In[14]:linsolve(Matrix(([1, 1, 1, 1], [1, 1, 2, 3])), (x, y, z))
-Out[14]: {(-y - 1, y, 2)}
-
-In[15]: M = Matrix(((1, 1, 1, 1), (1, 1, 2, 3)))
-        system = A, b = M[:, :-1], M[:, -1]
-        linsolve(system, x, y, z)
-Out[15]: {(-y - 1, y, 2)}</code></pre>
-<h3 id="非线性方程组nonlinsolve"><a href="#非线性方程组nonlinsolve" class="headerlink" title="非线性方程组nonlinsolve"></a>非线性方程组<code>nonlinsolve</code></h3><p><code>nonlinsolve(system, *symbols)</code></p>
-<pre><code class="python"># 仅有实数解
-In[16]: nonlinsolve([x*y - 1, x - 2], x, y)
-Out[16]: {(2, 1/2)}
-# 仅有复数解
-In[17]: nonlinsolve([x**2+1, y**2+1], [x,y])
-Out[17]: {(-ⅈ, -ⅈ), (-ⅈ, ⅈ), (ⅈ, -ⅈ), (ⅈ, ⅈ)}
-# 同时存在实数解和复数解
-In[18]: nonlinsolve([x**2-2*y**2-2, x*y-2], [x, y])
-Out[18]: {(-2, -1), (2, 1), (-√2⋅ⅈ, √2⋅ⅈ), (√2⋅ⅈ, -√2⋅ⅈ)}
-# 无数值解
-In[19]: nonlinsolve([x*y, x*y-x], [x, y])
-Out[19]: {(0, y)}</code></pre>
-<p>解的顺序与给定符号的顺序相对应.</p>
-<h3 id="微分方程dsolve"><a href="#微分方程dsolve" class="headerlink" title="微分方程dsolve"></a>微分方程<code>dsolve</code></h3><p><code>dsolve(eq, func=None, hint="default", simplify=True, ics= None, xi=None, eta=None, x0=0, n=6, **kwargs)</code></p>
-<pre><code class="python"># 首先需要创建新的未定义函数
-In[20]: f, g = symbols('f g', cls=Function)
-        f(x)
-Out[20]: f(x)
-# 定义方程
-In[21]::diffeq = Eq(x.diff(x, x) - 2*f(x).diff(x) + f(x), sin(x))
-Out[21]: 
-         d                
-f(x) - 2⋅──(f(x)) = sin(x)
-         dx               
-In[22]: dsolve(diffeq, f(x))
-Out[22]: 
-       ⎛      -x              -x        ⎞   
-       ⎜      ───             ───       ⎟  x
-       ⎜       2               2        ⎟  ─
-       ⎜     ℯ   ⋅sin(x)   2⋅ℯ   ⋅cos(x)⎟  2
-f(x) = ⎜C₁ + ─────────── + ─────────────⎟⋅ℯ 
-       ⎝          5              5      ⎠ </code></pre>
+                <p>逐步总结知识图谱相关知识，包括知识图谱概念、知识图谱构建、知识图谱嵌入和知识图谱应用。</p>
+<h1 id="1-知识"><a href="#1-知识" class="headerlink" title="1. 知识"></a>1. 知识</h1><p>知识是人们在改造客观世界的过程中所积累的经验和总结升华的产物。知识作为人类对客观世界认识的表达，具有相对的正确性、局限性和抽象性。相比人类的知识，我们这里的知识特指用计算机可以表示、存储和计算的一种特殊信息。具体来说，人类社会生活产生了海量的数据，这些数据可以作为人工智能模型最原始和最基础的输入。其中存在大量无用的内容和噪声，在此之上经过处理提取出的有用的、相关的数据，称为<strong>信息</strong>。这些信息可以是<strong>结构化</strong>的、<strong>半结构化</strong>的或<strong>标签化</strong>的。</p>
+<p>在此之上，对信息进一步的加工和处理所得到的普适、抽象和正确的信息，被称为<strong>知识</strong>，如某个领域的概念、概念之间的关系、概念的属性、实体的描述及规则等。因此，知识是蕴含在数据中的经过凝练的数据和信息，通过知识，可以更好地理解信息，可以推理更多的知识，并对未知的信息做出预测，从而体现出系统的智能性。</p>
+<h1 id="2-知识图谱"><a href="#2-知识图谱" class="headerlink" title="2. 知识图谱"></a>2. 知识图谱</h1><p>知识图谱在学术界没有一致的定义，目前知识图谱泛指当前基于通用语义知识的形式化描述而组织的人类知识系统。这个系统本质上是一个有向、有环的复杂的图结构。其中，图的节点表示语义符号，节点之间的边表示符号之间的关系。总的来说，一个知识图谱（KG， Knowledge Graph）存储大量三元组形式的实体以及实体关系信息。在知识图谱系统中，不论是知识框架还是实体数据的描述都统一采用三元组的形式。知识图谱$G=(E,R,S)$，其中$E=\lbrace e_{1},e_{2},…,e_{|E|}\rbrace$表示知识库中的实体集合，共包含$|E|$种不同的实体；$R=\lbrace r_{1},r_{2},…,r_{|R|} \rbrace$是知识库中的关系集合，共包含$|R|$种不同的关系；$S\subseteq E\times R\times E$代表知识库中实体和关系的三元组集合。</p>
+<p>知识图谱中的三元组使用RDF（Resource Description Framework），即资源描述框架来表示的。RDF本质上是一个数据模型，提供了一个统一的标准来描述web上的资源，也可以用来描述知识图谱。RDF在形式上表示为SPO三元组，即Subject，Predicate，Object三元组或借助图结构表示为$(h,r,t)$，即头实体（Head Entity）、关系（Relation）和尾实体（Tail Entity）的三元组。三元组也称为一条语句，在知识图谱中记为一条知识。</p>
+<p>当前，公开的大规模知识图谱主要有：Freebase、DBpedia、YAGO、NELL、Wikidata等。中文的知识图谱有openKG、cnSchema、cnDBpedia及zhishi.me等。这些知识图谱都是按照三元组的二元关系进行描述，有比较严格和完整的Schema定义结构。</p>
+<p><strong>参考资料：</strong></p>
+<ol>
+<li>人工智能知识图谱前沿技术. 朱小燕，李晶，肖寒，黄民烈. 中国工信出版集团，电子工业出版社.</li>
+</ol>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -566,7 +488,7 @@ f(x) = ⎜C₁ + ─────────── + ─────────
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://thooooor.github.io/2020/08/08/suan-fa-bi-ji/sympy/">https://thooooor.github.io/2020/08/08/suan-fa-bi-ji/sympy/</a>
+                    <a href="https://thooooor.github.io/2021/03/12/zhi-shi-tu-pu/zhi-shi-tu-pu-gai-nian/">https://thooooor.github.io/2021/03/12/zhi-shi-tu-pu/zhi-shi-tu-pu-gai-nian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -604,8 +526,8 @@ f(x) = ⎜C₁ + ─────────── + ─────────
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Python/">
-                                    <span class="chip bg-color">Python</span>
+                                <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
+                                    <span class="chip bg-color">知识图谱</span>
                                 </a>
                             
                         </div>
@@ -776,7 +698,7 @@ f(x) = ⎜C₁ + ─────────── + ─────────
         repo: 'blogcomment',
         owner: 'Thooooor',
         admin: "Thooooor",
-        id: '2020-08-08T10-02-00',
+        id: '2021-03-12T21-11-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -800,29 +722,80 @@ f(x) = ⎜C₁ + ─────────── + ─────────
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/08/08/suan-fa-bi-ji/shu-xue-gui-hua/">
+                <a href="/2021/03/12/zhi-shi-tu-pu/zhi-shi-tu-pu-gai-nian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="优化（规划）问题">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="知识图谱概念被">
                         
-                        <span class="card-title">优化（规划）问题</span>
+                        <span class="card-title">知识图谱概念被</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            使用Python解决数学建模中的优化（规划）问题
+                            总结知识图谱的基本概念
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-08
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Knowledge-Graph/" class="post-category">
+                                    Knowledge Graph
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
+                        <span class="chip bg-color">知识图谱</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/01/11/tuo-keng-ji-lu/matplotlib-zhong-wen-xian-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.png" class="responsive-img" alt="Matplotlib中文显示">
+                        
+                        <span class="card-title">Matplotlib中文显示</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            Matplotlib设置中文显示
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-11
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -840,55 +813,6 @@ f(x) = ⎜C₁ + ─────────── + ─────────
                     
                     <a href="/tags/Python/">
                         <span class="chip bg-color">Python</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/05/10/suan-fa-bi-ji/tan-huan-fen-xi/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="摊还分析">
-                        
-                        <span class="card-title">摊还分析</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            三种方法进行摊还分析
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-10
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-category">
-                                    学习笔记
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E7%AE%97%E6%B3%95%E8%AE%BE%E8%AE%A1%E4%B8%8E%E5%88%86%E6%9E%90/">
-                        <span class="chip bg-color">算法设计与分析</span>
                     </a>
                     
                 </div>
@@ -1064,6 +988,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1132,7 +1063,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">49.1k</span>&nbsp;字
+                class="white-color">50.1k</span>&nbsp;字
             
             
             
