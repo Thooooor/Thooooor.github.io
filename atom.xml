@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2021-03-12T13:28:51.289Z</updated>
+  <updated>2021-05-14T02:16:25.890Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -15,6 +15,39 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Variational Graph Auto-encoder</title>
+    <link href="https://thooooor.github.io/2021/05/14/lun-wen-bi-ji/gnn/2016-nips-variational-graph-auto-encoders/"/>
+    <id>https://thooooor.github.io/2021/05/14/lun-wen-bi-ji/gnn/2016-nips-variational-graph-auto-encoders/</id>
+    <published>2021-05-14T02:15:00.000Z</published>
+    <updated>2021-05-14T02:16:25.890Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/1611.07308&quot;&gt;论文地址&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="NLP" scheme="https://thooooor.github.io/categories/NLP/"/>
+    
+    
+      <category term="论文笔记" scheme="https://thooooor.github.io/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="GNN" scheme="https://thooooor.github.io/tags/GNN/"/>
+    
+      <category term="NIPS" scheme="https://thooooor.github.io/tags/NIPS/"/>
+    
+  </entry>
   
   <entry>
     <title>知识图谱概念</title>
@@ -551,35 +584,6 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
     
       <category term="算法" scheme="https://thooooor.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
-    
-      <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>最长公共子序列</title>
-    <link href="https://thooooor.github.io/2020/05/02/suan-fa-bi-ji/zui-chang-gong-gong-zi-xu-lie/"/>
-    <id>https://thooooor.github.io/2020/05/02/suan-fa-bi-ji/zui-chang-gong-gong-zi-xu-lie/</id>
-    <published>2020-05-02T07:20:00.000Z</published>
-    <updated>2021-03-12T13:20:03.078Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;问题定义&quot;&gt;&lt;a href=&quot;#问题定义&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://thooooor.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="C/C++" scheme="https://thooooor.github.io/tags/C-C/"/>
     
       <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     

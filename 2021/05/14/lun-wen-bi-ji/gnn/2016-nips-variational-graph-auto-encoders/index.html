@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="分治算法, Thor&#39;s Blog">
+    <meta name="keywords" content="Variational Graph Auto-encoder, Thor&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>分治算法 | Thor&#39;s Blog</title>
+    <title>Variational Graph Auto-encoder | Thor&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -252,12 +252,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">分治算法</h1>
+                    <h1 class="description center-align post-title">Variational Graph Auto-encoder</h1>
                 </div>
             </div>
         </div>
@@ -374,8 +374,16 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                                <span class="chip bg-color">学习笔记</span>
+                            <a href="/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">论文笔记</span>
+                            </a>
+                        
+                            <a href="/tags/GNN/">
+                                <span class="chip bg-color">GNN</span>
+                            </a>
+                        
+                            <a href="/tags/NIPS/">
+                                <span class="chip bg-color">NIPS</span>
                             </a>
                         
                     </div>
@@ -386,8 +394,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                算法
+                            <a href="/categories/NLP/" class="post-category">
+                                NLP
                             </a>
                         
                     </div>
@@ -399,28 +407,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-04-27
+                    2021-05-14
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-03-12
+                    2021-05-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    867
+                    1.4k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    5 分
                 </div>
                 
 
@@ -435,83 +443,78 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="一-分治算法的设计"><a href="#一-分治算法的设计" class="headerlink" title="一. 分治算法的设计"></a>一. 分治算法的设计</h1><ul>
-<li><h3 id="划分"><a href="#划分" class="headerlink" title="划分"></a>划分</h3><p>将整个问题划分为多个子问题</p>
-</li>
-<li><h3 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h3><p>求解各个子问题</p>
-</li>
-<li><h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><p>合并子问题的解，形成原始问题的解</p>
-</li>
-</ul>
-<h1 id="二-分治算法的分析"><a href="#二-分治算法的分析" class="headerlink" title="二. 分治算法的分析"></a>二. 分治算法的分析</h1><ul>
-<li><h3 id="分析过程"><a href="#分析过程" class="headerlink" title="分析过程"></a>分析过程</h3><ul>
-<li>建立递归方程</li>
-<li>求解</li>
-</ul>
-</li>
-<li><h3 id="递归方程的建立方法"><a href="#递归方程的建立方法" class="headerlink" title="递归方程的建立方法"></a>递归方程的建立方法</h3><ul>
-<li>设输入大小为n,T(n)为时间复杂性</li>
-<li>当$n&lt;c, T(n)=\Theta(1)$</li>
-</ul>
-</li>
-<li><h3 id="划分阶段的时间复杂性"><a href="#划分阶段的时间复杂性" class="headerlink" title="划分阶段的时间复杂性"></a>划分阶段的时间复杂性</h3><ul>
-<li>划分问题为a个子问题</li>
-<li>每个子问题大小为$\frac{n}{b}$</li>
-<li>划分时间可直接得到=$D(n)$</li>
-</ul>
-</li>
-<li><h3 id="递归求解阶段的时间复杂性"><a href="#递归求解阶段的时间复杂性" class="headerlink" title="递归求解阶段的时间复杂性"></a>递归求解阶段的时间复杂性</h3><ul>
-<li>递归调用</li>
-<li>求解时间=$aT(\frac{n}{b})$</li>
-</ul>
-</li>
-<li><h3 id="合并阶段的时间复杂性"><a href="#合并阶段的时间复杂性" class="headerlink" title="合并阶段的时间复杂性"></a>合并阶段的时间复杂性</h3><ul>
-<li>时间可以直接得到=$C(n)$</li>
-</ul>
-</li>
-</ul>
-<p>$$<br>T(n)=\Theta(1)\quad if;;n&lt;c<br>$$</p>
-<p>$$<br>T(n)=aT(\frac{n}{b})+D(n)+C(n)\quad if\quad n\ge c<br>$$</p>
-<h1 id="三、实际应用"><a href="#三、实际应用" class="headerlink" title="三、实际应用"></a>三、实际应用</h1><h2 id="1-大整数乘法"><a href="#1-大整数乘法" class="headerlink" title="1. 大整数乘法"></a>1. 大整数乘法</h2><ul>
-<li><p>输入：ｎ位二进制整数Ｘ和Y</p>
-</li>
-<li><p>输出：X和Y的乘积</p>
-</li>
-<li><p>通常时间复杂度：$O(n^2)$</p>
-</li>
-<li><p>简单分治算法：$O(n^{1.59})$</p>
-</li>
-</ul>
-<h3 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h3><ol>
-<li>划分产生$A,B,C,D$</li>
-<li>计算$A-B$和$C-D$</li>
-<li>计算$\frac{n}{2}$位乘法$AC,BD,(A+B)(C+D)$</li>
-<li>计算$(A+B)(C+D)-AC-BD$</li>
-<li>AC左移n位，$(A+B)(C+D)-AC-BD$左移$\frac{n}{2}$位</li>
-<li>计算XY</li>
-</ol>
-<p><img src="http://note.lizhihao999.cn/notes/20200818112253.png" alt="计算流程"></p>
-<h3 id="时间复杂性"><a href="#时间复杂性" class="headerlink" title="时间复杂性"></a>时间复杂性</h3><ul>
-<li><p>建立递归方程</p>
-<p>$$<br>T(n)=\Theta(1)\quad if;;n=1<br>$$</p>
-<p>$$<br>T(n)=3T(\frac{n}{2})+O(n)\quad if;;n&gt;1<br>$$</p>
-</li>
-</ul>
-<ul>
-<li>Master定理<br>$$<br>T(n)=O(n^{\log{3}})=O(n^{1.59})<br>$$</li>
-</ul>
-<h2 id="2-棋盘覆盖问题"><a href="#2-棋盘覆盖问题" class="headerlink" title="2. 棋盘覆盖问题"></a>2. 棋盘覆盖问题</h2><blockquote>
-<p>参考<a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid/26548237.html">梦醒潇湘love</a>博客</p>
+                <blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1611.07308">论文地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/tkipf/gae">tensorflow-代码地址</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/DaehanKim/vgae_pytorch">pytorch-代码地址</a></p>
 </blockquote>
-<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在一个2^k ×2^k （k≥0）个方格组成的棋盘中，恰有一个方格与其他方格不同，称该方格为特殊方格。显然，特殊方格在棋盘中可能出现的位置有4^k 种，因而有4^k种不同的棋盘。棋盘覆盖问题（chess cover problem）要求用图所示的4种不同形状的L型骨牌覆盖给定棋盘上除特殊方格以外的所有方格，且任何2个L型骨牌不得重叠覆盖。</p>
-<p><img src="http://blog.chinaunix.net/attachment/201303/1/26548237_1362125215RWwI.png" alt="棋盘样例和骨牌样式"></p>
-<h3 id="算法描述-1"><a href="#算法描述-1" class="headerlink" title="算法描述"></a>算法描述</h3><p>将2^k * 2^k的棋盘，先分成相等的四块子棋盘，其中特殊方格位于四个中的一个，构造剩下没特殊方格的三个字棋盘，将它们中的也假设一个方格为特殊方格。如果是：</p>
-<p>左上角的子棋盘（若不存在特殊方格）：则将该子棋盘右下角的那个方格假设为特殊方格；</p>
-<p>右上角的子棋盘（若不存在特殊方格）：则将该子棋盘左下角的那个方格假设为特殊方格；</p>
-<p>左下角的子棋盘（若不存在特殊方格）：则将该子棋盘右上角的那个方格假设为特殊方格；</p>
-<p>右下角的子棋盘（若不存在特殊方格）：则将该子棋盘左上角的那个方格假设为特殊方格；</p>
-<p>上面四种情况，只可能且必定只有三种成立，那三个假设的特殊方格刚好构成一个L型骨牌，我们可以给它们作上相同的标志。这样四个子棋盘就分别都和原来的大棋盘类似，就可以用递归的算法解决。</p>
-<p><img src="http://blog.chinaunix.net/attachment/201303/1/26548237_136212550647ax.png" alt="分割样例"></p>
+<p>这是一篇2016年NIPS的workshop，介绍了变分图自动编码器（VGAE），它是一种基于变分自动编码器（VAE）的无监督学习图结构化数据的框架。 该模型利用了潜在变量，并且能够为无向图学习可解释的潜在表示（请参见图1）。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210514101222.png" alt="图1"></p>
+<blockquote>
+<p>在Cora引用网络数据集上训练的无监督VGAE模型的潜在空间。 </p>
+<p>灰线表示引文链接。 颜色表示文档类别（训练期间未提供）。</p>
+</blockquote>
+<p>我们使用图卷积网络（GCN）编码器和一个简单的内积解码器演示了该模型。 我们的模型在引用网络中的链接预测任务上获得了具有竞争力的结果。 与大多数现有的无监督学习图形结构数据和链接预测模型相比，我们的模型可以自然地包含节点特征，从而显着提高了许多基准数据集的预测性能。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210514101249.png" alt="形象化"></p>
+<p>对于上图过程，可以看到变分自编码器学习<strong>低维向量表示的分布</strong>，包含一个Encoder和一个Decoder, 主要用于推理模型。其中Encoder把input变成概率分布，从概率分布中采样得到隐变量Z，Decoder把这个隐变量Z变成output。</p>
+<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>一个无边，无权重的图：<br>$$<br>G=(V,E)\quad with\quad N=|V|;nodes<br>$$</p>
+<ul>
+<li>邻接矩阵$A$，对角线元素为1</li>
+<li>度矩阵$D$</li>
+</ul>
+<p>随机潜在向量$z_{i}$，由矩阵$Z(N\times F)$统一，结点特征向量矩阵$X(N\times D)$。</p>
+<h2 id="推理模型"><a href="#推理模型" class="headerlink" title="推理模型"></a>推理模型</h2><p>通过一个两层GCN进行参数化：<br>$$<br>q(Z|X,A)=\prod_{i=1}^{N}{q(\vec{z_{i}}|X,A)}\quad with\quad q=(\vec{z_{i}}|X,A)=N(\vec{z_{i}}|\vec{\mu_{i}},\mathrm{diag}(\vec{\sigma_{i}}^{2}))<br>$$<br>其中，$\mu=\mathrm{GCN}<em>{\mu}(X,A)$是均值向量$\vec{\mu}</em>{i}$的矩阵；$\log{\sigma}=\mathrm{GCN}_{\sigma}(X,A)$是方差向量的矩阵；$N(\cdot)$代表服从高斯分布。</p>
+<p>两层GCN定义为：<br>$$<br>\mathrm{GCN}(X,A)=\mathrm{\tilde{A}}\mathrm{ReLU}(\mathrm{\tilde{A}XW_{0}})\mathrm{W_{1}}<br>$$<br>其中，$W_{i}$是每一层的权重矩阵，上述两个GCN共享第一层的权重矩阵$W_{0}$。</p>
+<ul>
+<li><p>线性整流函数$\mathrm{RuLU}(\cdot)=\max{(0,\cdot)}$</p>
+</li>
+<li><p>对称归一化邻接矩阵$\tilde{A}=D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$</p>
+</li>
+</ul>
+<h2 id="生成模型"><a href="#生成模型" class="headerlink" title="生成模型"></a>生成模型</h2><p>通过两个潜在向量之间的内积给出：<br>$$<br>p(\mathrm{A|Z})=\prod_{i=1}^{N}{\prod_{j=1}^{N}{p(A_{ij}|\vec{z}<em>{i},\vec{z}</em>{j})}}\quad with\quad p(A_{ij=1}|\vec{z}<em>{i},\vec{z}</em>{j})=\sigma(\vec{z}<em>{i}^{T}\vec{z}</em>{j})<br>$$<br>其中$A_{ij}$是矩阵$\mathrm{A}$中的元素，$\sigma(\cdot)$是logistic sigmoid激活函数。</p>
+<h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h2><p>针对变量参数$\bold{W}<em>{i}$优化变量下限$L$：<br>$$<br>L=E</em>{q(\bold{Z|A,X})}[\log{p(\bold{A|Z})}]-\mathrm{KL}[q(\bold{Z|X,A})||p(\bold{Z})]<br>$$<br>其中：</p>
+<ul>
+<li><p>$E_{q}[\cdot]$是均值；</p>
+</li>
+<li><p>$\mathrm{KL}[q(\cdot)||p(\cdot)]$是$q(\cdot),p(\cdot)$之间的Kullback-Leibler divergence（相对熵）。相对熵可以衡量两个随机分布之间的距离，当两个随机分布相同时，它们的相对熵为零，当两个随机分布的差别增大时，它们的相对熵也会增大。</p>
+</li>
+</ul>
+<p>进一步采用高斯平滑：<br>$$<br>p(\bold{Z})=\prod_{i}{p(\bold{z_{i}})}=\prod_{i}{N(\bold{z_{i}}|0,\bold{I})}<br>$$<br>我们执行批量梯度下降，并利用重新参数化技巧进行训练。 对于无特征的方法，我们只需放弃对X的依赖关系，然后用GCN中的单位矩阵替换X。</p>
+<h2 id="非概率图自动编码器（GAE）模型"><a href="#非概率图自动编码器（GAE）模型" class="headerlink" title="非概率图自动编码器（GAE）模型"></a>非概率图自动编码器（GAE）模型</h2><p>对于VGAE模型的非概率变体，我们计算嵌入Z和重构的邻接矩阵$\tilde{A}$，如下所示：<br>$$<br>\tilde{A}=\sigma(\bold{ZZ}^{T})\quad with\quad \bold{Z}=\mathrm{GCN(\bold{X,A})}<br>$$</p>
+<h1 id="代码解读"><a href="#代码解读" class="headerlink" title="代码解读"></a>代码解读</h1><p>对于<code>pytorch</code>版本的代码进行一定的解读。</p>
+<h2 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h2><pre><code class="python"># model.py: class VGAE
+def encode(self, X):
+        hidden = self.base_gcn(X)
+        self.mean = self.gcn_mean(hidden)    # 均值GCN
+        self.logstd = self.gcn_logstddev(hidden)    # 方差GCN
+        gaussian_noise = torch.randn(X.size(0), args.hidden2_dim)    # 随机采样
+        sampled_z = gaussian_noise*torch.exp(self.logstd) + self.mean    # 采样还原z'
+        return sampled_z</code></pre>
+<p>Encoder把input变成概率分布，并从概率分布中采样得到隐变量Z。</p>
+<h2 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h2><pre><code class="python"># model.py: class VGAE
+def forward(self, X):
+        Z = self.encode(X)
+        A_pred = dot_product_decode(Z)    # decode
+        return A_pred
+
+# model.py
+def dot_product_decode(Z):
+    A_pred = torch.sigmoid(torch.matmul(Z,Z.t()))
+    return A_pred</code></pre>
+<p>通过Z和Z转置的点积，可以得到一个对称矩阵，再通过sigmoid函数，可以得到最终的output。</p>
+<h2 id="train"><a href="#train" class="headerlink" title="train"></a>train</h2><pre><code class="python">for epoch in range(args.num_epoch):
+    ...
+    loss = log_lik = norm*F.binary_cross_entropy(A_pred.view(-1), adj_label.to_dense().view(-1), weight = weight_tensor)
+    # 通过交叉熵得到输出矩阵和实际连接矩阵的相似度（结构性）
+    if args.model == 'VGAE':
+        kl_divergence = 0.5/ A_pred.size(0) * (1 + 2*model.logstd - model.mean**2 - torch.exp(model.logstd)**2).sum(1).mean()
+        # 通过相对熵得到理论分布拟合真实分布时产生的信息损耗
+        loss -= kl_divergence
+
+    loss.backward()
+    optimizer.step()
+    ...</code></pre>
+<p>根据公式，L由两部分构成，第一部分为输出矩阵和实际连接矩阵的交叉熵，即两者之间的相似度。连接矩阵反应不同点之间的连接情况，也是一个对称矩阵。第二部分是两个分布之间的相对熵，表示两个分布之间的距离。最终的损失函数为两者之差。</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -555,7 +558,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://thooooor.github.io/2020/04/27/suan-fa-bi-ji/fen-zhi-suan-fa/">https://thooooor.github.io/2020/04/27/suan-fa-bi-ji/fen-zhi-suan-fa/</a>
+                    <a href="https://thooooor.github.io/2021/05/14/lun-wen-bi-ji/gnn/2016-nips-variational-graph-auto-encoders/">https://thooooor.github.io/2021/05/14/lun-wen-bi-ji/gnn/2016-nips-variational-graph-auto-encoders/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -593,8 +596,16 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                                    <span class="chip bg-color">学习笔记</span>
+                                <a href="/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">论文笔记</span>
+                                </a>
+                            
+                                <a href="/tags/GNN/">
+                                    <span class="chip bg-color">GNN</span>
+                                </a>
+                            
+                                <a href="/tags/NIPS/">
+                                    <span class="chip bg-color">NIPS</span>
                                 </a>
                             
                         </div>
@@ -765,7 +776,7 @@
         repo: 'blogcomment',
         owner: 'Thooooor',
         admin: "Thooooor",
-        id: '2020-04-27T20-25-00',
+        id: '2021-05-14T10-15-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -789,50 +800,56 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/04/28/suan-fa-bi-ji/kuai-su-pai-xu/">
+                <a href="/2021/05/14/lun-wen-bi-ji/gnn/2016-nips-variational-graph-auto-encoders/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="快速排序">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Variational Graph Auto-encoder">
                         
-                        <span class="card-title">快速排序</span>
+                        <span class="card-title">Variational Graph Auto-encoder</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            基于分治思想的快速排序、复杂度分析和C/C++代码实现
+                            2016 NIPS Workshop《Variational Graph Auto-encoder》变分图自动编码器论文笔记
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-14
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/NLP/" class="post-category">
+                                    NLP
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/C-C/">
-                        <span class="chip bg-color">C/C++</span>
+                    <a href="/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">论文笔记</span>
                     </a>
                     
-                    <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">学习笔记</span>
+                    <a href="/tags/GNN/">
+                        <span class="chip bg-color">GNN</span>
+                    </a>
+                    
+                    <a href="/tags/NIPS/">
+                        <span class="chip bg-color">NIPS</span>
                     </a>
                     
                 </div>
@@ -846,31 +863,31 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/04/26/suan-fa-bi-ji/suan-fa-fen-xi-de-shu-xue-ji-chu/">
+                <a href="/2021/03/12/zhi-shi-tu-pu/zhi-shi-tu-pu-gai-nian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="算法分析的数学基础">
+                        <img src="/medias/featureimages/7.png" class="responsive-img" alt="知识图谱概念">
                         
-                        <span class="card-title">算法分析的数学基础</span>
+                        <span class="card-title">知识图谱概念</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            算法设计与分析的数学基础
+                            总结知识图谱的基本概念
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-26
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-12
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/Knowledge-Graph/" class="post-category">
+                                    Knowledge Graph
                                 </a>
                             
                             
@@ -880,8 +897,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">学习笔记</span>
+                    <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
+                        <span class="chip bg-color">知识图谱</span>
                     </a>
                     
                 </div>
