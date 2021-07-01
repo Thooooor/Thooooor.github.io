@@ -435,26 +435,20 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1>1.1 算法</h1>
-<h2 id="（1）计算">（1）计算</h2>
-<h3 id="定义">定义</h3>
-<p>可由一个<strong>给定计算模型</strong>机械地<strong>执行的规则</strong>或<strong>计算步骤序列</strong>称为该计算模型的一个计算</p>
+                <h1 id="1-1-算法"><a href="#1-1-算法" class="headerlink" title="1.1 算法"></a>1.1 算法</h1><h2 id="（1）计算"><a href="#（1）计算" class="headerlink" title="（1）计算"></a>（1）计算</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>可由一个<strong>给定计算模型</strong>机械地<strong>执行的规则</strong>或<strong>计算步骤序列</strong>称为该计算模型的一个计算</p>
 <ul>
 <li>一个计算机程序是一个计算</li>
 <li>计算可能永远不会停止</li>
 <li>不是算法</li>
 </ul>
-<h2 id="（2）算法">（2）算法</h2>
-<h3 id="定义-2">定义</h3>
-<ol>
+<h2 id="（2）算法"><a href="#（2）算法" class="headerlink" title="（2）算法"></a>（2）算法</h2><h3 id="定义-1"><a href="#定义-1" class="headerlink" title="定义"></a>定义</h3><ol>
 <li>算法是满足下列条件的计算：</li>
 </ol>
 <ul>
 <li><strong>有穷性/终止性</strong>：有限步内必须停止</li>
 <li><strong>确定性</strong>：每一步都是严格定义和确定的动作</li>
 <li><strong>可行性</strong>：每一个动作都能够被精确地机械执行</li>
-<li><strong>输入</strong>：有一个满足给定约束条件的输入
-<ul>
+<li><strong>输入</strong>：有一个满足给定约束条件的输入<ul>
 <li>函数可以没有输入</li>
 <li>算法必须有输入</li>
 </ul>
@@ -465,80 +459,52 @@
 <li>算法的目的是求解问题</li>
 <li>一个算法<strong>面向一个问题</strong>，而不是仅求解一个问题的一个或几个实例</li>
 </ol>
-<h3 id="算法的描述">算法的描述</h3>
-<ol>
-<li>
-<p>伪代码</p>
+<h3 id="算法的描述"><a href="#算法的描述" class="headerlink" title="算法的描述"></a>算法的描述</h3><ol>
+<li><p>伪代码</p>
 </li>
-<li>
-<p>实例</p>
-<pre><code class="language-pseudocode">Input: A[1, ..., n] = n个数
+<li><p>实例</p>
+<pre><code class="pseudocode">Input: A[1, ..., n] = n个数
 Output: A[1, ..., n] = n个sorted数
 FOR j=2 To n Do
     key &lt;- A[j];
     i &lt;- j-1
     WHILE i&gt;0 AND A[i]&gt;key Do
-    	A[i+1] &lt;- A[i];
-    	i &lt;- i-1;
-    A[i+1] &lt;- key;
-</code></pre>
+        A[i+1] &lt;- A[i];
+        i &lt;- i-1;
+    A[i+1] &lt;- key;</code></pre>
 </li>
 </ol>
-<h2 id="（3）问题">（3）问题</h2>
-<h3 id="定义-3">定义</h3>
-<p>设Input和Output是两个<strong>集合</strong>。一个问题是一个<strong>关系R $\subseteq$ Input × Output</strong></p>
+<h2 id="（3）问题"><a href="#（3）问题" class="headerlink" title="（3）问题"></a>（3）问题</h2><h3 id="定义-2"><a href="#定义-2" class="headerlink" title="定义"></a>定义</h3><p>设Input和Output是两个<strong>集合</strong>。一个问题是一个<strong>关系R $\subseteq$ Input × Output</strong></p>
 <ul>
-<li>
-<p><strong>Input</strong>称为问题R的<strong>输入集合</strong><br>
-$$<br>
-Input = { &lt;a_1,…,a_n&gt; | a_i是整数 }<br>
-$$</p>
+<li><p><strong>Input</strong>称为问题R的<strong>输入集合</strong><br>$$<br>Input = { &lt;a_1,….,a_n&gt; | a_i是整数 }<br>$$</p>
 <ul>
 <li>Input的每个元素称为R的一个输入</li>
 </ul>
 </li>
-<li>
-<p><strong>Output</strong>称为问题R的<strong>输出或结果集合</strong><br>
-$$<br>
-Output = { &lt;b_1,…,b_n&gt; | b_i是整数，且b_i  \le…\le b_n}<br>
-$$</p>
+<li><p><strong>Output</strong>称为问题R的<strong>输出或结果集合</strong><br>$$<br>Output = { &lt;b_1,….,b_n&gt; | b_i是整数，且b_i  \le…\le b_n}<br>$$</p>
 <ul>
 <li>Output的每个元素称为R的一个结果</li>
 </ul>
 </li>
-<li>
-<p><strong>问题</strong>定义了<strong>输入和输出的关系</strong> $\to$</p>
+<li><p><strong>问题</strong>定义了<strong>输入和输出的关系</strong> $\to$ </p>
 </li>
 </ul>
-<p>$$<br>
-R = {<br>
-( &lt; a_1, … ,a_n &gt;, &lt; b_1, …, b_n &gt; ) | &lt; a_1, … , a_n &gt; \in Input, \<br>
-&lt; b_1, … ,b_n &gt; \in Output,<br>
-{a_1, … ,a_n} = {b_1, … ,b_n}<br>
-}<br>
-$$</p>
-<h1>1.2 计算机科学中算法的位置</h1>
-<hr>
-<h2 id="（1）算法是计算机科学基础的重要主题">（1）算法是计算机科学基础的重要主题</h2>
-<h2 id="（2）计算机科学的体系">（2）计算机科学的体系</h2>
-<h3 id="解决一个计算问题的过程">解决一个计算问题的过程</h3>
-<ol>
+<p>$$<br>R = {<br>( &lt; a_1, … ,a_n &gt;, &lt; b_1, …, b_n &gt; ) | &lt; a_1, … , a_n &gt; \in Input, \<br>&lt; b_1, … ,b_n &gt; \in Output,<br>{a_1, … ,a_n} = {b_1, … ,b_n}<br>}<br>$$</p>
+<h1 id="1-2-计算机科学中算法的位置"><a href="#1-2-计算机科学中算法的位置" class="headerlink" title="1.2 计算机科学中算法的位置"></a>1.2 计算机科学中算法的位置</h1><hr>
+<h2 id="（1）算法是计算机科学基础的重要主题"><a href="#（1）算法是计算机科学基础的重要主题" class="headerlink" title="（1）算法是计算机科学基础的重要主题"></a>（1）算法是计算机科学基础的重要主题</h2><h2 id="（2）计算机科学的体系"><a href="#（2）计算机科学的体系" class="headerlink" title="（2）计算机科学的体系"></a>（2）计算机科学的体系</h2><h3 id="解决一个计算问题的过程"><a href="#解决一个计算问题的过程" class="headerlink" title="解决一个计算问题的过程"></a>解决一个计算问题的过程</h3><ol>
 <li>可计算否</li>
 <li>能行计算否</li>
 <li>算法设计与分析</li>
 <li>用计算机语言实现算法</li>
 <li>软件系统</li>
 </ol>
-<p>###　可计算理论</p>
-<ul>
+<h3 id="可计算理论"><a href="#可计算理论" class="headerlink" title="可计算理论"></a>可计算理论</h3><ul>
 <li>计算模型</li>
 <li>可计算问题／不可计算问题</li>
 <li>计算模型的等价性$\to$ 图灵/Church命题</li>
 </ul>
-<h3 id="计算复杂性理论">计算复杂性理论</h3>
-<ul>
-<li>在给定的计算模型夏研究问题的复杂性
-<ul>
+<h3 id="计算复杂性理论"><a href="#计算复杂性理论" class="headerlink" title="计算复杂性理论"></a>计算复杂性理论</h3><ul>
+<li>在给定的计算模型夏研究问题的复杂性<ul>
 <li>固有复杂性</li>
 <li>上界</li>
 <li>下界</li>
@@ -548,70 +514,57 @@ $$</p>
 </ul>
 </li>
 </ul>
-<h3 id="算法设计与分析">算法设计与分析</h3>
-<ul>
+<h3 id="算法设计与分析"><a href="#算法设计与分析" class="headerlink" title="算法设计与分析"></a>算法设计与分析</h3><ul>
 <li>可计算问题的算法的设计与分析</li>
 <li>设计算法的理论、方法和技术</li>
 <li>分析算法的理论、方法和技术</li>
 </ul>
-<h3 id="计算机软件">计算机软件</h3>
-<ul>
+<h3 id="计算机软件"><a href="#计算机软件" class="headerlink" title="计算机软件"></a>计算机软件</h3><ul>
 <li>系统软件</li>
 <li>工具软件</li>
 <li>应用软件</li>
 </ul>
-<h1>1.3 算法分析引论</h1>
-<hr>
-<h2 id="（1）算法的正确性">（1）算法的正确性</h2>
-<ul>
-<li>
-<p>一个算法是正确 $\to$ 对于每一个输入都最终停止，而且产生正确的输出</p>
+<h1 id="1-3-算法分析引论"><a href="#1-3-算法分析引论" class="headerlink" title="1.3 算法分析引论"></a>1.3 算法分析引论</h1><hr>
+<h2 id="（1）算法的正确性"><a href="#（1）算法的正确性" class="headerlink" title="（1）算法的正确性"></a>（1）算法的正确性</h2><ul>
+<li><p>一个算法是正确 $\to$ 对于每一个输入都最终停止，而且产生正确的输出</p>
 </li>
-<li>
-<p>不正确算法</p>
+<li><p>不正确算法</p>
 <ul>
 <li>不停止</li>
 <li>对所有输入都停止，但对输入产生不正确结果</li>
 </ul>
 </li>
-<li>
-<p>近似算法</p>
+<li><p>近似算法</p>
 <ul>
 <li>对所有输入都停止</li>
 <li>产生近似正确的解或产生不多的不正确解</li>
 </ul>
 </li>
 </ul>
-<h2 id="（2）算法正确性的证明">（2）算法正确性的证明</h2>
-<ul>
+<h2 id="（2）算法正确性的证明"><a href="#（2）算法正确性的证明" class="headerlink" title="（2）算法正确性的证明"></a>（2）算法正确性的证明</h2><ul>
 <li>证明算法对所有输入都停止</li>
 <li>证明对每个输入都产生正确结果</li>
 <li>调试程序 $\ne$ 程序正确性证明</li>
 </ul>
-<h2 id="（3）算法复杂性分析">（3）算法复杂性分析</h2>
-<ul>
-<li>
-<p>目的</p>
+<h2 id="（3）算法复杂性分析"><a href="#（3）算法复杂性分析" class="headerlink" title="（3）算法复杂性分析"></a>（3）算法复杂性分析</h2><ul>
+<li><p>目的</p>
 <ul>
 <li>预测算法对不同输入所需资源量</li>
 </ul>
 </li>
-<li>
-<p>复杂性测度 $\to$ <strong>输入大小的函数</strong></p>
+<li><p>复杂性测度 $\to$ <strong>输入大小的函数</strong></p>
 <ul>
 <li>时间</li>
 <li>空间</li>
 <li>I/O</li>
 </ul>
 </li>
-<li>
-<p>用途</p>
+<li><p>用途</p>
 <ul>
 <li>为求解一个问题选择最佳算法、最佳设备</li>
 </ul>
 </li>
-<li>
-<p>需要的数学基础</p>
+<li><p>需要的数学基础</p>
 <ul>
 <li>离散数学</li>
 <li>组合数学</li>
@@ -619,147 +572,111 @@ $$</p>
 <li>代数</li>
 </ul>
 </li>
-<li>
-<p>需要的数学能力</p>
+<li><p>需要的数学能力</p>
 <ul>
 <li>建立算法复杂性的数学模型</li>
 <li>数学模型化简</li>
 </ul>
 </li>
 </ul>
-<h2 id="（4）算法复杂性分析的度量">（4）算法复杂性分析的度量</h2>
-<h3 id="输入的大小（输入规模）">输入的大小（输入规模）</h3>
-<ul>
+<h2 id="（4）算法复杂性分析的度量"><a href="#（4）算法复杂性分析的度量" class="headerlink" title="（4）算法复杂性分析的度量"></a>（4）算法复杂性分析的度量</h2><h3 id="输入的大小（输入规模）"><a href="#输入的大小（输入规模）" class="headerlink" title="输入的大小（输入规模）"></a>输入的大小（输入规模）</h3><ul>
 <li>设Input是问题R的输入集合</li>
 <li>R的<strong>输入大小</strong>是一个函数<strong>F：Input $\to$ N, N是正整数集合</strong></li>
-<li>输入规模量度
-<ul>
+<li>输入规模量度<ul>
 <li>最自然的量度：<strong>输入中的项数</strong></li>
 <li>对于研究的每个问题将指出所使用的输入规模量度</li>
 </ul>
 </li>
 </ul>
-<h3 id="时间复杂性">时间复杂性</h3>
-<ul>
+<h3 id="时间复杂性"><a href="#时间复杂性" class="headerlink" title="时间复杂性"></a>时间复杂性</h3><ul>
 <li>一个算法对特定输入的时间复杂性是该算法对该输入产生结果需要的<strong>原子(基本)操作数</strong>或<strong>步数</strong></li>
-<li><strong>注意</strong>
-<ul>
+<li><strong>注意</strong><ul>
 <li>时间复杂性是输入大小的函数</li>
 <li>我们假设每一步的执行需要常数时间，实际上每步需要的时间量可能不同</li>
 </ul>
 </li>
 </ul>
-<h3 id="空间复杂性">空间复杂性</h3>
-<ul>
+<h3 id="空间复杂性"><a href="#空间复杂性" class="headerlink" title="空间复杂性"></a>空间复杂性</h3><ul>
 <li>一个算法对特定输入的空间复杂性是该算法对该输入产生结果所需要的存储空间大小</li>
 </ul>
-<h3 id="最坏复杂性">最坏复杂性</h3>
-<p>设Input是问题R的输入集合，$Complexity(X)$是求解R的算法A的复杂性函数，$size(y)$是确定R中输入大小的函数，A的最坏复杂性是<br>
-$$<br>
-Max{ Complexity,(size(y)),|,y\in Input }<br>
-$$<br>
-我们往往集中于只求<strong>最坏情况运行时间</strong>：</p>
+<h3 id="最坏复杂性"><a href="#最坏复杂性" class="headerlink" title="最坏复杂性"></a>最坏复杂性</h3><p>设Input是问题R的输入集合，$Complexity(X)$是求解R的算法A的复杂性函数，$size(y)$是确定R中输入大小的函数，A的最坏复杂性是<br>$$<br>Max{ Complexity,(size(y)),|,y\in Input }<br>$$<br>我们往往集中于只求<strong>最坏情况运行时间</strong>：</p>
 <ul>
 <li>最坏复杂性给出任何输入的运行时间的一个<strong>上界</strong>，能够确保该算法绝不需要更长的时间</li>
-<li>对某些算法，最坏情况经常出现
-<ul>
+<li>对某些算法，最坏情况经常出现<ul>
 <li>例：在数据库中检索一条不存在的信息</li>
 </ul>
 </li>
-<li>平均复杂性往往与最坏复杂性大致一样差
-<ul>
+<li>平均复杂性往往与最坏复杂性大致一样差<ul>
 <li>例：随机选择n个数并应用插入排序</li>
 </ul>
 </li>
 </ul>
-<h3 id="最小复杂性">最小复杂性</h3>
-<p>$$<br>
-Min{ Complexity,(size(y)),|,y\in Input }<br>
-$$</p>
-<h3 id="平均复杂性">平均复杂性</h3>
-<p>设 $y\in Input$, y作为算法A的输入出现的概率是$p_y$，A的平均复杂性为</p>
-<p>$$<br>
-\sum_{y\in Input} p_y \times complexity(size(y))<br>
-$$</p>
-<h3 id="增长量级">增长量级</h3>
-<ul>
-<li><strong>抽象</strong>：
-<ul>
+<h3 id="最小复杂性"><a href="#最小复杂性" class="headerlink" title="最小复杂性"></a>最小复杂性</h3><p>$$<br>Min{ Complexity,(size(y)),|,y\in Input }<br>$$</p>
+<h3 id="平均复杂性"><a href="#平均复杂性" class="headerlink" title="平均复杂性"></a>平均复杂性</h3><p>设 $y\in Input$, y作为算法A的输入出现的概率是$p_y$，A的平均复杂性为</p>
+<p>$$<br> \sum_{y\in Input} p_y \times complexity(size(y))<br>$$</p>
+<h3 id="增长量级"><a href="#增长量级" class="headerlink" title="增长量级"></a>增长量级</h3><ul>
+<li><strong>抽象</strong>：<ul>
 <li><strong>只考虑公式中最重要的项</strong></li>
 <li>忽略<strong>低阶项</strong></li>
 <li>忽略<strong>最重要项</strong>的<strong>常系数</strong></li>
 </ul>
 </li>
-<li>记作：<strong>$\Theta(n^2)$</strong></li>
+<li>记作：**$\Theta(n^2)$**</li>
 <li>如果一个算法的最坏情况运行时间具有比另一个算法更低的增长量级，通常认为前者比后者有效</li>
 </ul>
-<h2 id="（5）算法分析的模型">（5）算法分析的模型</h2>
-<h3 id="随机访问模型-Random-Access-Model-RAM">随机访问模型(Random-Access-Model, RAM)</h3>
-<ul>
-<li>单处理机
-<ul>
+<h2 id="（5）算法分析的模型"><a href="#（5）算法分析的模型" class="headerlink" title="（5）算法分析的模型"></a>（5）算法分析的模型</h2><h3 id="随机访问模型-Random-Access-Model-RAM"><a href="#随机访问模型-Random-Access-Model-RAM" class="headerlink" title="随机访问模型(Random-Access-Model, RAM)"></a>随机访问模型(Random-Access-Model, RAM)</h3><ul>
+<li>单处理机<ul>
 <li>串行执行</li>
 <li>无并发</li>
 </ul>
 </li>
-<li>指令（所需时间为<strong>常量</strong>）
-<ul>
-<li>算术指令
-<ul>
+<li>指令（所需时间为<strong>常量</strong>）<ul>
+<li>算术指令<ul>
 <li>加减乘除</li>
 <li>向上/向下取整</li>
 <li>取余</li>
 </ul>
 </li>
-<li>数据移动指令
-<ul>
+<li>数据移动指令<ul>
 <li>装入</li>
 <li>存储</li>
 <li>复制</li>
 </ul>
 </li>
-<li>控制指令
-<ul>
+<li>控制指令<ul>
 <li>条件/无条件转移</li>
 <li>子程序调用/返回</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>基本数据类型
-<ul>
+<li>基本数据类型<ul>
 <li>整数型</li>
 <li>浮点实数型</li>
 </ul>
 </li>
 <li>基本操作 $\to$ 每个操作常数的时间</li>
 </ul>
-<h3 id="并行多处理机模型-PRAM">并行多处理机模型(PRAM)</h3>
-<p>暂不涉及</p>
-<h1>1.4 算法设计引论</h1>
-<hr>
-<h2 id="（1）算法设计模式">（1）算法设计模式</h2>
-<ul>
+<h3 id="并行多处理机模型-PRAM"><a href="#并行多处理机模型-PRAM" class="headerlink" title="并行多处理机模型(PRAM)"></a>并行多处理机模型(PRAM)</h3><p>暂不涉及</p>
+<h1 id="1-4-算法设计引论"><a href="#1-4-算法设计引论" class="headerlink" title="1.4 算法设计引论"></a>1.4 算法设计引论</h1><hr>
+<h2 id="（1）算法设计模式"><a href="#（1）算法设计模式" class="headerlink" title="（1）算法设计模式"></a>（1）算法设计模式</h2><ul>
 <li>暴力搜索</li>
 <li>分治法</li>
-<li>图搜索与枚举
-<ul>
+<li>图搜索与枚举<ul>
 <li>分支界限</li>
 <li>回溯</li>
 </ul>
 </li>
 <li>随机化方法</li>
 </ul>
-<h2 id="（2）算法实现方法">（2）算法实现方法</h2>
-<ul>
+<h2 id="（2）算法实现方法"><a href="#（2）算法实现方法" class="headerlink" title="（2）算法实现方法"></a>（2）算法实现方法</h2><ul>
 <li>递归与迭代</li>
 <li>顺序、并行与分布式</li>
 <li>确定性与非确定性</li>
 <li>近似求解与精确求解</li>
 <li>量子算法</li>
 </ul>
-<h2 id="（3）最优化设计方法">（3）<strong>最优化设计方法</strong></h2>
-<ul>
+<h2 id="（3）最优化设计方法"><a href="#（3）最优化设计方法" class="headerlink" title="（3）最优化设计方法"></a>（3）<strong>最优化设计方法</strong></h2><ul>
 <li>线性规划</li>
 <li>动态规划</li>
 <li>贪心法</li>
@@ -1384,7 +1301,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">52k</span>&nbsp;字
+                class="white-color">52.4k</span>&nbsp;字
             
             
             

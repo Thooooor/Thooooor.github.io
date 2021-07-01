@@ -440,78 +440,63 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p><strong>快速排序能够实现原址排序，而且平均性能很好。最基本的快速排序基于分治思想。</strong></p>
-<h1>算法过程</h1>
-<ol>
-<li>
-<p>选定分界值，将原数组划分为两个部分</p>
+<h1 id="算法过程"><a href="#算法过程" class="headerlink" title="算法过程"></a>算法过程</h1><ol>
+<li><p>选定分界值，将原数组划分为两个部分</p>
 </li>
-<li>
-<p>左边的值都小于分界值，右边的值都大于等于分界值</p>
+<li><p>左边的值都小于分界值，右边的值都大于等于分界值</p>
 </li>
-<li>
-<p>对左右两侧数组再次进行1、2步骤</p>
+<li><p>对左右两侧数组再次进行1、2步骤</p>
 </li>
-<li>
-<p>直到所有数据排序完成</p>
+<li><p>直到所有数据排序完成</p>
 </li>
 </ol>
-<h1>伪代码</h1>
-<pre><code class="language-pseudocode">QUICKSORT(A,low,high)
+<h1 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h1><pre><code class="pseudocode">QUICKSORT(A,low,high)
 if low &lt; high
-	q = PARTITION(A,low,high)
-	QUICKSORT(A,low,q-1)
-	QUICKSORT(A,q+1,high)
-	
+    q = PARTITION(A,low,high)
+    QUICKSORT(A,low,q-1)
+    QUICKSORT(A,q+1,high)
+
 PRTITION(A,low,high)
 x = A[high]
 i = low-1
 for j=low -&gt; high-1
-	if A[j] &lt;= x
-		i++
-		exchange A[i] with A[j]
+    if A[j] &lt;= x
+        i++
+        exchange A[i] with A[j]
 exchange A[i+1] with A[high]
-return i+1
-</code></pre>
-<h1>划分(PARTITION)</h1>
+return i+1</code></pre>
+<h1 id="划分-PARTITION"><a href="#划分-PARTITION" class="headerlink" title="划分(PARTITION)"></a>划分(PARTITION)</h1><ul>
+<li><p>选定一个分界值x（此例中为数组最后一个元素）</p>
+</li>
+<li><p>整个数组分为三个部分：</p>
 <ul>
-<li>
-<p>选定一个分界值x（此例中为数组最后一个元素）</p>
+<li><p>小于x的部分</p>
 </li>
-<li>
-<p>整个数组分为三个部分：</p>
-<ul>
-<li>
-<p>小于x的部分</p>
+<li><p>大于等于x的部分</p>
 </li>
-<li>
-<p>大于等于x的部分</p>
-</li>
-<li>
-<p>未确定的部分</p>
+<li><p>未确定的部分</p>
 <p><img src="http://note.lizhihao999.cn/notes/20200819111943.png" alt="排序过程中的四个部分"></p>
 </li>
 </ul>
 </li>
-<li>
-<p>循环开始时<code>i=low-1</code>,<code>j=low</code></p>
+<li><p>循环开始时<code>i=low-1</code>,<code>j=low</code></p>
 </li>
-<li>
-<p>考虑当前<code>A[j]</code>与分界值<code>x</code>的大小关系</p>
+<li><p>考虑当前<code>A[j]</code>与分界值<code>x</code>的大小关系</p>
 <ul>
 <li>如果<code>A[j]</code>小于<code>x</code>，则<code>i++</code>，同时交换<code>A[i]</code>和<code>A[j]</code>$\implies$保证<code>i</code>之前为小于<code>x</code>的值</li>
 <li>否则<code>j++</code>，继续遍历</li>
 </ul>
 </li>
-<li>
-<p>最后交换<code>A[i+1]</code>和<code>x</code></p>
+<li><p>最后交换<code>A[i+1]</code>和<code>x</code></p>
 <p><img src="http://note.lizhihao999.cn/notes/20200819114038.png" alt="划分过程中的两种情况"></p>
 </li>
 </ul>
-<h2 id="实例">实例</h2>
-<p>使用最基本的快速排序对$&lt;13,19,9,5,12,4,7,8&gt;$进行一次划分</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><p>使用最基本的快速排序对$&lt;13,19,9,5,12,4,7,8&gt;$进行一次划分</p>
 <img src="http://note.lizhihao999.cn/notes/20200819111516.png" style="zoom:50%;">
-<h1>代码</h1>
-<pre><code class="language-cpp">void swap(int *a, int *b)
+
+
+
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre><code class="cpp">void swap(int *a, int *b)
 {
     int temp = *a;
     *a = *b;
@@ -542,11 +527,9 @@ void quicksort(int *A, int low, int high)
         quicksort(A, low, q - 1);
         quicksort(A, q + 1, high);
     }
-}
-</code></pre>
-<h2 id="随机化版本">随机化版本</h2>
-<p>输入的数组的元素分布不一定是均衡的，采用<strong>随机取样</strong>的方法期望在平均情况下划分是比较均衡的，即随机选取主元元素。</p>
-<pre><code class="language-cpp">#include &lt;iostream&gt;
+}</code></pre>
+<h2 id="随机化版本"><a href="#随机化版本" class="headerlink" title="随机化版本"></a>随机化版本</h2><p>输入的数组的元素分布不一定是均衡的，采用<strong>随机取样</strong>的方法期望在平均情况下划分是比较均衡的，即随机选取主元元素。</p>
+<pre><code class="cpp">#include &lt;iostream&gt;
 #include &lt;ctime&gt;
 #include &lt;cstdlib&gt;
 
@@ -555,67 +538,55 @@ using namespace std;
 //随机选择一个分界值
 int random(int low, int high)
 {
-	srand(1);
-	int len = high - low + 1;
-	return rand() % len + low;
+    srand(1);
+    int len = high - low + 1;
+    return rand() % len + low;
 }
 
 void swap(int* a, int* b)
 {
-	int temp = *a;
-	*a = *b;
-	*b = temp;
+    int temp = *a;
+    *a = *b;
+    *b = temp;
 }
 
 int partition(int* A, int low, int high)
 {
-	int i = low - 1;
-	int x = A[high];
-	for (int j = low; j &lt; high; j++)
-	{
-		if (A[j] &lt;= x)
-		{
-			i++;
-			swap(&amp;A[i], &amp;A[j]);
-		}
-	}
-	swap(&amp;A[i + 1], &amp;A[high]);
-	return i + 1;
+    int i = low - 1;
+    int x = A[high];
+    for (int j = low; j &lt; high; j++)
+    {
+        if (A[j] &lt;= x)
+        {
+            i++;
+            swap(&amp;A[i], &amp;A[j]);
+        }
+    }
+    swap(&amp;A[i + 1], &amp;A[high]);
+    return i + 1;
 }
 
 int random_partition(int* A, int low, int high)
 {
-	int i = random(low, high);
+    int i = random(low, high);
     //将分界值交换到最后一位
-	swap(&amp;A[high], &amp;A[i]);
-	return partition(A, low, high);
+    swap(&amp;A[high], &amp;A[i]);
+    return partition(A, low, high);
 }
 
 void random_quicksort(int* A, int low, int high)
 {
-	if (low &lt; high)
-	{
-		int q = random_partition(A, low, high);
-		random_quicksort(A, low, q - 1);
-		random_quicksort(A, q + 1, high);
-	}
-}
-</code></pre>
-<h1>快速排序的性能</h1>
-<p>快速排序的运行时间依赖于<strong>划分是否平衡</strong>，平衡与否依赖于<strong>划分的元素</strong>。</p>
-<h2 id="划分的复杂度">划分的复杂度</h2>
-<p>$$<br>
-T(n)=\Theta(n)<br>
-$$</p>
-<p>$$<br>
-n=high-low+1<br>
-$$</p>
-<h2 id="最坏情况的划分">最坏情况的划分</h2>
-<p>当划分产生的两个子问题分别包含<code>n-1</code>个元素和<code>0</code>个元素时，快速排序的最坏情况发生。不妨假设算法的每一次递归调用中都出现这种不平衡划分，其中划分操作的时间复杂度为$\Theta(n)$。由于，对一个大小为0的数组进行递归调用会直接返回，因此$T(0)=\Theta(1)$，于是算法运行时间的递归式可以表示为：<br>
-$$<br>
-T(n)=T(n-1)+T(0)+\Theta(n)=T(n-1)+\Theta(n)<br>
-$$<br>
-利用代入法证明：</p>
+    if (low &lt; high)
+    {
+        int q = random_partition(A, low, high);
+        random_quicksort(A, low, q - 1);
+        random_quicksort(A, q + 1, high);
+    }
+}</code></pre>
+<h1 id="快速排序的性能"><a href="#快速排序的性能" class="headerlink" title="快速排序的性能"></a>快速排序的性能</h1><p>快速排序的运行时间依赖于<strong>划分是否平衡</strong>，平衡与否依赖于<strong>划分的元素</strong>。</p>
+<h2 id="划分的复杂度"><a href="#划分的复杂度" class="headerlink" title="划分的复杂度"></a>划分的复杂度</h2><p>$$<br>T(n)=\Theta(n)<br>$$</p>
+<p>$$<br>n=high-low+1<br>$$</p>
+<h2 id="最坏情况的划分"><a href="#最坏情况的划分" class="headerlink" title="最坏情况的划分"></a>最坏情况的划分</h2><p>当划分产生的两个子问题分别包含<code>n-1</code>个元素和<code>0</code>个元素时，快速排序的最坏情况发生。不妨假设算法的每一次递归调用中都出现这种不平衡划分，其中划分操作的时间复杂度为$\Theta(n)$。由于，对一个大小为0的数组进行递归调用会直接返回，因此$T(0)=\Theta(1)$，于是算法运行时间的递归式可以表示为：<br>$$<br>T(n)=T(n-1)+T(0)+\Theta(n)=T(n-1)+\Theta(n)<br>$$<br>利用代入法证明：</p>
 <p><strong>猜想假设</strong>：$T(n)=O(n^2)\quad c&gt;0$</p>
 <ol>
 <li>首先归纳假设：$\exist c &gt; 0,使得T(n)\le cn^2$</li>
@@ -637,10 +608,8 @@ $$<br>
 <p>当$-2cn+c+\Theta(n) \ge 0$时，</p>
 <p>$T(n)\ge cn^2$</p>
 <p>$\therefore T(n)=\Theta(n^2)$</p>
-<h2 id="最坏运行时间">最坏运行时间</h2>
-<p>在最坏情况下，快速排序的每一层递归的时间复杂度为$\Theta(n^2)$，从直观上来看，这就是最坏情况下的运行时间$\Theta(n^2)$。</p>
-<h2 id="期望运行时间">期望运行时间</h2>
-<p>随机化快速排序的期望运行时间为$O(n\lg{n})$；如果每一层递归上随机化算法都将任意常数比例的元素划分到一个子数组中，则算法的递归树的深度为$\Theta(\lg{n})$，并且每一层上的工作量都是$O(n)$。</p>
+<h2 id="最坏运行时间"><a href="#最坏运行时间" class="headerlink" title="最坏运行时间"></a>最坏运行时间</h2><p>在最坏情况下，快速排序的每一层递归的时间复杂度为$\Theta(n^2)$，从直观上来看，这就是最坏情况下的运行时间$\Theta(n^2)$。</p>
+<h2 id="期望运行时间"><a href="#期望运行时间" class="headerlink" title="期望运行时间"></a>期望运行时间</h2><p>随机化快速排序的期望运行时间为$O(n\lg{n})$；如果每一层递归上随机化算法都将任意常数比例的元素划分到一个子数组中，则算法的递归树的深度为$\Theta(\lg{n})$，并且每一层上的工作量都是$O(n)$。</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1261,7 +1230,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">52k</span>&nbsp;字
+                class="white-color">52.4k</span>&nbsp;字
             
             
             

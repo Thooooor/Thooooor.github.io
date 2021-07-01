@@ -443,31 +443,23 @@
 <p>即没有任何码字是其他码字的前缀。前缀码的作用是简化解码过程。</p>
 </blockquote>
 <p>解码过程需要前缀码的一种方便的表示方式，以便我们可以容易地截取开始码字。一种二叉树表示可以满足这种要求，其叶节点为给定的字符。字符的二进制码字用从根节点</p>
-<p>到该字符节点的简单路径表示。其中**“0”表示转向“左孩子”，“1”表示转向“右孩子”**。</p>
+<p>到该字符节点的简单路径表示。其中<strong>“0”表示转向“左孩子”，“1”表示转向“右孩子”</strong>。</p>
 <p>文件的最优编码方案总是对应一棵<strong>满二叉树</strong>，即每个非叶节点都有两个孩子节点。所以，若C为字母表且所有字符的出现频率均为正数，则最优前缀码对应的树恰有$|C|$个叶节点，每个叶节点对应字母表中的一个字符，且恰有$|C|-1$个内部节点。</p>
-<p>给定一棵对应前缀码的树T，可以轻易计算出编码一个文件需要多少个二进制位。对于字母表C中的每个字符c，令属性<code>c.freq</code>表示c在文件中出现的频率， 令$d_T©$（$d_T©$也是字符c的码字长度）表示c的叶节点在树中的深度。则编码文件需要：<br>
-$$<br>
-B(T)=\sum_{c\in C}{c.freq*d_{T}©}<br>
-$$<br>
-个二进制位，将$B(T)$定义为<strong>T的代价</strong>。</p>
-<h1>构建哈夫曼编码</h1>
-<p>假定C是一个n个字符的集合，其中每个字符$c\in C$都是一个对象，其属性<code>c.freq</code>给出字符的出现频率。算法自底向上地构造出对应最优编码地二叉树T。从$|C|$个叶节点开始，执行$|C|-1$个<strong>合并</strong>操作，创建出最终的二叉树。算法使用一个以$freq$为关键字的最小优先队列Q，以识别两个最低频率的对象将其合并。当合并两个对象时，得到的新对象的频率设置为原来两个对象的频率之和。</p>
-<pre><code class="language-c">HUFFMAN(C)
+<p>给定一棵对应前缀码的树T，可以轻易计算出编码一个文件需要多少个二进制位。对于字母表C中的每个字符c，令属性<code>c.freq</code>表示c在文件中出现的频率， 令$d_T(c)$（$d_T(c)$也是字符c的码字长度）表示c的叶节点在树中的深度。则编码文件需要：<br>$$<br>B(T)=\sum_{c\in C}{c.freq*d_{T}(c)}<br>$$<br>个二进制位，将$B(T)$定义为<strong>T的代价</strong>。</p>
+<h1 id="构建哈夫曼编码"><a href="#构建哈夫曼编码" class="headerlink" title="构建哈夫曼编码"></a>构建哈夫曼编码</h1><p>假定C是一个n个字符的集合，其中每个字符$c\in C$都是一个对象，其属性<code>c.freq</code>给出字符的出现频率。算法自底向上地构造出对应最优编码地二叉树T。从$|C|$个叶节点开始，执行$|C|-1$个<strong>合并</strong>操作，创建出最终的二叉树。算法使用一个以$freq$为关键字的最小优先队列Q，以识别两个最低频率的对象将其合并。当合并两个对象时，得到的新对象的频率设置为原来两个对象的频率之和。</p>
+<pre><code class="c">HUFFMAN(C)
 n = |C|
 Q = C
 for i=1 to n-1
-	allocate a new node z
-	z.left = x = EXTRACT-MIN(Q)
-	z.right = y = EXTRACT-MIN(Q)
-	z.freq = x.freq + y.freq
-	INSERT(Q,z)
-return EXTRACT-MIN(Q)
-</code></pre>
+    allocate a new node z
+    z.left = x = EXTRACT-MIN(Q)
+    z.right = y = EXTRACT-MIN(Q)
+    z.freq = x.freq + y.freq
+    INSERT(Q,z)
+return EXTRACT-MIN(Q)</code></pre>
 <p><img src="http://note.lizhihao999.cn/notes/20200822164521.png" alt="算法过程——《算法导论》"></p>
-<h1>算法正确性</h1>
-<p>为了证明贪心HUFFMAN算法正确，需要证明确定最优前缀码的问题具有贪心选择和最优子结构性质。</p>
-<h2 id="1-贪心选择性质">1. 贪心选择性质</h2>
-<blockquote>
+<h1 id="算法正确性"><a href="#算法正确性" class="headerlink" title="算法正确性"></a>算法正确性</h1><p>为了证明贪心HUFFMAN算法正确，需要证明确定最优前缀码的问题具有贪心选择和最优子结构性质。</p>
+<h2 id="1-贪心选择性质"><a href="#1-贪心选择性质" class="headerlink" title="1. 贪心选择性质"></a>1. 贪心选择性质</h2><blockquote>
 <p><strong>引理1</strong></p>
 <p>令C为一个字母表，其中每个字符$c\in C$都有一个频率<code>c.freq</code>。令x和y是C中频率最低的两个字符。那么存在C的一个最优前缀码，x和y的码字长度相同，且只有最后一个二进制位不同。</p>
 </blockquote>
@@ -475,33 +467,23 @@ return EXTRACT-MIN(Q)
 <p>证明：</p>
 <p>令a，b是T中深度最大的兄弟叶结点。不失一般性，假定$a.freq\le b.freq,\quad x.freq\le y.freq$。又因为x，y的频率最低，所以$a.freq\ge x.freq,\quad b.freq\ge y.freq$</p>
 <p>存在可能性，$x.freq=a.freq或y.freq=b.freq$；如果$x.freq=b.freq$，则$x.freq=b.freq=a.freq=y.freq$，此时引理显然成立；故假设$x.freq\ne b.freq$，也即$a.freq=b.freq和a.freq=x.freq$不同时成立。</p>
-<p>在T中交换x和a得到一棵新树T‘，在T’中交换y和b得到新树T"，则在T"中x和y是深度最深的两个兄弟节点。计算T和T’的代价差：</p>
-<p>$B(T)-B(T’)=\sum_{c\in C}{c.freq\cdot d_{T}©}-\sum_{c\in C}{c.freq\cdot d_{T’}©}$</p>
+<p>在T中交换x和a得到一棵新树T‘，在T’中交换y和b得到新树T”，则在T”中x和y是深度最深的两个兄弟节点。计算T和T’的代价差：</p>
+<p>$B(T)-B(T’)=\sum_{c\in C}{c.freq\cdot d_{T}(c)}-\sum_{c\in C}{c.freq\cdot d_{T’}(c)}$</p>
 <p>​                                   $=[x.freq\cdot d_{T}(x)+a.freq\cdot d_{T}(a)]-[x.freq\cdot d_{T’}(x)+a.freq\cdot d_{T’}(a)]$</p>
-<p>​                                   $=[x.freq\cdot d_{T}(x)+a.freq\cdot d_{T}(a)]-[x.freq\cdot d_{T}(a)+a.freq\cdot d_{T}(x)]$	<strong>(x在T’中的位置就是a在T中的位置)</strong></p>
+<p>​                                   $=[x.freq\cdot d_{T}(x)+a.freq\cdot d_{T}(a)]-[x.freq\cdot d_{T}(a)+a.freq\cdot d_{T}(x)]$    <strong>(x在T’中的位置就是a在T中的位置)</strong></p>
 <p>​                                   $=[x.freq\cdot d_{T}(x)-a.freq\cdot d_{T}(x)]-[x.freq\cdot d_{T}(a)-a.freq\cdot d_{T}(a)]$</p>
 <p>​                                   $=(a.freq-x.freq)(d_{T}(a)-d_{T}(x))$</p>
-<p>​                                   $\ge 0$	($a.freq-x.freq和d_{T}(a)-d_{T}(x)$都非负)</p>
-<p>类似，$B(T’)-B(T’’)\ge 0$，又因为<strong>T是最优的</strong>，所以$B(T)=B(T’)=B(T’’)$，即<strong>T’'也是最优的</strong>，引理成立。</p>
+<p>​                                   $\ge 0$    ($a.freq-x.freq和d_{T}(a)-d_{T}(x)$都非负)</p>
+<p>类似，$B(T’)-B(T’’)\ge 0$，又因为<strong>T是最优的</strong>，所以$B(T)=B(T’)=B(T’’)$，即<strong>T’’也是最优的</strong>，引理成立。</p>
 <p><img src="http://note.lizhihao999.cn/notes/20200822175055.png" alt="《算法导论》图例说明"></p>
 <p>引理1说明，不失一般性，通过合并来构造最优树的过程，可以从合并出现频率最低的两个字符的贪心选择开始。</p>
-<h2 id="2-最优子结构性质">2. 最优子结构性质</h2>
-<blockquote>
+<h2 id="2-最优子结构性质"><a href="#2-最优子结构性质" class="headerlink" title="2. 最优子结构性质"></a>2. 最优子结构性质</h2><blockquote>
 <p><strong>引理2</strong></p>
 <p>令C为一个给定的字母表，其中每个字符$c\in C$都定义了一个频率<code>c.freq</code>。令x和y是C中频率最低的两个字符。令C’为C去掉字符x和y，加入一个新字符z后得到的字母表，即$C’=C-{x,y}\bigcup{z}$。类似C，也为C’定义<code>freq</code>，不同之处只是<code>z.freq=x.freq+y.freq</code>。令T’为字母表C’的任意一个最优前缀码对应的编码树。将T’中叶结点z替换为一个以x和y为孩子的内部节点，得到树T，T表示字母表C的一个最优前缀码。</p>
 </blockquote>
 <p>证明：</p>
-<p>首先表示:<br>
-$$<br>
-B(T’)=B(T)-x.freq-y.freq<br>
-$$<br>
-使用反证法进行证明。假定T对应的前缀码并不是C的最优前缀码。存在最优编码树T’‘满足$B(T’’)&lt;B(T)$。不失一般性（引理1），T’‘包含兄弟节点x和y。令T’’‘为将T’‘中x、y及他们的父节点替换为叶结点z得到的树，其中<code>z.freq=x.freq+y.freq</code>。于是<br>
-$$<br>
-B(T’’’)=B(T’’)-x.freq-y.freq&lt;B(T)-x.freq-y.freq=B(T’)<br>
-$$<br>
-与T’对应C’的一个最优前缀码的假设矛盾。因此，T必然表示字母表C的一个最优前缀码。</p>
-<h2 id="3-最优性质">3. 最优性质</h2>
-<blockquote>
+<p>首先表示:<br>$$<br>B(T’)=B(T)-x.freq-y.freq<br>$$<br>使用反证法进行证明。假定T对应的前缀码并不是C的最优前缀码。存在最优编码树T’’满足$B(T’’)&lt;B(T)$。不失一般性（引理1），T’’包含兄弟节点x和y。令T’’’为将T’’中x、y及他们的父节点替换为叶结点z得到的树，其中<code>z.freq=x.freq+y.freq</code>。于是<br>$$<br>B(T’’’)=B(T’’)-x.freq-y.freq&lt;B(T)-x.freq-y.freq=B(T’)<br>$$<br>与T’对应C’的一个最优前缀码的假设矛盾。因此，T必然表示字母表C的一个最优前缀码。</p>
+<h2 id="3-最优性质"><a href="#3-最优性质" class="headerlink" title="3. 最优性质"></a>3. 最优性质</h2><blockquote>
 <p><strong>定理1</strong></p>
 <p>过程HUFFMAN会生成一个最优前缀码。</p>
 </blockquote>
@@ -1122,7 +1104,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">52k</span>&nbsp;字
+                class="white-color">52.4k</span>&nbsp;字
             
             
             

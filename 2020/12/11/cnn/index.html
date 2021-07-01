@@ -436,42 +436,25 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>卷积神经网络（Convolutional neural network， ConvNets or CNNs），是一种深度学习算法，可以输入图像，为图像中的各个方面/对象分配重要性（可学习的权重和偏差），并能够区分彼此。主要用于图像识别、图像分类任务，可以应用于目标检测、人脸识别等领域。</p>
-<h1>图像处理</h1>
-<p>对于计算机来说，一张输入的图片是以像素数组（array of pixels）的形式呈现，数组大小由图片的分辨率决定。对于一张图片来说，像素数组通常有3个维度：<br>
-$$<br>
-(h\times w\times d)\<br>
-\begin{align}<br>
-&amp;h:Height\quad高度\<br>
-&amp;w:Width\quad宽度\<br>
-&amp;d:Dimension\quad维度<br>
-\end{align}<br>
-$$<br>
-对于RGB标准的图片来说，通过对红®、绿(G)、蓝(B)三个颜色通道的变化以及它们相互之间的叠加来得到各式各样的颜色，所以维度有三层，分别对应三个颜色的通道。而对于一张灰度图像来说，维度通常只有一层。</p>
+<h1 id="图像处理"><a href="#图像处理" class="headerlink" title="图像处理"></a>图像处理</h1><p>对于计算机来说，一张输入的图片是以像素数组（array of pixels）的形式呈现，数组大小由图片的分辨率决定。对于一张图片来说，像素数组通常有3个维度：<br>$$<br>(h\times w\times d)\<br>\begin{align}<br>&amp;h:Height\quad高度\<br>&amp;w:Width\quad宽度\<br>&amp;d:Dimension\quad维度<br>\end{align}<br>$$<br>对于RGB标准的图片来说，通过对红(R)、绿(G)、蓝(B)三个颜色通道的变化以及它们相互之间的叠加来得到各式各样的颜色，所以维度有三层，分别对应三个颜色的通道。而对于一张灰度图像来说，维度通常只有一层。</p>
 <p><img src="http://note.lizhihao999.cn/notes/20201211233045.png" alt="4x4x3 RGB Image"></p>
-<h1>概述</h1>
-<p>卷积神经网络（CNN或ConvNet）是一种用于深度学习的网络体系结构，可直接从数据中学习，而无需手动提取特征。ConvNet的架构类似于人脑中神经元的连接模式，其灵感来自于视觉皮层的组织。 单个神经元仅在被称为感受野的视野受限区域内对刺激做出反应。 这些字段的集合重叠以覆盖整个可视区域。</p>
+<h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>卷积神经网络（CNN或ConvNet）是一种用于深度学习的网络体系结构，可直接从数据中学习，而无需手动提取特征。ConvNet的架构类似于人脑中神经元的连接模式，其灵感来自于视觉皮层的组织。 单个神经元仅在被称为感受野的视野受限区域内对刺激做出反应。 这些字段的集合重叠以覆盖整个可视区域。</p>
 <p>从技术上讲，深度学习CNN模型可以用于训练和测试，与其他神经网络一样，CNN也由输入层、输出层和之间的很多隐藏层组成。这些隐藏层执行更改数据的操作，目的是学习数据的特征。最常见的三个层是：卷积、激活函数或ReLU和池化。每个输入图像将通过一系列带有卷积核Filters（内核Kernels）、池化Pooling、全连接层（FC）的卷积层传递，并应用Softmax函数对概率值为$(0,1)$之间的对象进行分类。</p>
 <ul>
-<li>
-<p>卷积将输入图像通过一组卷积核，每个卷积核都会激活图像中的某些特征；</p>
+<li><p>卷积将输入图像通过一组卷积核，每个卷积核都会激活图像中的某些特征；</p>
 </li>
-<li>
-<p>线性整流单元（ReLU）通过将负值映射为零并保持正值，可以更快，更有效地进行训练。有时将其称为激活，因为只有激活的特征才被带入下一层；</p>
+<li><p>线性整流单元（ReLU）通过将负值映射为零并保持正值，可以更快，更有效地进行训练。有时将其称为激活，因为只有激活的特征才被带入下一层；</p>
 </li>
-<li>
-<p>池化通过执行非线性下降采样来简化输出，从而减少了网络需要学习的参数数量；</p>
+<li><p>池化通过执行非线性下降采样来简化输出，从而减少了网络需要学习的参数数量；</p>
 </li>
 </ul>
 <p>下图是一个具有许多卷积层的CNN示例，将卷积核以不同的分辨率（尺寸）应用于每个训练图像，并将每个卷积图像的输出用作下一层的输入。</p>
 <p><img src="http://note.lizhihao999.cn/notes/20201211233101.jpg" alt="Example of a network with many convolutional layers. Filters are applied to each training image at different resolutions, and the output of each convolved image is used as the input to the next layer."></p>
-<h1>隐藏层：特征学习</h1>
-<p>卷积神经网络中通过隐藏层进行特征学习，单个隐藏层通常包含的三个层是：卷积层、激活函数或ReLU和池化层。</p>
-<h2 id="卷积层-Convolution-Layer">卷积层 Convolution Layer</h2>
-<p>卷积是从输入图像的第一层，以提取特征。 卷积通过使用输入数据的小方块学习图像特征来保留像素之间的关系。 这是一项数学运算，需要两个输入，例如图像矩阵和卷积核（内核）。</p>
+<h1 id="隐藏层：特征学习"><a href="#隐藏层：特征学习" class="headerlink" title="隐藏层：特征学习"></a>隐藏层：特征学习</h1><p>卷积神经网络中通过隐藏层进行特征学习，单个隐藏层通常包含的三个层是：卷积层、激活函数或ReLU和池化层。</p>
+<h2 id="卷积层-Convolution-Layer"><a href="#卷积层-Convolution-Layer" class="headerlink" title="卷积层 Convolution Layer"></a>卷积层 Convolution Layer</h2><p>卷积是从输入图像的第一层，以提取特征。 卷积通过使用输入数据的小方块学习图像特征来保留像素之间的关系。 这是一项数学运算，需要两个输入，例如图像矩阵和卷积核（内核）。</p>
 <p>在每个卷积层，数据都是以三维形式存在的，可以把它看成许多个二维图片叠在一起，其中每一个称为一个特征图feature map。如果是灰度图片，那就只有一个feature map；如果是彩色图片，一般就是3个feature map（RGB）。层与层之间会有若干个卷积核，上一层和每个feature map跟每个卷积核做卷积，都会产生下一层的一个feature map。</p>
 <p><img src="http://note.lizhihao999.cn/notes/20201211233153.png" alt="Image matrix multiplies kernel or filter matrix"></p>
-<h3 id="步长-Stribes">步长 Stribes</h3>
-<p>卷积核以某个“步长”（Stride Value）向右移动，直到解析完整宽度为止，它将跳至具有相同“步长”的图像的开始（左侧），并重复该过程，直到遍历整个图像为止。 当步长为1时，我们一次将卷积核移动1个像素。 当步长为2时，我们一次将卷积核移动2个像素，依此类推。</p>
+<h3 id="步长-Stribes"><a href="#步长-Stribes" class="headerlink" title="步长 Stribes"></a>步长 Stribes</h3><p>卷积核以某个“步长”（Stride Value）向右移动，直到解析完整宽度为止，它将跳至具有相同“步长”的图像的开始（左侧），并重复该过程，直到遍历整个图像为止。 当步长为1时，我们一次将卷积核移动1个像素。 当步长为2时，我们一次将卷积核移动2个像素，依此类推。 </p>
 <p><img src="http://note.lizhihao999.cn/notes/20201211233201.png" alt="Movement of the Kernel"></p>
 <p>在下面的演示中，将5 x 5 x 1图像矩阵的卷积与3 x 3 x 1卷积核矩阵相乘，称为“特征图”（feature map）。绿色部分类似于我们的5x5x1输入图像I。在卷积层的第一部分中执行卷积运算所涉及的元素称为内核/卷积核K，以黄色表示，我们选择K作为3x3x1矩阵。</p>
 <p><img src="http://note.lizhihao999.cn/notes/20201211233249.png" alt=" Image matrix multiplies kernel or filter matrix"></p>
@@ -479,29 +462,18 @@ $$<br>
 <p><img src="http://note.lizhihao999.cn/notes/20201211233308.gif" alt="Convoluting a 5x5x1 image with a 3x3x1 kernel to get a 3x3x1 convolved feature"></p>
 <p>对于具有多个通道的图像（例如RGB），内核的深度与输入图像的深度相同。 在Kn和堆栈内（[K1，I1]； [K2，I2]； [K3，I3]）之间执行矩阵乘法，所有结果与偏差相加，得到一个压缩的单深度通道卷积特征输出。</p>
 <p><img src="http://note.lizhihao999.cn/notes/20201211233319.gif" alt="Convolution operation on a MxNx3 image matrix with a 3x3x3 Kernel"></p>
-<h3 id="填充-Padding">填充 Padding</h3>
-<p>有时执行操作时，卷积核无法完全适合输入图像，有两种填充方法：</p>
+<h3 id="填充-Padding"><a href="#填充-Padding" class="headerlink" title="填充 Padding"></a>填充 Padding</h3><p>有时执行操作时，卷积核无法完全适合输入图像，有两种填充方法：</p>
 <ol>
 <li><strong>Same Padding</strong>：用零填充图片（零填充），使其适合；</li>
 <li><strong>Valid Padding</strong>：删除图像中不适合卷积核的部分，这称为有效填充，仅保留图像的有效部分。</li>
 </ol>
 <p>第一种方法下通常会让输出维数增加或保持不变，例如下图所示，当我们将5x5x1图像扩充为6x6x1图像，然后在其上应用3x3x1内核时，我们发现卷积矩阵的尺寸为5x5x1。 因此，名称为“相同填充”（Same Padding）。第二种方法，会保留和卷积核相同维度的一个矩阵，称为“有效填充”（Valid Padding）。</p>
-<p><img src="http://note.lizhihao999.cn/notes/20201211233327.gif" alt="SAME padding: 5x5x1 image is padded with 0s to create a 6x6x1 image"></p>
-<h2 id="线性整流单元-ReLU">线性整流单元 ReLU</h2>
-<p>线性整流单元（Rectified Linear Unit，ReLU），用于非线性操作。通常意义下，线性整流函数指代数学中的斜坡函数，即函数输出结果为：<br>
-$$<br>
-f(x)=\max{(0,x)}<br>
-$$<br>
-<img src="http://note.lizhihao999.cn/notes/20201212005722.png" alt="ReLU"></p>
-<p>而在神经网络中，线性整流作为神经元的激活函数，定义了该神经元在线性变换$\bold{w^{T}x}+b$之后的非线性输出结果，即对于进入神经元的来自上一层神经网络的输入向量，使用线性整流激活函数的神经元会输出：<br>
-$$<br>
-\max{(0,\bold{w^{T}x}+b)}<br>
-$$<br>
-至下一层神经元或作为整个神经网络的输出（取决现神经元在网络结构中所处位置）。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20201211233327.gif" alt="**SAME padding:** 5x5x1 image is padded with 0s to create a 6x6x1 image"></p>
+<h2 id="线性整流单元-ReLU"><a href="#线性整流单元-ReLU" class="headerlink" title="线性整流单元 ReLU"></a>线性整流单元 ReLU</h2><p>线性整流单元（Rectified Linear Unit，ReLU），用于非线性操作。通常意义下，线性整流函数指代数学中的斜坡函数，即函数输出结果为：<br>$$<br>f(x)=\max{(0,x)}<br>$$<br><img src="http://note.lizhihao999.cn/notes/20201212005722.png" alt="ReLU"></p>
+<p>而在神经网络中，线性整流作为神经元的激活函数，定义了该神经元在线性变换$\bold{w^{T}x}+b$之后的非线性输出结果，即对于进入神经元的来自上一层神经网络的输入向量，使用线性整流激活函数的神经元会输出：<br>$$<br>\max{(0,\bold{w^{T}x}+b)}<br>$$<br>至下一层神经元或作为整个神经网络的输出（取决现神经元在网络结构中所处位置）。</p>
 <p><img src="http://note.lizhihao999.cn/notes/20201211233403.png" alt="ReLU operation"></p>
 <p>为什么ReLU很重要：ReLU的目的是在我们的ConvNet中引入非线性。 因为，现实世界中的数据希望我们的ConvNet学习的是非负线性值。 还有其他一些非线性函数（例如tanh或Sigmoid）也可以代替ReLU使用。 大多数数据科学家都使用ReLU，因为在性能方面ReLU比其他两个要好。</p>
-<h2 id="池化层-Pooling-Layer">池化层 Pooling Layer</h2>
-<p>与卷积层相似，池化层负责减小卷积特征的空间大小，即通过降维来减少处理数据所需的计算能力的同时保留重要信息。 此外，它对于提取旋转和位置不变的主要特征很有用，从而保持有效训练模型的过程。 池化有不同的方法，最基本、最常见的方法有两类：</p>
+<h2 id="池化层-Pooling-Layer"><a href="#池化层-Pooling-Layer" class="headerlink" title="池化层 Pooling Layer"></a>池化层 Pooling Layer</h2><p>与卷积层相似，池化层负责减小卷积特征的空间大小，即通过降维来减少处理数据所需的计算能力的同时保留重要信息。 此外，它对于提取旋转和位置不变的主要特征很有用，从而保持有效训练模型的过程。 池化有不同的方法，最基本、最常见的方法有两类：</p>
 <ul>
 <li>最大池化（Max Pooling）</li>
 <li>平均池化（Average Pooling）</li>
@@ -511,12 +483,10 @@ $$<br>
 <p>Max Pooling还可以充当噪声抑制器，它完全放弃激活噪声（只保留最大值），并且还执行了降噪以及降维。 而平均池化仅执行降维作为噪声抑制机制。 因此，我们可以说“最大池”的性能要比“平均池”好得多。下图为3x3的卷积核在5x5卷积上执行池化。</p>
 <p><img src="http://note.lizhihao999.cn/notes/20201211233419.gif" alt="3x3 pooling over 5x5 convolved feature"></p>
 <p>卷积层和池化层一起形成了卷积神经网络的第i层（隐藏层）。根据图像的复杂性，可以增加这种层的数量以进一步捕获更低粒度的特征，但是以更大的计算能力为代价。</p>
-<h1>分类功能</h1>
-<p>我们需要将得到的矩阵扁平化为向量，再将其输入一个全连接层（例如要一个神经网络）。添加全连接层是学习卷积层输出所表示的高级特征的非线性组合的（通常）方便快捷的方法。 全连接层可以学习该空间中可能存在的非线性函数。</p>
+<h1 id="分类功能"><a href="#分类功能" class="headerlink" title="分类功能"></a>分类功能</h1><p>我们需要将得到的矩阵扁平化为向量，再将其输入一个全连接层（例如要一个神经网络）。添加全连接层是学习卷积层输出所表示的高级特征的非线性组合的（通常）方便快捷的方法。 全连接层可以学习该空间中可能存在的非线性函数。</p>
 <p><img src="http://note.lizhihao999.cn/notes/20201211233428.jpeg" alt="Classification — Fully Connected Layer"></p>
 <p>经过一系列卷积（隐藏层），我们已经将输入图像转换为适合多层次感知器的形式，我们将把图像展平为列向量 (x1, x2, x3, …)。 扁平化后的输出作为前馈神经网络的输入，将反向传播应用于训练的每次迭代。 经过一系列epoch后，该模型能够区分图像中的主要特征和某些低级特征，并使用Softmax分类技术对其进行分类（输出层）。</p>
-<h1>总结</h1>
-<p><img src="http://note.lizhihao999.cn/notes/20201211233101.jpg" alt="完整的卷积神经网络图"></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><img src="http://note.lizhihao999.cn/notes/20201211233101.jpg" alt="完整的卷积神经网络图"></p>
 <p>学习完之后，再回顾一下这副卷积神经网络进行图像分类的图例，应该对卷积神经网络的结构和进行图像分类的流程比较了解了。流程大致如下：</p>
 <ol>
 <li>提供输入图像到卷积层；</li>
@@ -529,8 +499,7 @@ $$<br>
 </ol>
 <p>一般来说，可以认为一个卷积神经网络的前半部分为卷积（包括池化）进行特征学习，后半部分为一个分类器（一个或多个全连接层）。关于如何确定CNN中的卷积核大小、卷积层数以及每层feature map个数，目前还没有一个理论性很强的解释，更多的是在根据已有的经验设计，或者利用自动搜索的方法搜索出较为合适的取值。</p>
 <p>之后会更新如何使用<code>Python</code>实现CNN模型。</p>
-<h1>参考资料</h1>
-<p><a target="_blank" rel="noopener" href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53">A Comprehensive Guide to Convolutional Neural Networks — the ELI5 way</a></p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a target="_blank" rel="noopener" href="https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53">A Comprehensive Guide to Convolutional Neural Networks — the ELI5 way</a></p>
 <p><a target="_blank" rel="noopener" href="https://medium.com/@RaghavPrabhu/understanding-of-convolutional-neural-network-cnn-deep-learning-99760835f148">Understanding of Convolutional Neural Network (CNN) — Deep Learning</a></p>
 <p><a target="_blank" rel="noopener" href="https://www.mathworks.com/discovery/convolutional-neural-network-matlab.html">Convolutional Neural Network</a></p>
 <p><a target="_blank" rel="noopener" href="https://baike.baidu.com/item/ReLU%20%E5%87%BD%E6%95%B0/22689567?fr=aladdin">百度百科：ReLU函数</a></p>
@@ -1155,7 +1124,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">52k</span>&nbsp;字
+                class="white-color">52.4k</span>&nbsp;字
             
             
             

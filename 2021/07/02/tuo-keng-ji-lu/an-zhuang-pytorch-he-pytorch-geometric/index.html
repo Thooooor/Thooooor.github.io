@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="知识图谱概念, Thor&#39;s Blog">
+    <meta name="keywords" content="安装PyTorch和PyTorch Geometric, Thor&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>知识图谱概念 | Thor&#39;s Blog</title>
+    <title>安装PyTorch和PyTorch Geometric | Thor&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -252,12 +252,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">知识图谱概念</h1>
+                    <h1 class="description center-align post-title">安装PyTorch和PyTorch Geometric</h1>
                 </div>
             </div>
         </div>
@@ -374,8 +374,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
-                                <span class="chip bg-color">知识图谱</span>
+                            <a href="/tags/Python/">
+                                <span class="chip bg-color">Python</span>
+                            </a>
+                        
+                            <a href="/tags/PyTorch/">
+                                <span class="chip bg-color">PyTorch</span>
                             </a>
                         
                     </div>
@@ -386,8 +390,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Knowledge-Graph/" class="post-category">
-                                Knowledge Graph
+                            <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="post-category">
+                                脱坑实录
                             </a>
                         
                     </div>
@@ -399,28 +403,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-12
+                    2021-07-02
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-03-12
+                    2021-07-02
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    934
+                    426
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    3 分
+                    2 分
                 </div>
                 
 
@@ -435,17 +439,33 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>逐步总结知识图谱相关知识，包括知识图谱概念、知识图谱构建、知识图谱嵌入和知识图谱应用。</p>
-<h1 id="1-知识"><a href="#1-知识" class="headerlink" title="1. 知识"></a>1. 知识</h1><p>​        知识是人们在改造客观世界的过程中所积累的经验和总结升华的产物。知识作为人类对客观世界认识的表达，具有相对的正确性、局限性和抽象性。相比人类的知识，我们这里的知识特指用计算机可以表示、存储和计算的一种特殊信息。具体来说，人类社会生活产生了海量的数据，这些数据可以作为人工智能模型最原始和最基础的输入。其中存在大量无用的内容和噪声，在此之上经过处理提取出的有用的、相关的数据，称为<strong>信息</strong>。这些信息可以是<strong>结构化</strong>的、<strong>半结构化</strong>的或<strong>标签化</strong>的。</p>
-<p>​        在此之上，对信息进一步的加工和处理所得到的普适、抽象和正确的信息，被称为<strong>知识</strong>，如某个领域的概念、概念之间的关系、概念的属性、实体的描述及规则等。因此，知识是蕴含在数据中的经过凝练的数据和信息，通过知识，可以更好地理解信息，可以推理更多的知识，并对未知的信息做出预测，从而体现出系统的智能性。</p>
-<p><img src="https://ss0.baidu.com/6ON1bjeh1BF3odCf/it/u=3635028704,2156301383&amp;fm=15&amp;gp=0.jpg"></p>
-<h1 id="2-知识图谱"><a href="#2-知识图谱" class="headerlink" title="2. 知识图谱"></a>2. 知识图谱</h1><p>​        知识图谱在学术界没有一致的定义，目前知识图谱泛指当前基于通用语义知识的形式化描述而组织的人类知识系统。这个系统本质上是一个有向、有环的复杂的图结构。其中，图的节点表示语义符号，节点之间的边表示符号之间的关系。总的来说，一个知识图谱（KG， Knowledge Graph）存储大量三元组形式的实体以及实体关系信息。在知识图谱系统中，不论是知识框架还是实体数据的描述都统一采用三元组的形式。知识图谱$G=(E,R,S)$，其中$E=\lbrace e_{1},e_{2},…,e_{|E|}\rbrace$表示知识库中的实体集合，共包含$|E|$种不同的实体；$R=\lbrace r_{1},r_{2},…,r_{|R|} \rbrace$是知识库中的关系集合，共包含$|R|$种不同的关系；$S\subseteq E\times R\times E$代表知识库中实体和关系的三元组集合。</p>
-<p>​        知识图谱中的三元组使用RDF（Resource Description Framework），即资源描述框架来表示的。RDF本质上是一个数据模型，提供了一个统一的标准来描述web上的资源，也可以用来描述知识图谱。RDF在形式上表示为SPO三元组，即Subject，Predicate，Object三元组或借助图结构表示为$(h,r,t)$，即头实体（Head Entity）、关系（Relation）和尾实体（Tail Entity）的三元组。三元组也称为一条语句，在知识图谱中记为一条知识。</p>
-<p>当前，公开的大规模知识图谱主要有：Freebase、DBpedia、YAGO、NELL、Wikidata等。中文的知识图谱有openKG、cnSchema、cnDBpedia及zhishi.me等。这些知识图谱都是按照三元组的二元关系进行描述，有比较严格和完整的Schema定义结构。</p>
-<p><strong>参考资料：</strong></p>
-<ol>
-<li>人工智能知识图谱前沿技术. 朱小燕，李晶，肖寒，黄民烈. 中国工信出版集团，电子工业出版社.</li>
-</ol>
+                <h1 id="1-安装PyTorch"><a href="#1-安装PyTorch" class="headerlink" title="1. 安装PyTorch"></a>1. 安装PyTorch</h1><p>在<a target="_blank" rel="noopener" href="https://pytorch.org/">官网</a>选择操作系统、下载方式和对应的GPU配置：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210701235241.png"></p>
+<p>如果需要之前的版本可以点击下方<a target="_blank" rel="noopener" href="https://pytorch.org/get-started/previous-versions/">链接</a>选择之前的版本：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210701235457.png"></p>
+<p>需要注意对应的CUDA版本号。如何安装、切换多版本CUDA可以参考<a target="_blank" rel="noopener" href="http://lizhihao999.cn/2021/07/01/tuo-keng-ji-lu/linux-duo-ban-ben-cuda-an-zhuang-ji-qie-huan/">此前的博客</a>。可通过以下命令查看当前CUDA版本：</p>
+<pre><code class="shell">cat  /usr/local/cuda/version.txt</code></pre>
+<p>下载完成后可以通过以下命令检查torch版本及对应的CUDA版本：</p>
+<pre><code class="shell">python -c "import torch; print(torch.__version__)"
+python -c "import torch; print(torch.version.cuda)"</code></pre>
+<p>可以通过以下命令查看GPU是否可用：</p>
+<pre><code class="shell">python
+&gt;&gt;&gt; import torch
+&gt;&gt;&gt; torch.cuda.is_available()     # GPU是否可用
+&gt;&gt;&gt; torch.cuda.device_count()    # GPU数量
+&gt;&gt;&gt; torch.cuda.current_device()    # 当前GPU
+&gt;&gt;&gt; exit()</code></pre>
+<p>例如：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210702001140.png"></p>
+<h1 id="2-安装PyTorch-Geometric"><a href="#2-安装PyTorch-Geometric" class="headerlink" title="2. 安装PyTorch Geometric"></a>2. 安装PyTorch Geometric</h1><p>根据<a target="_blank" rel="noopener" href="https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html">官网</a>，最好根据当前的PyTorch版本和CUDA版本下载相关的依赖，下载命令如下：</p>
+<pre><code class="shell">pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html
+pip install torch-sparse -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html
+pip install torch-geometric</code></pre>
+<p>其中，<code>${TORCH}</code>替换为当前环境下的PyTorch版本，目前支持<code>1.4.0</code>、<code>1.5.0</code>、<code>1.6.0</code>、<code>1.7.0</code>、<code>1.7.1</code>、<code>1.8.0</code>、<code>1.8.1</code>、和<code>1.9.0</code>；<code>${CUDA}</code>替换为指定的CUDA版本，目前支持<code>cpu</code>、<code>cu92</code>、<code>cu101</code>、<code>cu102</code>、<code>cu110</code>和<code>cu111</code>。</p>
+<p>例如对于PyTorch 1.8.0/1.8.1和CUDA 10.2：</p>
+<pre><code class="shell">pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-1.8.0+cu102.html
+pip install torch-sparse -f https://pytorch-geometric.com/whl/torch-1.8.0+cu102.html
+pip install torch-geometric</code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -489,7 +509,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://thooooor.github.io/2021/03/12/zhi-shi-tu-pu/zhi-shi-tu-pu-gai-nian/">https://thooooor.github.io/2021/03/12/zhi-shi-tu-pu/zhi-shi-tu-pu-gai-nian/</a>
+                    <a href="https://thooooor.github.io/2021/07/02/tuo-keng-ji-lu/an-zhuang-pytorch-he-pytorch-geometric/">https://thooooor.github.io/2021/07/02/tuo-keng-ji-lu/an-zhuang-pytorch-he-pytorch-geometric/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -527,8 +547,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
-                                    <span class="chip bg-color">知识图谱</span>
+                                <a href="/tags/Python/">
+                                    <span class="chip bg-color">Python</span>
+                                </a>
+                            
+                                <a href="/tags/PyTorch/">
+                                    <span class="chip bg-color">PyTorch</span>
                                 </a>
                             
                         </div>
@@ -699,7 +723,7 @@
         repo: 'blogcomment',
         owner: 'Thooooor',
         admin: "Thooooor",
-        id: '2021-03-12T21-11-00',
+        id: '2021-07-02T00-57-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -723,54 +747,51 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/05/14/lun-wen-bi-ji/gnn/2016-nips-variational-graph-auto-encoders/">
+                <a href="/2021/07/02/tuo-keng-ji-lu/an-zhuang-pytorch-he-pytorch-geometric/">
                     <div class="card-image">
                         
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="安装PyTorch和PyTorch Geometric">
                         
-                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="Variational Graph Auto-encoder">
-                        
-                        <span class="card-title">Variational Graph Auto-encoder</span>
+                        <span class="card-title">安装PyTorch和PyTorch Geometric</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            2016 NIPS Workshop《Variational Graph Auto-encoder》变分图自动编码器论文笔记
+                            根据CUDA版本安装PyTorch和PyTorch Geometric
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-14
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/NLP/" class="post-category">
-                                    NLP
+                            <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="post-category">
+                                    脱坑实录
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">论文笔记</span>
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
                     </a>
                     
-                    <a href="/tags/GNN/">
-                        <span class="chip bg-color">GNN</span>
-                    </a>
-                    
-                    <a href="/tags/NIPS/">
-                        <span class="chip bg-color">NIPS</span>
+                    <a href="/tags/PyTorch/">
+                        <span class="chip bg-color">PyTorch</span>
                     </a>
                     
                 </div>
@@ -784,31 +805,30 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/01/11/tuo-keng-ji-lu/matplotlib-zhong-wen-xian-shi/">
+                <a href="/2021/07/01/tuo-keng-ji-lu/linux-duo-ban-ben-cuda-an-zhuang-ji-qie-huan/">
                     <div class="card-image">
                         
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Linux多版本CUDA安装及切换">
                         
-                        <img src="/medias/featureimages/6.png" class="responsive-img" alt="Matplotlib中文显示">
-                        
-                        <span class="card-title">Matplotlib中文显示</span>
+                        <span class="card-title">Linux多版本CUDA安装及切换</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Matplotlib设置中文显示
+                            在Linux-Ubuntu服务器上安装使用多版本CUDA
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-01-11
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-01
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="post-category">
-                                    数学建模
+                            <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="post-category">
+                                    脱坑实录
                                 </a>
                             
                             
@@ -818,8 +838,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Python/">
-                        <span class="chip bg-color">Python</span>
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/Ubuntu/">
+                        <span class="chip bg-color">Ubuntu</span>
                     </a>
                     
                 </div>
@@ -994,13 +1018,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
-    });
-</script>
 
 
 
