@@ -435,54 +435,83 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="一-分治算法的设计"><a href="#一-分治算法的设计" class="headerlink" title="一. 分治算法的设计"></a>一. 分治算法的设计</h1><ul>
-<li><h3 id="划分"><a href="#划分" class="headerlink" title="划分"></a>划分</h3><p>将整个问题划分为多个子问题</p>
+                <h1>一. 分治算法的设计</h1>
+<ul>
+<li>
+<h3 id="划分">划分</h3>
+<p>将整个问题划分为多个子问题</p>
 </li>
-<li><h3 id="求解"><a href="#求解" class="headerlink" title="求解"></a>求解</h3><p>求解各个子问题</p>
+<li>
+<h3 id="求解">求解</h3>
+<p>求解各个子问题</p>
 </li>
-<li><h3 id="合并"><a href="#合并" class="headerlink" title="合并"></a>合并</h3><p>合并子问题的解，形成原始问题的解</p>
+<li>
+<h3 id="合并">合并</h3>
+<p>合并子问题的解，形成原始问题的解</p>
 </li>
 </ul>
-<h1 id="二-分治算法的分析"><a href="#二-分治算法的分析" class="headerlink" title="二. 分治算法的分析"></a>二. 分治算法的分析</h1><ul>
-<li><h3 id="分析过程"><a href="#分析过程" class="headerlink" title="分析过程"></a>分析过程</h3><ul>
+<h1>二. 分治算法的分析</h1>
+<ul>
+<li>
+<h3 id="分析过程">分析过程</h3>
+<ul>
 <li>建立递归方程</li>
 <li>求解</li>
 </ul>
 </li>
-<li><h3 id="递归方程的建立方法"><a href="#递归方程的建立方法" class="headerlink" title="递归方程的建立方法"></a>递归方程的建立方法</h3><ul>
+<li>
+<h3 id="递归方程的建立方法">递归方程的建立方法</h3>
+<ul>
 <li>设输入大小为n,T(n)为时间复杂性</li>
 <li>当$n&lt;c, T(n)=\Theta(1)$</li>
 </ul>
 </li>
-<li><h3 id="划分阶段的时间复杂性"><a href="#划分阶段的时间复杂性" class="headerlink" title="划分阶段的时间复杂性"></a>划分阶段的时间复杂性</h3><ul>
+<li>
+<h3 id="划分阶段的时间复杂性">划分阶段的时间复杂性</h3>
+<ul>
 <li>划分问题为a个子问题</li>
 <li>每个子问题大小为$\frac{n}{b}$</li>
 <li>划分时间可直接得到=$D(n)$</li>
 </ul>
 </li>
-<li><h3 id="递归求解阶段的时间复杂性"><a href="#递归求解阶段的时间复杂性" class="headerlink" title="递归求解阶段的时间复杂性"></a>递归求解阶段的时间复杂性</h3><ul>
+<li>
+<h3 id="递归求解阶段的时间复杂性">递归求解阶段的时间复杂性</h3>
+<ul>
 <li>递归调用</li>
 <li>求解时间=$aT(\frac{n}{b})$</li>
 </ul>
 </li>
-<li><h3 id="合并阶段的时间复杂性"><a href="#合并阶段的时间复杂性" class="headerlink" title="合并阶段的时间复杂性"></a>合并阶段的时间复杂性</h3><ul>
+<li>
+<h3 id="合并阶段的时间复杂性">合并阶段的时间复杂性</h3>
+<ul>
 <li>时间可以直接得到=$C(n)$</li>
 </ul>
 </li>
 </ul>
-<p>$$<br>T(n)=\Theta(1)\quad if;;n&lt;c<br>$$</p>
-<p>$$<br>T(n)=aT(\frac{n}{b})+D(n)+C(n)\quad if\quad n\ge c<br>$$</p>
-<h1 id="三、实际应用"><a href="#三、实际应用" class="headerlink" title="三、实际应用"></a>三、实际应用</h1><h2 id="1-大整数乘法"><a href="#1-大整数乘法" class="headerlink" title="1. 大整数乘法"></a>1. 大整数乘法</h2><ul>
-<li><p>输入：ｎ位二进制整数Ｘ和Y</p>
+<p>$$<br>
+T(n)=\Theta(1)\quad if;;n&lt;c<br>
+$$</p>
+<p>$$<br>
+T(n)=aT(\frac{n}{b})+D(n)+C(n)\quad if\quad n\ge c<br>
+$$</p>
+<h1>三、实际应用</h1>
+<h2 id="1-大整数乘法">1. 大整数乘法</h2>
+<ul>
+<li>
+<p>输入：ｎ位二进制整数Ｘ和Y</p>
 </li>
-<li><p>输出：X和Y的乘积</p>
+<li>
+<p>输出：X和Y的乘积</p>
 </li>
-<li><p>通常时间复杂度：$O(n^2)$</p>
+<li>
+<p>通常时间复杂度：$O(n^2)$</p>
 </li>
-<li><p>简单分治算法：$O(n^{1.59})$</p>
+<li>
+<p>简单分治算法：$O(n^{1.59})$</p>
 </li>
 </ul>
-<h3 id="算法描述"><a href="#算法描述" class="headerlink" title="算法描述"></a>算法描述</h3><ol>
+<h3 id="算法描述">算法描述</h3>
+<ol>
 <li>划分产生$A,B,C,D$</li>
 <li>计算$A-B$和$C-D$</li>
 <li>计算$\frac{n}{2}$位乘法$AC,BD,(A+B)(C+D)$</li>
@@ -491,21 +520,33 @@
 <li>计算XY</li>
 </ol>
 <p><img src="http://note.lizhihao999.cn/notes/20200818112253.png" alt="计算流程"></p>
-<h3 id="时间复杂性"><a href="#时间复杂性" class="headerlink" title="时间复杂性"></a>时间复杂性</h3><ul>
-<li><p>建立递归方程</p>
-<p>$$<br>T(n)=\Theta(1)\quad if;;n=1<br>$$</p>
-<p>$$<br>T(n)=3T(\frac{n}{2})+O(n)\quad if;;n&gt;1<br>$$</p>
+<h3 id="时间复杂性">时间复杂性</h3>
+<ul>
+<li>
+<p>建立递归方程</p>
+<p>$$<br>
+T(n)=\Theta(1)\quad if;;n=1<br>
+$$</p>
+<p>$$<br>
+T(n)=3T(\frac{n}{2})+O(n)\quad if;;n&gt;1<br>
+$$</p>
+</li>
+<li>
+<p>Master定理<br>
+$$<br>
+T(n)=O(n^{\log{3}})=O(n^{1.59})<br>
+$$</p>
 </li>
 </ul>
-<ul>
-<li>Master定理<br>$$<br>T(n)=O(n^{\log{3}})=O(n^{1.59})<br>$$</li>
-</ul>
-<h2 id="2-棋盘覆盖问题"><a href="#2-棋盘覆盖问题" class="headerlink" title="2. 棋盘覆盖问题"></a>2. 棋盘覆盖问题</h2><blockquote>
+<h2 id="2-棋盘覆盖问题">2. 棋盘覆盖问题</h2>
+<blockquote>
 <p>参考<a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid/26548237.html">梦醒潇湘love</a>博客</p>
 </blockquote>
-<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在一个2^k ×2^k （k≥0）个方格组成的棋盘中，恰有一个方格与其他方格不同，称该方格为特殊方格。显然，特殊方格在棋盘中可能出现的位置有4^k 种，因而有4^k种不同的棋盘。棋盘覆盖问题（chess cover problem）要求用图所示的4种不同形状的L型骨牌覆盖给定棋盘上除特殊方格以外的所有方格，且任何2个L型骨牌不得重叠覆盖。</p>
+<h3 id="问题描述">问题描述</h3>
+<p>在一个2^k ×2^k （k≥0）个方格组成的棋盘中，恰有一个方格与其他方格不同，称该方格为特殊方格。显然，特殊方格在棋盘中可能出现的位置有4^k 种，因而有4^k种不同的棋盘。棋盘覆盖问题（chess cover problem）要求用图所示的4种不同形状的L型骨牌覆盖给定棋盘上除特殊方格以外的所有方格，且任何2个L型骨牌不得重叠覆盖。</p>
 <p><img src="http://blog.chinaunix.net/attachment/201303/1/26548237_1362125215RWwI.png" alt="棋盘样例和骨牌样式"></p>
-<h3 id="算法描述-1"><a href="#算法描述-1" class="headerlink" title="算法描述"></a>算法描述</h3><p>将2^k * 2^k的棋盘，先分成相等的四块子棋盘，其中特殊方格位于四个中的一个，构造剩下没特殊方格的三个字棋盘，将它们中的也假设一个方格为特殊方格。如果是：</p>
+<h3 id="算法描述-2">算法描述</h3>
+<p>将2^k * 2^k的棋盘，先分成相等的四块子棋盘，其中特殊方格位于四个中的一个，构造剩下没特殊方格的三个字棋盘，将它们中的也假设一个方格为特殊方格。如果是：</p>
 <p>左上角的子棋盘（若不存在特殊方格）：则将该子棋盘右下角的那个方格假设为特殊方格；</p>
 <p>右上角的子棋盘（若不存在特殊方格）：则将该子棋盘左下角的那个方格假设为特殊方格；</p>
 <p>左下角的子棋盘（若不存在特殊方格）：则将该子棋盘右上角的那个方格假设为特殊方格；</p>
@@ -827,12 +868,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/C-C/">
-                        <span class="chip bg-color">C/C++</span>
-                    </a>
-                    
                     <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
                         <span class="chip bg-color">学习笔记</span>
+                    </a>
+                    
+                    <a href="/tags/C-C/">
+                        <span class="chip bg-color">C/C++</span>
                     </a>
                     
                 </div>
@@ -1132,7 +1173,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">51.4k</span>&nbsp;字
+                class="white-color">52k</span>&nbsp;字
             
             
             

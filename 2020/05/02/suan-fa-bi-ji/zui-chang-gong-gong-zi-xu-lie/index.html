@@ -374,12 +374,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/C-C/">
-                                <span class="chip bg-color">C/C++</span>
-                            </a>
-                        
                             <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
                                 <span class="chip bg-color">学习笔记</span>
+                            </a>
+                        
+                            <a href="/tags/C-C/">
+                                <span class="chip bg-color">C/C++</span>
                             </a>
                         
                     </div>
@@ -439,64 +439,89 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h1><ul>
-<li><p><strong>子序列</strong><br>$$<br>对于给定序列X=&lt;x_1,x_2,…,x_m&gt;，Z=&lt;z_1,z_2,…z_k&gt;<br>$$<br>$$<br>存在一个严格递增的X的下标序列&lt;i_1,i_2,…,i_k&gt;，对所有j=1,2,…,k<br>$$</p>
-<p>$$<br>满足x_{i_j}=z_j<br>$$</p>
+                <h1>问题定义</h1>
+<ul>
+<li>
+<p><strong>子序列</strong><br>
+$$<br>
+对于给定序列X=&lt;x_1,x_2,…,x_m&gt;，Z=&lt;z_1,z_2,…z_k&gt;<br>
+$$<br>
+$$<br>
+存在一个严格递增的X的下标序列&lt;i_1,i_2,…,i_k&gt;，对所有j=1,2,…,k<br>
+$$</p>
+<p>$$<br>
+满足x_{i_j}=z_j<br>
+$$</p>
 <p>则称Z为X的子序列</p>
 </li>
-<li><p><strong>公共子序列</strong></p>
+<li>
+<p><strong>公共子序列</strong></p>
 <p>Z既是X的子序列，也是Y的子序列</p>
 </li>
-<li><p><strong>问题描述</strong></p>
-<p>给定两个序列<br>$$<br>X=&lt;x_1,x_2,…,x_m&gt;,Y=&lt;y_1,y_2,…,y_n&gt;<br>$$<br>求X和Y的<strong>长度最长</strong>的公共子序列</p>
+<li>
+<p><strong>问题描述</strong></p>
+<p>给定两个序列<br>
+$$<br>
+X=&lt;x_1,x_2,…,x_m&gt;,Y=&lt;y_1,y_2,…,y_n&gt;<br>
+$$<br>
+求X和Y的<strong>长度最长</strong>的公共子序列</p>
 </li>
 </ul>
-<h1 id="应用动态规划算法"><a href="#应用动态规划算法" class="headerlink" title="应用动态规划算法"></a>应用动态规划算法</h1><h2 id="1-刻画最长公共子序列的特征"><a href="#1-刻画最长公共子序列的特征" class="headerlink" title="1. 刻画最长公共子序列的特征"></a>1. 刻画最长公共子序列的特征</h2><h3 id="LCS最优子结构"><a href="#LCS最优子结构" class="headerlink" title="LCS最优子结构"></a>LCS最优子结构</h3><p>令$$X=&lt;x_1,x_2,…,x_m&gt;,Y=&lt;y_1,y_2,…,y_n&gt;$$为两个序列，$$Z=&lt;z_1,z_2,…,z_k&gt;$$是X和Y的任意LCS</p>
+<h1>应用动态规划算法</h1>
+<h2 id="1-刻画最长公共子序列的特征">1. 刻画最长公共子序列的特征</h2>
+<h3 id="LCS最优子结构">LCS最优子结构</h3>
+<p>令$$X=&lt;x_1,x_2,…,x_m&gt;,Y=&lt;y_1,y_2,…,y_n&gt;$$为两个序列，$$Z=&lt;z_1,z_2,…,z_k&gt;$$是X和Y的任意LCS</p>
 <ul>
 <li>如果$x_m=y_n，则z_k=x_m=y_n且Z_{k-1}是X_{m-1}和Y_{n-1}的一个LCS$</li>
 <li>如果$x_m\ne y_n，那么z_k\ne x_m\implies Z是X_{m-1}和Y的一个LCS$</li>
 <li>如果$x_m\ne y_n，那么z_k\ne y_n\implies Z是X和Y_{n-1}的一个LCS$</li>
 </ul>
-<h2 id="2-一个递归解"><a href="#2-一个递归解" class="headerlink" title="2. 一个递归解"></a>2. 一个递归解</h2><p><img src="http://note.lizhihao999.cn/notes/20200819163534.png" alt="递归解形式"></p>
-<h2 id="3-计算LCS的长度"><a href="#3-计算LCS的长度" class="headerlink" title="3. 计算LCS的长度"></a>3. 计算LCS的长度</h2><pre><code class="pseudocode"> LCS-LENGTH(X,Y)
+<h2 id="2-一个递归解">2. 一个递归解</h2>
+<p><img src="http://note.lizhihao999.cn/notes/20200819163534.png" alt="递归解形式"></p>
+<h2 id="3-计算LCS的长度">3. 计算LCS的长度</h2>
+<pre><code class="language-pseudocode"> LCS-LENGTH(X,Y)
  m &lt;- X.length
  n &lt;- Y.length
-
+ 
 let c[0...m][0...n] be new table
 
 for i&lt;-1 to m do
-    c[i,0] &lt;- 0
+	c[i,0] &lt;- 0
 for i&lt;-1 to n do
-    c[0,j] &lt;- 0
+	c[0,j] &lt;- 0
 
 for i&lt;-1 to m do
-    for j&lt;-1 to n do
-        if X[i]==Y[j] do
-            c[i][j] &lt;- c[i-1][j-1] + 1
-        else 
-            c[i][j] &lt;- max{c[i-1][j], c[i][j-1]}
- return c</code></pre>
-<h2 id="4-构造LCS"><a href="#4-构造LCS" class="headerlink" title="4. 构造LCS"></a>4. 构造LCS</h2><p>这里没有使用多余的表来存储顺序，而是通过$c[i-1][j],c[i][j-1],c[i-1][j-1]$的大小关系来判断顺序</p>
+	for j&lt;-1 to n do
+		if X[i]==Y[j] do
+			c[i][j] &lt;- c[i-1][j-1] + 1
+		else 
+			c[i][j] &lt;- max{c[i-1][j], c[i][j-1]}
+ return c
+</code></pre>
+<h2 id="4-构造LCS">4. 构造LCS</h2>
+<p>这里没有使用多余的表来存储顺序，而是通过$c[i-1][j],c[i][j-1],c[i-1][j-1]$的大小关系来判断顺序</p>
 <ul>
 <li>如果$c[i][j]==0$，则结束</li>
 <li>如果$c[i-1][j]==c[i][j]$，则对$i=i-1,j=j$继续</li>
 <li>如果$c[i][j-1]==c[i][j]$，则对$i=1,j=j-1$继续</li>
 <li>如果$c[i-1][j-1]+1==c[i][j]$，则对$i=i-1,j=j-1$继续，并输出$X[i]$</li>
 </ul>
-<pre><code class="pseudocode">PRINT-LCS(X, c, i, j)
+<pre><code class="language-pseudocode">PRINT-LCS(X, c, i, j)
 if c[i][j] == 0 do
-    return
+	return
 /* 如果c[i-1][j]==c[i][j]，则对i=i-1,j=j继续 */
 if c[i-1][j] == c[i][j] do
-    PRINT-LCS(X, c, i-1, j)
+	PRINT-LCS(X, c, i-1, j)
 /* 如果c[i][j-1]==c[i][j]，则对i=i,j=j-1继续 */
 else if c[i][j-1] == c[i][j] do
-    PRINT-LCS（X, c, i, j-1)
+	PRINT-LCS（X, c, i, j-1)
 /* 如果c[i-1][j-1]+1==c[i][j]，则对i=i-1,j=j-1继续 */
 else
-    PRINT-LCS(X, c, i-1, j-1)
-    print(X[i])</code></pre>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><pre><code class="cpp">#include &lt;iostream&gt;
+	PRINT-LCS(X, c, i-1, j-1)
+	print(X[i])
+</code></pre>
+<h1>代码实现</h1>
+<pre><code class="language-cpp">#include &lt;iostream&gt;
 #include &lt;vector&gt;
 #include &lt;cstring&gt;
 using namespace std;
@@ -539,7 +564,7 @@ void print_lcs(string X, vector&lt;vector&lt;int&gt;&gt; c, int i, int j)
     if (c[i][j] == 0) {
         return;
     }
-
+    
     if (c[i-1][j] == c[i][j]) {
         print_lcs(X, c, i - 1, j);
     }
@@ -564,34 +589,42 @@ int main()
 
     cout &lt;&lt; c[m][n] &lt;&lt; endl;
     print_lcs(X, c, m, n);
-}</code></pre>
-<h1 id="算法改进"><a href="#算法改进" class="headerlink" title="算法改进"></a>算法改进</h1><h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><p>对于计算某个位置的$c[i][j]$只需要三个表项：$c[i-1][j-1],c[i-1][j],c[i][j-1]$，所以其实只需要当前一行和上一行的表项数值，故利用利用一个二维数组记录当前行和上一行的数值即可</p>
+}
+</code></pre>
+<h1>算法改进</h1>
+<h2 id="二维数组">二维数组</h2>
+<p>对于计算某个位置的$c[i][j]$只需要三个表项：$c[i-1][j-1],c[i-1][j],c[i][j-1]$，所以其实只需要当前一行和上一行的表项数值，故利用利用一个二维数组记录当前行和上一行的数值即可</p>
 <table>
 <thead>
 <tr>
-<th align="center">$c[i-1][j-1]$</th>
-<th align="center">$c[i-1][j] $</th>
+<th style="text-align:center">$c[i-1][j-1]$</th>
+<th style="text-align:center">$c[i-1][j] $</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">$c[i][j-1]$</td>
-<td align="center">$c[i][j] $</td>
+<tbody>
+<tr>
+<td style="text-align:center">$c[i][j-1]$</td>
+<td style="text-align:center">$c[i][j] $</td>
 </tr>
-</tbody></table>
-<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><pre><code class="pseudocode">/* 假设X长度m&lt;=Y长度n */
+</tbody>
+</table>
+<h3 id="伪代码">伪代码</h3>
+<pre><code class="language-pseudocode">/* 假设X长度m&lt;=Y长度n */
 LCS-LENGTH(X, Y)
 m &lt;- X.length
 n &lt;- Y.length
 let c[2][m] be new table
 for i&lt;-1 to n do
-    for j&lt;-1 to m do
-        if X[j] == Y[i] do
-            c[(i+1)%2][j] &lt;- c[i%2][j-1]+1
-        else
-            c[(i+1)%2][j] &lt;- max{c[(i+1)%2][j-1], c[i%2][j]}
+	for j&lt;-1 to m do
+		if X[j] == Y[i] do
+			c[(i+1)%2][j] &lt;- c[i%2][j-1]+1
+		else
+			c[(i+1)%2][j] &lt;- max{c[(i+1)%2][j-1], c[i%2][j]}
 
-return c[n%2][m]</code></pre>
-<h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code class="cpp">int lcs_pro(string X, string Y)
+return c[n%2][m]
+</code></pre>
+<h3 id="代码实现">代码实现</h3>
+<pre><code class="language-cpp">int lcs_pro(string X, string Y)
 {
     int m = X.size();
     int n = Y.size();
@@ -610,27 +643,44 @@ return c[n%2][m]</code></pre>
     }
 
     return c[(n-1)%2][m];
-}</code></pre>
-<h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><p>对于计算某个位置的$c[i][j]$需要三个表项：<br>$$<br>c[i-1][j-1],c[i-1][j],c[i][j-1]<br>$$<br>如果在一行中表示，对于某个待计算的$c[j]$其中：<br>$$<br>c[i-1][j]=未覆盖前的c[j]<br>$$<br>$$<br>c[i][j-1]=c[j]<br>$$</p>
-<p>$$<br>c[i-1][j-1]=覆盖之前的c[j-1]<br>$$</p>
+}
+</code></pre>
+<h2 id="一维数组">一维数组</h2>
+<p>对于计算某个位置的$c[i][j]$需要三个表项：<br>
+$$<br>
+c[i-1][j-1],c[i-1][j],c[i][j-1]<br>
+$$<br>
+如果在一行中表示，对于某个待计算的$c[j]$其中：<br>
+$$<br>
+c[i-1][j]=未覆盖前的c[j]<br>
+$$<br>
+$$<br>
+c[i][j-1]=c[j]<br>
+$$</p>
+<p>$$<br>
+c[i-1][j-1]=覆盖之前的c[j-1]<br>
+$$</p>
 <p>所以在一行中$c[i-1][j]和c[i]][j-1]$已经存在，只需要额外一个空间保存被覆盖的$c[i-1][j-1]$即可</p>
 <table>
 <thead>
 <tr>
-<th align="center">被覆盖$c[i-1,j-1]=pre$</th>
-<th align="center"></th>
+<th style="text-align:center">被覆盖$c[i-1,j-1]=pre$</th>
+<th style="text-align:center"></th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center">$c[i][j-1]=c[j-1]$</td>
-<td align="center">$c[i-1][j]=c[j]$</td>
+<tbody>
+<tr>
+<td style="text-align:center">$c[i][j-1]=c[j-1]$</td>
+<td style="text-align:center">$c[i-1][j]=c[j]$</td>
 </tr>
 <tr>
-<td align="center"></td>
-<td align="center"><strong>待写入</strong>$c[i,j]$</td>
+<td style="text-align:center"></td>
+<td style="text-align:center"><strong>待写入</strong>$c[i,j]$</td>
 </tr>
-</tbody></table>
-<h3 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h3><pre><code class="pseudocode">/* 假设X长度m&lt;=Y长度n */
+</tbody>
+</table>
+<h3 id="伪代码-2">伪代码</h3>
+<pre><code class="language-pseudocode">/* 假设X长度m&lt;=Y长度n */
 LCS-LENGTH(X, Y)
 m &lt;- X.length
 n &lt;- Y.length
@@ -638,17 +688,19 @@ let c[m] be new table
 /* pre记录被前一个覆盖的值 */
 pre &lt;- 0
 for i&lt;-1 to n do
-    for j&lt;-1 to m do
-        /* tmp临时记录被覆盖的值 */
-        tmp &lt;- c[j]
-        if X[j] == Y[i] do
-            c[j] = pre+1
-        else
-            c[j] = max{c[j], c[j-1]}
-        pre &lt;- tmp
+	for j&lt;-1 to m do
+		/* tmp临时记录被覆盖的值 */
+		tmp &lt;- c[j]
+		if X[j] == Y[i] do
+			c[j] = pre+1
+		else
+			c[j] = max{c[j], c[j-1]}
+		pre &lt;- tmp
 
-return c[m]</code></pre>
-<h3 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code class="c++">int lcs_plus(string X, string Y)
+return c[m]
+</code></pre>
+<h3 id="代码实现-2">代码实现</h3>
+<pre><code class="language-c++">int lcs_plus(string X, string Y)
 {
     int m = X.size();
     int n = Y.size();
@@ -668,7 +720,8 @@ return c[m]</code></pre>
     }
 
     return c[m];
-}</code></pre>
+}
+</code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -750,12 +803,12 @@ return c[m]</code></pre>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/C-C/">
-                                    <span class="chip bg-color">C/C++</span>
-                                </a>
-                            
                                 <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
                                     <span class="chip bg-color">学习笔记</span>
+                                </a>
+                            
+                                <a href="/tags/C-C/">
+                                    <span class="chip bg-color">C/C++</span>
                                 </a>
                             
                         </div>
@@ -1289,7 +1342,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">51.4k</span>&nbsp;字
+                class="white-color">52k</span>&nbsp;字
             
             
             

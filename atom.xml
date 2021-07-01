@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2021-05-14T07:09:53.390Z</updated>
+  <updated>2021-07-01T15:34:46.440Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Linux多版本CUDA安装及切换</title>
+    <link href="https://thooooor.github.io/2021/07/01/tuo-keng-ji-lu/linux-duo-ban-ben-cuda-an-zhuang-ji-qie-huan/"/>
+    <id>https://thooooor.github.io/2021/07/01/tuo-keng-ji-lu/linux-duo-ban-ben-cuda-an-zhuang-ji-qie-huan/</id>
+    <published>2021-07-01T15:33:00.000Z</published>
+    <updated>2021-07-01T15:34:46.440Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;1. Linux多版本cuda切换&lt;/h1&gt;
+&lt;p&gt;cuda一般安装在 /usr/local/cuda/ 路径下，该路径下有一个version.txt文档，里面记录了cuda的版本信息&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;cat 
+        
+      
+    
+    </summary>
+    
+    
+      <category term="脱坑实录" scheme="https://thooooor.github.io/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/"/>
+    
+    
+      <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
+    
+      <category term="Ubuntu" scheme="https://thooooor.github.io/tags/Ubuntu/"/>
+    
+  </entry>
   
   <entry>
     <title>Variational Graph Auto-encoder</title>
@@ -63,7 +94,7 @@
         
         
           &lt;p&gt;逐步总结知识图谱相关知识，包括知识图谱概念、知识图谱构建、知识图谱嵌入和知识图谱应用。&lt;/p&gt;
-&lt;h1 id=&quot;1-知识&quot;&gt;&lt;a href=&quot;#1-知识&quot; class=&quot;headerlink&quot; title=&quot;1. 知识&quot;&gt;&lt;/a&gt;1. 知识&lt;/h1&gt;&lt;p&gt;​       
+&lt;h1&gt;1.
         
       
     
@@ -91,7 +122,7 @@
         
         
           &lt;p&gt;在脚本开始处进行如下设置：&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;python&quot;&gt;plt.rcParams[&#39;font.family&#39;] = [&#39;sans-serif&#39;]
+&lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;plt.rcParams[&#39;font.family&#39;] = [&#39;sans-serif&#39;]
 plt.rcParams[&#39;font.sans-serif&#39;] =
         
       
@@ -146,7 +177,7 @@ plt.rcParams[&#39;font.sans-serif&#39;] =
       
         
         
-          &lt;h1 id=&quot;图嵌入-Graph-Embedding&quot;&gt;&lt;a href=&quot;#图嵌入-Graph-Embedding&quot; class=&quot;headerlink&quot; title=&quot;图嵌入 Graph Embedding&quot;&gt;&lt;/a&gt;图嵌入 Graph
+          &lt;h1&gt;图嵌入 Graph
         
       
     
@@ -324,8 +355,9 @@ plt.rcParams[&#39;font.sans-serif&#39;] =
       
         
         
-          &lt;h1 id=&quot;线性规划&quot;&gt;&lt;a href=&quot;#线性规划&quot; class=&quot;headerlink&quot; title=&quot;线性规划&quot;&gt;&lt;/a&gt;线性规划&lt;/h1&gt;&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
-&lt;h2 id=&quot;特征&quot;&gt;&lt;a href=&quot;#特征&quot;
+          &lt;h1&gt;线性规划&lt;/h1&gt;
+&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
+&lt;h2
         
       
     
@@ -352,8 +384,9 @@ plt.rcParams[&#39;font.sans-serif&#39;] =
       
         
         
-          &lt;pre&gt;&lt;code class=&quot;python&quot;&gt;from sympy import *
-init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
+          &lt;pre&gt;&lt;code class=&quot;language-python&quot;&gt;from sympy import *
+init_printing(use_unicode=True)
+&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a
         
       
@@ -408,7 +441,9 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
       
         
         
-          &lt;h1 id=&quot;流网络&quot;&gt;&lt;a href=&quot;#流网络&quot; class=&quot;headerlink&quot; title=&quot;流网络&quot;&gt;&lt;/a&gt;流网络&lt;/h1&gt;&lt;h2 id=&quot;流网络和流&quot;&gt;&lt;a href=&quot;#流网络和流&quot; class=&quot;headerlink&quot;
+          &lt;h1&gt;流网络&lt;/h1&gt;
+&lt;h2 id=&quot;流网络和流&quot;&gt;流网络和流&lt;/h2&gt;
+&lt;p&gt;流网络$G=(V,E)$，是一个有向图，图中每条边$(u,v)\in E$有一个非负的&lt;strong&gt;容量值&lt;/strong&gt;$c(u,v)\ge
         
       
     
@@ -435,7 +470,9 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
       
         
         
-          &lt;h1 id=&quot;Floyd算法&quot;&gt;&lt;a href=&quot;#Floyd算法&quot; class=&quot;headerlink&quot;
+          &lt;h1&gt;Floyd算法&lt;/h1&gt;
+&lt;p&gt;Floyd算法利用&lt;strong&gt;动态规划&lt;/strong&gt;来解决所有结点对最短路径问题，运行时间为$O(V^3)$。假设负权重的边可以存在，但不能存在负权重的环路。&lt;/p&gt;
+&lt;p&gt;使用&lt;strong&gt;邻接矩阵W&lt;/strong&gt;来表示图，
         
       
     
@@ -445,9 +482,9 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
       <category term="算法" scheme="https://thooooor.github.io/categories/%E7%AE%97%E6%B3%95/"/>
     
     
-      <category term="C/C++" scheme="https://thooooor.github.io/tags/C-C/"/>
-    
       <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="C/C++" scheme="https://thooooor.github.io/tags/C-C/"/>
     
   </entry>
   
@@ -464,7 +501,8 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
       
         
         
-          &lt;h1 id=&quot;最短路径问题&quot;&gt;&lt;a href=&quot;#最短路径问题&quot; class=&quot;headerlink&quot; title=&quot;最短路径问题&quot;&gt;&lt;/a&gt;最短路径问题&lt;/h1&gt;&lt;p&gt;在该问题中，给定一个带权重的有向图$G=(V,E)$和权重函数$w:E\to
+          &lt;h1&gt;最短路径问题&lt;/h1&gt;
+&lt;p&gt;在该问题中，给定一个带权重的有向图$G=(V,E)$和权重函数$w:E\to
         
       
     
@@ -547,35 +585,9 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
       
         
         
-          &lt;h1 id=&quot;问题描述&quot;&gt;&lt;a href=&quot;#问题描述&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://thooooor.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>贪心算法</title>
-    <link href="https://thooooor.github.io/2020/05/03/suan-fa-bi-ji/tan-xin-suan-fa/"/>
-    <id>https://thooooor.github.io/2020/05/03/suan-fa-bi-ji/tan-xin-suan-fa/</id>
-    <published>2020-05-03T07:20:00.000Z</published>
-    <updated>2021-03-12T13:19:33.785Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;贪心算法通过做出一系列选择来求出问题的最优解。在每个决策点，它做出在当时看来最佳的选择。这种启发式策略不能保证总能找到最优解，但对某些问题确实能够得到最优解。&lt;/p&gt;
-&lt;h1 id=&quot;设计步骤&quot;&gt;&lt;a href=&quot;#设计步骤&quot; class=&quot;headerlink&quot;
+          &lt;h1&gt;问题描述&lt;/h1&gt;
+&lt;p&gt;有一个n个活动的集合，$S={a_1,a_2,…,a_n}$，这些活动使用同一个资源（一个教室），而这个资源在某个时刻只能供一个活动使用。&lt;/p&gt;
+&lt;p&gt;每个活动都有一个$开始时间s_i$和一个$结束时间f_i$，其中$0\le
         
       
     
