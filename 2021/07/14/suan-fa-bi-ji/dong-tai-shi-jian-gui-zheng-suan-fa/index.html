@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Pycharm远程调试, Thor&#39;s Blog">
+    <meta name="keywords" content="动态时间规整(DTW)算法, Thor&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Pycharm远程调试 | Thor&#39;s Blog</title>
+    <title>动态时间规整(DTW)算法 | Thor&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -252,12 +252,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Pycharm远程调试</h1>
+                    <h1 class="description center-align post-title">动态时间规整(DTW)算法</h1>
                 </div>
             </div>
         </div>
@@ -374,8 +374,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Linux/">
-                                <span class="chip bg-color">Linux</span>
+                            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                                <span class="chip bg-color">学习笔记</span>
                             </a>
                         
                     </div>
@@ -386,8 +386,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="post-category">
-                                脱坑实录
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                算法
                             </a>
                         
                     </div>
@@ -399,28 +399,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-03-28
+                    2021-07-14
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-08-07
+                    2021-07-14
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    730
+                    784
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    3 分
                 </div>
                 
 
@@ -435,88 +435,16 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p>IDE：PyCharm 2019.3.3 (Professional Edition)<br>ECS：腾讯云 Ubuntu 18.04.4 LTS</p>
-</blockquote>
-<p>利用pycharm进行远程调试，主要有两种模式：</p>
-<ul>
-<li>利用云服务器端的环境调试本地代码，实现本地开发，Linux云端调试</li>
-<li>在本地调试云端代码</li>
-</ul>
-<p>两种模式共同点都需要在本地的pycharm连接上云服务器的环境，首先需要先配置好服务器端的环境。</p>
-<h2 id="一-配置远程连接"><a href="#一-配置远程连接" class="headerlink" title="一. 配置远程连接"></a>一. 配置远程连接</h2><h4 id="1-进入Pycharm菜单栏，如下图依次点击Tools-gt-Deployment-gt-Configuration…"><a href="#1-进入Pycharm菜单栏，如下图依次点击Tools-gt-Deployment-gt-Configuration…" class="headerlink" title="1. 进入Pycharm菜单栏，如下图依次点击Tools->Deployment->Configuration…"></a>1. 进入Pycharm菜单栏，如下图依次点击Tools-&gt;Deployment-&gt;Configuration…</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328204451.png" alt="菜单栏"></p>
-<h4 id="2-右侧点击-添加SFTP"><a href="#2-右侧点击-添加SFTP" class="headerlink" title="2. 右侧点击+添加SFTP"></a>2. 右侧点击+添加SFTP</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328213703.png"></p>
-<h4 id="3-设置Name（自己设置）"><a href="#3-设置Name（自己设置）" class="headerlink" title="3. 设置Name（自己设置）"></a>3. 设置Name（自己设置）</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328213919.png"></p>
-<h4 id="4-填写连接配置"><a href="#4-填写连接配置" class="headerlink" title="4. 填写连接配置"></a>4. 填写连接配置</h4><ul>
-<li><strong>Host（外网IP）</strong></li>
-<li><strong>端口</strong></li>
-<li><strong>用户名</strong></li>
-<li><strong>密码</strong></li>
-</ul>
-<img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/1.png" style="zoom:80%;">
-
-<p>填好之后可以<strong>测试连接</strong></p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/2.png"></p>
-<p>之后点击<strong>Autodetect</strong>确定根目录</p>
-<h4 id="5-点击OK结束"><a href="#5-点击OK结束" class="headerlink" title="5. 点击OK结束"></a>5. 点击OK结束</h4><h2 id="二-配置远程解释器"><a href="#二-配置远程解释器" class="headerlink" title="二. 配置远程解释器"></a>二. 配置远程解释器</h2><h4 id="1-进入Pycharm菜单栏，如下图依次点击File-gt-Settings…"><a href="#1-进入Pycharm菜单栏，如下图依次点击File-gt-Settings…" class="headerlink" title="1. 进入Pycharm菜单栏，如下图依次点击File->Settings…"></a>1. 进入Pycharm菜单栏，如下图依次点击File-&gt;Settings…</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328223125.png"></p>
-<h4 id="2-选择Project-gt-Project-Interpreter"><a href="#2-选择Project-gt-Project-Interpreter" class="headerlink" title="2. 选择Project->Project Interpreter"></a>2. 选择Project-&gt;Project Interpreter</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328223329.png"></p>
-<h4 id="3-点击添加解释器"><a href="#3-点击添加解释器" class="headerlink" title="3. 点击添加解释器"></a>3. 点击添加解释器</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328223536.png"></p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328223554.png"></p>
-<h4 id="4-选择SSH-Interpreter-gt-Existing-server-configuration-gt-刚刚新建的Deployment"><a href="#4-选择SSH-Interpreter-gt-Existing-server-configuration-gt-刚刚新建的Deployment" class="headerlink" title="4. 选择SSH Interpreter->Existing server configuration->刚刚新建的Deployment"></a>4. 选择SSH Interpreter-&gt;Existing server configuration-&gt;刚刚新建的Deployment</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/4.png"></p>
-<h4 id="5-选择Move-gt-Next"><a href="#5-选择Move-gt-Next" class="headerlink" title="5. 选择Move ->Next"></a>5. 选择Move -&gt;Next</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200331105544.png"></p>
-<h4 id="6-设置远端解释器"><a href="#6-设置远端解释器" class="headerlink" title="6. 设置远端解释器"></a>6. 设置远端解释器</h4><p>我在这里设置为虚拟环境中的解释器，是否需要<strong>sudo</strong>权限根据自己的实际需要</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/5.png"></p>
-<p>可以看到pycharm在<code>tmp</code>文件夹下新建了<code>pycharm_project_xxx</code>文件夹用于放置本地的同步项目代码</p>
-<p>点击<strong>Finish</strong>结束配置</p>
-<h4 id="7-成功后可以看到环境中的安装的依赖包"><a href="#7-成功后可以看到环境中的安装的依赖包" class="headerlink" title="7. 成功后可以看到环境中的安装的依赖包"></a>7. 成功后可以看到环境中的安装的依赖包</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328224945.png"></p>
-<p>点击<strong>Apply</strong>完成配置</p>
-<h4 id="8-检查Mappings"><a href="#8-检查Mappings" class="headerlink" title="8. 检查Mappings"></a>8. 检查Mappings</h4><ul>
-<li><strong>Tools-&gt;Deployment-&gt;Configuration…</strong></li>
-<li><strong>查看之前Deployment的Mappings下的Deployment path</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200331111651.png"></p>
-<ul>
-<li><strong>如果没有自动定位可以手动设置</strong></li>
-</ul>
-<h2 id="三-远程调试本地代码"><a href="#三-远程调试本地代码" class="headerlink" title="三.远程调试本地代码"></a>三.远程调试本地代码</h2><blockquote>
-<p>以<strong>Django</strong>项目为例</p>
-</blockquote>
-<h4 id="1-设置ALLOWED-HOSTS"><a href="#1-设置ALLOWED-HOSTS" class="headerlink" title="1. 设置ALLOWED_HOSTS"></a>1. 设置ALLOWED_HOSTS</h4><p>允许所有的host访问</p>
-<pre><code class="python"># DataAdmin/settings.py
-...
-ALLOWED_HOSTS = ["*"]
-...</code></pre>
-<h4 id="2-自动同步代码"><a href="#2-自动同步代码" class="headerlink" title="2. 自动同步代码"></a>2. 自动同步代码</h4><p>实际的运行过程是：pycharm将本地代码<strong>自动同步</strong>到服务器上对应的的<code>tmp/pycharm_projectXXX</code>文件夹中，实际运行时也是运行的服务器端的代码。</p>
-<ul>
-<li><strong>可以通过File Transfer查看同步情况</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200331112257.png"></p>
-<ul>
-<li><strong>可以通过Tools-&gt;Deployment-&gt;Browse Remote Host查看服务器端目录结构</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200331112330.png"></p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200331112502.png"></p>
-<h4 id="3-调试运行项目"><a href="#3-调试运行项目" class="headerlink" title="3. 调试运行项目"></a>3. 调试运行项目</h4><ul>
-<li><strong>Run manage.py-&gt;Edit  Configurations…</strong></li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200331110847.png"></p>
-<ul>
-<li><strong>检查Script path是否对应自己的项目地址</strong></li>
-<li><strong>添加Parameters：<code>runserver 0.0.0.0:8000</code></strong></li>
-<li><strong>Apply-&gt;OK</strong></li>
-<li><strong>Run</strong></li>
-</ul>
-<p>打开<strong>IP:8000</strong>，可以看到自己的网页</p>
-<h2 id="四-远程调试云端代码"><a href="#四-远程调试云端代码" class="headerlink" title="四. 远程调试云端代码"></a>四. 远程调试云端代码</h2><h4 id="1-连接到服务器Tools-gt-Start-SSH-session…"><a href="#1-连接到服务器Tools-gt-Start-SSH-session…" class="headerlink" title="1. 连接到服务器Tools->Start SSH session…"></a>1. 连接到服务器Tools-&gt;Start SSH session…</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328231327.png"></p>
-<h4 id="2-选择对应的HOST"><a href="#2-选择对应的HOST" class="headerlink" title="2.选择对应的HOST"></a>2.选择对应的HOST</h4><p>连接成功后，会有终端显示</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/7.png"></p>
-<h4 id="3-显示服务器目录结构Tools-gt-Deployment-gt-Browse-Remote-Host"><a href="#3-显示服务器目录结构Tools-gt-Deployment-gt-Browse-Remote-Host" class="headerlink" title="3. 显示服务器目录结构Tools->Deployment->Browse Remote Host"></a>3. 显示服务器目录结构Tools-&gt;Deployment-&gt;Browse Remote Host</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328231901.png"></p>
-<p>选择后会显示出服务器目录结构，选中项目文件能够打开编辑</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/9.png"></p>
-<h4 id="4-编辑完成后更新版本"><a href="#4-编辑完成后更新版本" class="headerlink" title="4. 编辑完成后更新版本"></a>4. 编辑完成后更新版本</h4><p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328232528.png"></p>
-<p>可以设置自动上传更新<strong>Tools-&gt;Deployment-&gt;Automatic Upload</strong></p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200328232726.png"></p>
-<h4 id="5-在终端调试运行"><a href="#5-在终端调试运行" class="headerlink" title="5. 在终端调试运行"></a>5. 在终端调试运行</h4><script>
+                <p>时间序列数据存在多种相似或距离函数，其中最突出的是动态时间规整。在大部分的学科中，时间序列是数据的一种常见表示形式。对于时间序列处理来说，一个普遍的任务就是比较两个序列的相似性。在时间序列中，需要比较相似性的两段时间序列的<strong>长度可能并不相等</strong>，在语音识别领域表现为不同人的语速不同。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210714142246.png"></p>
+<p>动态时间规整在60年代由日本学者Itakura提出，把未知量伸长或缩短(压扩)，直到与参考模板的长度一致，在这一过程中，未知单词的时间轴会产生扭曲或弯折，以便其特征量与标准模式对应。即可以把序列某个时刻的点跟另一时刻多个连续时刻的点相对应。</p>
+<h1 id="1-算法描述"><a href="#1-算法描述" class="headerlink" title="1. 算法描述"></a>1. 算法描述</h1><p>给定两个时间序列$X$和$Y$ ，他们的长度分别是$n$和$m$：<br>$$<br>X=[x_{1},x_{2},…,x_{n}]\<br>Y=[y_{1},y_{2},…,y_{m}]<br>$$<br>在$m\ne n$的情况下，为了对齐这两个序列，首先构建一个$n\times m$的矩阵网格，矩阵$(i,j)$处的元素表示$x_{i},y_{j}$之间的距离$d(q_{i},c_{j})$，不同情况下距离公式的选择不同，最简单可以使用欧氏距离。然后，寻找一条从矩阵左上角元素到右下角的路径，使得路径上的元素和最小，可以通过<strong>动态规划</strong>解决。</p>
+<h1 id="2-规整路径-Warp-Path"><a href="#2-规整路径-Warp-Path" class="headerlink" title="2. 规整路径 Warp Path"></a>2. 规整路径 Warp Path</h1><p>该路径称为规整路径$W$：<br>$$<br>W=w_{1},w_{2},…,w_{k},…,w_{K}\<br>\max(m,n)\le K&lt;m+n-1<br>$$<br>第$k$个元素为$W_{k}=(i,j)_{k}$，$i,j$分别表示$X,Y$中的坐标，路径长度为路径上的元素和。</p>
+<p>路径需要满足以下条件：</p>
+<h2 id="边界条件"><a href="#边界条件" class="headerlink" title="边界条件"></a>边界条件</h2><p>各序列先后次序不可能改变，所以所选的路径必定是从左下角出发，在右上角结束。即：<br>$$<br>w_{1}=(1,1)\<br>w_{K}=(m,n)<br>$$</p>
+<h2 id="连续性、单调性"><a href="#连续性、单调性" class="headerlink" title="连续性、单调性"></a>连续性、单调性</h2><p>连续性保保证$X$和$Y$中的每个坐标都在$W$中出现，即不可能跨过某个点去匹配，只能和自己相邻的点对齐。单调性限制$W$上面的点必须是随着时间单调进行。综合两个条件：<br>$$<br>w_{k}=(i,j),w_{k+1}=(i’,j’)\<br>i\le i’\le i+1,j\le j’\le j+1<br>$$<br>其中，$i\le i’$保证单调性，$i’\le i+1$保证连续性。如下图所示，对于格点$(i,j)$，下一个格点$(i’,j’)$的可能位置为：<br>$$<br>(i+1,j)\<br>(i,j+1)\<br>(i+1,j+1)<br>$$<br><img src="http://note.lizhihao999.cn/notes/20210714143121.png"></p>
+<p>如图所示，最后要得到距离最短的规整路径，代价矩阵$D$定义为：<br>$$<br>D(i,j)=Dist(i,j)+\min[D(i-1,j),D(i,j-1),D(i-1,j-1)]<br>$$<br>使用动态规划来进行求解。</p>
+<script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -559,7 +487,7 @@ ALLOWED_HOSTS = ["*"]
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://thooooor.github.io/2020/03/28/tuo-keng-ji-lu/pycharm-yuan-cheng-diao-shi/">https://thooooor.github.io/2020/03/28/tuo-keng-ji-lu/pycharm-yuan-cheng-diao-shi/</a>
+                    <a href="https://thooooor.github.io/2021/07/14/suan-fa-bi-ji/dong-tai-shi-jian-gui-zheng-suan-fa/">https://thooooor.github.io/2021/07/14/suan-fa-bi-ji/dong-tai-shi-jian-gui-zheng-suan-fa/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -597,8 +525,8 @@ ALLOWED_HOSTS = ["*"]
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Linux/">
-                                    <span class="chip bg-color">Linux</span>
+                                <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                                    <span class="chip bg-color">学习笔记</span>
                                 </a>
                             
                         </div>
@@ -769,7 +697,7 @@ ALLOWED_HOSTS = ["*"]
         repo: 'blogcomment',
         owner: 'Thooooor',
         admin: "Thooooor",
-        id: '2020-03-28T09-25-00',
+        id: '2021-07-14T14-58-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -793,28 +721,79 @@ ALLOWED_HOSTS = ["*"]
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/03/29/tuo-keng-ji-lu/linux-pei-zhi-xu-ni-huan-jing/">
+                <a href="/2021/07/14/suan-fa-bi-ji/dong-tai-shi-jian-gui-zheng-suan-fa/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Linux配置虚拟环境">
                         
-                        <span class="card-title">Linux配置虚拟环境</span>
+                        <img src="/medias/featureimages/7.png" class="responsive-img" alt="动态时间规整(DTW)算法">
+                        
+                        <span class="card-title">动态时间规整(DTW)算法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在Ubuntu服务器上配置管理虚拟环境
+                            动态时间规整(DTW)算法描述
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-03-29
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-14
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
+                                </a>
+                            
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                        <span class="chip bg-color">学习笔记</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/07/02/tuo-keng-ji-lu/an-zhuang-pytorch-he-pytorch-geometric/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="安装PyTorch和PyTorch Geometric">
+                        
+                        <span class="card-title">安装PyTorch和PyTorch Geometric</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            根据CUDA版本安装PyTorch和PyTorch Geometric
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -830,60 +809,12 @@ ALLOWED_HOSTS = ["*"]
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Linux/">
-                        <span class="chip bg-color">Linux</span>
+                    <a href="/tags/Python/">
+                        <span class="chip bg-color">Python</span>
                     </a>
                     
-                    <a href="/tags/Ubuntu/">
-                        <span class="chip bg-color">Ubuntu</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/03/08/li-yong-channels-shi-xian-websocket-xie-yi/">
-                    <div class="card-image">
-                        
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="利用Channels实现WebSocket协议">
-                        
-                        <span class="card-title">利用Channels实现WebSocket协议</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            在Django中利用Channels实现WebSocket实时通讯协议
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-08
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E6%8A%80%E6%9C%AF%E5%AE%9E%E6%88%98/" class="post-category">
-                                    技术实战
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Django/">
-                        <span class="chip bg-color">Django</span>
+                    <a href="/tags/PyTorch/">
+                        <span class="chip bg-color">PyTorch</span>
                     </a>
                     
                 </div>
@@ -1058,6 +989,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
 
 
 

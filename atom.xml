@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2021-07-01T16:58:17.655Z</updated>
+  <updated>2021-07-14T06:58:50.621Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>动态时间规整(DTW)算法</title>
+    <link href="https://thooooor.github.io/2021/07/14/suan-fa-bi-ji/dong-tai-shi-jian-gui-zheng-suan-fa/"/>
+    <id>https://thooooor.github.io/2021/07/14/suan-fa-bi-ji/dong-tai-shi-jian-gui-zheng-suan-fa/</id>
+    <published>2021-07-14T06:58:00.000Z</published>
+    <updated>2021-07-14T06:58:50.621Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;时间序列数据存在多种相似或距离函数，其中最突出的是动态时间规整。在大部分的学科中，时间序列是数据的一种常见表示形式。对于时间序列处理来说，一个普遍的任务就是比较两个序列的相似性。在时间序列中，需要比较相似性的两段时间序列的&lt;strong&gt;长度可能并不相等&lt;/strong&gt;，
+        
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://thooooor.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>安装PyTorch和PyTorch Geometric</title>
@@ -550,35 +577,6 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
         
         
           &lt;p&gt;用$G=(V,E)$表示连通无向图，并且对于每条边$(u,v)\in E$，为其赋予权重$w(u,v)$。我们希望找到一个无环子集$T\subseteq
-        
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://thooooor.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>哈夫曼编码</title>
-    <link href="https://thooooor.github.io/2020/05/05/suan-fa-bi-ji/ha-fu-man-bian-ma/"/>
-    <id>https://thooooor.github.io/2020/05/05/suan-fa-bi-ji/ha-fu-man-bian-ma/</id>
-    <published>2020-05-05T14:52:00.000Z</published>
-    <updated>2021-03-12T13:18:35.644Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;哈夫曼编码可以很有效地压缩数据，通常可以节省20%-90%的空间，具体压缩率依赖于数据的特性。我们将带压缩数据看作字符序列，根据每个字符的出现频率，哈夫曼贪心算法构造出字符串的最优二进制表示。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;变长编码&lt;/strong
         
       
     
