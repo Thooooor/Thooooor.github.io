@@ -439,7 +439,8 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="图嵌入-Graph-Embedding"><a href="#图嵌入-Graph-Embedding" class="headerlink" title="图嵌入 Graph Embedding"></a>图嵌入 Graph Embedding</h1><p>图嵌入是将图中的结点、边、关系映射到更低维度的向量空间，同时最大化地保留特征信息，例如图结构以及信息。由于图的规模、特征和主题不同，同时，图类型的数据是离散的，所以对于图的处理是很困难的。</p>
+                <h1>图嵌入 Graph Embedding</h1>
+<p>图嵌入是将图中的结点、边、关系映射到更低维度的向量空间，同时最大化地保留特征信息，例如图结构以及信息。由于图的规模、特征和主题不同，同时，图类型的数据是离散的，所以对于图的处理是很困难的。</p>
 <blockquote>
 <p>理由：</p>
 <ol>
@@ -452,43 +453,59 @@
 <blockquote>
 <p>挑战：</p>
 <ol>
-<li><p>确保嵌入能够保留足够图的信息</p>
+<li>
+<p>确保嵌入能够保留足够图的信息</p>
 <p>图形拓扑、节点连接和节点邻域</p>
 </li>
-<li><p>网络的大小不能减慢嵌入速度</p>
+<li>
+<p>网络的大小不能减慢嵌入速度</p>
 <p>高效处理大型图表</p>
 </li>
-<li><p>确定嵌入维度</p>
+<li>
+<p>确定嵌入维度</p>
 <p>高维能够保留更多信息但是增加时间和空间复杂度，需要折中考虑</p>
 </li>
 </ol>
 </blockquote>
 <p>现在有多种方式实现图嵌入，每种方法都有不同的粒度等级。嵌入能够实施于结点层级、子图层级或者通过图遍历这样的策略进行实施。</p>
-<h1 id="遍历嵌入法-Walk-embedding"><a href="#遍历嵌入法-Walk-embedding" class="headerlink" title="遍历嵌入法 Walk embedding"></a>遍历嵌入法 Walk embedding</h1><h2 id="DeepWalk"><a href="#DeepWalk" class="headerlink" title="DeepWalk"></a>DeepWalk</h2><blockquote>
+<h1>遍历嵌入法 Walk embedding</h1>
+<h2 id="DeepWalk">DeepWalk</h2>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1403.6652.pdf">论文地址</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/phanein/deepwalk">代码地址</a></p>
 </blockquote>
 <p>DeepWalk是第一个被广泛用作基准（Benchmark）的图学习方法。DeepWalk通过遍历（walk）来实现嵌入。如果用任意表示向量来表示图中的每个节点，则可以遍历该图。该遍历的步骤可以通过在矩阵中排列相邻的节点表示向量来进行聚合。</p>
-<p>DeepWalk使用以下公式来完成一系列的随机遍历：<br>$$<br>Pr(v_i|(\Phi(v_1),\Phi(v_2),…,\Phi(v_{i-1})))<br>$$<br>目标是估计观察结点$v_i$的可能性，其中$Pr()$代表概率，$\Phi$表示图中每个结点$v$的潜在表示。潜在表示将会成为神经网络的输入，神经网络建立在结点的特点和行走过程中遇见结点的概率，能够预测结点的特征或分类。</p>
-<p><img src="http://note.lizhihao999.cn/notes/20201109110934.png"></p>
+<p>DeepWalk使用以下公式来完成一系列的随机遍历：<br>
+$$<br>
+Pr(v_i|(\Phi(v_1),\Phi(v_2),…,\Phi(v_{i-1})))<br>
+$$<br>
+目标是估计观察结点$v_i$的可能性，其中$Pr()$代表概率，$\Phi$表示图中每个结点$v$的潜在表示。潜在表示将会成为神经网络的输入，神经网络建立在结点的特点和行走过程中遇见结点的概率，能够预测结点的特征或分类。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20201109110934.png" alt=""></p>
 <p>预测的方法为<strong>skip-gram</strong>（与Word2vec相同）。DeepWalk通过遍历整个图来学习得到一个嵌入。模型可以通过一个靶结点来进行预测“context”，即一张图的关联性，结构规则和节点特征。</p>
 <p>DeepWalk是直推式（transductive）的方法，即每添加一个新结点都需要重新训练模型。</p>
-<h2 id="Node2vec"><a href="#Node2vec" class="headerlink" title="Node2vec"></a>Node2vec</h2><blockquote>
+<h2 id="Node2vec">Node2vec</h2>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://cs.stanford.edu/people/jure/pubs/node2vec-kdd16.pdf">论文地址</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/aditya-grover/node2vec">代码地址</a></p>
 </blockquote>
 <p>Node2vec和DeepWalk的之间的区别差之毫厘，却谬以千里。Node2vec通过变量α决定（bias）遍历路径，其中α由参数p和q决定。参数p优先考虑BFS的过程，参数q优先考虑DFS的过程。下一步路径的决定由概率$1/p$或$1/q$决定。</p>
 <img src="http://note.lizhihao999.cn/notes/20201105173741.png" style="zoom:80%;">
-
 <p>如图所示，BFS可以更多地学习本地邻居结点的信息(local neighbors)，DFS可以学习到更多的全局变量（global variables）。Node2vec可以根据任务不同来切换两种优先级，即对于不同的参数值，会产生不同的结果。与DeepWalk相同，Node2vec同样使用潜在嵌入并作为神经网络的输入来分类结点。</p>
 <p>BFS更擅长根据结构部分(枢纽、桥梁、离群点等)进行分类，而DFS返回的是更具社区驱动的分类方案。</p>
-<h2 id="Graph2vec"><a href="#Graph2vec" class="headerlink" title="Graph2vec"></a>Graph2vec</h2><blockquote>
+<h2 id="Graph2vec">Graph2vec</h2>
+<blockquote>
 <p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1707.05005">论文地址</a></p>
 <p><a target="_blank" rel="noopener" href="https://github.com/benedekrozemberczki/graph2vec">代码地址</a></p>
 </blockquote>
-<p>Graph2vec是对Node2vec变体的一种修改，本质上是学习嵌入图的子图。Doc2vec中使用的一个方程证明了这一点，这是一个密切相关的变体，也是本文的一个灵感点。<br>$$<br>Pr(w_j|d)=\frac{exp(d\cdot w_j)}{\sum_{w\in v}{exp(d\cdot w)}}<br>$$<br>该等式可写为：单词（$w_j$）出现在给定文档（d）的上下文中的概率等于文档嵌入矩阵（d〜）的指数乘以单词嵌入矩阵（w〜j从文档中取样），然后除以文档嵌入矩阵的所有指数之和再乘以所有文档中词汇表（V）中每个单词的单词嵌入矩阵。</p>
+<p>Graph2vec是对Node2vec变体的一种修改，本质上是学习嵌入图的子图。Doc2vec中使用的一个方程证明了这一点，这是一个密切相关的变体，也是本文的一个灵感点。<br>
+$$<br>
+Pr(w_j|d)=\frac{exp(d\cdot w_j)}{\sum_{w\in v}{exp(d\cdot w)}}<br>
+$$<br>
+该等式可写为：单词（$w_j$）出现在给定文档（d）的上下文中的概率等于文档嵌入矩阵（d〜）的指数乘以单词嵌入矩阵（w〜j从文档中取样），然后除以文档嵌入矩阵的所有指数之和再乘以所有文档中词汇表（V）中每个单词的单词嵌入矩阵。</p>
 <p>与word2vec进行类比，如果文档由句子组成（然后由单词组成），则图由子图组成（然后由节点组成）。这些预定的子图具有用户指定的一组边数，同样的，将潜在的子图嵌入传递到神经网络中进行分类。</p>
-<h1 id="相似度嵌入法-Proximity-embedding"><a href="#相似度嵌入法-Proximity-embedding" class="headerlink" title="相似度嵌入法 Proximity embedding"></a>相似度嵌入法 Proximity embedding</h1><h2 id="SDNE"><a href="#SDNE" class="headerlink" title="SDNE"></a>SDNE</h2><blockquote>
+<h1>相似度嵌入法 Proximity embedding</h1>
+<h2 id="SDNE">SDNE</h2>
+<blockquote>
 <p><strong>Structural Deep Network embedding</strong></p>
 <p><a target="_blank" rel="noopener" href="https://www.kdd.org/kdd2016/papers/files/rfp0191-wangAemb.pdf">论文地址</a></p>
 <p>[代码地址](<a target="_blank" rel="noopener" href="https://github.com/suanrong/SDNE">suanrong/SDNE: This is a implementation of SDNE (Structural Deep Network embedding) (github.com)</a>)</p>
@@ -506,12 +523,13 @@
 <p>为了保留一阶相似度，模型还使用了Laplacian特征图的一种变体，这是一种图形嵌入/降维技术。 当相似节点在嵌入式空间中彼此远离地映射时，拉普拉斯特征映射嵌入算法会施加惩罚，从而允许通过最小化相似节点之间的空间来进行优化。</p>
 <p>为了保留二阶相似度，将邻接矩阵传递给一个无监督自编码器，该编码器需要最小化重构损失函数。</p>
 <img src="http://note.lizhihao999.cn/1_44eDEuZBEsmG_TCAKRI3Kw%402x.png" style="zoom: 50%;">
-
 <p>将一阶接近损失函数和二阶重构损失函数联合最小化以返回图嵌入，其中嵌入是通过神经网络学习的。</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>在将表示形式通过机器学习模型之前，图嵌入技术先将图嵌入到低维连续潜空间中。主要有两类方法：遍历嵌入（walk embedding）和相似度嵌入（proximity embedding）。</p>
+<h1>总结</h1>
+<p>在将表示形式通过机器学习模型之前，图嵌入技术先将图嵌入到低维连续潜空间中。主要有两类方法：遍历嵌入（walk embedding）和相似度嵌入（proximity embedding）。</p>
 <p>遍历嵌入方法执行图的遍历，目的是保持结构和特征，并将这些遍历集合起来，然后通过递归神经网络进行遍历。</p>
 <p>相似度嵌入方法使用深度学习方法和/或接近度损失函数来优化接近度，以使原始图中彼此靠近的节点也同样在嵌入中。</p>
-<p><strong>参考资料：</strong><br><a target="_blank" rel="noopener" href="https://towardsdatascience.com/overview-of-deep-learning-on-graph-embeddings-4305c10ad4a4">Graph Embedding for Deep Learning</a></p>
+<p><strong>参考资料：</strong><br>
+<a target="_blank" rel="noopener" href="https://towardsdatascience.com/overview-of-deep-learning-on-graph-embeddings-4305c10ad4a4">Graph Embedding for Deep Learning</a></p>
 <p><a target="_blank" rel="noopener" href="https://towardsdatascience.com/graph-embeddings-the-summary-cc6075aba007">Graph Embeddings — The Summary</a></p>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -1137,7 +1155,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">54.4k</span>&nbsp;字
+                class="white-color">54.5k</span>&nbsp;字
             
             
             

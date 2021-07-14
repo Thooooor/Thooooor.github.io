@@ -417,7 +417,7 @@
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    519
+                    525
                 </div>
                 
 
@@ -439,43 +439,60 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="1-Linux多版本cuda切换"><a href="#1-Linux多版本cuda切换" class="headerlink" title="1. Linux多版本cuda切换"></a>1. Linux多版本cuda切换</h1><p>cuda一般安装在 /usr/local/cuda/ 路径下，该路径下有一个version.txt文档，里面记录了cuda的版本信息</p>
-<pre><code class="shell">cat  /usr/local/cuda/version.txt</code></pre>
+                <h1>1. Linux多版本cuda切换</h1>
+<p>cuda一般安装在 /usr/local/cuda/ 路径下，该路径下有一个version.txt文档，里面记录了cuda的版本信息</p>
+<pre><code class="language-shell">cat  /usr/local/cuda/version.txt
+</code></pre>
 <p>查看我们的所有的cuda版本，默认保存在/usr/local路径下：</p>
-<pre><code class="shell">cd /usr/local
-ls</code></pre>
-<p><img src="http://note.lizhihao999.cn/notes/20210701140137.png"></p>
+<pre><code class="language-shell">cd /usr/local
+ls
+</code></pre>
+<p><img src="http://note.lizhihao999.cn/notes/20210701140137.png" alt=""></p>
 <p>这里我安装有三个版本。通过<code>stat</code>命令查看当前的cuda信息：</p>
-<pre><code class="shell">stat cuda</code></pre>
-<p><img src="http://note.lizhihao999.cn/notes/20210701140523.png"></p>
+<pre><code class="language-shell">stat cuda
+</code></pre>
+<p><img src="http://note.lizhihao999.cn/notes/20210701140523.png" alt=""></p>
 <p>更改symbolic link，使其指向其他版本的cuda，例如9.0：</p>
-<pre><code class="shell">rm -rf cuda
-ln -s cuda-9.0 cuda</code></pre>
+<pre><code class="language-shell">rm -rf cuda
+ln -s cuda-9.0 cuda
+</code></pre>
 <p>再次查看cuda版本：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210701140954.png"></p>
-<h1 id="2-Linux安装cuda"><a href="#2-Linux安装cuda" class="headerlink" title="2. Linux安装cuda"></a>2. Linux安装cuda</h1><h2 id="1-下载CUDA"><a href="#1-下载CUDA" class="headerlink" title="1. 下载CUDA"></a>1. 下载CUDA</h2><p>根据需要选择对应的CUDA Toolkit版本<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-toolkit-archive">下载</a>：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210701142824.png"></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210701140954.png" alt=""></p>
+<h1>2. Linux安装cuda</h1>
+<h2 id="1-下载CUDA">1. 下载CUDA</h2>
+<p>根据需要选择对应的CUDA Toolkit版本<a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-toolkit-archive">下载</a>：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210701142824.png" alt=""></p>
 <p>选择自己对应的操作系统、结构、系统版本等之后，根据命令进行下载：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210701150049.png"></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210701150049.png" alt=""></p>
 <p>如果不知道对应信息可以通过第二点进行查看。<strong>推荐下载runfile</strong>，可以直接跳到第三点讲解如何安装。</p>
-<h2 id="2-确认系统版本"><a href="#2-确认系统版本" class="headerlink" title="2. 确认系统版本"></a>2. 确认系统版本</h2><p>选择对应系统的下载教程：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210701143208.png"></p>
+<h2 id="2-确认系统版本">2. 确认系统版本</h2>
+<p>选择对应系统的下载教程：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210701143208.png" alt=""></p>
 <p>按照官方文档的指引，确认自己的系统和GPU是否满足条件。</p>
-<h3 id="1-确认GPU"><a href="#1-确认GPU" class="headerlink" title="1. 确认GPU"></a>1. 确认GPU</h3><p>首先确认GPU是否支持CUDA，对照<a target="_blank" rel="noopener" href="https://developer.nvidia.com/zh-cn/cuda-gpus">官方列表</a>，通过以下命令查看自己的GPU：</p>
-<pre><code class="shell">lspci | grep -i nvidia</code></pre>
-<p><img src="http://note.lizhihao999.cn/notes/20210701144448.png"></p>
-<h3 id="2-确认Linux系统版本"><a href="#2-确认Linux系统版本" class="headerlink" title="2. 确认Linux系统版本"></a>2. 确认Linux系统版本</h3><p>通过以下命令查看自己的系统版本：</p>
-<pre><code class="shell">uname -m &amp;&amp; cat /etc/*release</code></pre>
-<p><img src="http://note.lizhihao999.cn/notes/20210701144740.png"></p>
+<h3 id="1-确认GPU">1. 确认GPU</h3>
+<p>首先确认GPU是否支持CUDA，对照<a target="_blank" rel="noopener" href="https://developer.nvidia.com/zh-cn/cuda-gpus">官方列表</a>，通过以下命令查看自己的GPU：</p>
+<pre><code class="language-shell">lspci | grep -i nvidia
+</code></pre>
+<p><img src="http://note.lizhihao999.cn/notes/20210701144448.png" alt=""></p>
+<h3 id="2-确认Linux系统版本">2. 确认Linux系统版本</h3>
+<p>通过以下命令查看自己的系统版本：</p>
+<pre><code class="language-shell">uname -m &amp;&amp; cat /etc/*release
+</code></pre>
+<p><img src="http://note.lizhihao999.cn/notes/20210701144740.png" alt=""></p>
 <p>主要注意以上两个信息，对比文档中给出的表格：</p>
 <img src="http://note.lizhihao999.cn/notes/20210701144857.png" style="zoom:80%;">
-
-<h3 id="3-确认安装gcc"><a href="#3-确认安装gcc" class="headerlink" title="3. 确认安装gcc"></a>3. 确认安装gcc</h3><p>使用CUDA Toolkit进行开发需要gcc编译器，它通常是作为Linux安装的一部分安装的。可通过以下命令确认：</p>
-<pre><code class="shell">gcc --version</code></pre>
-<h3 id="4-确认系统有正确的内核头文件和正确的依赖包"><a href="#4-确认系统有正确的内核头文件和正确的依赖包" class="headerlink" title="4. 确认系统有正确的内核头文件和正确的依赖包"></a>4. 确认系统有正确的内核头文件和正确的依赖包</h3><p>文档给出不同Linux系统的安装命令，比如Ubuntu：</p>
-<pre><code class="shell">sudo apt-get install linux-headers-$(uname -r)</code></pre>
-<h2 id="3-Runfile安装"><a href="#3-Runfile安装" class="headerlink" title="3. Runfile安装"></a>3. Runfile安装</h2><p>下载好runfile文件之后，根据之前给出的指令进行安装：</p>
-<pre><code class="shell">sudo sh cuda_10.1.243_418.87.00_linux.run</code></pre>
+<h3 id="3-确认安装gcc">3. 确认安装gcc</h3>
+<p>使用CUDA Toolkit进行开发需要gcc编译器，它通常是作为Linux安装的一部分安装的。可通过以下命令确认：</p>
+<pre><code class="language-shell">gcc --version
+</code></pre>
+<h3 id="4-确认系统有正确的内核头文件和正确的依赖包">4. 确认系统有正确的内核头文件和正确的依赖包</h3>
+<p>文档给出不同Linux系统的安装命令，比如Ubuntu：</p>
+<pre><code class="language-shell">sudo apt-get install linux-headers-$(uname -r)
+</code></pre>
+<h2 id="3-Runfile安装">3. Runfile安装</h2>
+<p>下载好runfile文件之后，根据之前给出的指令进行安装：</p>
+<pre><code class="language-shell">sudo sh cuda_10.1.243_418.87.00_linux.run
+</code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1096,7 +1113,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">54.4k</span>&nbsp;字
+                class="white-color">54.5k</span>&nbsp;字
             
             
             

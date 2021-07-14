@@ -442,46 +442,67 @@
                 <blockquote>
 <p>Anaconda 是一个用于科学计算的 Python 发行版，支持 Linux, Mac, Windows, 包含了众多流行的科学计算、数据分析的 Python 包。</p>
 </blockquote>
-<h1 id="Anaconda-下载"><a href="#Anaconda-下载" class="headerlink" title="Anaconda 下载"></a>Anaconda 下载</h1><ul>
-<li><h2 id="Anaconda官网"><a href="#Anaconda官网" class="headerlink" title="Anaconda官网"></a><a target="_blank" rel="noopener" href="https://www.anaconda.com/">Anaconda官网</a></h2><p>如果有梯子的话速度会比较快，如果没有梯子的话，速度可能会<strong>很慢</strong>。</p>
+<h1>Anaconda 下载</h1>
+<ul>
+<li>
+<h2 id="Anaconda官网"><a target="_blank" rel="noopener" href="https://www.anaconda.com/">Anaconda官网</a></h2>
+<p>如果有梯子的话速度会比较快，如果没有梯子的话，速度可能会<strong>很慢</strong>。</p>
 </li>
-<li><h2 id="清华大学开源软件镜像站"><a href="#清华大学开源软件镜像站" class="headerlink" title="清华大学开源软件镜像站"></a><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">清华大学开源软件镜像站</a></h2><p>建议使用这种方式下载（<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">下载地址</a>），按时间排序，选择合适的最新版：<code>64位Linux版</code></p>
+<li>
+<h2 id="清华大学开源软件镜像站"><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/">清华大学开源软件镜像站</a></h2>
+<p>建议使用这种方式下载（<a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">下载地址</a>），按时间排序，选择合适的最新版：<code>64位Linux版</code></p>
 <p>可以先下载到本地，通过<code>Xftp</code>传到Ubuntu服务器，也可以直接下载到服务器端。</p>
 </li>
 </ul>
-<h1 id="Anaconda-安装"><a href="#Anaconda-安装" class="headerlink" title="Anaconda 安装"></a>Anaconda 安装</h1><ol>
-<li><p>在终端中进到<code>.sh</code>文件所在文件夹</p>
+<h1>Anaconda 安装</h1>
+<ol>
+<li>
+<p>在终端中进到<code>.sh</code>文件所在文件夹</p>
 </li>
-<li><p>运行<code>.sh</code>文件</p>
-<pre><code class="shell">bash Anaconda3-2020.02-Linux-x86_64.sh</code></pre>
+<li>
+<p>运行<code>.sh</code>文件</p>
+<pre><code class="language-shell">bash Anaconda3-2020.02-Linux-x86_64.sh
+</code></pre>
 </li>
-<li><p>一路<code>Enter</code>，然后输入<code>yes</code>，接受协议</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/%E6%89%B9%E6%B3%A8%202020-04-02%20230506.png"></p>
+<li>
+<p>一路<code>Enter</code>，然后输入<code>yes</code>，接受协议</p>
+<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/%E6%89%B9%E6%B3%A8%202020-04-02%20230506.png" alt=""></p>
 </li>
-<li><p>选择安装路径，<code>Enter</code>选择默认路径，也可以自己更改</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402231106.png"></p>
+<li>
+<p>选择安装路径，<code>Enter</code>选择默认路径，也可以自己更改</p>
+<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402231106.png" alt=""></p>
 <p>选择完成后，开始安装</p>
 </li>
-<li><p>安装完成后，选择使用<code>conda</code></p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402232510.png"></p>
+<li>
+<p>安装完成后，选择使用<code>conda</code></p>
+<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402232510.png" alt=""></p>
 </li>
-<li><p>安装成功</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402232718.png"></p>
+<li>
+<p>安装成功</p>
+<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402232718.png" alt=""></p>
 </li>
 </ol>
-<h1 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h1><ol>
-<li><p>打开配置文件</p>
-<pre><code class="shell">vim ~/.bashrc</code></pre>
+<h1>配置环境变量</h1>
+<ol>
+<li>
+<p>打开配置文件</p>
+<pre><code class="language-shell">vim ~/.bashrc
+</code></pre>
 </li>
-<li><p>添加环境路径</p>
-<pre><code>export PATH=/home/XXX/anaconda3/bin:$PATH</code></pre>
+<li>
+<p>添加环境路径</p>
+<pre><code>export PATH=/home/XXX/anaconda3/bin:$PATH
+</code></pre>
 <p>填入自己的安装路径</p>
 </li>
-<li><p>激活环境</p>
-<pre><code class="shell">source ~/.bashrc</code></pre>
+<li>
+<p>激活环境</p>
+<pre><code class="language-shell">source ~/.bashrc
+</code></pre>
 </li>
-<li><p>查看Anaconda和python版本</p>
-<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402233509.png"></p>
+<li>
+<p>查看Anaconda和python版本</p>
+<p><img src="https://raw.githubusercontent.com/Thooooor/NoteImg/master/20200402233509.png" alt=""></p>
 </li>
 </ol>
 <script>
@@ -769,55 +790,6 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/04/25/suan-fa-bi-ji/suan-fa-gai-lun/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/6.png" class="responsive-img" alt="算法概论">
-                        
-                        <span class="card-title">算法概论</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            算法设计与分析概论
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-25
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">学习笔记</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
                 <a href="/2020/04/03/tuo-keng-ji-lu/gunicorn-ji-ben-shi-yong/">
                     <div class="card-image">
                         
@@ -833,8 +805,60 @@
                         
                     </div>
                     <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2020-04-03
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="post-category">
+                                    脱坑实录
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/Ubuntu/">
+                        <span class="chip bg-color">Ubuntu</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/03/29/tuo-keng-ji-lu/linux-pei-zhi-xu-ni-huan-jing/">
+                    <div class="card-image">
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Linux配置虚拟环境">
+                        
+                        <span class="card-title">Linux配置虚拟环境</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            在Ubuntu服务器上配置管理虚拟环境
+                        
+                    </div>
+                    <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-04-03
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-03-29
                             </span>
                         <span class="publish-author">
                             
@@ -1100,7 +1124,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">54.4k</span>&nbsp;字
+                class="white-color">54.5k</span>&nbsp;字
             
             
             

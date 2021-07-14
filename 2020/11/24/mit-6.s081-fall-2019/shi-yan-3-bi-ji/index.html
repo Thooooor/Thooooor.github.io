@@ -441,17 +441,25 @@
             <div id="articleContent">
                 <p>MIT 6.S081/Fall 2019实验 <a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2019/labs/lock.html">Lab: locks</a>，多核计算机上并行性差的一个常见症状是高锁争用。为了减少争用，提高并行性通常需要同时改变数据结构和锁定策略。在这个实验中，分为两部分内容：为xv6内存分配器和磁盘缓存buffer cache重新设计代码提高并行性。</p>
 <p>本文对主要思路和关键部分的代码实现进行说明，<a target="_blank" rel="noopener" href="https://github.com/Thooooor/xv6-riscv-fall19/tree/lock">完整代码</a>实现可以参考我的GitHub仓库.</p>
-<h1 id="1-内存分配器"><a href="#1-内存分配器" class="headerlink" title="1. 内存分配器"></a>1. 内存分配器</h1><h2 id="1-1-基本原理"><a href="#1-1-基本原理" class="headerlink" title="1.1 基本原理"></a>1.1 基本原理</h2><p>xv6对上层提供<code>kalloc</code>和<code>kfree</code>接口来管理物理内存。通过<code>kalloc</code>和<code>kfree</code>，屏蔽了对物理内存的管理，使得调用者只需要关心虚拟地址空间，在需要使用新内存空间的时候调用<code>kalloc</code>，在需要释放内存空间的时候调用<code>kfree</code>。</p>
+<h1>1. 内存分配器</h1>
+<h2 id="1-1-基本原理">1.1 基本原理</h2>
+<p>xv6对上层提供<code>kalloc</code>和<code>kfree</code>接口来管理物理内存。通过<code>kalloc</code>和<code>kfree</code>，屏蔽了对物理内存的管理，使得调用者只需要关心虚拟地址空间，在需要使用新内存空间的时候调用<code>kalloc</code>，在需要释放内存空间的时候调用<code>kfree</code>。</p>
 <p>在系统启动时，<code>main()</code>函数（见<code>kernel/main.c</code>）调用<code>kinit()</code>来初始化分配器。<code>kinit</code>通过保存所有空闲页来初始化链表。<code>kinit</code>调用<code>freerange</code>来把空闲内存加到链表里，<code>freerange</code>是把每个空闲页逐一加到链表里来实现此功能的。</p>
-<h2 id="1-2-链表操作"><a href="#1-2-链表操作" class="headerlink" title="1.2 链表操作"></a>1.2 链表操作</h2><h3 id="释放内存"><a href="#释放内存" class="headerlink" title="释放内存"></a>释放内存</h3><p>释放内存的函数是<code>kfree(char *v)</code>，首先将 <code>char *v</code> 开始的页物理内存初始化为1，这是为了让之前使用它的代码不能再读取到有效的内容，期望这些代码能尽早崩溃以发现问题所在。然后将这空闲页物理内存加到链表头。</p>
-<p><img src="http://note.lizhihao999.cn/notes/20201225000930.png"></p>
-<h3 id="申请内存"><a href="#申请内存" class="headerlink" title="申请内存"></a>申请内存</h3><p><code>kalloc(void *)</code>用来分配内存，移除并返回空闲链表头的第一个元素，即给调用者分配1页物理内存。</p>
-<p><img src="http://note.lizhihao999.cn/notes/20201225000947.png"></p>
+<h2 id="1-2-链表操作">1.2 链表操作</h2>
+<h3 id="释放内存">释放内存</h3>
+<p>释放内存的函数是<code>kfree(char *v)</code>，首先将 <code>char *v</code> 开始的页物理内存初始化为1，这是为了让之前使用它的代码不能再读取到有效的内容，期望这些代码能尽早崩溃以发现问题所在。然后将这空闲页物理内存加到链表头。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20201225000930.png" alt=""></p>
+<h3 id="申请内存">申请内存</h3>
+<p><code>kalloc(void *)</code>用来分配内存，移除并返回空闲链表头的第一个元素，即给调用者分配1页物理内存。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20201225000947.png" alt=""></p>
 <p>由于物理内存是在多进程之间共享的，所以不管是分配还是释放页面，每次操作<code>kmem.freelist</code>时都需要先申请<code>kmem.lock</code>，此后再进行内存页面的操作。</p>
-<h2 id="1-3-Lock"><a href="#1-3-Lock" class="headerlink" title="1.3 Lock"></a>1.3 Lock</h2><p><code>kalloc.c</code>中调用<code>acquire()</code>和<code>release()</code>来获取锁和释放锁，kalloc只在<code>kalloc()</code>和<code>kfree()</code>中使用了锁，都是把对freelist的操作锁了起来。<code>kfree()</code>在向freelist里加节点前锁了一下，操作完之后解锁。<code>kalloc()</code>在移除freelist第一个元素时也加锁，操作完成再释放锁。所以对于内存分配器中需要锁保护的只有对freelist的操作。</p>
-<h2 id="1-4-具体步骤"><a href="#1-4-具体步骤" class="headerlink" title="1.4 具体步骤"></a>1.4 具体步骤</h2><ol>
-<li><p>将kalloc的共享freelist改为每个CPU独立的freelist；</p>
-<pre><code class="c">struct run {
+<h2 id="1-3-Lock">1.3 Lock</h2>
+<p><code>kalloc.c</code>中调用<code>acquire()</code>和<code>release()</code>来获取锁和释放锁，kalloc只在<code>kalloc()</code>和<code>kfree()</code>中使用了锁，都是把对freelist的操作锁了起来。<code>kfree()</code>在向freelist里加节点前锁了一下，操作完之后解锁。<code>kalloc()</code>在移除freelist第一个元素时也加锁，操作完成再释放锁。所以对于内存分配器中需要锁保护的只有对freelist的操作。</p>
+<h2 id="1-4-具体步骤">1.4 具体步骤</h2>
+<ol>
+<li>
+<p>将kalloc的共享freelist改为每个CPU独立的freelist；</p>
+<pre><code class="language-c">struct run {
   struct run *next;
 };
 
@@ -470,14 +478,18 @@ void kinit()
     initlock(&amp;kmems[i].lock, lockname);
   }
   freerange(end, (void*)PHYSTOP);
-}</code></pre>
+}
+</code></pre>
 </li>
-<li><p>获取内存块时，优先分配当前CPU的freelist中的内存块；</p>
+<li>
+<p>获取内存块时，优先分配当前CPU的freelist中的内存块；</p>
 </li>
-<li><p>当前CPU没有空闲内存块，则从其他CPU的freelist中窃取内存块；</p>
+<li>
+<p>当前CPU没有空闲内存块，则从其他CPU的freelist中窃取内存块；</p>
 </li>
-<li><p>所有CPU都没有空闲块时，返回0；</p>
-<pre><code class="c">void *kalloc(void)
+<li>
+<p>所有CPU都没有空闲块时，返回0；</p>
+<pre><code class="language-c">void *kalloc(void)
 {
   struct run *r;
   push_off();
@@ -501,14 +513,16 @@ void kinit()
     }
   }
   pop_off();
-
+  
   if(r) memset((char*)r, 5, PGSIZE); // fill with junk
-
+  
   return (void*)r;
-}</code></pre>
+}
+</code></pre>
 </li>
-<li><p>释放内存块时，将内存块放入当前CPU的freelist中；</p>
-<pre><code class="c">void kfree(void *pa)
+<li>
+<p>释放内存块时，将内存块放入当前CPU的freelist中；</p>
+<pre><code class="language-c">void kfree(void *pa)
 {
   struct run *r;
 
@@ -522,26 +536,31 @@ void kinit()
   push_off();
   int cpu_num = cpuid();
   acquire(&amp;kmems[cpu_num].lock);  // 加锁
-  r-&gt;next = kmems[cpu_num].freelist;    // 加入freelist
+  r-&gt;next = kmems[cpu_num].freelist;	// 加入freelist
   kmems[cpu_num].freelist = r;
   release(&amp;kmems[cpu_num].lock);  // 解锁
   pop_off();
-}</code></pre>
+}
+</code></pre>
 </li>
-<li><p>为2-5步的过程合理加锁，保证每个freelist的一致性；</p>
+<li>
+<p>为2-5步的过程合理加锁，保证每个freelist的一致性；</p>
 </li>
 </ol>
-<h1 id="2-磁盘缓存"><a href="#2-磁盘缓存" class="headerlink" title="2. 磁盘缓存"></a>2. 磁盘缓存</h1><h2 id="2-1-bcache"><a href="#2-1-bcache" class="headerlink" title="2.1 bcache"></a>2.1 bcache</h2><p>数据结构<code>bcache</code>（见<code>kernel/bio.c</code>）维护了一个由静态数组<code>struct buf buf[NBUF]</code>组成的双向链表，它以块为单位，每次读入或写出一个磁盘块，放到一个内存缓存块中（<code>bcache.buf</code>），同时自旋锁<code>bcache.lock</code>用于用户互斥访问。所有对缓存块的访问都是通过<code>bcache.head</code>引用链表来实现的，而不是<code>buf</code>数组。</p>
-<pre><code class="c">struct {
+<h1>2. 磁盘缓存</h1>
+<h2 id="2-1-bcache">2.1 bcache</h2>
+<p>数据结构<code>bcache</code>（见<code>kernel/bio.c</code>）维护了一个由静态数组<code>struct buf buf[NBUF]</code>组成的双向链表，它以块为单位，每次读入或写出一个磁盘块，放到一个内存缓存块中（<code>bcache.buf</code>），同时自旋锁<code>bcache.lock</code>用于用户互斥访问。所有对缓存块的访问都是通过<code>bcache.head</code>引用链表来实现的，而不是<code>buf</code>数组。</p>
+<pre><code class="language-c">struct {
   struct spinlock lock;
   struct buf buf[NBUF];
 
   // Linked list of all buffers, through prev/next.
   // head.next is most recently used.
   struct buf head;
-} bcache;</code></pre>
-<p>每个缓存块都由三个部分组成，其中data字段标示了它的内容，指针字段（<em>prev，</em>next）用于组成链表，数值字段用于标示它的属性，如，字段<code>valid</code>的意思是缓存区包含了一个块的复制（即该buffer包含对应磁盘块的数据），字段<code>disk</code>的意思是缓存区的内容已经被提交到了磁盘，字段<code>dev</code>是设备号，字段<code>blockno</code>是缓存数据块号，字段<code>refcnt</code>是被引用次数，<code>lock</code>是睡眠锁。</p>
-<pre><code class="c">struct buf {
+} bcache;
+</code></pre>
+<p>每个缓存块都由三个部分组成，其中data字段标示了它的内容，指针字段（*prev，*next）用于组成链表，数值字段用于标示它的属性，如，字段<code>valid</code>的意思是缓存区包含了一个块的复制（即该buffer包含对应磁盘块的数据），字段<code>disk</code>的意思是缓存区的内容已经被提交到了磁盘，字段<code>dev</code>是设备号，字段<code>blockno</code>是缓存数据块号，字段<code>refcnt</code>是被引用次数，<code>lock</code>是睡眠锁。</p>
+<pre><code class="language-c">struct buf {
   int valid;   // has data been read from disk?
   int disk;    // does disk "own" buf?
   uint dev;
@@ -551,7 +570,8 @@ void kinit()
   struct buf *prev; // LRU cache list
   struct buf *next;
   uchar data[BSIZE];
-};</code></pre>
+};
+</code></pre>
 <p>对<code>bcache</code>的操作如下：</p>
 <ul>
 <li>在系统启动时，<code>main()</code>函数（见<code>kernel/main.c</code>）调用<code>binit()</code>来初始化缓存，随即调用<code>initlock()</code>初始化<code>bcache.lock</code>，然后循环遍历<code>buf</code>数组，采用头插法逐个链接到<code>bcache.head</code>后面。</li>
@@ -559,12 +579,15 @@ void kinit()
 <li>上层文件写磁盘时，调用<code>bwrite()</code>，随即调用<code>virtio_disk_rw()</code>函数直接将缓存中的数据写入磁盘。</li>
 <li>上层文件系统可通过调用<code>brelse()</code>释放一块不再使用的缓存块。</li>
 </ul>
-<h2 id="2-2-锁"><a href="#2-2-锁" class="headerlink" title="2.2 锁"></a>2.2 锁</h2><p>在<code>bio.c</code>中，一共使用两种类型的锁：自旋锁<code>spinlock</code>（<code>bcache.lock</code>）和睡眠锁<code>sleeplock</code>（<code>b.lock</code>）。</p>
-<h3 id="自旋锁"><a href="#自旋锁" class="headerlink" title="自旋锁"></a>自旋锁</h3><p><code>bcache.lock</code>用于表示当前访问的bcache缓存块数据结构的是否被锁住。 当<code>bcache.lock</code>为0时表示为锁住，能够访问当前数据结构bcache，如果为1，即暂时无法获得锁，则不断循环、自旋、等待锁重新可用。</p>
+<h2 id="2-2-锁">2.2 锁</h2>
+<p>在<code>bio.c</code>中，一共使用两种类型的锁：自旋锁<code>spinlock</code>（<code>bcache.lock</code>）和睡眠锁<code>sleeplock</code>（<code>b.lock</code>）。</p>
+<h3 id="自旋锁">自旋锁</h3>
+<p><code>bcache.lock</code>用于表示当前访问的bcache缓存块数据结构的是否被锁住。 当<code>bcache.lock</code>为0时表示为锁住，能够访问当前数据结构bcache，如果为1，即暂时无法获得锁，则不断循环、自旋、等待锁重新可用。</p>
 <p><code>bget()</code>在操作bcache数据结构（修改<code>refcnt</code>、<code>dev</code>、<code>blockno</code>、<code>valid</code>）时，需要获取到自旋锁<code>bcache.lock</code>，操作完成后再释放该锁。</p>
 <p><code>brelse()</code>需要获取到自旋锁<code>bcache.lock</code>，才能将<code>refcnt</code>（引用计数）减1，且只有在<code>refcnt</code>为0时，将该数据缓存块插入到<code>bcache.head</code>链表后面，操作完成后再释放该锁。</p>
 <p><code>bpin()</code>和<code>bunpin()</code>获取到锁后，才能修改<code>refcnt</code>，操作完成后再释放该锁。</p>
-<h3 id="睡眠锁"><a href="#睡眠锁" class="headerlink" title="睡眠锁"></a>睡眠锁</h3><p><code>b.lock</code>用于表示bcache缓存块数据结构中的当前缓存数据块buf是否被锁住，当<code>b.lock</code>为1时，则调用<code>sleep()</code>睡眠等待锁重新可用，为0则表示锁已经被释放。睡眠锁的三个接口函数如下：</p>
+<h3 id="睡眠锁">睡眠锁</h3>
+<p><code>b.lock</code>用于表示bcache缓存块数据结构中的当前缓存数据块buf是否被锁住，当<code>b.lock</code>为1时，则调用<code>sleep()</code>睡眠等待锁重新可用，为0则表示锁已经被释放。睡眠锁的三个接口函数如下：</p>
 <ul>
 <li><code>acquiresleep()</code>：查询<code>b.lock</code>是否被锁，如果被锁了，就睡眠，让出CPU，直到<code>wakeup()</code>唤醒后，获取到锁，并将<code>b.lock</code>置1。</li>
 <li><code>releasesleep()</code>：释放锁，并调用wakeup()</li>
@@ -573,9 +596,11 @@ void kinit()
 <p><code>bget()</code>在获取到缓存块（命中的缓存块，或者，未命中时通过LRU算法替换出来缓存中的缓存块）后，调用<code>acquiresleep()</code>获取睡眠锁。</p>
 <p><code>bwrite()</code>在写入到磁盘之前，先调用<code>holdingsleep()</code>查询是否已经获取到该睡眠锁，确保有带锁而入。</p>
 <p><code>brelse()</code>也先调用<code>holdingsleep()</code>查询是否已经获取到该睡眠锁，确保有带锁后，才调用<code>releasesleep()</code>释放该锁。</p>
-<h2 id="2-3-具体步骤"><a href="#2-3-具体步骤" class="headerlink" title="2.3 具体步骤"></a>2.3 具体步骤</h2><ol>
-<li><p>构建<code>bcache</code>数据结构哈希表；</p>
-<pre><code class="c">#define HashSize 17
+<h2 id="2-3-具体步骤">2.3 具体步骤</h2>
+<ol>
+<li>
+<p>构建<code>bcache</code>数据结构哈希表；</p>
+<pre><code class="language-c">#define HashSize 17
 struct {
   struct spinlock lock[HashSize];
   struct buf buf[NBUF];
@@ -608,13 +633,15 @@ void binit(void) {
     bcache.hashbucket[0].next-&gt;prev = b;
     bcache.hashbucket[0].next = b;
   }
-}</code></pre>
+}
+</code></pre>
 </li>
-<li><p>修改<code>bget()</code>和<code>brelse()</code>使得查找和释放缓存中的不同块时，锁之间的冲突更少；</p>
+<li>
+<p>修改<code>bget()</code>和<code>brelse()</code>使得查找和释放缓存中的不同块时，锁之间的冲突更少；</p>
 <ul>
 <li>首先在硬件层面寻找空闲的缓存块，如果没有则分配一个新的缓存块；</li>
 </ul>
-<pre><code class="c">static struct buf* bget(uint dev, uint blockno)
+<pre><code class="language-c">static struct buf* bget(uint dev, uint blockno)
 {
   // get the hash index of blockno
   int locknumber = blockno % HashSize;
@@ -660,10 +687,12 @@ void binit(void) {
     hashnumber = hashconflict(hashnumber);
   }
   panic("bget: no buffers");
-}</code></pre>
+}
+</code></pre>
 <ul>
-<li><p>释放一个已经锁住的缓存块，将其移到MRU list的头部</p>
-<pre><code class="c">void brelse(struct buf *b)
+<li>
+<p>释放一个已经锁住的缓存块，将其移到MRU list的头部</p>
+<pre><code class="language-c">void brelse(struct buf *b)
 {
   uint blockno = b-&gt;blockno;
   int locknumber = blockno % HashSize;
@@ -684,12 +713,14 @@ void binit(void) {
     bcache.hashbucket[locknumber].next = b;
   }
   release(&amp;bcache.lock[locknumber]);
-}</code></pre>
+}
+</code></pre>
 </li>
 </ul>
 </li>
-<li><p>修改<code>bpin()</code>和<code>bunpin()</code>增加或减少<code>refcnt</code>之前获取对应数据缓存块的锁，操作完成之后再释放锁。</p>
-<pre><code class="c">void bpin(struct buf *b) {
+<li>
+<p>修改<code>bpin()</code>和<code>bunpin()</code>增加或减少<code>refcnt</code>之前获取对应数据缓存块的锁，操作完成之后再释放锁。</p>
+<pre><code class="language-c">void bpin(struct buf *b) {
   uint blockno = b-&gt;blockno % HashSize;
   acquire(&amp;bcache.lock[blockno]);
   b-&gt;refcnt++;
@@ -701,7 +732,8 @@ void bunpin(struct buf *b) {
   acquire(&amp;bcache.lock[blockno]);
   b-&gt;refcnt--;
   release(&amp;bcache.lock[blockno]);
-}</code></pre>
+}
+</code></pre>
 </li>
 </ol>
 <script>
@@ -989,19 +1021,19 @@ void bunpin(struct buf *b) {
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2020/11/24/mit-6.s081-fall-2019/shi-yan-2-bi-ji/">
+                <a href="/2020/11/24/mit-6.s081-fall-2019/shi-yan-4-bi-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="MIT 6.S081/Fall 2019 Lab3 Allocator for xv6">
                         
-                        <span class="card-title">MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell</span>
+                        <span class="card-title">MIT 6.S081/Fall 2019 Lab3 Allocator for xv6</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell 实验思路和代码实现
+                            MIT 6.S081/Fall 2019 Lab3 Allocator for xv6 实验思路和代码实现
                         
                     </div>
                     <div class="publish-info">
@@ -1042,19 +1074,19 @@ void bunpin(struct buf *b) {
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/11/24/mit-6.s081-fall-2019/shi-yan-4-bi-ji/">
+                <a href="/2020/11/24/mit-6.s081-fall-2019/shi-yan-1-bi-ji/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="MIT 6.S081/Fall 2019 Lab3 Allocator for xv6">
+                        <img src="/medias/featureimages/7.png" class="responsive-img" alt="MIT 6.S081/Fall 2019 Lab1 Xv6 and Unix utilities">
                         
-                        <span class="card-title">MIT 6.S081/Fall 2019 Lab3 Allocator for xv6</span>
+                        <span class="card-title">MIT 6.S081/Fall 2019 Lab1 Xv6 and Unix utilities</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            MIT 6.S081/Fall 2019 Lab3 Allocator for xv6 实验思路和代码实现
+                            MIT 6.S081/Fall 2019 Lab1 Xv6 and Unix utilities 实验思路和代码实现
                         
                     </div>
                     <div class="publish-info">
@@ -1332,7 +1364,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">54.4k</span>&nbsp;字
+                class="white-color">54.5k</span>&nbsp;字
             
             
             
