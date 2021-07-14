@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2021-07-14T06:58:50.621Z</updated>
+  <updated>2021-07-14T17:41:21.541Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -17,11 +17,43 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>struc2vec Learning Node Representations from Structural Identity</title>
+    <link href="https://thooooor.github.io/2021/07/15/lun-wen-bi-ji/graph-embedding/2017-kdd-struc2vec-learning-node-representations-from-structural-identity/"/>
+    <id>https://thooooor.github.io/2021/07/15/lun-wen-bi-ji/graph-embedding/2017-kdd-struc2vec-learning-node-representations-from-structural-identity/</id>
+    <published>2021-07-14T17:36:00.000Z</published>
+    <updated>2021-07-14T17:41:21.541Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;STRUC2VEC的目的是捕捉网络中节点的结构信息（潜在表示）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;结构相似节点的表示应该相似（距离近）；结构不同的节点表示应该不同（距离远）；&lt;/li&gt;
+&lt;li&gt;节点结构的潜在表示不依赖于节点、边的标签等属性，只与节点在网络中的“位置有关”。&lt;/l
+        
+      
+    
+    </summary>
+    
+    
+      <category term="论文笔记" scheme="https://thooooor.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Graph Embedding" scheme="https://thooooor.github.io/tags/Graph-Embedding/"/>
+    
+      <category term="KDD" scheme="https://thooooor.github.io/tags/KDD/"/>
+    
+  </entry>
+  
+  <entry>
     <title>动态时间规整(DTW)算法</title>
-    <link href="https://thooooor.github.io/2021/07/14/suan-fa-bi-ji/dong-tai-shi-jian-gui-zheng-suan-fa/"/>
-    <id>https://thooooor.github.io/2021/07/14/suan-fa-bi-ji/dong-tai-shi-jian-gui-zheng-suan-fa/</id>
+    <link href="https://thooooor.github.io/2021/07/14/suan-fa-bi-ji/dong-tai-shi-jian-gui-zheng/"/>
+    <id>https://thooooor.github.io/2021/07/14/suan-fa-bi-ji/dong-tai-shi-jian-gui-zheng/</id>
     <published>2021-07-14T06:58:00.000Z</published>
-    <updated>2021-07-14T06:58:50.621Z</updated>
+    <updated>2021-07-14T08:48:22.482Z</updated>
     
     <summary type="html">
     
@@ -106,7 +138,7 @@
     <link href="https://thooooor.github.io/2021/05/14/lun-wen-bi-ji/gnn/2016-nips-variational-graph-auto-encoders/"/>
     <id>https://thooooor.github.io/2021/05/14/lun-wen-bi-ji/gnn/2016-nips-variational-graph-auto-encoders/</id>
     <published>2021-05-14T02:15:00.000Z</published>
-    <updated>2021-05-14T07:09:53.390Z</updated>
+    <updated>2021-07-14T17:38:30.043Z</updated>
     
     <summary type="html">
     
@@ -123,10 +155,8 @@
     </summary>
     
     
-      <category term="NLP" scheme="https://thooooor.github.io/categories/NLP/"/>
+      <category term="论文笔记" scheme="https://thooooor.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
     
-    
-      <category term="论文笔记" scheme="https://thooooor.github.io/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
     
       <category term="GNN" scheme="https://thooooor.github.io/tags/GNN/"/>
     
@@ -365,10 +395,10 @@ plt.rcParams[&#39;font.sans-serif&#39;] =
   
   <entry>
     <title>A Joint Neural Model for Information Extraction with Global Features</title>
-    <link href="https://thooooor.github.io/2020/10/18/lun-wen-bi-ji/a-joint-neural-model-for-information-extraction-with-global-features/"/>
-    <id>https://thooooor.github.io/2020/10/18/lun-wen-bi-ji/a-joint-neural-model-for-information-extraction-with-global-features/</id>
+    <link href="https://thooooor.github.io/2020/10/18/lun-wen-bi-ji/ner/a-joint-neural-model-for-information-extraction-with-global-features/"/>
+    <id>https://thooooor.github.io/2020/10/18/lun-wen-bi-ji/ner/a-joint-neural-model-for-information-extraction-with-global-features/</id>
     <published>2020-10-18T14:58:00.000Z</published>
-    <updated>2020-11-30T08:15:47.103Z</updated>
+    <updated>2021-07-14T17:38:13.407Z</updated>
     
     <summary type="html">
     
@@ -385,12 +415,10 @@ plt.rcParams[&#39;font.sans-serif&#39;] =
     </summary>
     
     
-      <category term="NLP" scheme="https://thooooor.github.io/categories/NLP/"/>
+      <category term="论文笔记" scheme="https://thooooor.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
     
     
       <category term="NER" scheme="https://thooooor.github.io/tags/NER/"/>
-    
-      <category term="论文笔记" scheme="https://thooooor.github.io/tags/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
     
       <category term="ACL" scheme="https://thooooor.github.io/tags/ACL/"/>
     
@@ -550,33 +578,6 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
         
         
           &lt;h1 id=&quot;最短路径问题&quot;&gt;&lt;a href=&quot;#最短路径问题&quot; class=&quot;headerlink&quot; title=&quot;最短路径问题&quot;&gt;&lt;/a&gt;最短路径问题&lt;/h1&gt;&lt;p&gt;在该问题中，给定一个带权重的有向图$G=(V,E)$和权重函数$w:E\to
-        
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://thooooor.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>最小生成树</title>
-    <link href="https://thooooor.github.io/2020/05/06/suan-fa-bi-ji/zui-xiao-sheng-cheng-shu/"/>
-    <id>https://thooooor.github.io/2020/05/06/suan-fa-bi-ji/zui-xiao-sheng-cheng-shu/</id>
-    <published>2020-05-06T07:20:00.000Z</published>
-    <updated>2021-03-12T13:19:56.144Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;用$G=(V,E)$表示连通无向图，并且对于每条边$(u,v)\in E$，为其赋予权重$w(u,v)$。我们希望找到一个无环子集$T\subseteq
         
       
     
