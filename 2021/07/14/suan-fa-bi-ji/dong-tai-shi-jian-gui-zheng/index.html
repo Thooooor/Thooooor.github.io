@@ -436,47 +436,14 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>时间序列数据存在多种相似或距离函数，其中最突出的是动态时间规整。在大部分的学科中，时间序列是数据的一种常见表示形式。对于时间序列处理来说，一个普遍的任务就是比较两个序列的相似性。在时间序列中，需要比较相似性的两段时间序列的<strong>长度可能并不相等</strong>，在语音识别领域表现为不同人的语速不同。</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210714142246.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210714142246.png"></p>
 <p>动态时间规整在60年代由日本学者Itakura提出，把未知量伸长或缩短(压扩)，直到与参考模板的长度一致，在这一过程中，未知单词的时间轴会产生扭曲或弯折，以便其特征量与标准模式对应。即可以把序列某个时刻的点跟另一时刻多个连续时刻的点相对应。</p>
-<h1>1. 算法描述</h1>
-<p>给定两个时间序列$X$和$Y$ ，他们的长度分别是$n$和$m$：<br>
-$$<br>
-X=[x_{1},x_{2},…,x_{n}]\<br>
-Y=[y_{1},y_{2},…,y_{m}]<br>
-$$<br>
-在$m\ne n$的情况下，为了对齐这两个序列，首先构建一个$n\times m$的矩阵网格，矩阵$(i,j)$处的元素表示$x_{i},y_{j}$之间的距离$d(x_{i},y_{j})$，不同情况下距离公式的选择不同，最简单可以使用欧氏距离。然后，寻找一条从矩阵左上角元素到右下角的路径，使得路径上的元素和最小，可以通过<strong>动态规划</strong>解决。</p>
-<h1>2. 规整路径 Warp Path</h1>
-<p>该路径称为规整路径$W$：<br>
-$$<br>
-W=w_{1},w_{2},…,w_{k},…,w_{K}\<br>
-\max(m,n)\le K&lt;m+n-1<br>
-$$<br>
-第$k$个元素为$W_{k}=(i,j)_{k}$，$i,j$分别表示$X,Y$中的坐标，路径长度为路径上的元素和。</p>
+<h1 id="1-算法描述"><a href="#1-算法描述" class="headerlink" title="1. 算法描述"></a>1. 算法描述</h1><p>给定两个时间序列$X$和$Y$ ，他们的长度分别是$n$和$m$：<br>$$<br>X=[x_{1},x_{2},…,x_{n}]\<br>Y=[y_{1},y_{2},…,y_{m}]<br>$$<br>在$m\ne n$的情况下，为了对齐这两个序列，首先构建一个$n\times m$的矩阵网格，矩阵$(i,j)$处的元素表示$x_{i},y_{j}$之间的距离$d(x_{i},y_{j})$，不同情况下距离公式的选择不同，最简单可以使用欧氏距离。然后，寻找一条从矩阵左上角元素到右下角的路径，使得路径上的元素和最小，可以通过<strong>动态规划</strong>解决。</p>
+<h1 id="2-规整路径-Warp-Path"><a href="#2-规整路径-Warp-Path" class="headerlink" title="2. 规整路径 Warp Path"></a>2. 规整路径 Warp Path</h1><p>该路径称为规整路径$W$：<br>$$<br>W=w_{1},w_{2},…,w_{k},…,w_{K}\<br>\max(m,n)\le K&lt;m+n-1<br>$$<br>第$k$个元素为$W_{k}=(i,j)_{k}$，$i,j$分别表示$X,Y$中的坐标，路径长度为路径上的元素和。</p>
 <p>路径需要满足以下条件：</p>
-<h2 id="边界条件">边界条件</h2>
-<p>各序列先后次序不可能改变，所以所选的路径必定是从左下角出发，在右上角结束。即：<br>
-$$<br>
-w_{1}=(1,1)\<br>
-w_{K}=(m,n)<br>
-$$</p>
-<h2 id="连续性、单调性">连续性、单调性</h2>
-<p>连续性保保证$X$和$Y$中的每个坐标都在$W$中出现，即不可能跨过某个点去匹配，只能和自己相邻的点对齐。单调性限制$W$上面的点必须是随着时间单调进行。综合两个条件：<br>
-$$<br>
-w_{k}=(i,j),w_{k+1}=(i’,j’)\<br>
-i\le i’\le i+1,j\le j’\le j+1<br>
-$$<br>
-其中，$i\le i’$保证单调性，$i’\le i+1$保证连续性。如下图所示，对于格点$(i,j)$，下一个格点$(i’,j’)$的可能位置为：<br>
-$$<br>
-(i+1,j)\<br>
-(i,j+1)\<br>
-(i+1,j+1)<br>
-$$<br>
-<img src="http://note.lizhihao999.cn/notes/20210714143121.png" alt=""></p>
-<p>如图所示，最后要得到距离最短的规整路径，代价矩阵$D$定义为：<br>
-$$<br>
-D(i,j)=Dist(i,j)+\min[D(i-1,j),D(i,j-1),D(i-1,j-1)]<br>
-$$<br>
-使用动态规划来进行求解。</p>
+<h2 id="边界条件"><a href="#边界条件" class="headerlink" title="边界条件"></a>边界条件</h2><p>各序列先后次序不可能改变，所以所选的路径必定是从左下角出发，在右上角结束。即：<br>$$<br>w_{1}=(1,1)\<br>w_{K}=(m,n)<br>$$</p>
+<h2 id="连续性、单调性"><a href="#连续性、单调性" class="headerlink" title="连续性、单调性"></a>连续性、单调性</h2><p>连续性保保证$X$和$Y$中的每个坐标都在$W$中出现，即不可能跨过某个点去匹配，只能和自己相邻的点对齐。单调性限制$W$上面的点必须是随着时间单调进行。综合两个条件：<br>$$<br>w_{k}=(i,j),w_{k+1}=(i’,j’)\<br>i\le i’\le i+1,j\le j’\le j+1<br>$$<br>其中，$i\le i’$保证单调性，$i’\le i+1$保证连续性。如下图所示，对于格点$(i,j)$，下一个格点$(i’,j’)$的可能位置为：<br>$$<br>(i+1,j)\<br>(i,j+1)\<br>(i+1,j+1)<br>$$<br><img src="http://note.lizhihao999.cn/notes/20210714143121.png"></p>
+<p>如图所示，最后要得到距离最短的规整路径，代价矩阵$D$定义为：<br>$$<br>D(i,j)=Dist(i,j)+\min[D(i-1,j),D(i,j-1),D(i-1,j-1)]<br>$$<br>使用动态规划来进行求解。</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1100,7 +1067,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">54.5k</span>&nbsp;字
+                class="white-color">54.7k</span>&nbsp;字
             
             
             

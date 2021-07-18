@@ -440,17 +440,15 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>MIT 6.S081/Fall 2019实验<a target="_blank" rel="noopener" href="https://pdos.csail.mit.edu/6.828/2019/labs/sh.html">Lab: Simple xv6 shell</a>，为xv6写一个简单的shell。应该能够使用参数运行命令，处理输入和输出重定向，并设置双元素管道。对于这些示例以及类似的命令，实现的<code>shell</code>应类似于 xv6 shell sh：</p>
-<pre><code class="language-shell">echo hello there
+<pre><code class="shell">echo hello there
 echo something &gt; file.txt
 ls | grep READ
 grep lion &lt; data.txt | wc &gt; count
 echo echo hello | nsh
-find . b | xargs grep hello
-</code></pre>
+find . b | xargs grep hello</code></pre>
 <p>同时，该实验不能使用动态内存分配接口，例如<code>malloc()</code>、<code>sbrk()</code>，取而代之的是，只有本地变量（栈分配的）和全局变量可以使用。可以对命令名的最大长度、参数的最大数量或者任何单个参数的最大长度等内容施加合理的固定限制。</p>
 <p>本次实验的关键点和难点在于指令的解析和不同类型指令的执行。本文对主要思路和关键部分的代码实现进行说明，<a target="_blank" rel="noopener" href="https://github.com/Thooooor/xv6-riscv-fall19/tree/sh">完整代码</a>实现可以参考我的GitHub仓库.</p>
-<h1>1. shell执行流程</h1>
-<ol>
+<h1 id="1-shell执行流程"><a href="#1-shell执行流程" class="headerlink" title="1. shell执行流程"></a>1. shell执行流程</h1><ol>
 <li>shell执行<code>getcmd</code>获得用户输入的命令；</li>
 <li>shell执行<code>fork</code>创建一个shell进程的副本，然后shell进行wait状态；</li>
 <li>调用<code>parsecmd(buf)</code>解析输入的命令；</li>
@@ -459,7 +457,7 @@ find . b | xargs grep hello
 <li>函数执行结束后，接着执行<code>exit</code>系统调用返回shell，shell从wait中退出。</li>
 </ol>
 <p>据此编写<code>main</code>函数：</p>
-<pre><code class="language-c">/*
+<pre><code class="c">/*
     main process:
     get cmd -&gt; cd? -&gt; fork -&gt; parse cmd -&gt; run cmd -&gt; get cmd
                    -&gt; cd
@@ -486,27 +484,21 @@ int main(void) {
         wait(0);
     }
     exit(0);
-}
-</code></pre>
+}</code></pre>
 <p>其中<code>cd</code>指令较为特殊，需要进行特判。</p>
-<h1>2. parsecmd解析指令</h1>
-<p>指令解析函数<code>parsecmd</code>执行的核心函数的<code>parseline</code>，这个函数是递归执行的，其执行流程如下：</p>
+<h1 id="2-parsecmd解析指令"><a href="#2-parsecmd解析指令" class="headerlink" title="2. parsecmd解析指令"></a>2. parsecmd解析指令</h1><p>指令解析函数<code>parsecmd</code>执行的核心函数的<code>parseline</code>，这个函数是递归执行的，其执行流程如下：</p>
 <ol>
-<li>
-<p>首先执行<code>parsepipe</code>的核心函数<code>parseexec</code>，调用<code>execcmd</code>，生成一个<code>execcmd</code>的结构体，然后调用<code>parseredirs</code>函数，检查是否有重定向符号"&lt;“或”&gt;"，如果有，则将之前的<code>execcmd</code>改为<code>redircmd</code>。将命令的入参保存在cmd-&gt;argv中；</p>
+<li><p>首先执行<code>parsepipe</code>的核心函数<code>parseexec</code>，调用<code>execcmd</code>，生成一个<code>execcmd</code>的结构体，然后调用<code>parseredirs</code>函数，检查是否有重定向符号”&lt;“或”&gt;”，如果有，则将之前的<code>execcmd</code>改为<code>redircmd</code>。将命令的入参保存在cmd-&gt;argv中；</p>
 </li>
-<li>
-<p>接着，检查用户输入的命令中是否有管道命令，如果有，递归调用<code>parsepipe</code>，则建立管道连接；</p>
+<li><p>接着，检查用户输入的命令中是否有管道命令，如果有，递归调用<code>parsepipe</code>，则建立管道连接；</p>
 </li>
-<li>
-<p>返回parseline，执行命令中是否有&amp;（返回命令），如果有，则生成一个新的backcmd；</p>
+<li><p>返回parseline，执行命令中是否有&amp;（返回命令），如果有，则生成一个新的backcmd；</p>
 </li>
-<li>
-<p>检查是否有；（多条命令分别要执行），如果有，递归调用<code>parseline</code>，将所有的命令分别解析后连接起来。</p>
+<li><p>检查是否有；（多条命令分别要执行），如果有，递归调用<code>parseline</code>，将所有的命令分别解析后连接起来。</p>
 </li>
 </ol>
 <p>据此编写以下解析cmd的函数：</p>
-<pre><code class="language-c">struct cmd* parsecmd(char *s) {
+<pre><code class="c">struct cmd* parsecmd(char *s) {
     struct cmd *cmd;
     char *es;
     es = s + strlen(s);
@@ -562,7 +554,7 @@ struct cmd* parseexec(char **ps, char *es){
             fprintf(2, "too many args.\n");
             exit(-1);
         }
-        
+
         ret = parseredirs(ret, ps, es);
     }
     cmd-&gt;argv[argc] = 0;
@@ -627,7 +619,7 @@ struct cmd *execcmd(void) {
     struct execcmd *cmd = &amp;myexeccmd[cmd_index[EXEC]];
 
     cmd-&gt;type = EXEC;
-    
+
     return (struct cmd*)cmd;
 }
 
@@ -649,12 +641,9 @@ struct cmd *redircmd(struct cmd *subcmd, char *file, int type, int mode, int fd)
 
     return (struct cmd*)cmd;
 }
-
 </code></pre>
-<h1>3. cmd执行</h1>
-<h2 id="3-1-cmd结构体">3.1 cmd结构体</h2>
-<p>参考<code>sh.c</code>中的cmd结构体定义，定义不同指令的结构体：</p>
-<pre><code class="language-c">struct cmd {
+<h1 id="3-cmd执行"><a href="#3-cmd执行" class="headerlink" title="3. cmd执行"></a>3. cmd执行</h1><h2 id="3-1-cmd结构体"><a href="#3-1-cmd结构体" class="headerlink" title="3.1 cmd结构体"></a>3.1 cmd结构体</h2><p>参考<code>sh.c</code>中的cmd结构体定义，定义不同指令的结构体：</p>
+<pre><code class="c">struct cmd {
   int type;
 };
 
@@ -677,10 +666,9 @@ struct pipecmd {
   int type;
   struct cmd *left;
   struct cmd *right;
-};
-</code></pre>
+};</code></pre>
 <p>由于不能使用动态分配函数，所以事先定义指令数组，分配好空间：</p>
-<pre><code class="language-c">/*
+<pre><code class="c">/*
     not allowed to use m a l l o c()
     use global parameters instead
     index and cmd_index record the use of space
@@ -692,11 +680,9 @@ struct redircmd myredircmd[MAXCMDS];
 int cmd_index[MAXCMDS];
 char mybuf[MAXBUF];
 char cmdbuff[MAXBUF];
-int index = 0;
-</code></pre>
-<h2 id="3-2-cmd执行">3.2 cmd执行</h2>
-<p>不同类型的指令，最终都会使用<code>exec</code>进行执行，根据指令的不同类型，递归调用<code>runcmd</code>完成对不同指令的执行。</p>
-<pre><code class="language-c">void runcmd(struct cmd *cmd) {
+int index = 0;</code></pre>
+<h2 id="3-2-cmd执行"><a href="#3-2-cmd执行" class="headerlink" title="3.2 cmd执行"></a>3.2 cmd执行</h2><p>不同类型的指令，最终都会使用<code>exec</code>进行执行，根据指令的不同类型，递归调用<code>runcmd</code>完成对不同指令的执行。</p>
+<pre><code class="c">void runcmd(struct cmd *cmd) {
     int p[2];
     struct execcmd *ecmd;
     struct pipecmd *pcmd;
@@ -748,8 +734,7 @@ int index = 0;
             break;
     }
     exit(0);
-}
-</code></pre>
+}</code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1378,7 +1363,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">54.5k</span>&nbsp;字
+                class="white-color">54.7k</span>&nbsp;字
             
             
             

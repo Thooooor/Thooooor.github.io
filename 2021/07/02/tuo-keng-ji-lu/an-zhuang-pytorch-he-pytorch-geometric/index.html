@@ -439,40 +439,33 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1>1. 安装PyTorch</h1>
-<p>在<a target="_blank" rel="noopener" href="https://pytorch.org/">官网</a>选择操作系统、下载方式和对应的GPU配置：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210701235241.png" alt=""></p>
+                <h1 id="1-安装PyTorch"><a href="#1-安装PyTorch" class="headerlink" title="1. 安装PyTorch"></a>1. 安装PyTorch</h1><p>在<a target="_blank" rel="noopener" href="https://pytorch.org/">官网</a>选择操作系统、下载方式和对应的GPU配置：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210701235241.png"></p>
 <p>如果需要之前的版本可以点击下方<a target="_blank" rel="noopener" href="https://pytorch.org/get-started/previous-versions/">链接</a>选择之前的版本：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210701235457.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210701235457.png"></p>
 <p>需要注意对应的CUDA版本号。如何安装、切换多版本CUDA可以参考<a target="_blank" rel="noopener" href="http://lizhihao999.cn/2021/07/01/tuo-keng-ji-lu/linux-duo-ban-ben-cuda-an-zhuang-ji-qie-huan/">此前的博客</a>。可通过以下命令查看当前CUDA版本：</p>
-<pre><code class="language-shell">cat  /usr/local/cuda/version.txt
-</code></pre>
+<pre><code class="shell">cat  /usr/local/cuda/version.txt</code></pre>
 <p>下载完成后可以通过以下命令检查torch版本及对应的CUDA版本：</p>
-<pre><code class="language-shell">python -c "import torch; print(torch.__version__)"
-python -c "import torch; print(torch.version.cuda)"
-</code></pre>
+<pre><code class="shell">python -c "import torch; print(torch.__version__)"
+python -c "import torch; print(torch.version.cuda)"</code></pre>
 <p>可以通过以下命令查看GPU是否可用：</p>
-<pre><code class="language-shell">python
+<pre><code class="shell">python
 &gt;&gt;&gt; import torch
-&gt;&gt;&gt; torch.cuda.is_available() 	# GPU是否可用
-&gt;&gt;&gt; torch.cuda.device_count()	# GPU数量
-&gt;&gt;&gt; torch.cuda.current_device()	# 当前GPU
-&gt;&gt;&gt; exit()
-</code></pre>
+&gt;&gt;&gt; torch.cuda.is_available()     # GPU是否可用
+&gt;&gt;&gt; torch.cuda.device_count()    # GPU数量
+&gt;&gt;&gt; torch.cuda.current_device()    # 当前GPU
+&gt;&gt;&gt; exit()</code></pre>
 <p>例如：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210702001140.png" alt=""></p>
-<h1>2. 安装PyTorch Geometric</h1>
-<p>根据<a target="_blank" rel="noopener" href="https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html">官网</a>，最好根据当前的PyTorch版本和CUDA版本下载相关的依赖，下载命令如下：</p>
-<pre><code class="language-shell">pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html
+<p><img src="http://note.lizhihao999.cn/notes/20210702001140.png"></p>
+<h1 id="2-安装PyTorch-Geometric"><a href="#2-安装PyTorch-Geometric" class="headerlink" title="2. 安装PyTorch Geometric"></a>2. 安装PyTorch Geometric</h1><p>根据<a target="_blank" rel="noopener" href="https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html">官网</a>，最好根据当前的PyTorch版本和CUDA版本下载相关的依赖，下载命令如下：</p>
+<pre><code class="shell">pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html
 pip install torch-sparse -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html
-pip install torch-geometric
-</code></pre>
+pip install torch-geometric</code></pre>
 <p>其中，<code>${TORCH}</code>替换为当前环境下的PyTorch版本，目前支持<code>1.4.0</code>、<code>1.5.0</code>、<code>1.6.0</code>、<code>1.7.0</code>、<code>1.7.1</code>、<code>1.8.0</code>、<code>1.8.1</code>、和<code>1.9.0</code>；<code>${CUDA}</code>替换为指定的CUDA版本，目前支持<code>cpu</code>、<code>cu92</code>、<code>cu101</code>、<code>cu102</code>、<code>cu110</code>和<code>cu111</code>。</p>
 <p>例如对于PyTorch 1.8.0/1.8.1和CUDA 10.2：</p>
-<pre><code class="language-shell">pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-1.8.0+cu102.html
+<pre><code class="shell">pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-1.8.0+cu102.html
 pip install torch-sparse -f https://pytorch-geometric.com/whl/torch-1.8.0+cu102.html
-pip install torch-geometric
-</code></pre>
+pip install torch-geometric</code></pre>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -818,7 +811,7 @@ pip install torch-geometric
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在Linux-Ubuntu服务器上安装使用多版本CUDA
+                            在Linux-Ubuntu服务器上安装使用多版本CUDA并通过软连接进行切换
                         
                     </div>
                     <div class="publish-info">
@@ -846,6 +839,10 @@ pip install torch-geometric
                     
                     <a href="/tags/Ubuntu/">
                         <span class="chip bg-color">Ubuntu</span>
+                    </a>
+                    
+                    <a href="/tags/cuda/">
+                        <span class="chip bg-color">cuda</span>
                     </a>
                     
                 </div>
@@ -1089,7 +1086,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">54.5k</span>&nbsp;字
+                class="white-color">54.7k</span>&nbsp;字
             
             
             
