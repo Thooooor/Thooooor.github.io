@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Variational Graph Auto-encoder, Thor&#39;s Blog">
+    <meta name="keywords" content="tmux实现Linux下的终端复用, Thor&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Variational Graph Auto-encoder | Thor&#39;s Blog</title>
+    <title>tmux实现Linux下的终端复用 | Thor&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -257,7 +257,7 @@
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Variational Graph Auto-encoder</h1>
+                    <h1 class="description center-align post-title">tmux实现Linux下的终端复用</h1>
                 </div>
             </div>
         </div>
@@ -374,12 +374,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/GNN/">
-                                <span class="chip bg-color">GNN</span>
+                            <a href="/tags/Linux/">
+                                <span class="chip bg-color">Linux</span>
                             </a>
                         
-                            <a href="/tags/NIPS/">
-                                <span class="chip bg-color">NIPS</span>
+                            <a href="/tags/Ubuntu/">
+                                <span class="chip bg-color">Ubuntu</span>
                             </a>
                         
                     </div>
@@ -390,8 +390,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="post-category">
-                                论文笔记
+                            <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="post-category">
+                                脱坑实录
                             </a>
                         
                     </div>
@@ -403,28 +403,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-05-14
+                    2021-07-19
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-07-15
+                    2021-07-19
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.3k
+                    387
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    5 分
+                    1 分
                 </div>
                 
 
@@ -439,78 +439,27 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <blockquote>
-<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1611.07308">论文地址</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/tkipf/gae">tensorflow-代码地址</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/DaehanKim/vgae_pytorch">pytorch-代码地址</a></p>
-</blockquote>
-<p>这是一篇2016年NIPS的workshop，介绍了变分图自动编码器（VGAE），它是一种基于变分自动编码器（VAE）的无监督学习图结构化数据的框架。 该模型利用了潜在变量，并且能够为无向图学习可解释的潜在表示（请参见图1）。</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210514101222.png" alt="图1"></p>
-<blockquote>
-<p>在Cora引用网络数据集上训练的无监督VGAE模型的潜在空间。 </p>
-<p>灰线表示引文链接。 颜色表示文档类别（训练期间未提供）。</p>
-</blockquote>
-<p>我们使用图卷积网络（GCN）编码器和一个简单的内积解码器演示了该模型。 我们的模型在引用网络中的链接预测任务上获得了具有竞争力的结果。 与大多数现有的无监督学习图形结构数据和链接预测模型相比，我们的模型可以自然地包含节点特征，从而显着提高了许多基准数据集的预测性能。</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210514101249.png" alt="形象化"></p>
-<p>对于上图过程，可以看到变分自编码器学习<strong>低维向量表示的分布</strong>，包含一个Encoder和一个Decoder, 主要用于推理模型。其中Encoder把input变成概率分布，从概率分布中采样得到隐变量Z，Decoder把这个隐变量Z变成output。</p>
-<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>一个无边，无权重的图：<br>$$<br>G=(V,E)\quad with\quad N=|V|;nodes<br>$$</p>
-<ul>
-<li>邻接矩阵$A$，对角线元素为1</li>
-<li>度矩阵$D$</li>
-</ul>
-<p>随机潜在向量$z_{i}$，由矩阵$Z(N\times F)$统一，结点特征向量矩阵$X(N\times D)$。</p>
-<h2 id="推理模型"><a href="#推理模型" class="headerlink" title="推理模型"></a>推理模型</h2><p>通过一个两层GCN进行参数化：<br>$$<br>q(Z|X,A)=\prod_{i=1}^{N}{q(\vec{z_{i}}|X,A)}\quad with\quad q=(\vec{z_{i}}|X,A)=N(\vec{z_{i}}|\vec{\mu_{i}},\mathrm{diag}(\vec{\sigma_{i}}^{2}))<br>$$<br>其中，$\mu=GCN_{\mu}(X,A)$是均值向量$\mu_{i}$的矩阵；$\log{\sigma}=GCN_{\sigma}(X,A)$是方差向量的矩阵；$N(\cdot)$代表服从高斯分布。</p>
-<p>两层GCN定义为：<br>$$<br>\mathrm{GCN}(X,A)=\mathrm{\tilde{A}}\mathrm{ReLU}(\mathrm{\tilde{A}XW_{0}})\mathrm{W_{1}}<br>$$<br>其中，$W_{i}$是每一层的权重矩阵，上述两个GCN共享第一层的权重矩阵$W_{0}$。</p>
-<ul>
-<li><p>线性整流函数$\mathrm{RuLU}(\cdot)=\max{(0,\cdot)}$</p>
-</li>
-<li><p>对称归一化邻接矩阵$\tilde{A}=D^{-\frac{1}{2}}AD^{-\frac{1}{2}}$</p>
-</li>
-</ul>
-<h2 id="生成模型"><a href="#生成模型" class="headerlink" title="生成模型"></a>生成模型</h2><p>通过两个潜在向量之间的内积给出：<br>$$<br>p(\mathrm{A|Z})=\prod_{i=1}^{N}{\prod_{j=1}^{N}{p(A_{ij}|\vec{z}<em>{i},\vec{z}</em>{j})}}\quad with\quad p(A_{ij=1}|\vec{z}<em>{i},\vec{z}</em>{j})=\sigma(\vec{z}<em>{i}^{T}\vec{z}</em>{j})<br>$$<br>其中$A_{ij}$是矩阵$\mathrm{A}$中的元素，$\sigma(\cdot)$是logistic sigmoid激活函数。</p>
-<h2 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h2><p>针对变量参数$\bold{W}<em>{i}$优化变量下限$L$：<br>$$<br>L=E</em>{q(Z|A,X)}[\log{p(A|Z)}]-\mathrm{KL}[q(Z|X,A)||p(Z)]<br>$$<br>其中：</p>
-<ul>
-<li><p>$E_{q}[\cdot]$是均值；</p>
-</li>
-<li><p>$\mathrm{KL}[q(\cdot)||p(\cdot)]$是$q(\cdot),p(\cdot)$之间的Kullback-Leibler divergence（相对熵）。相对熵可以衡量两个随机分布之间的距离，当两个随机分布相同时，它们的相对熵为零，当两个随机分布的差别增大时，它们的相对熵也会增大。</p>
-</li>
-</ul>
-<p>进一步采用高斯平滑：<br>$$<br>p(Z)=\prod_{i}{p(z_{i})}=\prod_{i}{N(z_{i}|0,I)}<br>$$<br>我们执行批量梯度下降，并利用重新参数化技巧进行训练。 对于无特征的方法，我们只需放弃对X的依赖关系，然后用GCN中的单位矩阵替换X。</p>
-<h2 id="非概率图自动编码器（GAE）模型"><a href="#非概率图自动编码器（GAE）模型" class="headerlink" title="非概率图自动编码器（GAE）模型"></a>非概率图自动编码器（GAE）模型</h2><p>对于VGAE模型的非概率变体，我们计算嵌入Z和重构的邻接矩阵$\tilde{A}$，如下所示：<br>$$<br>\tilde{A}=\sigma(ZZ^{T})\quad with\quad Z=\mathrm{GCN(X,A)}<br>$$</p>
-<h1 id="代码解读"><a href="#代码解读" class="headerlink" title="代码解读"></a>代码解读</h1><p>对于<code>pytorch</code>版本的代码进行一定的解读。</p>
-<h2 id="Encoder"><a href="#Encoder" class="headerlink" title="Encoder"></a>Encoder</h2><pre><code class="python"># model.py: class VGAE
-def encode(self, X):
-        hidden = self.base_gcn(X)
-        self.mean = self.gcn_mean(hidden)    # 均值GCN
-        self.logstd = self.gcn_logstddev(hidden)    # 方差GCN
-        gaussian_noise = torch.randn(X.size(0), args.hidden2_dim)    # 随机采样
-        sampled_z = gaussian_noise*torch.exp(self.logstd) + self.mean    # 采样还原z'
-        return sampled_z</code></pre>
-<p>Encoder把input变成概率分布，并从概率分布中采样得到隐变量Z。</p>
-<h2 id="Decoder"><a href="#Decoder" class="headerlink" title="Decoder"></a>Decoder</h2><pre><code class="python"># model.py: class VGAE
-def forward(self, X):
-        Z = self.encode(X)
-        A_pred = dot_product_decode(Z)    # decode
-        return A_pred
-
-# model.py
-def dot_product_decode(Z):
-    A_pred = torch.sigmoid(torch.matmul(Z,Z.t()))
-    return A_pred</code></pre>
-<p>通过Z和Z转置的点积，可以得到一个对称矩阵，再通过sigmoid函数，可以得到最终的output。</p>
-<h2 id="train"><a href="#train" class="headerlink" title="train"></a>train</h2><pre><code class="python">for epoch in range(args.num_epoch):
-    ...
-    loss = log_lik = norm*F.binary_cross_entropy(A_pred.view(-1), adj_label.to_dense().view(-1), weight = weight_tensor)
-    # 通过交叉熵得到输出矩阵和实际连接矩阵的相似度（结构性）
-    if args.model == 'VGAE':
-        kl_divergence = 0.5/ A_pred.size(0) * (1 + 2*model.logstd - model.mean**2 - torch.exp(model.logstd)**2).sum(1).mean()
-        # 通过相对熵得到理论分布拟合真实分布时产生的信息损耗
-        loss -= kl_divergence
-
-    loss.backward()
-    optimizer.step()
-    ...</code></pre>
-<p>根据公式，L由两部分构成，第一部分为输出矩阵和实际连接矩阵的交叉熵，即两者之间的相似度。连接矩阵反应不同点之间的连接情况，也是一个对称矩阵。第二部分是两个分布之间的相对熵，表示两个分布之间的距离。最终的损失函数为两者之差。</p>
+                <p>当通过SHH远程连接服务器训练模型或者运行程序时，如果断开SSH连接，当前操作也会停止运行，这样的操作很不优雅，我们可以通过<code>tmux</code>实现断开连接后仍然继续执行当前窗口的操作。<code>tmux</code>实际为一个终端复用软件，主要可以实现以下功能：</p>
+<ol>
+<li>分屏</li>
+<li>保护现场</li>
+<li>会话共享</li>
+</ol>
+<h1 id="1-安装tmux"><a href="#1-安装tmux" class="headerlink" title="1. 安装tmux"></a>1. 安装tmux</h1><p>ubuntu环境下可通过以下命令进行安装：</p>
+<pre><code class="shell">sudo apt-get install tmux</code></pre>
+<h1 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2. 常用命令"></a>2. 常用命令</h1><h2 id="2-1-新建会话"><a href="#2-1-新建会话" class="headerlink" title="2.1 新建会话"></a>2.1 新建会话</h2><p>新建时需要指定会话名称：</p>
+<pre><code class="shell">tmux new -s session-name</code></pre>
+<p>之后会直接进入新建的会话当中，并且新会话默认停留在当前目录。之后即使断开SSH连接，当前会话中的程序仍然会继续运行，不会停止。</p>
+<h2 id="2-2-重回会话"><a href="#2-2-重回会话" class="headerlink" title="2.2 重回会话"></a>2.2 重回会话</h2><p>当我们重新连接SSH后，可以重新进入之前的会话查看运行情况：</p>
+<pre><code class="shell">tmux a -t session-name</code></pre>
+<h2 id="2-3-查看所有会话"><a href="#2-3-查看所有会话" class="headerlink" title="2.3 查看所有会话"></a>2.3 查看所有会话</h2><p>有两条命令均可查看：</p>
+<pre><code class="shell">tmux list-session
+tmux ls</code></pre>
+<h2 id="2-4-关闭会话"><a href="#2-4-关闭会话" class="headerlink" title="2.4 关闭会话"></a>2.4 关闭会话</h2><p>会话中所有操作结束后需要关闭会话，可以指定关闭特定会话：</p>
+<pre><code class="shell">tmux kill-session -t session-name</code></pre>
+<p>也可以直接关闭所有会话：</p>
+<pre><code class="shell">tmux kill-server</code></pre>
+<p>后续更新进阶功能的配置</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -554,7 +503,7 @@ def dot_product_decode(Z):
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://thooooor.github.io/2021/05/14/lun-wen-bi-ji/gnn/2016-nips-variational-graph-auto-encoders/">https://thooooor.github.io/2021/05/14/lun-wen-bi-ji/gnn/2016-nips-variational-graph-auto-encoders/</a>
+                    <a href="https://thooooor.github.io/2021/07/19/tuo-keng-ji-lu/tmux-shi-xian-linux-xia-de-zhong-duan-fu-yong/">https://thooooor.github.io/2021/07/19/tuo-keng-ji-lu/tmux-shi-xian-linux-xia-de-zhong-duan-fu-yong/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -592,12 +541,12 @@ def dot_product_decode(Z):
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/GNN/">
-                                    <span class="chip bg-color">GNN</span>
+                                <a href="/tags/Linux/">
+                                    <span class="chip bg-color">Linux</span>
                                 </a>
                             
-                                <a href="/tags/NIPS/">
-                                    <span class="chip bg-color">NIPS</span>
+                                <a href="/tags/Ubuntu/">
+                                    <span class="chip bg-color">Ubuntu</span>
                                 </a>
                             
                         </div>
@@ -768,7 +717,7 @@ def dot_product_decode(Z):
         repo: 'blogcomment',
         owner: 'Thooooor',
         admin: "Thooooor",
-        id: '2021-05-14T10-15-00',
+        id: '2021-07-19T08-36-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -792,28 +741,29 @@ def dot_product_decode(Z):
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/07/01/tuo-keng-ji-lu/linux-duo-ban-ben-cuda-an-zhuang-ji-qie-huan/">
+                <a href="/2021/07/19/tuo-keng-ji-lu/tmux-shi-xian-linux-xia-de-zhong-duan-fu-yong/">
                     <div class="card-image">
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Linux多版本CUDA安装及切换">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="tmux实现Linux下的终端复用">
                         
-                        <span class="card-title">Linux多版本CUDA安装及切换</span>
+                        <span class="card-title">tmux实现Linux下的终端复用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            在Linux-Ubuntu服务器上安装使用多版本CUDA并通过软连接进行切换
+                            在Linux-Ubuntu服务器上安装使用tmux，断开SSH后可以继续执行操作
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-19
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -826,6 +776,7 @@ def dot_product_decode(Z):
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -835,10 +786,6 @@ def dot_product_decode(Z):
                     
                     <a href="/tags/Ubuntu/">
                         <span class="chip bg-color">Ubuntu</span>
-                    </a>
-                    
-                    <a href="/tags/cuda/">
-                        <span class="chip bg-color">cuda</span>
                     </a>
                     
                 </div>
@@ -852,31 +799,31 @@ def dot_product_decode(Z):
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/12/zhi-shi-tu-pu/zhi-shi-tu-pu-gai-nian/">
+                <a href="/2021/07/15/lun-wen-bi-ji/graph-embedding/2017-kdd-struc2vec-learning-node-representations-from-structural-identity/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.png" class="responsive-img" alt="知识图谱概念">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="struc2vec Learning Node Representations from Structural Identity">
                         
-                        <span class="card-title">知识图谱概念</span>
+                        <span class="card-title">struc2vec Learning Node Representations from Structural Identity</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            总结知识图谱的基本概念
+                            2017 KDD 经典图嵌入方法 struc2vec
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-12
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-15
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Knowledge-Graph/" class="post-category">
-                                    Knowledge Graph
+                            <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    论文笔记
                                 </a>
                             
                             
@@ -886,8 +833,12 @@ def dot_product_decode(Z):
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/">
-                        <span class="chip bg-color">知识图谱</span>
+                    <a href="/tags/Graph-Embedding/">
+                        <span class="chip bg-color">Graph Embedding</span>
+                    </a>
+                    
+                    <a href="/tags/KDD/">
+                        <span class="chip bg-color">KDD</span>
                     </a>
                     
                 </div>
@@ -1062,13 +1013,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
-    });
-</script>
 
 
 

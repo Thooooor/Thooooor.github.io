@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2021-07-14T17:41:21.541Z</updated>
+  <updated>2021-07-19T00:37:02.488Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>tmux实现Linux下的终端复用</title>
+    <link href="https://thooooor.github.io/2021/07/19/tuo-keng-ji-lu/tmux-shi-xian-linux-xia-de-zhong-duan-fu-yong/"/>
+    <id>https://thooooor.github.io/2021/07/19/tuo-keng-ji-lu/tmux-shi-xian-linux-xia-de-zhong-duan-fu-yong/</id>
+    <published>2021-07-19T00:36:00.000Z</published>
+    <updated>2021-07-19T00:37:02.488Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;当通过SHH远程连接服务器训练模型或者运行程序时，如果断开SSH连接，当前操作也会停止运行，这样的操作很不优雅，我们可以通过&lt;code&gt;tmux&lt;/code&gt;实现断开连接后仍然继续执行当前窗口的操作。&lt;code&gt;tmux&lt;/code&gt;实际为一个终端复用软件，主要可以实现以下
+        
+      
+    
+    </summary>
+    
+    
+      <category term="脱坑实录" scheme="https://thooooor.github.io/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/"/>
+    
+    
+      <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
+    
+      <category term="Ubuntu" scheme="https://thooooor.github.io/tags/Ubuntu/"/>
+    
+  </entry>
   
   <entry>
     <title>struc2vec Learning Node Representations from Structural Identity</title>
@@ -309,11 +338,11 @@ plt.rcParams[&#39;font.sans-serif&#39;] =
   </entry>
   
   <entry>
-    <title>MIT 6.S081/Fall 2019 Lab3 Allocator for xv6</title>
-    <link href="https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-4-bi-ji/"/>
-    <id>https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-4-bi-ji/</id>
+    <title>MIT 6.S081/Fall 2019 Lab7 locks</title>
+    <link href="https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-3-bi-ji/"/>
+    <id>https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-3-bi-ji/</id>
     <published>2020-11-24T06:32:00.000Z</published>
-    <updated>2020-12-24T16:21:26.418Z</updated>
+    <updated>2020-12-24T16:20:21.992Z</updated>
     
     <summary type="html">
     
@@ -321,7 +350,7 @@ plt.rcParams[&#39;font.sans-serif&#39;] =
       
         
         
-          &lt;p&gt;MIT 6.S081/Fall 2019实验 &lt;a href=&quot;https://pdos.csail.mit.edu/6.828/2019/labs/alloc.html&quot;&gt;Lab: Allocator for xv6&lt;/a&gt;，用好友分配器替换 xv6
+          &lt;p&gt;MIT 6.S081/Fall 2019实验 &lt;a href=&quot;https://pdos.csail.mit.edu/6.828/2019/labs/lock.html&quot;&gt;Lab:
         
       
     
@@ -338,11 +367,11 @@ plt.rcParams[&#39;font.sans-serif&#39;] =
   </entry>
   
   <entry>
-    <title>MIT 6.S081/Fall 2019 Lab7 locks</title>
-    <link href="https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-3-bi-ji/"/>
-    <id>https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-3-bi-ji/</id>
+    <title>MIT 6.S081/Fall 2019 Lab3 Allocator for xv6</title>
+    <link href="https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-4-bi-ji/"/>
+    <id>https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-4-bi-ji/</id>
     <published>2020-11-24T06:32:00.000Z</published>
-    <updated>2020-12-24T16:20:21.992Z</updated>
+    <updated>2020-12-24T16:21:26.418Z</updated>
     
     <summary type="html">
     
@@ -350,7 +379,7 @@ plt.rcParams[&#39;font.sans-serif&#39;] =
       
         
         
-          &lt;p&gt;MIT 6.S081/Fall 2019实验 &lt;a href=&quot;https://pdos.csail.mit.edu/6.828/2019/labs/lock.html&quot;&gt;Lab:
+          &lt;p&gt;MIT 6.S081/Fall 2019实验 &lt;a href=&quot;https://pdos.csail.mit.edu/6.828/2019/labs/alloc.html&quot;&gt;Lab: Allocator for xv6&lt;/a&gt;，用好友分配器替换 xv6
         
       
     
@@ -563,33 +592,6 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
       <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
       <category term="C/C++" scheme="https://thooooor.github.io/tags/C-C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>单源最短路径</title>
-    <link href="https://thooooor.github.io/2020/05/07/suan-fa-bi-ji/dan-yuan-zui-duan-lu-jing/"/>
-    <id>https://thooooor.github.io/2020/05/07/suan-fa-bi-ji/dan-yuan-zui-duan-lu-jing/</id>
-    <published>2020-05-07T07:20:00.000Z</published>
-    <updated>2021-03-12T13:18:14.501Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;最短路径问题&quot;&gt;&lt;a href=&quot;#最短路径问题&quot; class=&quot;headerlink&quot; title=&quot;最短路径问题&quot;&gt;&lt;/a&gt;最短路径问题&lt;/h1&gt;&lt;p&gt;在该问题中，给定一个带权重的有向图$G=(V,E)$和权重函数$w:E\to
-        
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://thooooor.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
