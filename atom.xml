@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2021-07-21T15:53:56.994Z</updated>
+  <updated>2021-07-21T18:12:05.446Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Semi-Riemannian Graph Convolutional Networks</title>
+    <link href="https://thooooor.github.io/2021/07/22/lun-wen-bi-ji/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/"/>
+    <id>https://thooooor.github.io/2021/07/22/lun-wen-bi-ji/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/</id>
+    <published>2021-07-21T18:11:00.000Z</published>
+    <updated>2021-07-21T18:12:05.446Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.03134&quot;&gt;NeurIPS 2021 Semi-Riemannian Graph Convolutional Networks&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="论文笔记" scheme="https://thooooor.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="GNN" scheme="https://thooooor.github.io/tags/GNN/"/>
+    
+      <category term="NeurIPS" scheme="https://thooooor.github.io/tags/NeurIPS/"/>
+    
+  </entry>
   
   <entry>
     <title>Graph Geometry Interaction Learning</title>
@@ -557,33 +588,6 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
         
         
           &lt;p&gt;在摊还分析中，我们求数据结构的一个操作序列中所执行的所有操作的&lt;strong&gt;平均时间&lt;/strong&gt;，来评价操作的代价。摊还分析不同于平均情况分析，不涉及概率，保证&lt;strong&gt;最坏情况下每个操作的平均性能&lt;/strong&gt;。通过做摊还分析，通常可以获得对某种特定数据
-        
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://thooooor.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>网络最大流</title>
-    <link href="https://thooooor.github.io/2020/05/09/suan-fa-bi-ji/wang-luo-zui-da-liu/"/>
-    <id>https://thooooor.github.io/2020/05/09/suan-fa-bi-ji/wang-luo-zui-da-liu/</id>
-    <published>2020-05-09T07:20:00.000Z</published>
-    <updated>2021-03-12T13:19:49.229Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;流网络&quot;&gt;&lt;a href=&quot;#流网络&quot; class=&quot;headerlink&quot; title=&quot;流网络&quot;&gt;&lt;/a&gt;流网络&lt;/h1&gt;&lt;h2 id=&quot;流网络和流&quot;&gt;&lt;a href=&quot;#流网络和流&quot; class=&quot;headerlink&quot;
         
       
     
