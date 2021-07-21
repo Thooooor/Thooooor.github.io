@@ -410,21 +410,21 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-07-02
+                    2021-07-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    426
+                    676
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    2 分
+                    3 分
                 </div>
                 
 
@@ -457,7 +457,10 @@ python -c "import torch; print(torch.version.cuda)"</code></pre>
 &gt;&gt;&gt; exit()</code></pre>
 <p>例如：</p>
 <p><img src="http://note.lizhihao999.cn/notes/20210702001140.png"></p>
-<h1 id="2-安装PyTorch-Geometric"><a href="#2-安装PyTorch-Geometric" class="headerlink" title="2. 安装PyTorch Geometric"></a>2. 安装PyTorch Geometric</h1><p>根据<a target="_blank" rel="noopener" href="https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html">官网</a>，最好根据当前的PyTorch版本和CUDA版本下载相关的依赖，下载命令如下：</p>
+<p>注意，GPU devices从0开始编号。</p>
+<h1 id="2-安装PyTorch-Geometric"><a href="#2-安装PyTorch-Geometric" class="headerlink" title="2. 安装PyTorch Geometric"></a>2. 安装PyTorch Geometric</h1><h2 id="2-1-快速安装"><a href="#2-1-快速安装" class="headerlink" title="2.1 快速安装"></a>2.1 快速安装</h2><p>根据<a target="_blank" rel="noopener" href="https://pytorch-geometric.readthedocs.io/en/latest/notes/installation.html">官网</a>，如果PyTorch版本$\ge1.8.0$，可以快速下载：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721155357.png"></p>
+<h2 id="2-2-自定义安装"><a href="#2-2-自定义安装" class="headerlink" title="2.2 自定义安装"></a>2.2 自定义安装</h2><p>自定义下载需要根据当前的PyTorch版本和CUDA版本下载相关的依赖，下载命令如下：</p>
 <pre><code class="shell">pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html
 pip install torch-sparse -f https://pytorch-geometric.com/whl/torch-${TORCH}+${CUDA}.html
 pip install torch-geometric</code></pre>
@@ -466,6 +469,21 @@ pip install torch-geometric</code></pre>
 <pre><code class="shell">pip install torch-scatter -f https://pytorch-geometric.com/whl/torch-1.8.0+cu102.html
 pip install torch-sparse -f https://pytorch-geometric.com/whl/torch-1.8.0+cu102.html
 pip install torch-geometric</code></pre>
+<h2 id="2-3-版本依赖"><a href="#2-3-版本依赖" class="headerlink" title="2.3 版本依赖"></a>2.3 版本依赖</h2><p>使用自定义安装时，依然可能会出现安装失败的问题，因为pytorch geometric几个相关库之间有比较强的依赖关系，建议是在自定义安装的基础上指定对应库的版本，例如对于<code>pytorch==1.4.0</code>和<code>cuda==10.1</code>：</p>
+<pre><code class="shell">pip install torch-scatter==2.0.4 -f https://pytorch-geometric.com/whl/torch-1.4.0+cu101.html
+pip install torch-cluster==1.5.4 -f https://pytorch-geometric.com/whl/torch-1.4.0+cu101.html
+pip install torch-sparse==0.6.1 -f https://pytorch-geometric.com/whl/torch-1.4.0+cu101.html
+pip install torch-spline-conv==1.2.0 -f https://pytorch-geometric.com/whl/torch-1.4.0+cu101.html
+pip install torch-geometric==1.6.0 -f https://pytorch-geometric.com/whl/torch-1.4.0+cu101.html</code></pre>
+<p>每个库的版本信息可以在GitHub上的release页找到，例如：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721160038.png"></p>
+<p>几个相关库的GitHub地址如下：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/rusty1s/pytorch_cluster/releases">pytorch_cluster</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/rusty1s/pytorch_sparse/releases">pytorch_sparse</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/rusty1s/pytorch_scatter/releases">pytorch_scatter</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/rusty1s/pytorch_geometric/releases">pytorch_geometric</a></li>
+</ul>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -1086,7 +1104,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">55.1k</span>&nbsp;字
+                class="white-color">55.4k</span>&nbsp;字
             
             
             

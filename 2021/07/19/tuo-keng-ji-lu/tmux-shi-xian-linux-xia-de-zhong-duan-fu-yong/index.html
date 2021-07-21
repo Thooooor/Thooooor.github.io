@@ -410,14 +410,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-07-19
+                    2021-07-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    387
+                    466
                 </div>
                 
 
@@ -448,17 +448,24 @@
 <h1 id="1-安装tmux"><a href="#1-安装tmux" class="headerlink" title="1. 安装tmux"></a>1. 安装tmux</h1><p>ubuntu环境下可通过以下命令进行安装：</p>
 <pre><code class="shell">sudo apt-get install tmux</code></pre>
 <h1 id="2-常用命令"><a href="#2-常用命令" class="headerlink" title="2. 常用命令"></a>2. 常用命令</h1><h2 id="2-1-新建会话"><a href="#2-1-新建会话" class="headerlink" title="2.1 新建会话"></a>2.1 新建会话</h2><p>新建时需要指定会话名称：</p>
-<pre><code class="shell">tmux new -s session-name</code></pre>
+<pre><code class="shell">tmux new -s &lt;session-name&gt;</code></pre>
 <p>之后会直接进入新建的会话当中，并且新会话默认停留在当前目录。之后即使断开SSH连接，当前会话中的程序仍然会继续运行，不会停止。</p>
 <h2 id="2-2-重回会话"><a href="#2-2-重回会话" class="headerlink" title="2.2 重回会话"></a>2.2 重回会话</h2><p>当我们重新连接SSH后，可以重新进入之前的会话查看运行情况：</p>
-<pre><code class="shell">tmux a -t session-name</code></pre>
-<h2 id="2-3-查看所有会话"><a href="#2-3-查看所有会话" class="headerlink" title="2.3 查看所有会话"></a>2.3 查看所有会话</h2><p>有两条命令均可查看：</p>
+<pre><code class="shell">tmux attach -t &lt;session-name&gt;
+tmux a -t &lt;session-name&gt;</code></pre>
+<h2 id="2-3-退出当前会话"><a href="#2-3-退出当前会话" class="headerlink" title="2.3 退出当前会话"></a>2.3 退出当前会话</h2><p>可以显示输入：</p>
+<pre><code class="shell">exit</code></pre>
+<p>或者快捷键<code>Ctrl+d</code>。</p>
+<h2 id="2-4-查看所有会话"><a href="#2-4-查看所有会话" class="headerlink" title="2.4 查看所有会话"></a>2.4 查看所有会话</h2><p>有两条命令均可查看：</p>
 <pre><code class="shell">tmux list-session
 tmux ls</code></pre>
-<h2 id="2-4-关闭会话"><a href="#2-4-关闭会话" class="headerlink" title="2.4 关闭会话"></a>2.4 关闭会话</h2><p>会话中所有操作结束后需要关闭会话，可以指定关闭特定会话：</p>
-<pre><code class="shell">tmux kill-session -t session-name</code></pre>
+<h2 id="2-5-关闭会话"><a href="#2-5-关闭会话" class="headerlink" title="2.5 关闭会话"></a>2.5 关闭会话</h2><p>会话中所有操作结束后需要关闭会话，可以指定关闭特定会话：</p>
+<pre><code class="shell">tmux kill-session -t &lt;session-name&gt;</code></pre>
 <p>也可以直接关闭所有会话：</p>
 <pre><code class="shell">tmux kill-server</code></pre>
+<h2 id="2-6-切换会话"><a href="#2-6-切换会话" class="headerlink" title="2.6 切换会话"></a>2.6 切换会话</h2><p><code>tmux switch</code>命令用于切换会话，可以通过编号或者名称进行指定：</p>
+<pre><code class="shell">tmux switch -t &lt;session-id&gt;
+tmux switch -t &lt;session-name&gt;</code></pre>
 <p>后续更新进阶功能的配置</p>
 <script>
         document.querySelectorAll('.github-emoji')
@@ -1082,7 +1089,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">55.1k</span>&nbsp;字
+                class="white-color">55.4k</span>&nbsp;字
             
             
             
