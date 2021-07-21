@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2021-07-21T08:12:46.657Z</updated>
+  <updated>2021-07-21T15:53:56.994Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Graph Geometry Interaction Learning</title>
+    <link href="https://thooooor.github.io/2021/07/21/lun-wen-bi-ji/gnn/2020-nips-graph-geometry-interaction-learning/"/>
+    <id>https://thooooor.github.io/2021/07/21/lun-wen-bi-ji/gnn/2020-nips-graph-geometry-interaction-learning/</id>
+    <published>2021-07-21T15:53:00.000Z</published>
+    <updated>2021-07-21T15:53:56.994Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2010.12135&quot;&gt;NeurIPS 2020 Graph Geometry Interaction Learning&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="论文笔记" scheme="https://thooooor.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="GNN" scheme="https://thooooor.github.io/tags/GNN/"/>
+    
+      <category term="NeurIPS" scheme="https://thooooor.github.io/tags/NeurIPS/"/>
+    
+  </entry>
   
   <entry>
     <title>tmux实现Linux下的终端复用</title>
@@ -563,35 +594,6 @@ init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
     
     
       <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>所有结点对最短路径</title>
-    <link href="https://thooooor.github.io/2020/05/08/suan-fa-bi-ji/suo-you-jie-dian-dui-de-zui-duan-lu-jing/"/>
-    <id>https://thooooor.github.io/2020/05/08/suan-fa-bi-ji/suo-you-jie-dian-dui-de-zui-duan-lu-jing/</id>
-    <published>2020-05-08T07:20:00.000Z</published>
-    <updated>2021-03-12T13:19:26.834Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;Floyd算法&quot;&gt;&lt;a href=&quot;#Floyd算法&quot; class=&quot;headerlink&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://thooooor.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="C/C++" scheme="https://thooooor.github.io/tags/C-C/"/>
     
   </entry>
   

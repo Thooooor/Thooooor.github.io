@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="最长公共子序列, Thor&#39;s Blog">
+    <meta name="keywords" content="Graph Geometry Interaction Learning, Thor&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>最长公共子序列 | Thor&#39;s Blog</title>
+    <title>Graph Geometry Interaction Learning | Thor&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -252,12 +252,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">最长公共子序列</h1>
+                    <h1 class="description center-align post-title">Graph Geometry Interaction Learning</h1>
                 </div>
             </div>
         </div>
@@ -374,12 +374,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                                <span class="chip bg-color">学习笔记</span>
+                            <a href="/tags/GNN/">
+                                <span class="chip bg-color">GNN</span>
                             </a>
                         
-                            <a href="/tags/C-C/">
-                                <span class="chip bg-color">C/C++</span>
+                            <a href="/tags/NeurIPS/">
+                                <span class="chip bg-color">NeurIPS</span>
                             </a>
                         
                     </div>
@@ -390,8 +390,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                算法
+                            <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="post-category">
+                                论文笔记
                             </a>
                         
                     </div>
@@ -403,28 +403,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-05-02
+                    2021-07-21
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-03-12
+                    2021-07-21
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    1.5k
+                    1.9k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    8 分
+                    6 分
                 </div>
                 
 
@@ -439,236 +439,73 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h1><ul>
-<li><p><strong>子序列</strong><br>$$<br>对于给定序列X=&lt;x_1,x_2,…,x_m&gt;，Z=&lt;z_1,z_2,…z_k&gt;<br>$$<br>$$<br>存在一个严格递增的X的下标序列&lt;i_1,i_2,…,i_k&gt;，对所有j=1,2,…,k<br>$$</p>
-<p>$$<br>满足x_{i_j}=z_j<br>$$</p>
-<p>则称Z为X的子序列</p>
-</li>
-<li><p><strong>公共子序列</strong></p>
-<p>Z既是X的子序列，也是Y的子序列</p>
-</li>
-<li><p><strong>问题描述</strong></p>
-<p>给定两个序列<br>$$<br>X=&lt;x_1,x_2,…,x_m&gt;,Y=&lt;y_1,y_2,…,y_n&gt;<br>$$<br>求X和Y的<strong>长度最长</strong>的公共子序列</p>
-</li>
-</ul>
-<h1 id="应用动态规划算法"><a href="#应用动态规划算法" class="headerlink" title="应用动态规划算法"></a>应用动态规划算法</h1><h2 id="1-刻画最长公共子序列的特征"><a href="#1-刻画最长公共子序列的特征" class="headerlink" title="1. 刻画最长公共子序列的特征"></a>1. 刻画最长公共子序列的特征</h2><h3 id="LCS最优子结构"><a href="#LCS最优子结构" class="headerlink" title="LCS最优子结构"></a>LCS最优子结构</h3><p>令$$X=&lt;x_1,x_2,…,x_m&gt;,Y=&lt;y_1,y_2,…,y_n&gt;$$为两个序列，$$Z=&lt;z_1,z_2,…,z_k&gt;$$是X和Y的任意LCS</p>
-<ul>
-<li>如果$x_m=y_n，则z_k=x_m=y_n且Z_{k-1}是X_{m-1}和Y_{n-1}的一个LCS$</li>
-<li>如果$x_m\ne y_n，那么z_k\ne x_m\implies Z是X_{m-1}和Y的一个LCS$</li>
-<li>如果$x_m\ne y_n，那么z_k\ne y_n\implies Z是X和Y_{n-1}的一个LCS$</li>
-</ul>
-<h2 id="2-一个递归解"><a href="#2-一个递归解" class="headerlink" title="2. 一个递归解"></a>2. 一个递归解</h2><p><img src="http://note.lizhihao999.cn/notes/20200819163534.png" alt="递归解形式"></p>
-<h2 id="3-计算LCS的长度"><a href="#3-计算LCS的长度" class="headerlink" title="3. 计算LCS的长度"></a>3. 计算LCS的长度</h2><pre><code class="pseudocode"> LCS-LENGTH(X,Y)
- m &lt;- X.length
- n &lt;- Y.length
-
-let c[0...m][0...n] be new table
-
-for i&lt;-1 to m do
-    c[i,0] &lt;- 0
-for i&lt;-1 to n do
-    c[0,j] &lt;- 0
-
-for i&lt;-1 to m do
-    for j&lt;-1 to n do
-        if X[i]==Y[j] do
-            c[i][j] &lt;- c[i-1][j-1] + 1
-        else 
-            c[i][j] &lt;- max{c[i-1][j], c[i][j-1]}
- return c</code></pre>
-<h2 id="4-构造LCS"><a href="#4-构造LCS" class="headerlink" title="4. 构造LCS"></a>4. 构造LCS</h2><p>这里没有使用多余的表来存储顺序，而是通过$c[i-1][j],c[i][j-1],c[i-1][j-1]$的大小关系来判断顺序</p>
-<ul>
-<li>如果$c[i][j]==0$，则结束</li>
-<li>如果$c[i-1][j]==c[i][j]$，则对$i=i-1,j=j$继续</li>
-<li>如果$c[i][j-1]==c[i][j]$，则对$i=1,j=j-1$继续</li>
-<li>如果$c[i-1][j-1]+1==c[i][j]$，则对$i=i-1,j=j-1$继续，并输出$X[i]$</li>
-</ul>
-<pre><code class="pseudocode">PRINT-LCS(X, c, i, j)
-if c[i][j] == 0 do
-    return
-/* 如果c[i-1][j]==c[i][j]，则对i=i-1,j=j继续 */
-if c[i-1][j] == c[i][j] do
-    PRINT-LCS(X, c, i-1, j)
-/* 如果c[i][j-1]==c[i][j]，则对i=i,j=j-1继续 */
-else if c[i][j-1] == c[i][j] do
-    PRINT-LCS（X, c, i, j-1)
-/* 如果c[i-1][j-1]+1==c[i][j]，则对i=i-1,j=j-1继续 */
-else
-    PRINT-LCS(X, c, i-1, j-1)
-    print(X[i])</code></pre>
-<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><pre><code class="cpp">#include &lt;iostream&gt;
-#include &lt;vector&gt;
-#include &lt;cstring&gt;
-using namespace std;
-
-int my_max(int a, int b) {
-    return (a &gt;= b) ? a : b;
-}
-
-vector&lt;vector&lt;int&gt;&gt; lcs_length(string X, string Y)
-{
-    int m = X.size();
-    int n = Y.size();
-    vector&lt;vector&lt;int&gt;&gt;c(m+1);
-    for (int i = 0; i &lt;= m; i++) {
-        c[i].resize(n+1);
-    }
-    for (int i = 1; i &lt;= m; i++) {
-        c[i][0] = 0;
-    }
-    for (int j = 1; j &lt;= n; j++) {
-        c[0][j] = 0;
-    }
-    for (int i = 1; i &lt;= m; i++) {
-        for (int j = 1; j &lt;= n; j++) {
-            /* 注意对应X和Y的索引 */
-            if (X[i-1] == Y[j-1]) {
-                c[i][j] = c[i - 1][j - 1] + 1;
-            }
-            else {
-                c[i][j] = my_max(c[i][j - 1], c[i - 1][j]);
-            }
-        }
-    }
-
-    return c;
-}
-
-void print_lcs(string X, vector&lt;vector&lt;int&gt;&gt; c, int i, int j)
-{
-    if (c[i][j] == 0) {
-        return;
-    }
-
-    if (c[i-1][j] == c[i][j]) {
-        print_lcs(X, c, i - 1, j);
-    }
-    else if (c[i][j - 1] == c[i][j]) {
-        print_lcs(X, c, i, j - 1);
-    }
-    else {
-        print_lcs(X, c, i - 1, j - 1);
-        cout &lt;&lt; X[i - 1];
-    }
-}
-
-int main()
-{
-    string X;
-    string Y;
-    cin &gt;&gt; X;
-    cin &gt;&gt; Y;
-    int m = X.size();
-    int n = Y.size();
-    vector&lt;vector&lt;int&gt;&gt; c = lcs_length(X, Y);
-
-    cout &lt;&lt; c[m][n] &lt;&lt; endl;
-    print_lcs(X, c, m, n);
-}</code></pre>
-<h1 id="算法改进"><a href="#算法改进" class="headerlink" title="算法改进"></a>算法改进</h1><h2 id="二维数组"><a href="#二维数组" class="headerlink" title="二维数组"></a>二维数组</h2><p>对于计算某个位置的$c[i][j]$只需要三个表项：$c[i-1][j-1],c[i-1][j],c[i][j-1]$，所以其实只需要当前一行和上一行的表项数值，故利用利用一个二维数组记录当前行和上一行的数值即可</p>
-<table>
-<thead>
-<tr>
-<th align="center">$c[i-1][j-1]$</th>
-<th align="center">$c[i-1][j] $</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">$c[i][j-1]$</td>
-<td align="center">$c[i][j] $</td>
-</tr>
-</tbody></table>
-<h3 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h3><pre><code class="pseudocode">/* 假设X长度m&lt;=Y长度n */
-LCS-LENGTH(X, Y)
-m &lt;- X.length
-n &lt;- Y.length
-let c[2][m] be new table
-for i&lt;-1 to n do
-    for j&lt;-1 to m do
-        if X[j] == Y[i] do
-            c[(i+1)%2][j] &lt;- c[i%2][j-1]+1
-        else
-            c[(i+1)%2][j] &lt;- max{c[(i+1)%2][j-1], c[i%2][j]}
-
-return c[n%2][m]</code></pre>
-<h3 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code class="cpp">int lcs_pro(string X, string Y)
-{
-    int m = X.size();
-    int n = Y.size();
-    vector&lt;vector&lt;int&gt;&gt; c(2);
-    c[1].resize(m + 1);
-    c[0].resize(m + 1);
-    for (int i = 1; i &lt;= n; i++) {
-        for (int j = 1; j &lt;= m; j++) {
-            if (X[j - 1] == Y[i - 1]) {
-                c[i%2][j] = c[(i-1)%2][j - 1] + 1;
-            }
-            else {
-                c[i%2][j] = my_max(c[i%2][j - 1], c[(i-1)%2][j]);
-            }
-        }
-    }
-
-    return c[(n-1)%2][m];
-}</code></pre>
-<h2 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h2><p>对于计算某个位置的$c[i][j]$需要三个表项：<br>$$<br>c[i-1][j-1],c[i-1][j],c[i][j-1]<br>$$<br>如果在一行中表示，对于某个待计算的$c[j]$其中：<br>$$<br>c[i-1][j]=未覆盖前的c[j]<br>$$<br>$$<br>c[i][j-1]=c[j]<br>$$</p>
-<p>$$<br>c[i-1][j-1]=覆盖之前的c[j-1]<br>$$</p>
-<p>所以在一行中$c[i-1][j]和c[i]][j-1]$已经存在，只需要额外一个空间保存被覆盖的$c[i-1][j-1]$即可</p>
-<table>
-<thead>
-<tr>
-<th align="center">被覆盖$c[i-1,j-1]=pre$</th>
-<th align="center"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">$c[i][j-1]=c[j-1]$</td>
-<td align="center">$c[i-1][j]=c[j]$</td>
-</tr>
-<tr>
-<td align="center"></td>
-<td align="center"><strong>待写入</strong>$c[i,j]$</td>
-</tr>
-</tbody></table>
-<h3 id="伪代码-1"><a href="#伪代码-1" class="headerlink" title="伪代码"></a>伪代码</h3><pre><code class="pseudocode">/* 假设X长度m&lt;=Y长度n */
-LCS-LENGTH(X, Y)
-m &lt;- X.length
-n &lt;- Y.length
-let c[m] be new table
-/* pre记录被前一个覆盖的值 */
-pre &lt;- 0
-for i&lt;-1 to n do
-    for j&lt;-1 to m do
-        /* tmp临时记录被覆盖的值 */
-        tmp &lt;- c[j]
-        if X[j] == Y[i] do
-            c[j] = pre+1
-        else
-            c[j] = max{c[j], c[j-1]}
-        pre &lt;- tmp
-
-return c[m]</code></pre>
-<h3 id="代码实现-2"><a href="#代码实现-2" class="headerlink" title="代码实现"></a>代码实现</h3><pre><code class="c++">int lcs_plus(string X, string Y)
-{
-    int m = X.size();
-    int n = Y.size();
-    int pre = 0;
-    vector&lt;int&gt; c(m + 1);
-    for (int i = 1; i &lt;= n; i++) {
-        for (int j = 1; j &lt;= m; j++) {
-            int tmp = c[j];
-            if (X[j - 1] == Y[i - 1]) {
-                c[j] = pre + 1;
-            }
-            else {
-                c[j] = my_max(c[j - 1], c[j]);
-            }
-            pre = tmp;
-        }
-    }
-
-    return c[m];
-}</code></pre>
+                <blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2010.12135">NeurIPS 2020 Graph Geometry Interaction Learning</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/CheriseZhu/GIL">GIL code</a></p>
+</blockquote>
+<p>这篇文章提出一种新颖的图形几何交互学习 (GIL) 方法，这是一种非常适合且有效的替代方法，可以利用欧几里得几何和双曲几何的优势，用于学习图形中丰富的几何属性。此外，该方法通过灵活的双特征交互学习和概率组合机制赋予每个节点自由度来确定每种几何空间的重要性。</p>
+<p>许多真实的复杂图表现出非欧几何的特征，例如无标度或层次结构。现有双曲空间的工作中，一般假设图中的所有节点共享相同的空间曲率，而不同空间之间没有交互。 与之前方法不同，本文尝试以一种新的交互学习方式将图同时嵌入到欧几里得空间和双曲空间中，希望这两组嵌入可以相互增强，为下游任务提供更有效的表示。GIL 不仅考虑如何交互不同的几何空间，还保证了每个空间的共形不变性。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721201519.png" alt="图1"></p>
+<blockquote>
+<p>具有双曲线和欧几里德结构的图示</p>
+<p>欧几里得空间（左）适合表示低维规则结构的蓝点，而层次结构的黄点更适合表示双曲线空间（右）。</p>
+</blockquote>
+<h1>1. 基础定义 Notation and Preliminaries</h1>
+<h2 id="1-1-双曲几何">1.1 双曲几何</h2>
+<p>该方法在庞加莱模型中进行双曲嵌入，并通过指数变换和对数变换在双曲空间和正切空间之间进行切换。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720224124.png" alt=""></p>
+<p>双曲空间中的基本操作为莫比乌斯加法，需要通过定义莫比乌斯加法实现以上操作：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720224217.png" alt=""></p>
+<p>基于莫比乌斯变换，进一步定义在双曲空间中的莫比乌斯标量乘法和莫比乌斯矩阵乘法：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720224055.png" alt=""></p>
+<h2 id="1-2-图注意力网络">1.2 图注意力网络</h2>
+<p>图注意力网络（GAT）可以解释为在节点上执行注意力消息传播和更新。每一层通过注意力邻居信息对节点特征$h_{i}$进行更新，得到$h_{i}’$：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720224702.png" alt=""></p>
+<p>其中$N_{i}$表示节点$i$的单跳邻居，$W$为需要训练的参数。</p>
+<p>注意力系数$\alpha_{ij}$通过以下方式计算：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720224717.png" alt=""></p>
+<p>$a$为参数化注意力的权重向量。</p>
+<h1>2. Graph Geometry Interaction Learning</h1>
+<p>GIL方法通过特征交互方案利用不同的几何空间，在此基础上进一步开发概率组装以整合最终预测的类别概率。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721002157.png" alt="GIL架构示意图"></p>
+<p>模型GIL分为三个主要部分：</p>
+<ol>
+<li>几何消息传播(Geometry Message Propagation)：通过距离感知注意机制在欧几里得空间和双曲线空间中同时传播邻居信息。 在双曲线空间中，消息通过切线空间上的距离引导的自注意力机制进行聚合；</li>
+<li>双特征交互(Dual Feature Interaction)：节点特征根据距离相似度从双特征空间进行自适应调整；</li>
+<li>概率组合(Probability Assembling)：在训练阶段使用来自每个空间的分类概率的加权和来获得最终的分类结果。</li>
+</ol>
+<p>该方法是端到端训练的。</p>
+<h2 id="2-1-Geometry-Feature-Interaction-几何特征交互">2.1 Geometry Feature Interaction 几何特征交互</h2>
+<h2 id="2-1-1-几何消息传播">2.1.1 几何消息传播</h2>
+<p>GNN通过消息传播来学习节点嵌入。在欧氏空间中，可以直接使用GAT来进行信息传播。而在双曲空间中，由于莫比乌斯加法不满足交换律和结合律，所以无法直接使用GAT。可以映射到正切空间后，在正切空间中执行以上操作。</p>
+<p>对于输入的欧几里得空间的图和节点特征，首先通过指数映射将其映射到双曲空间并进行初始化。初始化得到$h^{(0)}$之后，再通过对数映射到正切空间，进行后续的消息传播。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720232831.png" alt=""></p>
+<p>映射到切线空间后，消息通过节点$j$特征的归一化注意力$\alpha_{ij}^{(k)}$缩放到节点$i$（方程10）。 $\alpha_{ij}^{(k)}$是基于距离感知的注意力：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721003118.png" alt=""></p>
+<h2 id="2-1-2-双特征交互">2.1.2 双特征交互</h2>
+<p>基于图拓扑进行消息传播后，节点嵌入将从双特征空间进行自适应调整，以促进不同几何空间之间的交互。具体来说，通过将双曲嵌入映射到正切空间，欧式嵌入映射到双曲空间来进行交互：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720234810.png" alt=""></p>
+<p>其中，$h’<em>{D</em>{c}}$和$h’_{R}$就是融合之后的节点嵌入。</p>
+<p>在特征融合后，因为嵌入仍然回到对应的原始空间中，所以节点嵌入不仅通过交互学习整合了不同的几何特征，而且还保持了原始空间的属性和结构。</p>
+<h2 id="2-2-双曲逻辑回归和概率组合">2.2 双曲逻辑回归和概率组合</h2>
+<h2 id="2-2-1-双曲面逻辑回归">2.2.1 双曲面逻辑回归</h2>
+<p>为了在双曲空间上执行多类逻辑回归，我们通过引入仿射超平面作为决策边界，将欧几里得 softmax 推广到双曲 softmax。 类别概率通过节点到超平面的距离来衡量：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720235402.png" alt=""></p>
+<p>要在双曲空间中定义超平面，需要找出法向量，超平面的方向完全由它决定。由于切线空间是欧几里得空间，因此可以在该空间中直观地定义法向量和内积。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721000315.png" alt=""></p>
+<p>向量$\vec{x}$到超平面$\tilde{H}_{u,p}^{c}$的距离为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721000545.png" alt=""></p>
+<h2 id="2-2-2-概率组合">2.2.2 概率组合</h2>
+<p>最直观和自然的做法是，将不同的几何特征连接起来，然后将单个特征输入一个分类器。 然而，由于几何空间的不同操作，共形不变性的其中之一需要舍弃，要么保留欧几里得方程的空间形式，要么保留双曲线方程的形式：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721000908.png" alt=""></p>
+<p>希望同时保持每个空间的特征，并尽可能多地保留空间属性。 所以需要找出对每个节点来说，哪个几何嵌入更重要，然后为相应的概率分配更多权重：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721001332.png" alt=""></p>
+<p>其中对应的权重$\lambda_{0},\lambda_{1}\in R^{N}$表示不同几何概率的节点级权重，通过沿维度1对串联$[\lambda_{0},\lambda_{1}]$进行 L2 归一化来满足归一化条件。分别通过具有相应节点嵌入输入的全连接层进行计算：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721001801.png" alt=""></p>
+<p>两个空间概率对最终概率的贡献由对应空间中的节点特征决定，即节点本身决定了哪个概率对于下游任务更可靠。</p>
+<h1>3. 模型总结</h1>
+<p>本文提出了用于图形的几何交互学习 (GIL)，这是一种利用双曲和欧几里得拓扑特征的综合几何表示学习方法。 GIL 为不同的几何结构推导出一种新的距离感知传播和交互学习方案，并以自适应方式为每个节点的不同几何嵌入分配不同的重要性权重。</p>
+<p>作者使用端到端架构实现GIL方法，如GIL架构示意图所示。图中左侧面板显示了两个空间之间的消息传播和交互。 对于每一层，局部消息在整个图中扩散，然后节点特征被自适应地合并以根据对偶几何信息进行自我调整。 在堆叠多层使几何特征深度交互后，GIL 应用概率组合得到可靠的最终结果，如图右侧所示。</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -712,7 +549,7 @@ return c[m]</code></pre>
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://thooooor.github.io/2020/05/02/suan-fa-bi-ji/zui-chang-gong-gong-zi-xu-lie/">https://thooooor.github.io/2020/05/02/suan-fa-bi-ji/zui-chang-gong-gong-zi-xu-lie/</a>
+                    <a href="https://thooooor.github.io/2021/07/21/lun-wen-bi-ji/gnn/2020-nips-graph-geometry-interaction-learning/">https://thooooor.github.io/2021/07/21/lun-wen-bi-ji/gnn/2020-nips-graph-geometry-interaction-learning/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -750,12 +587,12 @@ return c[m]</code></pre>
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                                    <span class="chip bg-color">学习笔记</span>
+                                <a href="/tags/GNN/">
+                                    <span class="chip bg-color">GNN</span>
                                 </a>
                             
-                                <a href="/tags/C-C/">
-                                    <span class="chip bg-color">C/C++</span>
+                                <a href="/tags/NeurIPS/">
+                                    <span class="chip bg-color">NeurIPS</span>
                                 </a>
                             
                         </div>
@@ -926,7 +763,7 @@ return c[m]</code></pre>
         repo: 'blogcomment',
         owner: 'Thooooor',
         admin: "Thooooor",
-        id: '2020-05-02T15-20-00',
+        id: '2021-07-21T23-53-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -950,46 +787,52 @@ return c[m]</code></pre>
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/05/03/suan-fa-bi-ji/tan-xin-suan-fa/">
+                <a href="/2021/07/21/lun-wen-bi-ji/gnn/2020-nips-graph-geometry-interaction-learning/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.png" class="responsive-img" alt="贪心算法">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="Graph Geometry Interaction Learning">
                         
-                        <span class="card-title">贪心算法</span>
+                        <span class="card-title">Graph Geometry Interaction Learning</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            贪心算法基本原理
+                            2020 NeurIPS《Graph Geometry Interaction Learning》图形几何交互学习 (GIL)论文笔记
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-05-03
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-21
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    论文笔记
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">学习笔记</span>
+                    <a href="/tags/GNN/">
+                        <span class="chip bg-color">GNN</span>
+                    </a>
+                    
+                    <a href="/tags/NeurIPS/">
+                        <span class="chip bg-color">NeurIPS</span>
                     </a>
                     
                 </div>
@@ -1003,31 +846,30 @@ return c[m]</code></pre>
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2020/05/01/suan-fa-bi-ji/ju-zhen-lian-cheng-fa/">
+                <a href="/2021/07/19/tuo-keng-ji-lu/tmux-shi-xian-linux-xia-de-zhong-duan-fu-yong/">
                     <div class="card-image">
                         
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="tmux实现Linux下的终端复用">
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="矩阵链乘法">
-                        
-                        <span class="card-title">矩阵链乘法</span>
+                        <span class="card-title">tmux实现Linux下的终端复用</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            基于动态规划算法实现矩阵链乘法
+                            在Linux-Ubuntu服务器上安装使用tmux，断开SSH后可以继续执行操作
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-05-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-19
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
+                            <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="post-category">
+                                    脱坑实录
                                 </a>
                             
                             
@@ -1037,8 +879,12 @@ return c[m]</code></pre>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-                        <span class="chip bg-color">学习笔记</span>
+                    <a href="/tags/Linux/">
+                        <span class="chip bg-color">Linux</span>
+                    </a>
+                    
+                    <a href="/tags/Ubuntu/">
+                        <span class="chip bg-color">Ubuntu</span>
                     </a>
                     
                 </div>
