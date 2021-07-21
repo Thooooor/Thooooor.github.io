@@ -450,61 +450,50 @@
 <p>具有双曲线和欧几里德结构的图示</p>
 <p>欧几里得空间（左）适合表示低维规则结构的蓝点，而层次结构的黄点更适合表示双曲线空间（右）。</p>
 </blockquote>
-<h1>1. 基础定义 Notation and Preliminaries</h1>
-<h2 id="1-1-双曲几何">1.1 双曲几何</h2>
-<p>该方法在庞加莱模型中进行双曲嵌入，并通过指数变换和对数变换在双曲空间和正切空间之间进行切换。</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210720224124.png" alt=""></p>
+<h1 id="1-基础定义-Notation-and-Preliminaries"><a href="#1-基础定义-Notation-and-Preliminaries" class="headerlink" title="1. 基础定义 Notation and Preliminaries"></a>1. 基础定义 Notation and Preliminaries</h1><h2 id="1-1-双曲几何"><a href="#1-1-双曲几何" class="headerlink" title="1.1 双曲几何"></a>1.1 双曲几何</h2><p>该方法在庞加莱模型中进行双曲嵌入，并通过指数变换和对数变换在双曲空间和正切空间之间进行切换。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720224124.png"></p>
 <p>双曲空间中的基本操作为莫比乌斯加法，需要通过定义莫比乌斯加法实现以上操作：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210720224217.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720224217.png"></p>
 <p>基于莫比乌斯变换，进一步定义在双曲空间中的莫比乌斯标量乘法和莫比乌斯矩阵乘法：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210720224055.png" alt=""></p>
-<h2 id="1-2-图注意力网络">1.2 图注意力网络</h2>
-<p>图注意力网络（GAT）可以解释为在节点上执行注意力消息传播和更新。每一层通过注意力邻居信息对节点特征$h_{i}$进行更新，得到$h_{i}’$：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210720224702.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720224055.png"></p>
+<h2 id="1-2-图注意力网络"><a href="#1-2-图注意力网络" class="headerlink" title="1.2 图注意力网络"></a>1.2 图注意力网络</h2><p>图注意力网络（GAT）可以解释为在节点上执行注意力消息传播和更新。每一层通过注意力邻居信息对节点特征$h_{i}$进行更新，得到$h_{i}’$：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720224702.png"></p>
 <p>其中$N_{i}$表示节点$i$的单跳邻居，$W$为需要训练的参数。</p>
 <p>注意力系数$\alpha_{ij}$通过以下方式计算：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210720224717.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720224717.png"></p>
 <p>$a$为参数化注意力的权重向量。</p>
-<h1>2. Graph Geometry Interaction Learning</h1>
-<p>GIL方法通过特征交互方案利用不同的几何空间，在此基础上进一步开发概率组装以整合最终预测的类别概率。</p>
+<h1 id="2-Graph-Geometry-Interaction-Learning"><a href="#2-Graph-Geometry-Interaction-Learning" class="headerlink" title="2. Graph Geometry Interaction Learning"></a>2. Graph Geometry Interaction Learning</h1><p>GIL方法通过特征交互方案利用不同的几何空间，在此基础上进一步开发概率组装以整合最终预测的类别概率。</p>
 <p><img src="http://note.lizhihao999.cn/notes/20210721002157.png" alt="GIL架构示意图"></p>
 <p>模型GIL分为三个主要部分：</p>
 <ol>
 <li>几何消息传播(Geometry Message Propagation)：通过距离感知注意机制在欧几里得空间和双曲线空间中同时传播邻居信息。 在双曲线空间中，消息通过切线空间上的距离引导的自注意力机制进行聚合；</li>
-<li>双特征交互(Dual Feature Interaction)：节点特征根据距离相似度从双特征空间进行自适应调整；</li>
-<li>概率组合(Probability Assembling)：在训练阶段使用来自每个空间的分类概率的加权和来获得最终的分类结果。</li>
+<li>双特征交互(Dual Feature Interaction)：节点特征根据距离相似度从双特征空间进行自适应调整； </li>
+<li> 概率组合(Probability Assembling)：在训练阶段使用来自每个空间的分类概率的加权和来获得最终的分类结果。</li>
 </ol>
 <p>该方法是端到端训练的。</p>
-<h2 id="2-1-Geometry-Feature-Interaction-几何特征交互">2.1 Geometry Feature Interaction 几何特征交互</h2>
-<h2 id="2-1-1-几何消息传播">2.1.1 几何消息传播</h2>
-<p>GNN通过消息传播来学习节点嵌入。在欧氏空间中，可以直接使用GAT来进行信息传播。而在双曲空间中，由于莫比乌斯加法不满足交换律和结合律，所以无法直接使用GAT。可以映射到正切空间后，在正切空间中执行以上操作。</p>
+<h2 id="2-1-Geometry-Feature-Interaction-几何特征交互"><a href="#2-1-Geometry-Feature-Interaction-几何特征交互" class="headerlink" title="2.1 Geometry Feature Interaction 几何特征交互"></a>2.1 Geometry Feature Interaction 几何特征交互</h2><h2 id="2-1-1-几何消息传播"><a href="#2-1-1-几何消息传播" class="headerlink" title="2.1.1 几何消息传播"></a>2.1.1 几何消息传播</h2><p>GNN通过消息传播来学习节点嵌入。在欧氏空间中，可以直接使用GAT来进行信息传播。而在双曲空间中，由于莫比乌斯加法不满足交换律和结合律，所以无法直接使用GAT。可以映射到正切空间后，在正切空间中执行以上操作。</p>
 <p>对于输入的欧几里得空间的图和节点特征，首先通过指数映射将其映射到双曲空间并进行初始化。初始化得到$h^{(0)}$之后，再通过对数映射到正切空间，进行后续的消息传播。</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210720232831.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720232831.png"></p>
 <p>映射到切线空间后，消息通过节点$j$特征的归一化注意力$\alpha_{ij}^{(k)}$缩放到节点$i$（方程10）。 $\alpha_{ij}^{(k)}$是基于距离感知的注意力：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210721003118.png" alt=""></p>
-<h2 id="2-1-2-双特征交互">2.1.2 双特征交互</h2>
-<p>基于图拓扑进行消息传播后，节点嵌入将从双特征空间进行自适应调整，以促进不同几何空间之间的交互。具体来说，通过将双曲嵌入映射到正切空间，欧式嵌入映射到双曲空间来进行交互：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210720234810.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721003118.png"></p>
+<h2 id="2-1-2-双特征交互"><a href="#2-1-2-双特征交互" class="headerlink" title="2.1.2 双特征交互"></a>2.1.2 双特征交互</h2><p>基于图拓扑进行消息传播后，节点嵌入将从双特征空间进行自适应调整，以促进不同几何空间之间的交互。具体来说，通过将双曲嵌入映射到正切空间，欧式嵌入映射到双曲空间来进行交互：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720234810.png"></p>
 <p>其中，$h’<em>{D</em>{c}}$和$h’_{R}$就是融合之后的节点嵌入。</p>
-<p>在特征融合后，因为嵌入仍然回到对应的原始空间中，所以节点嵌入不仅通过交互学习整合了不同的几何特征，而且还保持了原始空间的属性和结构。</p>
-<h2 id="2-2-双曲逻辑回归和概率组合">2.2 双曲逻辑回归和概率组合</h2>
-<h2 id="2-2-1-双曲面逻辑回归">2.2.1 双曲面逻辑回归</h2>
-<p>为了在双曲空间上执行多类逻辑回归，我们通过引入仿射超平面作为决策边界，将欧几里得 softmax 推广到双曲 softmax。 类别概率通过节点到超平面的距离来衡量：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210720235402.png" alt=""></p>
+<p>在特征融合后，因为嵌入仍然回到对应的原始空间中，所以节点嵌入不仅通过交互学习整合了不同的几何特征，而且还保持了原始空间的属性和结构。 </p>
+<h2 id="2-2-双曲逻辑回归和概率组合"><a href="#2-2-双曲逻辑回归和概率组合" class="headerlink" title="2.2 双曲逻辑回归和概率组合"></a>2.2 双曲逻辑回归和概率组合</h2><h2 id="2-2-1-双曲面逻辑回归"><a href="#2-2-1-双曲面逻辑回归" class="headerlink" title="2.2.1 双曲面逻辑回归"></a>2.2.1 双曲面逻辑回归</h2><p>为了在双曲空间上执行多类逻辑回归，我们通过引入仿射超平面作为决策边界，将欧几里得 softmax 推广到双曲 softmax。 类别概率通过节点到超平面的距离来衡量：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210720235402.png"></p>
 <p>要在双曲空间中定义超平面，需要找出法向量，超平面的方向完全由它决定。由于切线空间是欧几里得空间，因此可以在该空间中直观地定义法向量和内积。</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210721000315.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721000315.png"></p>
 <p>向量$\vec{x}$到超平面$\tilde{H}_{u,p}^{c}$的距离为：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210721000545.png" alt=""></p>
-<h2 id="2-2-2-概率组合">2.2.2 概率组合</h2>
-<p>最直观和自然的做法是，将不同的几何特征连接起来，然后将单个特征输入一个分类器。 然而，由于几何空间的不同操作，共形不变性的其中之一需要舍弃，要么保留欧几里得方程的空间形式，要么保留双曲线方程的形式：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210721000908.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721000545.png"></p>
+<h2 id="2-2-2-概率组合"><a href="#2-2-2-概率组合" class="headerlink" title="2.2.2 概率组合"></a>2.2.2 概率组合</h2><p>最直观和自然的做法是，将不同的几何特征连接起来，然后将单个特征输入一个分类器。 然而，由于几何空间的不同操作，共形不变性的其中之一需要舍弃，要么保留欧几里得方程的空间形式，要么保留双曲线方程的形式：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721000908.png"></p>
 <p>希望同时保持每个空间的特征，并尽可能多地保留空间属性。 所以需要找出对每个节点来说，哪个几何嵌入更重要，然后为相应的概率分配更多权重：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210721001332.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721001332.png"></p>
 <p>其中对应的权重$\lambda_{0},\lambda_{1}\in R^{N}$表示不同几何概率的节点级权重，通过沿维度1对串联$[\lambda_{0},\lambda_{1}]$进行 L2 归一化来满足归一化条件。分别通过具有相应节点嵌入输入的全连接层进行计算：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210721001801.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721001801.png"></p>
 <p>两个空间概率对最终概率的贡献由对应空间中的节点特征决定，即节点本身决定了哪个概率对于下游任务更可靠。</p>
-<h1>3. 模型总结</h1>
-<p>本文提出了用于图形的几何交互学习 (GIL)，这是一种利用双曲和欧几里得拓扑特征的综合几何表示学习方法。 GIL 为不同的几何结构推导出一种新的距离感知传播和交互学习方案，并以自适应方式为每个节点的不同几何嵌入分配不同的重要性权重。</p>
+<h1 id="3-模型总结"><a href="#3-模型总结" class="headerlink" title="3. 模型总结"></a>3. 模型总结</h1><p>本文提出了用于图形的几何交互学习 (GIL)，这是一种利用双曲和欧几里得拓扑特征的综合几何表示学习方法。 GIL 为不同的几何结构推导出一种新的距离感知传播和交互学习方案，并以自适应方式为每个节点的不同几何嵌入分配不同的重要性权重。 </p>
 <p>作者使用端到端架构实现GIL方法，如GIL架构示意图所示。图中左侧面板显示了两个空间之间的消息传播和交互。 对于每一层，局部消息在整个图中扩散，然后节点特征被自适应地合并以根据对偶几何信息进行自我调整。 在堆叠多层使几何特征深度交互后，GIL 应用概率组合得到可靠的最终结果，如图右侧所示。</p>
 <script>
         document.querySelectorAll('.github-emoji')
