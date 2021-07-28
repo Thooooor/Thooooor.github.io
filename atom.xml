@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2021-07-22T03:34:33.924Z</updated>
+  <updated>2021-07-28T15:08:59.553Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -15,6 +15,96 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures</title>
+    <link href="https://thooooor.github.io/2021/07/28/lun-wen-bi-ji/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/"/>
+    <id>https://thooooor.github.io/2021/07/28/lun-wen-bi-ji/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/</id>
+    <published>2021-07-28T14:56:00.000Z</published>
+    <updated>2021-07-28T15:08:59.553Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs/2106.04311&quot;&gt;论文地址&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;通过简单地增加负样本的数量，最近提出的 ATTH 模型可以在 Temporal KGs (TKGs)
+        
+      
+    
+    </summary>
+    
+    
+      <category term="论文笔记" scheme="https://thooooor.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="ACL" scheme="https://thooooor.github.io/tags/ACL/"/>
+    
+      <category term="Knowledge Graph Embedding" scheme="https://thooooor.github.io/tags/Knowledge-Graph-Embedding/"/>
+    
+      <category term="Hyperbolic" scheme="https://thooooor.github.io/tags/Hyperbolic/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering</title>
+    <link href="https://thooooor.github.io/2021/07/28/lun-wen-bi-ji/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/"/>
+    <id>https://thooooor.github.io/2021/07/28/lun-wen-bi-ji/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/</id>
+    <published>2021-07-28T14:53:01.707Z</published>
+    <updated>2021-07-28T15:10:22.240Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本文提出用于协同过滤的双曲GCN 模型，模型可以通过边际排名损失有效地学习，并表明双曲空间在边界排序设置下具有理想的属性，称为双曲协同过滤 (HGCF)。&lt;/p&gt;
+&lt;p&gt;HGCF 通过 GCN
+        
+      
+    
+    </summary>
+    
+    
+      <category term="论文笔记" scheme="https://thooooor.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Hyperbolic" scheme="https://thooooor.github.io/tags/Hyperbolic/"/>
+    
+      <category term="Recommender System" scheme="https://thooooor.github.io/tags/Recommender-System/"/>
+    
+      <category term="WWW" scheme="https://thooooor.github.io/tags/WWW/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://thooooor.github.io/2021/07/27/suan-fa-bi-ji/xie-tong-guo-lu/"/>
+    <id>https://thooooor.github.io/2021/07/27/suan-fa-bi-ji/xie-tong-guo-lu/</id>
+    <published>2021-07-27T06:13:05.844Z</published>
+    <updated>2021-07-27T06:13:05.844Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;推荐系统的核心任务是准确捕获用户偏好和项目属性，以正确预测用户是否会喜欢给定项目。 协同过滤 (CF) 方法利用过去的用户-项目交互数据来驱动推荐。&lt;/p&gt;
+&lt;p&gt;最近的研究主要集中在隐式反馈设置上，因为隐式交互通常可以以更大的数量和低成本收集。 CF
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Semi-Riemannian Graph Convolutional Networks</title>
@@ -514,90 +604,6 @@ plt.rcParams[&#39;font.sans-serif&#39;] =
       <category term="NER" scheme="https://thooooor.github.io/tags/NER/"/>
     
       <category term="ACL" scheme="https://thooooor.github.io/tags/ACL/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>优化（规划）问题</title>
-    <link href="https://thooooor.github.io/2020/08/08/shu-xue-jian-mo/shu-xue-gui-hua/"/>
-    <id>https://thooooor.github.io/2020/08/08/shu-xue-jian-mo/shu-xue-gui-hua/</id>
-    <published>2020-08-08T02:25:00.000Z</published>
-    <updated>2020-08-15T14:28:13.969Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;h1 id=&quot;线性规划&quot;&gt;&lt;a href=&quot;#线性规划&quot; class=&quot;headerlink&quot; title=&quot;线性规划&quot;&gt;&lt;/a&gt;线性规划&lt;/h1&gt;&lt;p&gt;在一组线性约束条件的限制下，求一线性目标函数最大或最小的问题。&lt;/p&gt;
-&lt;h2 id=&quot;特征&quot;&gt;&lt;a href=&quot;#特征&quot;
-        
-      
-    
-    </summary>
-    
-    
-      <category term="数学建模" scheme="https://thooooor.github.io/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/"/>
-    
-    
-      <category term="Python" scheme="https://thooooor.github.io/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Sympy的基本使用</title>
-    <link href="https://thooooor.github.io/2020/08/08/shu-xue-jian-mo/sympy/"/>
-    <id>https://thooooor.github.io/2020/08/08/shu-xue-jian-mo/sympy/</id>
-    <published>2020-08-08T02:02:00.000Z</published>
-    <updated>2020-08-08T02:03:33.782Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;pre&gt;&lt;code class=&quot;python&quot;&gt;from sympy import *
-init_printing(use_unicode=True)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="数学建模" scheme="https://thooooor.github.io/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/"/>
-    
-    
-      <category term="Python" scheme="https://thooooor.github.io/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>摊还分析</title>
-    <link href="https://thooooor.github.io/2020/05/10/suan-fa-bi-ji/tan-huan-fen-xi/"/>
-    <id>https://thooooor.github.io/2020/05/10/suan-fa-bi-ji/tan-huan-fen-xi/</id>
-    <published>2020-05-10T07:20:00.000Z</published>
-    <updated>2021-03-12T13:19:41.575Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;在摊还分析中，我们求数据结构的一个操作序列中所执行的所有操作的&lt;strong&gt;平均时间&lt;/strong&gt;，来评价操作的代价。摊还分析不同于平均情况分析，不涉及概率，保证&lt;strong&gt;最坏情况下每个操作的平均性能&lt;/strong&gt;。通过做摊还分析，通常可以获得对某种特定数据
-        
-      
-    
-    </summary>
-    
-    
-      <category term="算法" scheme="https://thooooor.github.io/categories/%E7%AE%97%E6%B3%95/"/>
-    
-    
-      <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
