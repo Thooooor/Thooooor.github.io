@@ -414,7 +414,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-07-28
+                    2021-07-29
                 </div>
                 
 
@@ -451,7 +451,7 @@
 <p><img src="http://note.lizhihao999.cn/notes/20210727143044.png" alt="图1"></p>
 <h1 id="双曲嵌入"><a href="#双曲嵌入" class="headerlink" title="双曲嵌入"></a>双曲嵌入</h1><p>HGCF对用户和项目嵌入都使用洛伦兹表示。固定原点为$o=(\sqrt{k},0,…,0)\in H^{d}$​​并作为参考点。请注意，$k=-1/c$​是曲率$c$​的倒数，此处被视为超参数并根据经验设置。</p>
 <p>嵌入是通过从参考点$o$​​的切线空间上的高斯分布采样来初始化的。形式上，给定用户$u$​和项目$i$，首先从多元高斯中采样：<br>$$<br>\theta_{u}’,\theta_{i}’\sim N(0,\sigma I_{d\times d})<br>$$<br>然后设置<br>$$<br>\theta_{u}’’=[0;\theta_{u}’]\quad \theta_{i}’’=[0;\theta_{i}’]<br>$$<br>其中$\theta_{u}’’,\theta_{i}’’$都满足$&lt;\theta_{u}’’,o&gt;<em>{L}=0,&lt;\theta_{i}’’,o&gt;</em>{L}=0$，都属于正切空间$T_{o}H^{d}$。为了在$H^{d}$​中获得相应的嵌入，通过指数映射投影到双曲空间$\exp_{o}:T_{o}H^{d}\to H^{d}$：</p>
-<p><img src="C:\Users\Thor\AppData\Roaming\Typora\typora-user-images\image-20210727144059605.png" alt="image-20210727144059605"></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729141330.png"></p>
 <p>之后便可以得到用户和物品在双曲空间中的嵌入：</p>
 <p><img src="http://note.lizhihao999.cn/notes/20210727144209.png"></p>
 <p>以上的双曲嵌入用于为所有用户和物品初始化模型。</p>
@@ -464,7 +464,7 @@
 <p><img src="http://note.lizhihao999.cn/notes/20210727145408.png"></p>
 <p>每一层都聚集在越来越高阶的邻居上，允许对用户和物品之间的长期关系进行明确建模。</p>
 <p>为了充分利用高阶关系，需要将多个图卷积层堆叠在一起。为了减轻深度的限制，本文探索了包含由残差网络和深度 GCN 相关工作激发的跳跃连接（Skip-connected）的架构，如图2所示。</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210727145743.png"></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210727145743.png" alt="图2"></p>
 <p>这里，PlainGCN 是原始模型，SkipGCN、ResGCN 和 DenseGCN 具有不同的跳过连接结构。 SkipGCN 包含从每一层到最后一层的跳过连接，ResGCN 具有连续层之间的残差连接，而 DenseGCN 结合了 SkipGCN 和 ResGCN。 根据经验，SkipGCN 在双曲空间设置中表现最好，将这种架构用于 HGCF。</p>
 <p>在 SkipGCN 下，最后一层聚合来自所有中间层的表示，每个用户和项目的最终嵌入是通过应用指数映射将 SkipGCN 的输出投影回双曲空间来获得：</p>
 <p><img src="C:\Users\Thor\AppData\Roaming\Typora\typora-user-images\image-20210727150022685.png" alt="image-20210727150022685"></p>
