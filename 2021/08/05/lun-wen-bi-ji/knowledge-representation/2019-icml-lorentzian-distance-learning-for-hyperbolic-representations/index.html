@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Thor&#39;s Blog">
+    <meta name="keywords" content="Lorentzian Distance Learning for Hyperbolic Representations, Thor&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Thor&#39;s Blog</title>
+    <title>Lorentzian Distance Learning for Hyperbolic Representations | Thor&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -252,12 +252,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title"></h1>
+                    <h1 class="description center-align post-title">Lorentzian Distance Learning for Hyperbolic Representations</h1>
                 </div>
             </div>
         </div>
@@ -372,12 +372,33 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/Hyperbolic/">
+                                <span class="chip bg-color">Hyperbolic</span>
+                            </a>
+                        
+                            <a href="/tags/Knowledge-Representaion/">
+                                <span class="chip bg-color">Knowledge Representaion</span>
+                            </a>
+                        
+                            <a href="/tags/ICML/">
+                                <span class="chip bg-color">ICML</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="post-category">
+                                论文笔记
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -386,28 +407,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-07-27
+                    2021-08-05
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-07-27
+                    2021-08-05
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    435
+                    2.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    7 分
                 </div>
                 
 
@@ -422,9 +443,74 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>推荐系统的核心任务是准确捕获用户偏好和项目属性，以正确预测用户是否会喜欢给定项目。 协同过滤 (CF) 方法利用过去的用户-项目交互数据来驱动推荐。</p>
-<p>最近的研究主要集中在隐式反馈设置上，因为隐式交互通常可以以更大的数量和低成本收集。 CF 的一个突出方向是潜在模型，它学习用户和项目的紧凑表示，然后使用这些表示之间的距离来推断偏好。 最流行的潜在 CF 方法是矩阵分解，其中用户 - 项目交互矩阵由两个低秩矩阵的乘积近似，这些矩阵作为用户和项目表示。 另一个方向是将交互矩阵视为二部图，边表示用户和项目节点之间的交互。 然后可以应用基于图的方法沿边传递消息并学习总结每个节点的邻域信息的表示。</p>
-<p>面向图的方法的一个关键优势是能够对用户和项目之间的高阶关系（邻居的邻居）进行建模。 最近将图卷积网络 (GCN) 应用于 CF 的工作证明了探索用户-项目建模的高阶关系的重要性。 这些方法通过在图卷积设置下应用多级邻域聚合来生成最终表示，在许多公共基准测试中取得了最先进的性能。</p>
+                <blockquote>
+<p>2019 ICML Oral <a target="_blank" rel="noopener" href="http://proceedings.mlr.press/v97/law19a.html">Lorentzian Distance Learning for Hyperbolic Representations</a></p>
+</blockquote>
+<p>本文的主要贡献是对洛伦兹距离的研究。本文解释了为什么平方洛伦兹距离是比庞加莱度量更好的选择。 一个分析论点依赖于黎曼质心的雅可比场 (Lee, 2006) 特性（也称为“Karcher 均值”，尽管 Karcher (2014) 强烈反对使用该术语）。 另一个有趣的特性是，与平方洛伦兹距离相关的质心可以写成封闭形式，这种质心的欧几里得范数随着双曲空间曲率的减小而减小。此属性适合表示层次结构，其中父节点与其后代的距离最小，并且欧几里得范数小于其子节点。</p>
+<p>文章表明用一组点解释平方洛伦兹距离等效于用它们的质心解释距离，同时还研究了质心与一些超参数的相关性，特别是流形的曲率，它会影响其欧几里得范数，该范数用作层次结构中的深度代理。</p>
+<h1>1. Hyperbolic Background</h1>
+<h2 id="1-1-Poincare-Ball">1.1 Poincare Ball</h2>
+<p>庞加莱球$P^{d}$被定义为欧几里得范数小于 1 的$d$维向量集：$P^{d}=\lbrace x\in R^{d}:||x||&lt;1\rbrace$.</p>
+<h2 id="1-2-Hyperboloid-Model">1.2 Hyperboloid Model</h2>
+<p>双曲面模型$H^{d,\beta}\in R^{d+1}$也叫洛伦兹模型，定义为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729141119.png" alt=""></p>
+<p>平方洛伦兹范数源自洛伦兹内积：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729143403.png" alt=""></p>
+<p>当$\beta=1$时，双曲面模型称为单位双曲面，可以表示为$H^{d}$，也是文献中考虑的主要双曲面模型。</p>
+<h2 id="1-3-Optimizing-the-Poincare-Distance-Metric">1.3 Optimizing the Poincare Distance Metric</h2>
+<p>大多数双曲线表示的方法都考虑庞加莱距离度量：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729144815.png" alt=""></p>
+<p>使用方程（3）中的距离公式直接优化问题的庞加莱模型在数值上不稳定，主要有两个原因：</p>
+<ol>
+<li>分母取决于示例的范数，因此当 c 和 d 的任何一个范数接近 1 时对其进行优化会导致数值不稳定；</li>
+<li>元素必须在每次迭代时以固定的最大范数重新投影到庞加莱球上；</li>
+</ol>
+<p>此外，方程（3）当 $c = d$​ 时不可微。</p>
+<p>为了获得更好的求解器数值稳定性，Nickel &amp; Kiela (2018) 建议在单位双曲面模型中使用$d_{P}$的等效公式。他们利用存在可逆映射$h:H^{d,\beta}\to P^{d}$的事实：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729150034.png" alt=""></p>
+<p>当$\beta=1,a\in H^{d},b\in H^{d}$时，有如下的等价式：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729150339.png" alt=""></p>
+<p>Nickel &amp; Kiela (2018) 表明，（5）中的优化方程在数值上更稳定。</p>
+<h2 id="1-5-Duality-between-Spherical-and-Hyperbolic-geometries-二元性">1.5 Duality between Spherical and Hyperbolic geometries 二元性</h2>
+<p>从方程（5）可以看出，保持Poincare距离的顺序等同于保持Lorentzian内积的逆序，因为$\mathrm{cosh}^{-1}$函数在其域$[1,+\infin]$上单调递增。当$p,q$由于这些几何之间的二元性而位于单位超球面$S^{d}$时，庞加莱度量与洛伦兹内积的关系其实类似于测地距离$\cos^{-1}(&lt;p,q&gt;)$与余弦$&lt;p,q&gt;$​的关系。</p>
+<p>双曲面$H^{d,\beta}$可以看作是一个虚半径为$i\sqrt{\beta}$​的半超球面。 与将 Hilbert 空间中的内积视为相似性度量的核方法相同，本文中考虑洛伦兹内积及其诱导距离。</p>
+<h1>2. Lorentzian Distance Learning</h1>
+<p>当表示为双曲时，给出了洛伦兹质心的公式，并表明其欧几里得范数（用作层次结构中的深度代理）取决于曲率$-\frac{1}{\beta}$​。</p>
+<h2 id="2-1-Lorentzian-Distance-and-Mappings">2.1 Lorentzian Distance and Mappings</h2>
+<p>首先给出平方洛伦兹公式的定义：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729164424.png" alt=""></p>
+<p>除了三角不等式，它满足距离度量的所有公理。</p>
+<h3 id="Mapping-映射">Mapping 映射</h3>
+<p>由于我们的方法不一定考虑 β = 1，我们考虑可逆映射$g_{\beta}:F^{d}\to H^{d,\beta}$，称为$H^{d,\beta}$的本地参数化：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729164911.png" alt=""></p>
+<p>通过平方洛伦兹公式可以比较两个样例$f_{1},f_{2}\in F^{d}$：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729165043.png" alt=""></p>
+<h3 id="Preserved-order-of-Euclidean-norms-欧几里得范数的保留顺序">Preserved order of Euclidean norms 欧几里得范数的保留顺序</h3>
+<p>示例的欧几里得范数的顺序沿三个空间保留，可由以下定理给出：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729165450.png" alt=""></p>
+<p>总之，示例的欧几里得范数可以在任何空间中等价地进行比较，如果想研究质心的欧几里得范数，这特别有用。</p>
+<h2 id="2-2-Centroid-Properties-质心属性">2.2 Centroid Properties 质心属性</h2>
+<p>质心是 (Frechet, 1948) 中提出的统计概念，用于估计一组点的某些统计离散度（例如方差），它是一组点的（平方）距离期望的最小值，并在 (Grove &amp; Karcher, 1973) 中扩展到黎曼流形。研究平方洛伦兹距离的质心，在理想情况下，希望节点表示的质心是（接近）其最低共同祖先的表示。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729170121.png" alt=""></p>
+<p>公式 (11) 中的质心公式概括了 （Galperin, 1993; Ratcliffe, 2006）中给出的质心公式，适用于任何数量的点和任何恒定曲率 -1/β 的值。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729170318.png" alt=""></p>
+<p>质心 μ 的公式可用于执行硬聚类，其中假设对聚类中的数据采用统一度量。可以看到，一个示例的质心就是示例本身。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729180838.png" alt=""></p>
+<p>图 1 说明了一组 10 个不同点的质心的二维庞加莱球表示。不同 β &gt; 0 值的庞加莱距离和平方洛伦兹距离。可以看到质心庞加莱度量没有更小的范数。 另一方面，洛伦兹质心的欧几里得范数确实随着 β 的减小而减小，然后可以通过选择 β &gt; 0 的较低值来强制使其变小。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729212228.png" alt="图1"></p>
+<p>下面提供了一些有助于理解洛伦兹距离的旁注。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729213000.png" alt=""></p>
+<p>该定理表明，一组点的距离只能与作为质心的一个点进行比较。</p>
+<p>此外，根据柯西-施瓦茨不等式，当 β 趋于 0 时，方程 (9) 中的洛伦兹距离到$f_{1}$的任何向量$f_{2}$都趋于 0，其可写为$f_{2}=\tau f_{1}$且$\tau\ge 0$​，否则距离更大。因此，具有一组点的洛伦兹距离沿着包含可以写为τμ的元素的射线趋于更小，其中τ ≥ 0且 μ 是它们的质心。<br>
+$$<br>
+(\sum_{k=1}^{n}{a_{k}\cdot b_{k}})^{2}\le (\sum_{k=1}^{n}{a_{k}^{2}})(\sum_{k=1}^{n}{b_{k}^{2}})\<br>
+$$</p>
+<h3 id="Curvature-adaption-曲率适应">Curvature adaption 曲率适应</h3>
+<p>根据雅可比场性质，当所选度量是单位双曲面$H^{d}$上的庞加莱度量$d_{H}$时，$d_{H}$的Hessian沿径向具有特征值0。然而，Hessian 的特征值是水平面的主曲率。 由于矢量场更重要并且为了获得“更好的曲率适应”（Karcher，2014）（即非零特征值），Karcher (1987) 建议使用“修正距离”$(-1+\cosh(d_{H}))$，它在$H^{d}$上等于$\frac{1}{2}d_{L}^{2}$.</p>
+<h3 id="Hyperbolic-centroids-in-the-literature-双曲质心">Hyperbolic centroids in the literature 双曲质心</h3>
+<p>有另外两篇论文利用了双曲质心。 首先是萨拉等人 (2018) 使用与 Poincare 度量相关的质心，但没有封闭形式的解决方案，因此他们通过梯度下降来计算它。 古尔切尔等人 (2019) 优化了一个基于庞加莱度量的问题，但利用了属于另一种双曲几何类型的陀螺质心 (Ungar, 2014)。 当该集合仅包含 2 个点时，它是使用陀螺三角不等式将其与该集合的两个点之间的陀螺距离进行爱因斯坦加法的最小值。 否则，可以将其视为保留左回旋平移的点。 陀螺质心的一个限制是它不能被视为距离期望的最小值（与 Frechet 均值不同），因为爱因斯坦加法不是可交换的。</p>
+<h2 id="2-3-Optimization-and-solver">2.3 Optimization and solver</h2>
+<p>$d_{H}$的方向导数缺乏合适的向量空间结构，无法使用标准优化器。另一方面，平方洛伦兹距离仅依赖于方程（2）中洛伦兹内积的公式，该公式对于任何对都是明确且平滑的。通过尝试减少向量空间中的洛伦兹距离，标准 SGD 也减少了测地距离。</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -468,7 +554,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://thooooor.github.io/2021/07/27/suan-fa-bi-ji/xie-tong-guo-lu/">https://thooooor.github.io/2021/07/27/suan-fa-bi-ji/xie-tong-guo-lu/</a>
+                    <a href="https://thooooor.github.io/2021/08/05/lun-wen-bi-ji/knowledge-representation/2019-icml-lorentzian-distance-learning-for-hyperbolic-representations/">https://thooooor.github.io/2021/08/05/lun-wen-bi-ji/knowledge-representation/2019-icml-lorentzian-distance-learning-for-hyperbolic-representations/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -505,7 +591,19 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/Hyperbolic/">
+                                    <span class="chip bg-color">Hyperbolic</span>
+                                </a>
+                            
+                                <a href="/tags/Knowledge-Representaion/">
+                                    <span class="chip bg-color">Knowledge Representaion</span>
+                                </a>
+                            
+                                <a href="/tags/ICML/">
+                                    <span class="chip bg-color">ICML</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -674,7 +772,7 @@
         repo: 'blogcomment',
         owner: 'Thooooor',
         admin: "Thooooor",
-        id: '2021-07-27T14-13-05',
+        id: '2021-08-05T22-50-00',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -702,24 +800,24 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/07/28/lun-wen-bi-ji/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/">
+                <a href="/2021/08/05/lun-wen-bi-ji/gnn/2021-www-lorentzian-graph-convolutional-networks/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.png" class="responsive-img" alt="HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Lorentzian Graph Convolutional Networks">
                         
-                        <span class="card-title">HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering</span>
+                        <span class="card-title">Lorentzian Graph Convolutional Networks</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            2021 WWW 双曲协同过滤模型 HGCN
+                            2021 WWW Lorentzian Graph Convolutional Networks 洛伦兹GCN 论文笔记
                         
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-07-28
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-05
                         </span>
                         <span class="publish-author">
                             
@@ -736,12 +834,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Hyperbolic/">
-                        <span class="chip bg-color">Hyperbolic</span>
+                    <a href="/tags/GNN/">
+                        <span class="chip bg-color">GNN</span>
                     </a>
                     
-                    <a href="/tags/Recommender-System/">
-                        <span class="chip bg-color">Recommender System</span>
+                    <a href="/tags/Hyperbolic/">
+                        <span class="chip bg-color">Hyperbolic</span>
                     </a>
                     
                     <a href="/tags/WWW/">
@@ -759,24 +857,24 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/07/22/lun-wen-bi-ji/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/">
+                <a href="/2021/08/05/lun-wen-bi-ji/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="Semi-Riemannian Graph Convolutional Networks">
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="A Hyperbolic-to-Hyperbolic Graph Convolutional Network">
                         
-                        <span class="card-title">Semi-Riemannian Graph Convolutional Networks</span>
+                        <span class="card-title">A Hyperbolic-to-Hyperbolic Graph Convolutional Network</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            2021 NeurIPS《Semi-Riemannian Graph Convolutional Networks》半黎曼GCN 论文笔记
+                            2021 CVPR Oral A Hyperbolic-to-Hyperbolic Graph Convolutional Network 双曲GCN 论文笔记
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-07-22
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-05
                             </span>
                         <span class="publish-author">
                             
@@ -797,8 +895,12 @@
                         <span class="chip bg-color">GNN</span>
                     </a>
                     
-                    <a href="/tags/NeurIPS/">
-                        <span class="chip bg-color">NeurIPS</span>
+                    <a href="/tags/Hyperbolic/">
+                        <span class="chip bg-color">Hyperbolic</span>
+                    </a>
+                    
+                    <a href="/tags/CVPR/">
+                        <span class="chip bg-color">CVPR</span>
                     </a>
                     
                 </div>
@@ -974,6 +1076,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 </main>
 
 
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
 
 
     <footer class="page-footer bg-color">
@@ -1042,7 +1151,7 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
             <br>
             
             &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
-                class="white-color">62.9k</span>&nbsp;字
+                class="white-color">71.5k</span>&nbsp;字
             
             
             

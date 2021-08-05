@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://thooooor.github.io/"/>
-  <updated>2021-07-28T15:08:59.553Z</updated>
+  <updated>2021-08-05T15:03:12.147Z</updated>
   <id>https://thooooor.github.io/</id>
   
   <author>
@@ -15,6 +15,193 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>协同过滤算法</title>
+    <link href="https://thooooor.github.io/2021/08/05/suan-fa-bi-ji/xie-tong-guo-lu/"/>
+    <id>https://thooooor.github.io/2021/08/05/suan-fa-bi-ji/xie-tong-guo-lu/</id>
+    <published>2021-08-05T15:05:00.000Z</published>
+    <updated>2021-08-05T15:03:12.147Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;推荐系统的核心任务是准确捕获用户偏好和项目属性，以正确预测用户是否会喜欢给定项目。 协同过滤 (CF) 方法利用过去的用户-项目交互数据来驱动推荐。&lt;/p&gt;
+&lt;p&gt;最近的研究主要集中在隐式反馈设置上，因为隐式交互通常可以以更大的数量和低成本收集。 CF
+        
+      
+    
+    </summary>
+    
+    
+      <category term="算法" scheme="https://thooooor.github.io/categories/%E7%AE%97%E6%B3%95/"/>
+    
+    
+      <category term="学习笔记" scheme="https://thooooor.github.io/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>近期踩坑</title>
+    <link href="https://thooooor.github.io/2021/08/05/tuo-keng-ji-lu/jin-qi-cai-keng/"/>
+    <id>https://thooooor.github.io/2021/08/05/tuo-keng-ji-lu/jin-qi-cai-keng/</id>
+    <published>2021-08-05T15:02:00.000Z</published>
+    <updated>2021-08-05T15:01:45.774Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1&gt;1. PyCharm远程&lt;/h1&gt;
+&lt;pre&gt;&lt;code class=&quot;language-shell&quot;&gt;sudo ldconfig /usr/local/cuda/lib64
+&lt;/code&gt;&lt;/pre&gt;
+&lt;script&gt;
+       
+        
+      
+    
+    </summary>
+    
+    
+      <category term="脱坑实录" scheme="https://thooooor.github.io/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Inductive Matrix Completion Based on Graph Neural Networks</title>
+    <link href="https://thooooor.github.io/2021/08/05/lun-wen-bi-ji/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/"/>
+    <id>https://thooooor.github.io/2021/08/05/lun-wen-bi-ji/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/</id>
+    <published>2021-08-05T15:00:00.000Z</published>
+    <updated>2021-08-05T15:00:07.393Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;2020 ICLR &lt;a href=&quot;https://arxiv.org/abs/1904.12058&quot;&gt;Inductive Matrix Completion Based on Graph Neural
+        
+      
+    
+    </summary>
+    
+    
+      <category term="论文笔记" scheme="https://thooooor.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="GNN" scheme="https://thooooor.github.io/tags/GNN/"/>
+    
+      <category term="Recommender System" scheme="https://thooooor.github.io/tags/Recommender-System/"/>
+    
+      <category term="ICRL" scheme="https://thooooor.github.io/tags/ICRL/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Lorentzian Graph Convolutional Networks</title>
+    <link href="https://thooooor.github.io/2021/08/05/lun-wen-bi-ji/gnn/2021-www-lorentzian-graph-convolutional-networks/"/>
+    <id>https://thooooor.github.io/2021/08/05/lun-wen-bi-ji/gnn/2021-www-lorentzian-graph-convolutional-networks/</id>
+    <published>2021-08-05T14:55:00.000Z</published>
+    <updated>2021-08-05T14:56:23.332Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;2021 WWW &lt;a href=&quot;https://arxiv.org/abs/2104.07477&quot;&gt;Lorentzian Graph Convolutional Networks&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;大多数
+        
+      
+    
+    </summary>
+    
+    
+      <category term="论文笔记" scheme="https://thooooor.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="GNN" scheme="https://thooooor.github.io/tags/GNN/"/>
+    
+      <category term="Hyperbolic" scheme="https://thooooor.github.io/tags/Hyperbolic/"/>
+    
+      <category term="WWW" scheme="https://thooooor.github.io/tags/WWW/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Lorentzian Distance Learning for Hyperbolic Representations</title>
+    <link href="https://thooooor.github.io/2021/08/05/lun-wen-bi-ji/knowledge-representation/2019-icml-lorentzian-distance-learning-for-hyperbolic-representations/"/>
+    <id>https://thooooor.github.io/2021/08/05/lun-wen-bi-ji/knowledge-representation/2019-icml-lorentzian-distance-learning-for-hyperbolic-representations/</id>
+    <published>2021-08-05T14:50:00.000Z</published>
+    <updated>2021-08-05T14:50:47.540Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;2019 ICML Oral &lt;a href=&quot;http://proceedings.mlr.press/v97/law19a.html&quot;&gt;Lorentzian Distance Learning for Hyperbolic
+        
+      
+    
+    </summary>
+    
+    
+      <category term="论文笔记" scheme="https://thooooor.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="Hyperbolic" scheme="https://thooooor.github.io/tags/Hyperbolic/"/>
+    
+      <category term="Knowledge Representaion" scheme="https://thooooor.github.io/tags/Knowledge-Representaion/"/>
+    
+      <category term="ICML" scheme="https://thooooor.github.io/tags/ICML/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>A Hyperbolic-to-Hyperbolic Graph Convolutional Network</title>
+    <link href="https://thooooor.github.io/2021/08/05/lun-wen-bi-ji/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/"/>
+    <id>https://thooooor.github.io/2021/08/05/lun-wen-bi-ji/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/</id>
+    <published>2021-08-05T14:45:00.000Z</published>
+    <updated>2021-08-05T14:47:18.590Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;blockquote&gt;
+&lt;p&gt;2021 CVPR Oral &lt;a href=&quot;https://arxiv.org/abs/2104.06942&quot;&gt;A Hyperbolic-to-Hyperbolic Graph Convolutional
+        
+      
+    
+    </summary>
+    
+    
+      <category term="论文笔记" scheme="https://thooooor.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="GNN" scheme="https://thooooor.github.io/tags/GNN/"/>
+    
+      <category term="Hyperbolic" scheme="https://thooooor.github.io/tags/Hyperbolic/"/>
+    
+      <category term="CVPR" scheme="https://thooooor.github.io/tags/CVPR/"/>
+    
+  </entry>
   
   <entry>
     <title>Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures</title>
@@ -55,7 +242,7 @@
     <link href="https://thooooor.github.io/2021/07/28/lun-wen-bi-ji/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/"/>
     <id>https://thooooor.github.io/2021/07/28/lun-wen-bi-ji/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/</id>
     <published>2021-07-28T14:53:01.707Z</published>
-    <updated>2021-07-29T06:14:00.860Z</updated>
+    <updated>2021-08-05T15:00:28.283Z</updated>
     
     <summary type="html">
     
@@ -74,35 +261,13 @@
       <category term="论文笔记" scheme="https://thooooor.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
     
     
+      <category term="GNN" scheme="https://thooooor.github.io/tags/GNN/"/>
+    
       <category term="Hyperbolic" scheme="https://thooooor.github.io/tags/Hyperbolic/"/>
     
       <category term="Recommender System" scheme="https://thooooor.github.io/tags/Recommender-System/"/>
     
       <category term="WWW" scheme="https://thooooor.github.io/tags/WWW/"/>
-    
-  </entry>
-  
-  <entry>
-    <title></title>
-    <link href="https://thooooor.github.io/2021/07/27/suan-fa-bi-ji/xie-tong-guo-lu/"/>
-    <id>https://thooooor.github.io/2021/07/27/suan-fa-bi-ji/xie-tong-guo-lu/</id>
-    <published>2021-07-27T06:13:05.844Z</published>
-    <updated>2021-07-27T06:13:05.844Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;推荐系统的核心任务是准确捕获用户偏好和项目属性，以正确预测用户是否会喜欢给定项目。 协同过滤 (CF) 方法利用过去的用户-项目交互数据来驱动推荐。&lt;/p&gt;
-&lt;p&gt;最近的研究主要集中在隐式反馈设置上，因为隐式交互通常可以以更大的数量和低成本收集。 CF
-        
-      
-    
-    </summary>
-    
-    
     
   </entry>
   
@@ -457,153 +622,6 @@ plt.rcParams[&#39;font.sans-serif&#39;] =
       <category term="GE" scheme="https://thooooor.github.io/tags/GE/"/>
     
       <category term="知识图谱" scheme="https://thooooor.github.io/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell</title>
-    <link href="https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-2-bi-ji/"/>
-    <id>https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-2-bi-ji/</id>
-    <published>2020-11-24T06:32:00.000Z</published>
-    <updated>2020-12-24T16:19:12.709Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;MIT 6.S081/Fall 2019实验&lt;a href=&quot;https://pdos.csail.mit.edu/6.828/2019/labs/sh.html&quot;&gt;Lab: Simple xv6
-        
-      
-    
-    </summary>
-    
-    
-      <category term="MIT 6.S081/Fall 2019 Lab" scheme="https://thooooor.github.io/categories/MIT-6-S081-Fall-2019-Lab/"/>
-    
-    
-      <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
-    
-      <category term="操作系统" scheme="https://thooooor.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MIT 6.S081/Fall 2019 Lab7 locks</title>
-    <link href="https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-3-bi-ji/"/>
-    <id>https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-3-bi-ji/</id>
-    <published>2020-11-24T06:32:00.000Z</published>
-    <updated>2020-12-24T16:20:21.992Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;MIT 6.S081/Fall 2019实验 &lt;a href=&quot;https://pdos.csail.mit.edu/6.828/2019/labs/lock.html&quot;&gt;Lab:
-        
-      
-    
-    </summary>
-    
-    
-      <category term="MIT 6.S081/Fall 2019 Lab" scheme="https://thooooor.github.io/categories/MIT-6-S081-Fall-2019-Lab/"/>
-    
-    
-      <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
-    
-      <category term="操作系统" scheme="https://thooooor.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MIT 6.S081/Fall 2019 Lab3 Allocator for xv6</title>
-    <link href="https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-4-bi-ji/"/>
-    <id>https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-4-bi-ji/</id>
-    <published>2020-11-24T06:32:00.000Z</published>
-    <updated>2020-12-24T16:21:26.418Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;MIT 6.S081/Fall 2019实验 &lt;a href=&quot;https://pdos.csail.mit.edu/6.828/2019/labs/alloc.html&quot;&gt;Lab: Allocator for xv6&lt;/a&gt;，用好友分配器替换 xv6
-        
-      
-    
-    </summary>
-    
-    
-      <category term="MIT 6.S081/Fall 2019 Lab" scheme="https://thooooor.github.io/categories/MIT-6-S081-Fall-2019-Lab/"/>
-    
-    
-      <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
-    
-      <category term="操作系统" scheme="https://thooooor.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MIT 6.S081/Fall 2019 Lab1 Xv6 and Unix utilities</title>
-    <link href="https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-1-bi-ji/"/>
-    <id>https://thooooor.github.io/2020/11/24/mit-6.s081-fall-2019/shi-yan-1-bi-ji/</id>
-    <published>2020-11-24T04:57:00.000Z</published>
-    <updated>2020-12-24T16:18:16.928Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;MIT 6.S081/Fall 2019实验&lt;a href=&quot;https://pdos.csail.mit.edu/6.828/2019/labs/util.html&quot;&gt;Lab: Xv6 and Unix
-        
-      
-    
-    </summary>
-    
-    
-      <category term="MIT 6.S081/Fall 2019 Lab" scheme="https://thooooor.github.io/categories/MIT-6-S081-Fall-2019-Lab/"/>
-    
-    
-      <category term="Linux" scheme="https://thooooor.github.io/tags/Linux/"/>
-    
-      <category term="操作系统" scheme="https://thooooor.github.io/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>A Joint Neural Model for Information Extraction with Global Features</title>
-    <link href="https://thooooor.github.io/2020/10/18/lun-wen-bi-ji/ner/a-joint-neural-model-for-information-extraction-with-global-features/"/>
-    <id>https://thooooor.github.io/2020/10/18/lun-wen-bi-ji/ner/a-joint-neural-model-for-information-extraction-with-global-features/</id>
-    <published>2020-10-18T14:58:00.000Z</published>
-    <updated>2021-07-14T17:38:13.407Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;blockquote&gt;
-&lt;p&gt;2020 ACL会议《A Joint Neural Model for Information Extraction with Global Features》&lt;/p&gt;
-&lt;p&gt;&lt;a
-        
-      
-    
-    </summary>
-    
-    
-      <category term="论文笔记" scheme="https://thooooor.github.io/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/"/>
-    
-    
-      <category term="NER" scheme="https://thooooor.github.io/tags/NER/"/>
-    
-      <category term="ACL" scheme="https://thooooor.github.io/tags/ACL/"/>
     
   </entry>
   

@@ -1,0 +1,1333 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="keywords" content="Lorentzian Graph Convolutional Networks, Thor&#39;s Blog">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+    <title>Lorentzian Graph Convolutional Networks | Thor&#39;s Blog</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+
+    <script src="/libs/jquery/jquery.min.js"></script>
+
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Thor's Blog" type="application/atom+xml">
+</head>
+
+
+<body>
+    <header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">Thor&#39;s Blog</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fas fa-bars"></i></a>
+<ul class="right nav-menu">
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/" class="waves-effect waves-light">
+      
+      <i class="fas fa-home" style="zoom: 0.6;"></i>
+      
+      <span>首页</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/tags" class="waves-effect waves-light">
+      
+      <i class="fas fa-tags" style="zoom: 0.6;"></i>
+      
+      <span>标签</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/categories" class="waves-effect waves-light">
+      
+      <i class="fas fa-bookmark" style="zoom: 0.6;"></i>
+      
+      <span>分类</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/archives" class="waves-effect waves-light">
+      
+      <i class="fas fa-archive" style="zoom: 0.6;"></i>
+      
+      <span>归档</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/about" class="waves-effect waves-light">
+      
+      <i class="fas fa-user-circle" style="zoom: 0.6;"></i>
+      
+      <span>关于</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/contact" class="waves-effect waves-light">
+      
+      <i class="fas fa-comments" style="zoom: 0.6;"></i>
+      
+      <span>留言板</span>
+    </a>
+    
+  </li>
+  
+  <li class="hide-on-med-and-down nav-item">
+    
+    <a href="/friends" class="waves-effect waves-light">
+      
+      <i class="fas fa-address-book" style="zoom: 0.6;"></i>
+      
+      <span>友情链接</span>
+    </a>
+    
+  </li>
+  
+  <li>
+    <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+      <i id="searchIcon" class="fas fa-search" title="搜索" style="zoom: 0.85;"></i>
+    </a>
+  </li>
+</ul>
+
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">Thor&#39;s Blog</div>
+        <div class="logo-desc">
+            
+            Never really desperate, only the lost of the soul.
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li class="m-nav-item">
+	  
+		<a href="/" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-home"></i>
+			
+			首页
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/tags" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-tags"></i>
+			
+			标签
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/categories" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-bookmark"></i>
+			
+			分类
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/archives" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-archive"></i>
+			
+			归档
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/about" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-user-circle"></i>
+			
+			关于
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/contact" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-comments"></i>
+			
+			留言板
+		</a>
+          
+        </li>
+        
+        <li class="m-nav-item">
+	  
+		<a href="/friends" class="waves-effect waves-light">
+			
+			    <i class="fa-fw fas fa-address-book"></i>
+			
+			友情链接
+		</a>
+          
+        </li>
+        
+        
+        <li><div class="divider"></div></li>
+        <li>
+            <a href="https://github.com/Thooooor" class="waves-effect waves-light" target="_blank">
+                <i class="fab fa-github-square fa-fw"></i>Fork Me
+            </a>
+        </li>
+        
+    </ul>
+</div>
+
+
+        </div>
+
+    </nav>
+
+</header>
+
+    
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Lorentzian Graph Convolutional Networks</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        width: 345px;
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content {
+        height: calc(100vh - 250px);
+        overflow: auto;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+
+        position: absolute;
+        right: 23.5vw;
+        display: block;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 15px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/GNN/">
+                                <span class="chip bg-color">GNN</span>
+                            </a>
+                        
+                            <a href="/tags/Hyperbolic/">
+                                <span class="chip bg-color">Hyperbolic</span>
+                            </a>
+                        
+                            <a href="/tags/WWW/">
+                                <span class="chip bg-color">WWW</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="post-category">
+                                论文笔记
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2021-08-05
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2021-08-05
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
+                    2.9k
+                </div>
+                
+
+                
+                <div class="info-break-policy">
+                    <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                    10 分
+                </div>
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <blockquote>
+<p>2021 WWW <a target="_blank" rel="noopener" href="https://arxiv.org/abs/2104.07477">Lorentzian Graph Convolutional Networks</a></p>
+</blockquote>
+<p>大多数 GCN 学习欧几里德几何中的节点表示，但在嵌入具有无标度或分层结构的图的情况下，这可能会产生很大的失真。最近，提出了一些 GCN 来处理非欧几何中的这个问题，例如双曲几何。 尽管双曲 GCN 取得了不错的性能，但现有的双曲图操作（指数、对数映射）实际上不能严格遵循双曲几何，这可能会限制双曲几何的能力，从而损害双曲 GCN 的性能。</p>
+<p>为解决以上问题，本文提出一种名为洛伦兹图卷积网络 (LGCN) 的新型双曲 GCN，它在双曲空间的双曲面模型上设计了统一的图操作框架，严格保证学习到的节点特征遵循双曲几何。具体来说，使用洛伦兹重建双曲 GCN 的图操作，例如特征转换和非线性激活。 此外，基于洛伦兹距离的质心设计了一种优雅的邻域聚合方法。 本文提出的图操作在不同类型的双曲几何中是等效的，这也从根本上表明了它们的正确性。</p>
+<h1>1. Preliminaries</h1>
+<h2 id="1-1-Hyperbolic-geometry">1.1 Hyperbolic geometry</h2>
+<p>双曲几何是具有恒定负曲率的非欧几何。 双曲面（洛伦兹）模型作为一种典型的能很好地描述双曲几何的等效模型，被广泛使用。洛伦兹标量积定义为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730113554.png" alt=""></p>
+<p>$n$维双曲面流形的定义为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730113639.png" alt=""></p>
+<p>洛伦兹标量积满足：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730113720.png" alt=""></p>
+<p>$x$处的切线空间定义为一个$n$维向量空间，近似于$x$周围的$H^{n,\beta}$：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730113830.png" alt=""></p>
+<p>方程（4）具有 Lorentzian 标量积的约束。 切线空间的黎曼度量张量定义为：$g_{x}^{\beta}(v,w):=&lt;v,w&gt;_{L}$。</p>
+<p>双曲空间和切线空间之间的映射可以通过指数映射和对数映射来完成：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730114353.png" alt=""></p>
+<p>其中两点间的内在距离函数定义为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730114455.png" alt=""></p>
+<h2 id="1-2-Hyperbolic-graph-convolutional-networks">1.2 Hyperbolic graph convolutional networks</h2>
+<p>本文使用HGCN，将欧几里得图卷积扩展到双曲面模型，作为典型例子来说明双曲GCN的基本框架。HGCN 的消息传递规则包含特征变换：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730115019.png" alt=""></p>
+<p>和邻域聚合：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730115111.png" alt=""></p>
+<p>正如方程（8）所示，特征通过对数映射从双曲空间转换到切线空间。然而，因为$&lt;M\log_{0}^{\beta}(h_{i}^{k,\beta}),0&gt;<em>{L}\ne0,0=(\sqrt{\beta},0,…,0)\in H^{k,\beta}$，所以无法满足方程（4）中切线空间$&lt;v,x&gt;</em>{L}=0$的基本约束。因此，通过指数映射将节点特征投影回双曲面流形后，节点特征将超出双曲空间，这不严格满足双曲几何。</p>
+<p>回到欧几里得空间，其中进行的节点特征聚合有如下数学意义：</p>
+<blockquote>
+<p><strong>Remark 3.1</strong></p>
+<p>给定一个节点，邻域聚合本质上是其局部邻域特征的加权算术平均值。 此外，聚合的特征是几何中邻域特征的质心。</p>
+</blockquote>
+<p>因此，方程（9）中的邻域聚合也应与双曲空间中的欧几里得聚合具有相同的含义。 但是HGCN 中的方程(9) 仅在切线空间而不是双曲空间中满足这些含义，这可能会导致特征失真。 综上所述，上述问题表明现有的双曲线图操作根本不遵循数学，这可能会导致潜在的不可信问题。</p>
+<h1>2. LGCN</h1>
+<p>为了解决现有双曲 GCN 的问题，本文提出了 LGCN，它设计了图操作来保证双曲空间中的数学意义。 具体来说，LGCN 首先将输入节点特征映射到双曲线空间，然后通过精心设计的洛伦兹矩阵向量乘法进行特征变换。 此外，提出了基于质心的洛伦兹聚合来聚合特征，聚合权重通过自注意力机制学习。 最后，遵循洛伦兹逐点非线性激活以获得输出节点特征。LGCN中曲率$-\frac{1}{\beta}$同样为可学习的参数。</p>
+<h2 id="2-1-Mapping-feature-with-different-curvature">2.1 Mapping feature with different curvature</h2>
+<p>LGCN 的输入节点特征可以存在于欧几里得空间或双曲空间中。如果原始特征存在于欧几里得空间中，则需要将它们映射到双曲空间中，此时需要在$h^{k,E}$的第一个坐标处添加一个“0”元素以满足方程（4）约束$&lt;(0,h^{k,E}),0&gt;_{L}=0$，然后再映射到双曲空间：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730140018.png" alt=""></p>
+<p>如果输入特征$h^{k,\beta’}$​已经在双曲空间中（例如，前一个 LGCN 层的输出），但它的曲率$-\frac{1}{\beta’}$​可能与现有流形的曲率并不同，需要将其转化为具有特定曲率$-\frac{1}{\beta}$​的双曲面模型：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730141043.png" alt=""></p>
+<h2 id="2-2-Lorentzian-feature-transformation">2.2 Lorentzian feature transformation</h2>
+<p>双曲空间并不是向量空间，这意味着欧几里得空间中的运算不能应用于双曲空间。 为了确保变换后的特征满足双曲几何，在双曲面模型中定义一些规范变换至关重要，因此定义：</p>
+<p><strong>Definition 2.1 (Lorentzian version).</strong></p>
+<p>不同维度之间的映射：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730141810.png" alt=""></p>
+<p>洛伦兹版本利用对数和指数映射来投影双曲空间和切线空间之间的特征。由于切线空间是向量空间并且与$R^{n}$同构，因此欧几里得变换可以应用于切线空间。与之前方法不同的是，洛伦兹版本只利用了切线空间中最后$n$个坐标$(v_{1},…,v_{n})$上的欧几里德变换，并且将第一个坐标$v_{0}$置为“0”以满足方程（ 4）中的约束。因此，此操作可以确保变换后的特征严格遵循双曲几何。</p>
+<p>为了在双曲面模型上应用线性变换，遵循洛伦兹版本，可以导出洛伦兹矩阵向量乘法：</p>
+<p><strong>Definition 2.2 (Lorentzian matrix-vector multiplication).</strong></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730142714.png" alt=""></p>
+<p>洛伦兹矩阵向量乘法与双曲面模型上的其他矩阵向量乘法之间的一个主要区别是矩阵 M 的大小。假设需要将$ 𝑛 $维特征转换为$m$维特征，矩阵 M 的大小应该是$m\times n$，这是洛伦兹矩阵-向量乘法所满足的。然而，对于其他方法，如方程（8），矩阵M的大小为$(m+1)\times (n+1)$，导致不能满足切线空间的约束$&lt;M\log_{0}^{\beta}(h_{i}^{k,\beta}),0&gt;_{L}\ne0$，所以转换后的特征将超出双曲空间。 此外，洛伦兹矩阵向量乘法具有以下性质：</p>
+<blockquote>
+<p><strong>Theorem 2.1.</strong></p>
+<p>给定双曲空间中的一个点，双曲面模型表示为$x^{n,\beta}\in H^{n,\beta}$，庞加莱球模型表示为$x^{n,\alpha}\in D^{n,\alpha}$。令$M$为一个$m\times n$的矩阵，双曲面模型中的洛伦兹矩阵向量乘法$M\otimes^{\beta}x^{n,\beta}$与庞加莱球模型中的莫比乌斯矩阵向量乘法$M\otimes^{\alpha}x^{n,\alpha}$​是等价的。</p>
+</blockquote>
+<p>这个属性优雅地桥接了双曲面模型和庞加莱球模型之间矩阵向量乘法的关系。 可以使用洛伦兹矩阵向量乘法对双曲面模型进行特征变换为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730165319.png" alt=""></p>
+<h2 id="2-3-Lorentzian-neighborhood-aggregation">2.3 Lorentzian neighborhood aggregation</h2>
+<p>与 Remark3.1一样，在欧几里得空间中，邻域聚合是计算其邻域特征的权重算术平均值或质心（也称为质心），如图1（a）所示。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730171404.png" alt="图1（a）"></p>
+<p>LGCN目标是聚合双曲线空间中的邻域特征并遵循这些含义。 Fréchet 均值提供了一种可行的方法来计算黎曼流形中的质心。 此外，算术平均值也可以解释为一种 Fréchet 平均值。 因此，Fréchet mean 符合邻域聚合的含义。 Fréchet 均值的主要思想是最小化一组点的（平方）距离的期望。 然而，Fréchet mean 没有一个关于双曲空间中的内在距离$d_{H}^{\beta}$​​的封闭形式的解，它必须通过梯度下降进行低效计算。 因此，本文提出了一种优雅的基于平方洛伦兹距离的质心的邻域聚合方法，可以很好地平衡数学意义和效率：</p>
+<blockquote>
+<p><strong>Theorem 2.2 (Lorentzian aggregation via centroid of squared Lorentzian distance).</strong></p>
+<p>对于一个节点特征$h_{i}^{d,\beta}\in H^{d,\beta}$，其一组邻域节点$N(i)$，对应聚合权重为$w_{ij}$，邻域聚合包含在节点的质心$c^{d,\beta}$​中，这将问题最小化：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730170051.png" alt=""></p>
+<p>这个问题有封闭形式的解决方案：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730170942.png" alt=""></p>
+</blockquote>
+<p>其中用到的平方洛伦兹距离公式定义为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730171042.png" alt=""></p>
+<p>图 1(b) 说明了通过质心的洛伦兹聚合。 类似于 Fréchet/Karcher 均值，由洛伦兹聚合计算的节点特征是平方洛伦兹距离的期望值的最小值。 此外，洛伦兹邻域聚合中的聚合特征是几何中双曲面模型中的质心 。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730171445.png" alt="图1（b）"></p>
+<p>另一方面，一些双曲 GCNs聚合了切线空间中的邻域（如图 1© 所示），只能在切线空间中视为质心或算术平均值，而不是在双曲线空间。 因此，通过平方洛伦兹距离的质心进行洛伦兹聚合是一种很有前途的方法，与其他双曲 GCN 相比，它满足更优雅的数学含义。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730171735.png" alt="图1（c）"></p>
+<p>如方程（16）所示，有一个聚合权重$w_{ij}$表示邻域对于中心节点的重要性。 这里提出了一种自注意力机制来学习聚合权重$w_{ij}$​。对于两个节点特征，注意力系数$\mu_{ij}$表示节点$i\to j$的重要程度，计算公式为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730172504.png" alt=""></p>
+<p>其中𝐴𝑇𝑇(·)表示计算注意力系数的函数，而𝑑×𝑑矩阵$M_{att}$是将节点特征转化为基于注意力的特征。考虑一个较大的注意系数$\mu_{ij}$表示$i,j$节点的高度相似性, 基于洛伦兹距离的平方定义𝐴𝑇𝑇 (·)：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730225121.png" alt=""></p>
+<p>对于所有的邻居𝑁 (𝑖) 节点的𝑖 (包括其本身），使用softmax函数对其进行规范化，以计算聚合权重：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210731003129.png" alt=""></p>
+<h2 id="2-4-Lorentzian-pointwise-non-linear-activation">2.4 Lorentzian pointwise non-linear activation</h2>
+<p>非线性激活是GCN不可缺少的一部分。与特征转换类似，双曲面模型上现有的非线性激活也会使特征脱离双曲面模型。这里根据洛伦兹版本推导出洛伦兹点态非线性激活：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210731003435.png" alt=""></p>
+<p>洛伦兹点态非线性激活不仅保证了变换后的特征仍然存在于双曲空间中，而且具有如下性质。</p>
+<blockquote>
+<p>Theorem 4.3.</p>
+<p>双曲面模型中的洛伦兹点态非线性$\sigma^{\otimes^{\beta}}(x^{n,\beta})$等价于庞加莱球模型中的莫比乌斯点态非线性$\sigma^{\otimes^{\alpha}}(x^{n,\alpha})$，𝜎(·) 表示某些特定的非线性激活，例如Relu、LEKLYRELU。</p>
+</blockquote>
+<p>这一特性也在两个模型中架起了点态非线性的桥梁。洛伦兹点态非线性激活后，LGCN层的输出为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210731004006.png" alt=""></p>
+<p>这可用于下游任务，如链路预测和节点分类。</p>
+<h1>3. 总结</h1>
+<p>这篇文章提出的LGCN模型的思路和之前的HGCN思路大致相同，都是采用双曲-切线-双曲的模式，本文的不同在于改进了双曲-切线之间的映射函数，使其不违背双曲约束，能够保留双曲特征。</p>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://thooooor.github.io" rel="external nofollow noreferrer">Thor</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://thooooor.github.io/2021/08/05/lun-wen-bi-ji/gnn/2021-www-lorentzian-graph-convolutional-networks/">https://thooooor.github.io/2021/08/05/lun-wen-bi-ji/gnn/2021-www-lorentzian-graph-convolutional-networks/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY-NC 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="https://thooooor.github.io" target="_blank">Thor</a>
+                    !
+                </span>
+            </div>
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            
+                                <a href="/tags/GNN/">
+                                    <span class="chip bg-color">GNN</span>
+                                </a>
+                            
+                                <a href="/tags/Hyperbolic/">
+                                    <span class="chip bg-color">Hyperbolic</span>
+                                </a>
+                            
+                                <a href="/tags/WWW/">
+                                    <span class="chip bg-color">WWW</span>
+                                </a>
+                            
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
+</div>
+
+                </div>
+            </div>
+            
+                <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.4rem;
+        line-height: 38px;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .close:hover {
+        color: #ef5350;
+        transform: scale(1.3);
+        -moz-transform:scale(1.3);
+        -webkit-transform:scale(1.3);
+        -o-transform:scale(1.3);
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-content ul {
+        padding-left: 0 !important;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        background-color: #ccc;
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff !important;
+        background-color: #22AB38 !important;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff !important;
+        background-color: #019FE8 !important;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a href="#rewardModal" class="reward-link modal-trigger btn-floating btn-medium waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close modal-close"><i class="fas fa-times"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs row">
+                        <li class="tab col s6 alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                        <li class="tab col s6 wechat-tab waves-effect waves-light"><a href="#wechat">微 信</a></li>
+                    </ul>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.png" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $('.tabs').tabs();
+    });
+</script>
+
+            
+        </div>
+    </div>
+
+    
+        <link rel="stylesheet" href="/libs/gitalk/gitalk.css">
+<link rel="stylesheet" href="/css/my-gitalk.css">
+
+<div class="card gitalk-card" data-aos="fade-up">
+    <div class="comment_headling" style="font-size: 20px; font-weight: 700; position: relative; padding-left: 20px; top: 15px; padding-bottom: 5px;">
+        <i class="fas fa-comments fa-fw" aria-hidden="true"></i>
+        <span>评论</span>
+    </div>
+    <div id="gitalk-container" class="card-content"></div>
+</div>
+
+<script src="/libs/gitalk/gitalk.min.js"></script>
+<script>
+    let gitalk = new Gitalk({
+        clientID: '1a30df6a52a387695989',
+        clientSecret: '2459b6662ab3f7094c591e42b4babded0135c466',
+        repo: 'blogcomment',
+        owner: 'Thooooor',
+        admin: "Thooooor",
+        id: '2021-08-05T22-55-00',
+        distractionFreeMode: false  // Facebook-like distraction free mode
+    });
+
+    gitalk.render('gitalk-container');
+</script>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2021/08/05/lun-wen-bi-ji/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Inductive Matrix Completion Based on Graph Neural Networks">
+                        
+                        <span class="card-title">Inductive Matrix Completion Based on Graph Neural Networks</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            2020 ICRL Inductive Matrix Completion Based on Graph Neural Networks 论文笔记
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-08-05
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    论文笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/GNN/">
+                        <span class="chip bg-color">GNN</span>
+                    </a>
+                    
+                    <a href="/tags/Recommender-System/">
+                        <span class="chip bg-color">Recommender System</span>
+                    </a>
+                    
+                    <a href="/tags/ICRL/">
+                        <span class="chip bg-color">ICRL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/08/05/lun-wen-bi-ji/knowledge-representation/2019-icml-lorentzian-distance-learning-for-hyperbolic-representations/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.png" class="responsive-img" alt="Lorentzian Distance Learning for Hyperbolic Representations">
+                        
+                        <span class="card-title">Lorentzian Distance Learning for Hyperbolic Representations</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            2019 ICML Oral Lorentzian Distance Learning for Hyperbolic Representations 论文笔记
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-08-05
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="post-category">
+                                    论文笔记
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Hyperbolic/">
+                        <span class="chip bg-color">Hyperbolic</span>
+                    </a>
+                    
+                    <a href="/tags/Knowledge-Representaion/">
+                        <span class="chip bg-color">Knowledge Representaion</span>
+                    </a>
+                    
+                    <a href="/tags/ICML/">
+                        <span class="chip bg-color">ICML</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+
+</div>
+
+
+<script>
+    $('#articleContent').on('copy', function (e) {
+        // IE8 or earlier browser is 'undefined'
+        if (typeof window.getSelection === 'undefined') return;
+
+        var selection = window.getSelection();
+        // if the selection is short let's not annoy our users.
+        if (('' + selection).length < Number.parseInt('120')) {
+            return;
+        }
+
+        // create a div outside of the visible area and fill it with the selected text.
+        var bodyElement = document.getElementsByTagName('body')[0];
+        var newdiv = document.createElement('div');
+        newdiv.style.position = 'absolute';
+        newdiv.style.left = '-99999px';
+        bodyElement.appendChild(newdiv);
+        newdiv.appendChild(selection.getRangeAt(0).cloneContents());
+
+        // we need a <pre> tag workaround.
+        // otherwise the text inside "pre" loses all the line breaks!
+        if (selection.getRangeAt(0).commonAncestorContainer.nodeName === 'PRE') {
+            newdiv.innerHTML = "<pre>" + newdiv.innerHTML + "</pre>";
+        }
+
+        var url = document.location.href;
+        newdiv.innerHTML += '<br />'
+            + '来源: Thor&#39;s Blog<br />'
+            + '文章作者: Thor<br />'
+            + '文章链接: <a href="' + url + '">' + url + '</a><br />'
+            + '本文章著作权归作者所有，任何形式的转载都请注明出处。';
+
+        selection.selectAllChildren(newdiv);
+        window.setTimeout(function () {bodyElement.removeChild(newdiv);}, 200);
+    });
+</script>
+
+
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
+
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+<!-- 代码块折行 -->
+
+<style type="text/css">
+code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
+</style>
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h1, h2, h3, h4'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
+</main>
+
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
+
+
+
+    <footer class="page-footer bg-color">
+    
+        <link rel="stylesheet" href="/libs/aplayer/APlayer.min.css">
+<style>
+    .aplayer .aplayer-lrc p {
+        
+        display: none;
+        
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 16px !important;
+    }
+
+    .aplayer .aplayer-lrc p.aplayer-lrc-current {
+        
+        display: none;
+        
+        font-size: 15px;
+        color: #42b983;
+    }
+
+    
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+        left: -66px !important;
+    }
+
+    .aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+        left: 0px !important;
+    }
+
+    
+</style>
+<div class="">
+    
+    <div class="row">
+        <meting-js class="col l8 offset-l2 m10 offset-m1 s12"
+                   server="netease"
+                   type="playlist"
+                   id="4932737014"
+                   fixed='true'
+                   autoplay='false'
+                   theme='#42b983'
+                   loop='all'
+                   order='random'
+                   preload='auto'
+                   volume='0.7'
+                   list-folded='true'
+        >
+        </meting-js>
+    </div>
+</div>
+
+<script src="/libs/aplayer/APlayer.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+
+    
+    <div class="container row center-align" style="margin-bottom: 0px !important;">
+        <div class="col s12 m8 l8 copy-right">
+            Copyright&nbsp;&copy;
+            <span id="year">2020</span>
+            <a href="/about" target="_blank">Thor</a>
+            |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
+            |&nbsp;Theme&nbsp;<a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">Matery</a>
+            <br>
+            
+            &nbsp;<i class="fas fa-chart-area"></i>&nbsp;站点总字数:&nbsp;<span
+                class="white-color">71.5k</span>&nbsp;字
+            
+            
+            
+            
+            
+            
+            <span id="busuanzi_container_site_pv">
+                |&nbsp;<i class="far fa-eye"></i>&nbsp;总访问量:&nbsp;<span id="busuanzi_value_site_pv"
+                    class="white-color"></span>&nbsp;次
+            </span>
+            
+            
+            <span id="busuanzi_container_site_uv">
+                |&nbsp;<i class="fas fa-users"></i>&nbsp;总访问人数:&nbsp;<span id="busuanzi_value_site_uv"
+                    class="white-color"></span>&nbsp;人
+            </span>
+            
+            <br>
+            
+            <br>
+            
+            <span id="icp"><img src="/medias/icp.png" style="vertical-align: text-bottom;" />
+                <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备19090631号</a>
+            </span>
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="https://github.com/Thooooor" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fab fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:554475362@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fas fa-envelope-open"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=554475362" class="tooltipped" target="_blank" data-tooltip="QQ联系我: 554475362" data-position="top" data-delay="50">
+        <i class="fab fa-qq"></i>
+    </a>
+
+
+
+
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fas fa-rss"></i>
+    </a>
+
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+    <!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fas fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/search.xml", 'searchInput', 'searchResult');
+});
+</script>
+
+    <!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+</div>
+
+
+    <script src="/libs/materialize/materialize.min.js"></script>
+    <script src="/libs/masonry/masonry.pkgd.min.js"></script>
+    <script src="/libs/aos/aos.js"></script>
+    <script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+    <script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+    <script src="/js/matery.js"></script>
+
+    <!-- Baidu Analytics -->
+
+<script>
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?9e1951c963cab63ff40f6c2658b6d6d8";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <script src="/libs/others/clicklove.js" async="async"></script>
+    
+    
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+    
+
+    
+
+    
+
+    
+    <script type="text/javascript" color="0,0,255"
+        pointColor="0,0,255" opacity='0.7'
+        zIndex="-1" count="99"
+        src="/libs/background/canvas-nest.js"></script>
+    
+
+    
+
+    
+    <script type="text/javascript" src="/libs/background/ribbon-dynamic.js" async="async"></script>
+    
+
+    
+    <script src="/libs/instantpage/instantpage.js" type="module"></script>
+    
+
+</body>
+
+</html>
