@@ -454,66 +454,61 @@
 <li>围绕（用户，项目）对的局部图模式是该用户对项目的评价的有效预测器；</li>
 <li>建模推荐系统可能不需要长期依赖。</li>
 </ol>
-<h1>1 .IGMC</h1>
-<p><img src="http://note.lizhihao999.cn/notes/20210805004425.png" alt="图1"></p>
+<h1 id="1-IGMC"><a href="#1-IGMC" class="headerlink" title="1 .IGMC"></a>1 .IGMC</h1><p><img src="http://note.lizhihao999.cn/notes/20210805004425.png" alt="图1"></p>
 <p>如图1，IGMC围绕每个评分（深绿色）提取局部封闭子图，并训练 GNN 将子图映射到评分。 每个封闭子图由与目标评分相关联的用户和物品以及它的$h$​-跳邻居（这里 h=1）诱导。 从子图中，GNN 可以学习对评级预测有用的混合图模式（例如平均评级、路径等）。 最后使用经过训练的 GNN 来补全缺失的条目。</p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">符号</th>
-<th style="text-align:center">表示</th>
-<th style="text-align:center">解释</th>
+<th align="center">符号</th>
+<th align="center">表示</th>
+<th align="center">解释</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">$\mathrm{R}$</td>
-<td style="text-align:center">评分矩阵</td>
-<td style="text-align:center"></td>
+<tbody><tr>
+<td align="center">$\mathrm{R}$</td>
+<td align="center">评分矩阵</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center">$G$</td>
-<td style="text-align:center">无向二部图</td>
-<td style="text-align:center">从给定的评分矩阵$\mathrm{R}$构造，节点为用户$u$或者物品$v$</td>
+<td align="center">$G$</td>
+<td align="center">无向二部图</td>
+<td align="center">从给定的评分矩阵$\mathrm{R}$构造，节点为用户$u$或者物品$v$</td>
 </tr>
 <tr>
-<td style="text-align:center">$u$</td>
-<td style="text-align:center">用户</td>
-<td style="text-align:center">$G$中的节点，$\mathrm{R}$一行</td>
+<td align="center">$u$</td>
+<td align="center">用户</td>
+<td align="center">$G$中的节点，$\mathrm{R}$一行</td>
 </tr>
 <tr>
-<td style="text-align:center">$v$</td>
-<td style="text-align:center">物品</td>
-<td style="text-align:center">$G$​中的节点，$\mathrm{R}$​中的一列</td>
+<td align="center">$v$</td>
+<td align="center">物品</td>
+<td align="center">$G$​中的节点，$\mathrm{R}$​中的一列</td>
 </tr>
 <tr>
-<td style="text-align:center">$(u,v)$</td>
-<td style="text-align:center">图中的边</td>
-<td style="text-align:center">只有用户和物品之间有边，用户与用户、物品与物品之间没有边</td>
+<td align="center">$(u,v)$</td>
+<td align="center">图中的边</td>
+<td align="center">只有用户和物品之间有边，用户与用户、物品与物品之间没有边</td>
 </tr>
 <tr>
-<td style="text-align:center">$r=\mathrm{R}_{u,v}$</td>
-<td style="text-align:center">边$(u,v)$的值</td>
-<td style="text-align:center">表示用户$u$给物品$v$的评分</td>
+<td align="center">$r=\mathrm{R}_{u,v}$</td>
+<td align="center">边$(u,v)$的值</td>
+<td align="center">表示用户$u$给物品$v$的评分</td>
 </tr>
 <tr>
-<td style="text-align:center">$R$</td>
-<td style="text-align:center">所有可能分数的集合</td>
-<td style="text-align:center"></td>
+<td align="center">$R$</td>
+<td align="center">所有可能分数的集合</td>
+<td align="center"></td>
 </tr>
 <tr>
-<td style="text-align:center">$N_{r}(u)$</td>
-<td style="text-align:center">用户$u$的所有邻居集合</td>
-<td style="text-align:center">通过类型为$r$的边连接到$u$</td>
+<td align="center">$N_{r}(u)$</td>
+<td align="center">用户$u$的所有邻居集合</td>
+<td align="center">通过类型为$r$的边连接到$u$</td>
 </tr>
-</tbody>
-</table>
-<h2 id="1-1-ENCLOSING-SUBGRAPH-EXTRACTION-提取封闭子图">1.1 ENCLOSING SUBGRAPH EXTRACTION 提取封闭子图</h2>
-<p>首先，对于每个观察到的评分$\mathrm{R}_{u,v}$，从$G$中提取一个围绕$(u,v)$的$h$-跳的封闭子图。算法 1 描述了用于提取$h$​-跳封闭子图的 BFS过程。</p>
+</tbody></table>
+<h2 id="1-1-ENCLOSING-SUBGRAPH-EXTRACTION-提取封闭子图"><a href="#1-1-ENCLOSING-SUBGRAPH-EXTRACTION-提取封闭子图" class="headerlink" title="1.1 ENCLOSING SUBGRAPH EXTRACTION 提取封闭子图"></a>1.1 ENCLOSING SUBGRAPH EXTRACTION 提取封闭子图</h2><p>首先，对于每个观察到的评分$\mathrm{R}_{u,v}$，从$G$中提取一个围绕$(u,v)$的$h$-跳的封闭子图。算法 1 描述了用于提取$h$​-跳封闭子图的 BFS过程。</p>
 <p><img src="http://note.lizhihao999.cn/notes/20210804235022.png" alt="算法1"></p>
 <p>这些封闭的子图将提供给 GNN 并对其评分进行回归。 然后，对于每个测试$(u,v)$对，再次从$G$中提取其$h$-跳封闭子图，并使用经过训练的GNN模型来预测其评分。需要注意的是，在为$(u,v)$提取训练封闭子图后，应该删除边$(u,v)$，因为它是要预测的目标。</p>
-<h2 id="1-2-NODE-LABELING-节点标注">1.2 NODE LABELING 节点标注</h2>
-<p>IGMC 的第二部分是节点标注。 在将封闭子图提供给 GNN 之前，首先对其应用节点标注，为子图中的每个节点提供一个整数标签。目的是使用不同的标签来标记节点在子图中的不同角色。 理想情况下的节点标签应该能够：</p>
+<h2 id="1-2-NODE-LABELING-节点标注"><a href="#1-2-NODE-LABELING-节点标注" class="headerlink" title="1.2 NODE LABELING 节点标注"></a>1.2 NODE LABELING 节点标注</h2><p>IGMC 的第二部分是节点标注。 在将封闭子图提供给 GNN 之前，首先对其应用节点标注，为子图中的每个节点提供一个整数标签。目的是使用不同的标签来标记节点在子图中的不同角色。 理想情况下的节点标签应该能够：</p>
 <ol>
 <li>区分目标用户和目标评分所在的目标物品；</li>
 <li>区分用户类型节点和物品类型节点。</li>
@@ -522,8 +517,7 @@
 <p>为了满足这些条件，提出了如下的节点标签方法：</p>
 <ol>
 <li>分别为目标用户和目标物品赋予标签 0 和 1；</li>
-<li>根据算法 1 中子图中包含的其他节点的标签来确定其他节点的标签：
-<ol>
+<li>根据算法 1 中子图中包含的其他节点的标签来确定其他节点的标签：<ol>
 <li>如果第 i 跳包含一个用户类型节点，给予标签$2i$；</li>
 <li>如果第 i 跳包含一个项目类型节点，给予标签$2i+1$。</li>
 </ol>
@@ -536,57 +530,50 @@
 <li>与目标评分不同距离的节点。</li>
 </ol>
 <p>当送到 GNN 时，这些节点标签的 one-hot 编码将被视为子图的初始节点特征$x^{0}$。节点标签完全在每个封闭子图中确定，因此独立于全局二部图。 给定一个新的封闭子图，即使它的所有节点都来自不同的二部图，也可以预测它的评分，因为 IGMC 纯粹依赖于局部封闭子图中的图模式，而没有利用任何特定于二部图的全局信息。</p>
-<h2 id="1-3-GRAPH-NEURAL-NETWORK-ARCHITECTURE-图神经网络架构">1.3 GRAPH NEURAL NETWORK ARCHITECTURE 图神经网络架构</h2>
-<p>IGMC 的第三部分是训练图神经网络 (GNN) 模型，从封闭的子图中预测评分。 IGMC 将图级 GNN 应用于$(u,v)$周围的封闭子图，并将子图映射到评分。因此，GNN 中有两个组件：</p>
+<h2 id="1-3-GRAPH-NEURAL-NETWORK-ARCHITECTURE-图神经网络架构"><a href="#1-3-GRAPH-NEURAL-NETWORK-ARCHITECTURE-图神经网络架构" class="headerlink" title="1.3 GRAPH NEURAL NETWORK ARCHITECTURE 图神经网络架构"></a>1.3 GRAPH NEURAL NETWORK ARCHITECTURE 图神经网络架构</h2><p>IGMC 的第三部分是训练图神经网络 (GNN) 模型，从封闭的子图中预测评分。 IGMC 将图级 GNN 应用于$(u,v)$周围的封闭子图，并将子图映射到评分。因此，GNN 中有两个组件：</p>
 <ol>
 <li>消息传递层，为子图中的每个节点提取特征向量；</li>
 <li>一个池化层，用于从节点特征中总结子图表示。</li>
 </ol>
 <p>为了学习不同边类型引入的丰富图模式，我们采用关系图卷积算子（R-GCN）作为 GNN 的消息传递层，其形式如下：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210805001248.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210805001248.png"></p>
 <table>
 <thead>
 <tr>
-<th style="text-align:center">符号</th>
-<th style="text-align:center">表示</th>
+<th align="center">符号</th>
+<th align="center">表示</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">$x_{i}^{l}$</td>
-<td style="text-align:center">节点$i$在第$l$层的特征向量</td>
+<tbody><tr>
+<td align="center">$x_{i}^{l}$</td>
+<td align="center">节点$i$在第$l$层的特征向量</td>
 </tr>
 <tr>
-<td style="text-align:center">$W_{0}^{l},\lbrace W_{r}^{l}</td>
-<td style="text-align:center">r\in R\rbrace$</td>
+<td align="center">$ W_{0}^{l},\lbrace W_{r}^{l},r\in R\rbrace $​</td>
+<td align="center">可学习的参数矩阵</td>
 </tr>
-</tbody>
-</table>
+</tbody></table>
 <p>由于连接到$i$的具有不同边类型$r$的邻居$j$由不同的参数矩阵$W_{r}^{l}$处理，所以能够在边类型内部学习大量丰富的图模式，例如目标用户对物品的平均评分，目标物品接收到的平均评分，以及两个目标节点通过哪些路径连接等。</p>
 <p>堆叠$L$个消息传递层，并在两层之间用$tanh$激活。节点$i$来自不同层的特征向量被连接起来作为其最终表示$h_{i}$：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210805002129.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210805002129.png"></p>
 <p>接下来，将节点表示池化为图级特征向量。 在这项工作中，使用一个不同的池化层连接目标用户和目标物品的最终表示来作为图形表示：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210805002427.png" alt=""></p>
-<p>其中，$h_{u},h_{v}$分别代表目标用户和目标物品的最终表示。这样选择是由于这两个目标节点与其他上下文节点相比具有额外的重要性。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210805002427.png"></p>
+<p>其中，$h_{u},h_{v}$分别代表目标用户和目标物品的最终表示。这样选择是由于这两个目标节点与其他上下文节点相比具有额外的重要性。 </p>
 <p>在获得最终的图形表示后，使用 MLP 来输出预测的评分：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210805002715.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210805002715.png"></p>
 <p>其中，$W,w$是$MLP$的参数，将图形表示$g$映射到标量评分$\hat{r}$；$\sigma$是激活函数（$ReLU$）。</p>
-<h2 id="1-4-MODEL-TRAINING-模型训练">1.4 MODEL TRAINING 模型训练</h2>
-<h3 id="Loss-Function">Loss Function</h3>
-<p>最小化预测和真实评分之间的均方误差 (MSE)：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210805003112.png" alt=""></p>
+<h2 id="1-4-MODEL-TRAINING-模型训练"><a href="#1-4-MODEL-TRAINING-模型训练" class="headerlink" title="1.4 MODEL TRAINING 模型训练"></a>1.4 MODEL TRAINING 模型训练</h2><h3 id="Loss-Function"><a href="#Loss-Function" class="headerlink" title="Loss Function"></a>Loss Function</h3><p>最小化预测和真实评分之间的均方误差 (MSE)：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210805003112.png"></p>
 <p>其中，$R_{u,v},\hat{R}_{u,v}$分别表示$(u,v)$的真实评分和预测评分；$\Omega$是一个 0/1 掩码矩阵，表示评分矩阵$\mathrm{R}$的观察项。</p>
-<h3 id="Adjacent-Rating-Regularization">Adjacent Rating Regularization</h3>
-<p>GNN 中使用的 R-GCN 层针对不同的评级类型具有不同的参数$W_{r}$​​。 这里的一个缺点是它没有考虑评级的大小。 例如，MovieLens 的评分 4 和评分 5 都表示用户喜欢这部电影，而评分 1 表示用户不喜欢这部电影。理想情况下，希望模型意识到 4 比 1 更类似于 5 的事实。 然而在 RGCN 中，评级 1、4 和 5 仅被视为三种独立的边缘类型——评级的大小和顺序信息完全丢失。</p>
+<h3 id="Adjacent-Rating-Regularization"><a href="#Adjacent-Rating-Regularization" class="headerlink" title="Adjacent Rating Regularization"></a>Adjacent Rating Regularization</h3><p>GNN 中使用的 R-GCN 层针对不同的评级类型具有不同的参数$W_{r}$​​。 这里的一个缺点是它没有考虑评级的大小。 例如，MovieLens 的评分 4 和评分 5 都表示用户喜欢这部电影，而评分 1 表示用户不喜欢这部电影。理想情况下，希望模型意识到 4 比 1 更类似于 5 的事实。 然而在 RGCN 中，评级 1、4 和 5 仅被视为三种独立的边缘类型——评级的大小和顺序信息完全丢失。 </p>
 <p>为了解决这个问题，提出了一种相邻评级正则化 (ARR) 技术，该技术鼓励彼此相邻的评级具有相似的参数矩阵。假设$R$中的评分表现出一个排序$r_{1},r_{2},…,r_{|R|}$​，这表明用户对物品的偏好越来越高。因此，ARR正则化为：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210805003845.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210805003845.png"></p>
 <p>其中，$||\cdot||_{F}$​表示矩阵的 Frobenius 范数。</p>
 <p>上述正则化器抑制了相邻评分的参数矩阵差异过大，这不仅考虑了评分的顺序，而且还通过从相邻评分中转移知识来帮助优化那些不频繁的评分。</p>
 <p>最终的损失函数由下式给出：</p>
-<p><img src="http://note.lizhihao999.cn/notes/20210805004301.png" alt=""></p>
+<p><img src="http://note.lizhihao999.cn/notes/20210805004301.png"></p>
 <p>$\lambda$在MSE损失和ARR正则化之间进行平衡。</p>
-<h1>2. 实验</h1>
-<p>对所有数据集使用 1 跳封闭子图，并发现它们足够好。 虽然使用 2 跳或更多跳可以稍微提高性能，但需要更长的训练时间。</p>
+<h1 id="2-实验"><a href="#2-实验" class="headerlink" title="2. 实验"></a>2. 实验</h1><p>对所有数据集使用 1 跳封闭子图，并发现它们足够好。 虽然使用 2 跳或更多跳可以稍微提高性能，但需要更长的训练时间。</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
