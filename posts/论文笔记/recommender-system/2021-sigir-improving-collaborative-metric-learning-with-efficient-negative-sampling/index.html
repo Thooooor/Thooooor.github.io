@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>Improving Collaborative Metric Learning with Efficient Negative Sampling | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="2021 SIGIR 通过更有效的负采样提升协同过滤">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"Improving Collaborative Metric Learning with Efficient Negative Sampling",
+      "item":"/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-sigir-improving-collaborative-metric-learning-with-efficient-negative-sampling/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-sigir-improving-collaborative-metric-learning-with-efficient-negative-sampling/"
+    },
+    "headline": "Improving Collaborative Metric Learning with Efficient Negative Sampling | 若虚杂记","datePublished": "2021-08-18T22:58:00+00:00",
+    "dateModified": "2021-08-18T22:58:00+00:00",
+    "wordCount":  171 ,
+    "author": {
+        "@type": "Person",
+        "name": ["lizhihao"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Li Zhihao",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/icon.png"
+        }
+        },
+    "description": "2021 SIGIR 通过更有效的负采样提升协同过滤"
+}
+</script><meta property="og:title" content="Improving Collaborative Metric Learning with Efficient Negative Sampling | 若虚杂记" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-sigir-improving-collaborative-metric-learning-with-efficient-negative-sampling/" />
+
+
+
+
+<meta property="og:description" content="2021 SIGIR 通过更有效的负采样提升协同过滤" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-08-18T22:58:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-08-18T22:58:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Recommender System" />
+
+<meta property="article:tag" content="Negative Sampling" />
+
+<meta property="article:tag" content="SIGIR" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-recsys-sse-pt-sequential-recommendation-via-personalized-transformed/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-aaai-non-invasive-self-attention-for-side-information-fusion-in-sequential-recommendation/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-kdd-handling-information-loss-of-graph-neural-networks-for-session-based-recommendation/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-wsdm-an-efficient-and-effective-framework-for-session-based-social-recommendation/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-session-aware-linear-item-item-models-for-session-based-recommendation/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">Improving Collaborative Metric Learning with Efficient Negative Sampling</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-18</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p><a href="https://arxiv.org/abs/1909.10912">Improving Collaborative Metric Learning with Efficient Negative Sampling (arxiv.org)</a></p>
+<p><a href="https://github.com/deezer/sigir2019-2stagesampling">Improving Collaborative Metric Learning for Recommendation by a 2-stage negative sampling strategy. (github.com)</a></p>
+</blockquote>
+<p>基于三元组损失的距离度量学习已成功应用于广泛的应用中，例如人脸识别、图像检索、说话人变化检测以及最近使用协作度量学习 (CML) 模型进行推荐。然而，正如我们在本文中所展示的，由于用于选择三元组的统一负采样策略过于简单，因此 CML 需要大批量才能正常工作。由于内存限制，这使得在高维场景中难以扩展。为了缓解这个问题，我们在这里提出了一种 2 阶段负采样策略，它可以找到对学习具有高度信息量的三元组。我们的策略允许 CML 在准确性和流行度偏差方面有效工作，即使批量大小比默认统一采样所需的数量小一个数量级。我们证明了所提出的推荐策略的适用性，并在各种数据集上展示了一致的积极结果。</p>
+<p>距离度量学习旨在表示空间中的数据点，其中邻近性解释了相似性。最近流行的人脸识别、图像检索或说话人变化检测方法将此问题形式化为三重损失优化任务，即最小化：$L=\max(D(a,p)-D(a,n)+\alpha,0)$，其中$D(a,p)$是类内（相同标签）样本（锚点和正样本）之间的距离，$D(a,n)$是类间（不同标签）样本（锚和负）之间的距离，$\alpha&gt;0$是边际常数。主要思想是强制类间对与类内对至少相差$\alpha$，这有利于同一类样本的聚类。但是最小化 L 并不容易，因为可能的三元组的数量随着身份的数量呈三次增长。</p>
+<p>此外，一个朴素的统一采样策略会选择 L 的梯度可以忽略不计的平凡三元组。 因此，学习可能会很慢并陷入局部最小值。为了解决这个问题，一些工作提出只选择硬样本$(D(a,p)&gt;D(a,n))$进行训练。然而，硬样本挖掘选择具有噪声（高方差）L 梯度的三元组。然后模型可能难以有效地将类间对分开，并最终处于折叠状态。</p>
+<p>一个宽松的替代方案是只挖掘半硬样本：三元组，其中负数不一定比正数更接近锚点，但仍会产生严格的正损失。 该策略通过避免训练集中的过拟合异常值来提高训练的鲁棒性。 它通常在第一次迭代中很快收敛，但最终会用完信息样本并停止取得进展。</p>
+<p>可以将这种现象归因于半硬样本的 L 梯度方差集中在一个小区域。 为了解决这个问题，他们建议根据它们到锚点的距离来选择负样本。可以证明这种策略导致 L 梯度的方差在更大的范围内传播，从而始终如一地产生信息丰富的三元组。</p>
+<p>其处理大规模目录和数据稀疏性的能力使得三重损失模型适用于推荐任务。它确实最近被提出作为 CML 模型，与传统的矩阵分解 (MF) 方法取得了有竞争力的结果。 CML 假设用户和物品可以放置在一个联合的低维空间中。然后，根据它们的欧几里德距离测量的接近度，可以轻松地完成推荐。 CML 可以达到有竞争力的准确性，但我们在本文中表明它需要大批量才能做到这一点，因为它是简单的统一负采样策略。由于内存限制，这使得 CML 无法在高维场景中扩展，例如，在构建混合多媒体推荐系统时，该系统从交互数据和高维物品内容（如音频频谱图）中共同学习。出于这个原因，将默认的统一采样替换为 2 阶段策略，该策略找到对学习始终提供信息的三元组。这使得 CML 能够在均匀采样方面具有竞争力，即使是小批量，无论是在准确性还是流行性偏差方面。</p>
+<p>贡献有三方面：</p>
+<ol>
+<li>研究了批量大小对 CML 性能的影响；</li>
+<li>提出了一个 2 阶段的负采样，它使小批量的 CML 高效；</li>
+<li>证明了本文的采样策略在三个真实世界数据集上的适用性，对于 Top-N 推荐任务，在准确性和流行度偏差方面</li>
+</ol>
+<h1 id="1-preliminaries">1. Preliminaries</h1>
+<h2 id="11-问题定义">1.1 问题定义</h2>
+<p>考虑一个数据集，用户数量为$N$，物品数量为$M$，二元交互矩阵$R:M\times N$，$R_{ij}$表示表示第 i 个用户和第 j 个物品之间唯一的正面隐式反馈（例如，点击、收听、查看历史记录等）。使用$S=\lbrace(i,j)|R_{ij}=1\rbrace$表示存在隐式交互的用户-物品对的集合。考虑的任务是预测可能一起交互的物品/用户。</p>
+<h2 id="12-协同过滤学习">1.2 协同过滤学习</h2>
+<p>CML 学习用户和物品的联合度量空间来编码$S$​。这个想法是学习一个度量，将 S 中的正对拉得更近，同时将负对（不在 S 中的对）相对于正对推得更远，基于以下损失：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108181730579.png" alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">符号</th>
+<th style="text-align:center">表示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$u_{i}\in R^{d}$</td>
+<td style="text-align:center">用户潜在表示</td>
+</tr>
+<tr>
+<td style="text-align:center">$v_{i}\in R^{d}$</td>
+<td style="text-align:center">物品潜在表示</td>
+</tr>
+<tr>
+<td style="text-align:center">$B\subset S$</td>
+<td style="text-align:center">考虑的小批量中的一组正对</td>
+</tr>
+<tr>
+<td style="text-align:center">$N_{ij}\subset \lbrace k</td>
+<td style="text-align:center">(i,k)\notin S\rbrace$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\alpha&gt;0$</td>
+<td style="text-align:center">常数边界</td>
+</tr>
+<tr>
+<td style="text-align:center">$D$</td>
+<td style="text-align:center">欧几里得距离</td>
+</tr>
+<tr>
+<td style="text-align:center">$w_{ij}$</td>
+<td style="text-align:center">基于$N_{ij}$中落入$\alpha$-ball 中的负数数量的权重，以惩罚较低等级的物品</td>
+</tr>
+<tr>
+<td style="text-align:center">$[.]_{+}=\max(.,0)$</td>
+<td style="text-align:center"></td>
+</tr>
+<tr>
+<td style="text-align:center">$L_{c}$</td>
+<td style="text-align:center">正则化项（由$\lambda_{c}$加权）用于去相关学习度量中的维度。</td>
+</tr>
+<tr>
+<td style="text-align:center">$\lambda_{c}$</td>
+<td style="text-align:center">超参数</td>
+</tr>
+</tbody>
+</table>
+<p>然后通过在潜在空间中找到她/他周围的 k 个最近的物品来为用户做出推荐。</p>
+<p>将$w_{ij}$设置为1，用于不同采样策略之间的公平比较。此外，不会对所有模型都使用$L_{c}$，因为使用这种正则化进行均匀采样的结果较差。此外，所有用户和物品向量都归一化为单位球体：$\forall p\le M,q\le N:||u_{p}||_{2}=1$（通过在用户/物品嵌入层之后添加 L2 归一化步骤），而不是被束缚在单位球内。</p>
+<h1 id="2-采样策略">2. 采样策略</h1>
+<h2 id="21-spread-out-regularization-展开正则化">2.1 Spread-out Regularization 展开正则化</h2>
+<p>为了充分利用嵌入的表达能力，潜在向量应该在空间中充分“展开”。 直观地，如果两个随机采样的非匹配向量以高概率正交，则它们是“展开”的。 为此可以证明，如果$p_{1},p_{2}$​是从$R^{d}$​中的单位球面独立均匀采样的两个向量，则$p_{1}^{T}p_{2}$的概率密度满足：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108181804175.png" alt=""></p>
+<p>其中$Beta(a,b)$是beta分布函数。通过这个分布，可以进一步发现$E[p_{1}^{T}p_{2}]=0,E[(p_{1}^{T}p_{2})^{2}]=\frac{1}{d}$并且提出了全局正交正则化（GOR）来强制潜在向量的传播。 因此，GOR 在 CML 中的应用是：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108181808045.png" alt=""></p>
+<p>其中$\lambda_{g}$是一个超参数，$Q=|B|\times |N_{ij}|$，$d$是潜在空间的维度。</p>
+<h2 id="22-2-stage-negative-sampling">2.2 2-stage negative sampling</h2>
+<p>为了构建一个批次，首先在 S 中随机采样对，以获得锚用户和正项。策略旨在通过如下所述的 2 阶段设置替换三元组中集合$N_{ij}$负项的统一采样。</p>
+<p>在第一阶段，根据自然语言处理中流行的 Word2Vec 算法及其在推荐任务中的应用中提出的频率，从数据集中的所有物品中采样 C 个否定候选：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108181812258.png" alt=""></p>
+<p>其中$f(j)$是物品$j$的交互频率，参数$\beta$​起到锐化或平滑分布的作用。$\beta&gt;0$导致采样偏爱流行物品，$\beta=0$​导致物品被均匀采样，而$\beta&lt;0$则更可能采样不受欢迎的物品。</p>
+<p>在这项工作中，使用正样本来支持流行物品作为负样本。动机是由于交互数据中的流行偏差，流行的物品往往靠得很近。 因此，一个挑战是将不匹配的流行物品在潜在空间中推得更远。 将流行的物品分开可以帮助减少推荐中经常出现的流行偏见。</p>
+<p>在第二阶段，从 C 个先前候选中选择信息性否定项。 给定正项$v_{j}$的潜在向量，对负项索引$n$进行采样，对应的潜在因子$v_{n}$如下：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108181816995.png" alt=""></p>
+<p>该策略有两个目标：首先，与半硬三元组采样相比，此概率函数的选择提供了梯度方差范围更大的三元组。其次，它对为 $v_{j}^{T}v_{n}$产生高正值的物品$n$赋予很高的概率，从而导致$L^{triplet}$的正值和$L^{GOR}$的大值。</p>
+<p>当$v_{j}^{T}v_{n}&gt;0$时，$L^{ROG}$随着$v_{j}^{T}v_{n}$的增大而增大。同时，对于每个正负对$(v_{j},v_{n})$，有$||v_{j}-v_{n}||<em>{2}^{2}=||v</em>{j}||<em>{2}^{2}+||v</em>{n}||<em>{2}^{2}-2v</em>{j}^{T}v_{n}=2-2v_{j}^{T}v_{n}$，所以$v_{j}^{T}v_{n}$越大，正负点越接近。这导致$D^{2}(u_{i},v_{j}),D^{2}(u_{i},v_{n})$之间的差异较小，让$L^{triplet}$更可能是正的。因此，与均匀采样情况相比，它会导致更高的损失值，并有望产生更适合训练的梯度。</p>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/recommender-system/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Recommender System</a>
+    
+    <a href="/tags/negative-sampling/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Negative Sampling</a>
+    
+    <a href="/tags/sigir/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#SIGIR</a>
+    
+</div>
+        
+        
+        
+
+
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/lizhihao/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/avatar.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/lizhihao/" class="block font-bold text-lg pb-1 mb-2 border-b">Li Zhihao</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:lzh821403039@163.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://example.com/" class="mr-1">
+                <i class="fab fa-github"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-recsys-sse-pt-sequential-recommendation-via-personalized-transformed/" class="block">SSE-PT Sequential Recommendation Via Personalized Transformed</a>
+        
+    </div>
+</div>
+
+        
+
+
+
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-问题定义">1.1 问题定义</a></li>
+    <li><a href="#12-协同过滤学习">1.2 协同过滤学习</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-spread-out-regularization-展开正则化">2.1 Spread-out Regularization 展开正则化</a></li>
+    <li><a href="#22-2-stage-negative-sampling">2.2 2-stage negative sampling</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">See Also</h2>
+        <div class="content">
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-recsys-sse-pt-sequential-recommendation-via-personalized-transformed/">SSE-PT Sequential Recommendation Via Personalized Transformed</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-aaai-non-invasive-self-attention-for-side-information-fusion-in-sequential-recommendation/">Non-invasive Self-attention for Side Information Fusion in Sequential Recommendation</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-kdd-handling-information-loss-of-graph-neural-networks-for-session-based-recommendation/">Handling Information Loss of Graph Neural Networks for Session-based Recommendation</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-wsdm-an-efficient-and-effective-framework-for-session-based-social-recommendation/">An Efficient and Effective Framework for Session-based Social Recommendation</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-session-aware-linear-item-item-models-for-session-based-recommendation/">Session-aware Linear Item-Item Models for Session-based Recommendation</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/">Inductive Matrix Completion Based on Graph Neural Networks</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

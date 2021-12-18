@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>Lorentzian Distance Learning for Hyperbolic Representations | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="2019 ICML Oral Lorentzian Distance Learning for Hyperbolic Representations 论文笔记">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"Lorentzian Distance Learning for Hyperbolic Representations",
+      "item":"/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-representation/2019-icml-lorentzian-distance-learning-for-hyperbolic-representations/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-representation/2019-icml-lorentzian-distance-learning-for-hyperbolic-representations/"
+    },
+    "headline": "Lorentzian Distance Learning for Hyperbolic Representations | 若虚杂记","datePublished": "2021-08-05T22:50:00+00:00",
+    "dateModified": "2021-08-05T22:50:00+00:00",
+    "wordCount":  216 ,
+    "author": {
+        "@type": "Person",
+        "name": ["lizhihao"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Li Zhihao",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/icon.png"
+        }
+        },
+    "description": "2019 ICML Oral Lorentzian Distance Learning for Hyperbolic Representations 论文笔记"
+}
+</script><meta property="og:title" content="Lorentzian Distance Learning for Hyperbolic Representations | 若虚杂记" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-representation/2019-icml-lorentzian-distance-learning-for-hyperbolic-representations/" />
+
+
+
+
+<meta property="og:description" content="2019 ICML Oral Lorentzian Distance Learning for Hyperbolic Representations 论文笔记" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-08-05T22:50:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-08-05T22:50:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Knowledge Representaion" />
+
+<meta property="article:tag" content="ICML" />
+
+<meta property="article:tag" content="Hyperbolic" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">Lorentzian Distance Learning for Hyperbolic Representations</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-05</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>2 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p>2019 ICML Oral <a href="http://proceedings.mlr.press/v97/law19a.html">Lorentzian Distance Learning for Hyperbolic Representations</a></p>
+</blockquote>
+<p>本文的主要贡献是对洛伦兹距离的研究。本文解释了为什么平方洛伦兹距离是比庞加莱度量更好的选择。 一个分析论点依赖于黎曼质心的雅可比场 (Lee, 2006) 特性（也称为“Karcher 均值”，尽管 Karcher (2014) 强烈反对使用该术语）。 另一个有趣的特性是，与平方洛伦兹距离相关的质心可以写成封闭形式，这种质心的欧几里得范数随着双曲空间曲率的减小而减小。此属性适合表示层次结构，其中父节点与其后代的距离最小，并且欧几里得范数小于其子节点。</p>
+<p>文章表明用一组点解释平方洛伦兹距离等效于用它们的质心解释距离，同时还研究了质心与一些超参数的相关性，特别是流形的曲率，它会影响其欧几里得范数，该范数用作层次结构中的深度代理。</p>
+<h1 id="1-hyperbolic-background">1. Hyperbolic Background</h1>
+<h2 id="11-poincare-ball">1.1 Poincare Ball</h2>
+<p>庞加莱球$P^{d}$被定义为欧几里得范数小于 1 的$d$维向量集：$P^{d}=\lbrace x\in R^{d}:||x||&lt;1\rbrace$.</p>
+<h2 id="12-hyperboloid-model">1.2 Hyperboloid Model</h2>
+<p>双曲面模型$H^{d,\beta}\in R^{d+1}$也叫洛伦兹模型，定义为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729141119.png" alt=""></p>
+<p>平方洛伦兹范数源自洛伦兹内积：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729143403.png" alt=""></p>
+<p>当$\beta=1$时，双曲面模型称为单位双曲面，可以表示为$H^{d}$，也是文献中考虑的主要双曲面模型。</p>
+<h2 id="13-optimizing-the-poincare-distance-metric">1.3 Optimizing the Poincare Distance Metric</h2>
+<p>大多数双曲线表示的方法都考虑庞加莱距离度量：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729144815.png" alt=""></p>
+<p>使用方程（3）中的距离公式直接优化问题的庞加莱模型在数值上不稳定，主要有两个原因：</p>
+<ol>
+<li>分母取决于示例的范数，因此当 c 和 d 的任何一个范数接近 1 时对其进行优化会导致数值不稳定；</li>
+<li>元素必须在每次迭代时以固定的最大范数重新投影到庞加莱球上；</li>
+</ol>
+<p>此外，方程（3）当 $c = d$​ 时不可微。</p>
+<p>为了获得更好的求解器数值稳定性，Nickel &amp; Kiela (2018) 建议在单位双曲面模型中使用$d_{P}$的等效公式。他们利用存在可逆映射$h:H^{d,\beta}\to P^{d}$的事实：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729150034.png" alt=""></p>
+<p>当$\beta=1,a\in H^{d},b\in H^{d}$时，有如下的等价式：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729150339.png" alt=""></p>
+<p>Nickel &amp; Kiela (2018) 表明，（5）中的优化方程在数值上更稳定。</p>
+<h2 id="15-duality-between-spherical-and-hyperbolic-geometries-二元性">1.5 Duality between Spherical and Hyperbolic geometries 二元性</h2>
+<p>从方程（5）可以看出，保持Poincare距离的顺序等同于保持Lorentzian内积的逆序，因为$\mathrm{cosh}^{-1}$函数在其域$[1,+\infin]$上单调递增。当$p,q$由于这些几何之间的二元性而位于单位超球面$S^{d}$时，庞加莱度量与洛伦兹内积的关系其实类似于测地距离$\cos^{-1}(&lt;p,q&gt;)$与余弦$&lt;p,q&gt;$​的关系。</p>
+<p>双曲面$H^{d,\beta}$可以看作是一个虚半径为$i\sqrt{\beta}$​的半超球面。 与将 Hilbert 空间中的内积视为相似性度量的核方法相同，本文中考虑洛伦兹内积及其诱导距离。</p>
+<h1 id="2-lorentzian-distance-learning">2. Lorentzian Distance Learning</h1>
+<p>当表示为双曲时，给出了洛伦兹质心的公式，并表明其欧几里得范数（用作层次结构中的深度代理）取决于曲率$-\frac{1}{\beta}$​。</p>
+<h2 id="21-lorentzian-distance-and-mappings">2.1 Lorentzian Distance and Mappings</h2>
+<p>首先给出平方洛伦兹公式的定义：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729164424.png" alt=""></p>
+<p>除了三角不等式，它满足距离度量的所有公理。</p>
+<h3 id="mapping-映射">Mapping 映射</h3>
+<p>由于我们的方法不一定考虑 β = 1，我们考虑可逆映射$g_{\beta}:F^{d}\to H^{d,\beta}$，称为$H^{d,\beta}$的本地参数化：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729164911.png" alt=""></p>
+<p>通过平方洛伦兹公式可以比较两个样例$f_{1},f_{2}\in F^{d}$：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729165043.png" alt=""></p>
+<h3 id="preserved-order-of-euclidean-norms-欧几里得范数的保留顺序">Preserved order of Euclidean norms 欧几里得范数的保留顺序</h3>
+<p>示例的欧几里得范数的顺序沿三个空间保留，可由以下定理给出：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729165450.png" alt=""></p>
+<p>总之，示例的欧几里得范数可以在任何空间中等价地进行比较，如果想研究质心的欧几里得范数，这特别有用。</p>
+<h2 id="22-centroid-properties-质心属性">2.2 Centroid Properties 质心属性</h2>
+<p>质心是 (Frechet, 1948) 中提出的统计概念，用于估计一组点的某些统计离散度（例如方差），它是一组点的（平方）距离期望的最小值，并在 (Grove &amp; Karcher, 1973) 中扩展到黎曼流形。研究平方洛伦兹距离的质心，在理想情况下，希望节点表示的质心是（接近）其最低共同祖先的表示。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729170121.png" alt=""></p>
+<p>公式 (11) 中的质心公式概括了 （Galperin, 1993; Ratcliffe, 2006）中给出的质心公式，适用于任何数量的点和任何恒定曲率 -1/β 的值。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729170318.png" alt=""></p>
+<p>质心 μ 的公式可用于执行硬聚类，其中假设对聚类中的数据采用统一度量。可以看到，一个示例的质心就是示例本身。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729180838.png" alt=""></p>
+<p>图 1 说明了一组 10 个不同点的质心的二维庞加莱球表示。不同 β &gt; 0 值的庞加莱距离和平方洛伦兹距离。可以看到质心庞加莱度量没有更小的范数。 另一方面，洛伦兹质心的欧几里得范数确实随着 β 的减小而减小，然后可以通过选择 β &gt; 0 的较低值来强制使其变小。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729212228.png" alt="图1"></p>
+<p>下面提供了一些有助于理解洛伦兹距离的旁注。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729213000.png" alt=""></p>
+<p>该定理表明，一组点的距离只能与作为质心的一个点进行比较。</p>
+<p>此外，根据柯西-施瓦茨不等式，当 β 趋于 0 时，方程 (9) 中的洛伦兹距离到$f_{1}$的任何向量$f_{2}$都趋于 0，其可写为$f_{2}=\tau f_{1}$且$\tau\ge 0$​，否则距离更大。因此，具有一组点的洛伦兹距离沿着包含可以写为τμ的元素的射线趋于更小，其中τ ≥ 0且 μ 是它们的质心。
+$$
+(\sum_{k=1}^{n}{a_{k}\cdot b_{k}})^{2}\le (\sum_{k=1}^{n}{a_{k}^{2}})(\sum_{k=1}^{n}{b_{k}^{2}})\
+$$</p>
+<h3 id="curvature-adaption-曲率适应">Curvature adaption 曲率适应</h3>
+<p>根据雅可比场性质，当所选度量是单位双曲面$H^{d}$上的庞加莱度量$d_{H}$时，$d_{H}$的Hessian沿径向具有特征值0。然而，Hessian 的特征值是水平面的主曲率。 由于矢量场更重要并且为了获得“更好的曲率适应”（Karcher，2014）（即非零特征值），Karcher (1987) 建议使用“修正距离”$(-1+\cosh(d_{H}))$，它在$H^{d}$上等于$\frac{1}{2}d_{L}^{2}$.</p>
+<h3 id="hyperbolic-centroids-in-the-literature-双曲质心">Hyperbolic centroids in the literature 双曲质心</h3>
+<p>有另外两篇论文利用了双曲质心。 首先是萨拉等人 (2018) 使用与 Poincare 度量相关的质心，但没有封闭形式的解决方案，因此他们通过梯度下降来计算它。 古尔切尔等人 (2019) 优化了一个基于庞加莱度量的问题，但利用了属于另一种双曲几何类型的陀螺质心 (Ungar, 2014)。 当该集合仅包含 2 个点时，它是使用陀螺三角不等式将其与该集合的两个点之间的陀螺距离进行爱因斯坦加法的最小值。 否则，可以将其视为保留左回旋平移的点。 陀螺质心的一个限制是它不能被视为距离期望的最小值（与 Frechet 均值不同），因为爱因斯坦加法不是可交换的。</p>
+<h2 id="23-optimization-and-solver">2.3 Optimization and solver</h2>
+<p>$d_{H}$的方向导数缺乏合适的向量空间结构，无法使用标准优化器。另一方面，平方洛伦兹距离仅依赖于方程（2）中洛伦兹内积的公式，该公式对于任何对都是明确且平滑的。通过尝试减少向量空间中的洛伦兹距离，标准 SGD 也减少了测地距离。</p>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/knowledge-representaion/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Knowledge Representaion</a>
+    
+    <a href="/tags/icml/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#ICML</a>
+    
+    <a href="/tags/hyperbolic/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Hyperbolic</a>
+    
+</div>
+        
+        
+        
+
+
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/lizhihao/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/avatar.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/lizhihao/" class="block font-bold text-lg pb-1 mb-2 border-b">Li Zhihao</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:lzh821403039@163.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://example.com/" class="mr-1">
+                <i class="fab fa-github"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-www-lorentzian-graph-convolutional-networks/" class="block">Lorentzian Graph Convolutional Networks</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/" class="block">A Hyperbolic-to-Hyperbolic Graph Convolutional Network</a>
+        
+    </div>
+</div>
+
+        
+
+
+
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-poincare-ball">1.1 Poincare Ball</a></li>
+    <li><a href="#12-hyperboloid-model">1.2 Hyperboloid Model</a></li>
+    <li><a href="#13-optimizing-the-poincare-distance-metric">1.3 Optimizing the Poincare Distance Metric</a></li>
+    <li><a href="#15-duality-between-spherical-and-hyperbolic-geometries-二元性">1.5 Duality between Spherical and Hyperbolic geometries 二元性</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-lorentzian-distance-and-mappings">2.1 Lorentzian Distance and Mappings</a>
+      <ul>
+        <li><a href="#mapping-映射">Mapping 映射</a></li>
+        <li><a href="#preserved-order-of-euclidean-norms-欧几里得范数的保留顺序">Preserved order of Euclidean norms 欧几里得范数的保留顺序</a></li>
+      </ul>
+    </li>
+    <li><a href="#22-centroid-properties-质心属性">2.2 Centroid Properties 质心属性</a>
+      <ul>
+        <li><a href="#curvature-adaption-曲率适应">Curvature adaption 曲率适应</a></li>
+        <li><a href="#hyperbolic-centroids-in-the-literature-双曲质心">Hyperbolic centroids in the literature 双曲质心</a></li>
+      </ul>
+    </li>
+    <li><a href="#23-optimization-and-solver">2.3 Optimization and solver</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">See Also</h2>
+        <div class="content">
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/">A Hyperbolic-to-Hyperbolic Graph Convolutional Network</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/">HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/">Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

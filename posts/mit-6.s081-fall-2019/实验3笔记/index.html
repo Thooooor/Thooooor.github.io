@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>MIT 6.S081/Fall 2019 Lab7 locks | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="MIT 6.S081/Fall 2019 Lab7 locks 实验思路和代码实现">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"MIT 6.S081/Fall 2019 Lab7 locks",
+      "item":"/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C3%E7%AC%94%E8%AE%B0/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C3%E7%AC%94%E8%AE%B0/"
+    },
+    "headline": "MIT 6.S081\/Fall 2019 Lab7 locks | 若虚杂记","datePublished": "2020-11-24T14:32:00+00:00",
+    "dateModified": "2020-11-24T14:32:00+00:00",
+    "wordCount":  670 ,
+    "author": {
+        "@type": "Person",
+        "name": ["lizhihao"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Li Zhihao",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/icon.png"
+        }
+        },
+    "description": "MIT 6.S081\/Fall 2019 Lab7 locks 实验思路和代码实现"
+}
+</script><meta property="og:title" content="MIT 6.S081/Fall 2019 Lab7 locks | 若虚杂记" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C3%E7%AC%94%E8%AE%B0/" />
+
+
+
+
+<meta property="og:description" content="MIT 6.S081/Fall 2019 Lab7 locks 实验思路和代码实现" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2020-11-24T14:32:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2020-11-24T14:32:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Linux" />
+
+<meta property="article:tag" content="操作系统" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/" />
+
+<meta property="og:see_also" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C4%E7%AC%94%E8%AE%B0/" />
+
+<meta property="og:see_also" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C1%E7%AC%94%E8%AE%B0/" />
+
+<meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/gunicorn%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" />
+
+<meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85anaconda/" />
+
+<meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">MIT 6.S081/Fall 2019 Lab7 locks</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2020-11-24</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>4 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/mit-6.s081/fall-2019-lab/" class="hover:text-eureka">MIT 6.S081/Fall 2019 Lab</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <p>MIT 6.S081/Fall 2019实验 <a href="https://pdos.csail.mit.edu/6.828/2019/labs/lock.html">Lab: locks</a>，多核计算机上并行性差的一个常见症状是高锁争用。为了减少争用，提高并行性通常需要同时改变数据结构和锁定策略。在这个实验中，分为两部分内容：为xv6内存分配器和磁盘缓存buffer cache重新设计代码提高并行性。</p>
+<p>本文对主要思路和关键部分的代码实现进行说明，<a href="https://github.com/Thooooor/xv6-riscv-fall19/tree/lock">完整代码</a>实现可以参考我的GitHub仓库.</p>
+<h1 id="1-内存分配器">1. 内存分配器</h1>
+<h2 id="11-基本原理">1.1 基本原理</h2>
+<p>xv6对上层提供<code>kalloc</code>和<code>kfree</code>接口来管理物理内存。通过<code>kalloc</code>和<code>kfree</code>，屏蔽了对物理内存的管理，使得调用者只需要关心虚拟地址空间，在需要使用新内存空间的时候调用<code>kalloc</code>，在需要释放内存空间的时候调用<code>kfree</code>。</p>
+<p>在系统启动时，<code>main()</code>函数（见<code>kernel/main.c</code>）调用<code>kinit()</code>来初始化分配器。<code>kinit</code>通过保存所有空闲页来初始化链表。<code>kinit</code>调用<code>freerange</code>来把空闲内存加到链表里，<code>freerange</code>是把每个空闲页逐一加到链表里来实现此功能的。</p>
+<h2 id="12-链表操作">1.2 链表操作</h2>
+<h3 id="释放内存">释放内存</h3>
+<p>释放内存的函数是<code>kfree(char *v)</code>，首先将 <code>char *v</code> 开始的页物理内存初始化为1，这是为了让之前使用它的代码不能再读取到有效的内容，期望这些代码能尽早崩溃以发现问题所在。然后将这空闲页物理内存加到链表头。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20201225000930.png" alt=""></p>
+<h3 id="申请内存">申请内存</h3>
+<p><code>kalloc(void *)</code>用来分配内存，移除并返回空闲链表头的第一个元素，即给调用者分配1页物理内存。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20201225000947.png" alt=""></p>
+<p>由于物理内存是在多进程之间共享的，所以不管是分配还是释放页面，每次操作<code>kmem.freelist</code>时都需要先申请<code>kmem.lock</code>，此后再进行内存页面的操作。</p>
+<h2 id="13-lock">1.3 Lock</h2>
+<p><code>kalloc.c</code>中调用<code>acquire()</code>和<code>release()</code>来获取锁和释放锁，kalloc只在<code>kalloc()</code>和<code>kfree()</code>中使用了锁，都是把对freelist的操作锁了起来。<code>kfree()</code>在向freelist里加节点前锁了一下，操作完之后解锁。<code>kalloc()</code>在移除freelist第一个元素时也加锁，操作完成再释放锁。所以对于内存分配器中需要锁保护的只有对freelist的操作。</p>
+<h2 id="14-具体步骤">1.4 具体步骤</h2>
+<ol>
+<li>
+<p>将kalloc的共享freelist改为每个CPU独立的freelist；</p>
+<pre><code class="language-c">struct run {
+  struct run *next;
+};
+
+struct kmem{
+  struct spinlock lock;
+  struct run *freelist;
+};
+
+struct kmem kmems[NCPU];
+
+void kinit()
+{
+  char *lockname = &quot;kmem 0&quot;;
+  for (int i = 0; i &lt; NCPU; i++) {
+    lockname[5] = '0' + i;
+    initlock(&amp;kmems[i].lock, lockname);
+  }
+  freerange(end, (void*)PHYSTOP);
+}
+</code></pre>
+</li>
+<li>
+<p>获取内存块时，优先分配当前CPU的freelist中的内存块；</p>
+</li>
+<li>
+<p>当前CPU没有空闲内存块，则从其他CPU的freelist中窃取内存块；</p>
+</li>
+<li>
+<p>所有CPU都没有空闲块时，返回0；</p>
+<pre><code class="language-c">void *kalloc(void)
+{
+  struct run *r;
+  push_off();
+  int cpu_num = cpuid();
+  acquire(&amp;kmems[cpu_num].lock);  // 加锁
+  r = kmems[cpu_num].freelist;
+  if (r) {  // 优先分配freelist里面的内存块
+    kmems[cpu_num].freelist = r-&gt;next;
+    release(&amp;kmems[cpu_num].lock);
+  } else {  // 从其他CPU的freelist进行窃取
+    release(&amp;kmems[cpu_num].lock);
+    for (int i = 0; i &lt; NCPU; i++) {
+      acquire(&amp;kmems[i].lock);
+      r = kmems[i].freelist;
+      if (r) { 
+        kmems[i].freelist = r-&gt;next;
+        release(&amp;kmems[i].lock);
+        break;
+      }
+      release(&amp;kmems[i].lock);  // 解锁
+    }
+  }
+  pop_off();
+
+  if(r) memset((char*)r, 5, PGSIZE); // fill with junk
+
+  return (void*)r;
+}
+</code></pre>
+</li>
+<li>
+<p>释放内存块时，将内存块放入当前CPU的freelist中；</p>
+<pre><code class="language-c">void kfree(void *pa)
+{
+  struct run *r;
+
+  if(((uint64)pa % PGSIZE) != 0 || (char*)pa &lt; end || (uint64)pa &gt;= PHYSTOP)
+    panic(&quot;kfree&quot;);
+
+  // Fill with junk to catch dangling refs.
+  memset(pa, 1, PGSIZE);
+
+  r = (struct run*)pa;
+  push_off();
+  int cpu_num = cpuid();
+  acquire(&amp;kmems[cpu_num].lock);  // 加锁
+  r-&gt;next = kmems[cpu_num].freelist;	// 加入freelist
+  kmems[cpu_num].freelist = r;
+  release(&amp;kmems[cpu_num].lock);  // 解锁
+  pop_off();
+}
+</code></pre>
+</li>
+<li>
+<p>为2-5步的过程合理加锁，保证每个freelist的一致性；</p>
+</li>
+</ol>
+<h1 id="2-磁盘缓存">2. 磁盘缓存</h1>
+<h2 id="21-bcache">2.1 bcache</h2>
+<p>数据结构<code>bcache</code>（见<code>kernel/bio.c</code>）维护了一个由静态数组<code>struct buf buf[NBUF]</code>组成的双向链表，它以块为单位，每次读入或写出一个磁盘块，放到一个内存缓存块中（<code>bcache.buf</code>），同时自旋锁<code>bcache.lock</code>用于用户互斥访问。所有对缓存块的访问都是通过<code>bcache.head</code>引用链表来实现的，而不是<code>buf</code>数组。</p>
+<pre><code class="language-c">struct {
+  struct spinlock lock;
+  struct buf buf[NBUF];
+
+  // Linked list of all buffers, through prev/next.
+  // head.next is most recently used.
+  struct buf head;
+} bcache;
+</code></pre>
+<p>每个缓存块都由三个部分组成，其中data字段标示了它的内容，指针字段（*prev，*next）用于组成链表，数值字段用于标示它的属性，如，字段<code>valid</code>的意思是缓存区包含了一个块的复制（即该buffer包含对应磁盘块的数据），字段<code>disk</code>的意思是缓存区的内容已经被提交到了磁盘，字段<code>dev</code>是设备号，字段<code>blockno</code>是缓存数据块号，字段<code>refcnt</code>是被引用次数，<code>lock</code>是睡眠锁。</p>
+<pre><code class="language-c">struct buf {
+  int valid;   // has data been read from disk?
+  int disk;    // does disk &quot;own&quot; buf?
+  uint dev;
+  uint blockno;
+  struct sleeplock lock;
+  uint refcnt;
+  struct buf *prev; // LRU cache list
+  struct buf *next;
+  uchar data[BSIZE];
+};
+</code></pre>
+<p>对<code>bcache</code>的操作如下：</p>
+<ul>
+<li>在系统启动时，<code>main()</code>函数（见<code>kernel/main.c</code>）调用<code>binit()</code>来初始化缓存，随即调用<code>initlock()</code>初始化<code>bcache.lock</code>，然后循环遍历<code>buf</code>数组，采用头插法逐个链接到<code>bcache.head</code>后面。</li>
+<li>上层文件系统读磁盘时，调用<code>bread()</code>，随即调用<code>bget()</code>检查请求的磁盘块是否在缓存中，如果命中，返回缓存命令结果。如果未命中，转到底层的<code>virtio_disk_rw()</code>函数先此磁盘块从磁盘加载进缓存中，再返回此磁盘块。</li>
+<li>上层文件写磁盘时，调用<code>bwrite()</code>，随即调用<code>virtio_disk_rw()</code>函数直接将缓存中的数据写入磁盘。</li>
+<li>上层文件系统可通过调用<code>brelse()</code>释放一块不再使用的缓存块。</li>
+</ul>
+<h2 id="22-锁">2.2 锁</h2>
+<p>在<code>bio.c</code>中，一共使用两种类型的锁：自旋锁<code>spinlock</code>（<code>bcache.lock</code>）和睡眠锁<code>sleeplock</code>（<code>b.lock</code>）。</p>
+<h3 id="自旋锁">自旋锁</h3>
+<p><code>bcache.lock</code>用于表示当前访问的bcache缓存块数据结构的是否被锁住。 当<code>bcache.lock</code>为0时表示为锁住，能够访问当前数据结构bcache，如果为1，即暂时无法获得锁，则不断循环、自旋、等待锁重新可用。</p>
+<p><code>bget()</code>在操作bcache数据结构（修改<code>refcnt</code>、<code>dev</code>、<code>blockno</code>、<code>valid</code>）时，需要获取到自旋锁<code>bcache.lock</code>，操作完成后再释放该锁。</p>
+<p><code>brelse()</code>需要获取到自旋锁<code>bcache.lock</code>，才能将<code>refcnt</code>（引用计数）减1，且只有在<code>refcnt</code>为0时，将该数据缓存块插入到<code>bcache.head</code>链表后面，操作完成后再释放该锁。</p>
+<p><code>bpin()</code>和<code>bunpin()</code>获取到锁后，才能修改<code>refcnt</code>，操作完成后再释放该锁。</p>
+<h3 id="睡眠锁">睡眠锁</h3>
+<p><code>b.lock</code>用于表示bcache缓存块数据结构中的当前缓存数据块buf是否被锁住，当<code>b.lock</code>为1时，则调用<code>sleep()</code>睡眠等待锁重新可用，为0则表示锁已经被释放。睡眠锁的三个接口函数如下：</p>
+<ul>
+<li><code>acquiresleep()</code>：查询<code>b.lock</code>是否被锁，如果被锁了，就睡眠，让出CPU，直到<code>wakeup()</code>唤醒后，获取到锁，并将<code>b.lock</code>置1。</li>
+<li><code>releasesleep()</code>：释放锁，并调用wakeup()</li>
+<li><code>holdingsleep()</code>：返回锁的状态（1：锁住或0：未锁）</li>
+</ul>
+<p><code>bget()</code>在获取到缓存块（命中的缓存块，或者，未命中时通过LRU算法替换出来缓存中的缓存块）后，调用<code>acquiresleep()</code>获取睡眠锁。</p>
+<p><code>bwrite()</code>在写入到磁盘之前，先调用<code>holdingsleep()</code>查询是否已经获取到该睡眠锁，确保有带锁而入。</p>
+<p><code>brelse()</code>也先调用<code>holdingsleep()</code>查询是否已经获取到该睡眠锁，确保有带锁后，才调用<code>releasesleep()</code>释放该锁。</p>
+<h2 id="23-具体步骤">2.3 具体步骤</h2>
+<ol>
+<li>
+<p>构建<code>bcache</code>数据结构哈希表；</p>
+<pre><code class="language-c">#define HashSize 17
+struct {
+  struct spinlock lock[HashSize];
+  struct buf buf[NBUF];
+
+  // Linked list of all buffers, through prev/next.
+  // head.next is most recently used.
+  // struct buf head;
+  struct buf hashbucket[HashSize];
+} bcache;
+
+int hashconflict(int number) {
+  return (number + 1) % HashSize;
+}
+
+void binit(void) {
+  struct buf *b;
+  // initial every lock
+  for (int i = 0; i &lt; HashSize; i++) {
+    char *lockname = &quot;bcache 00&quot;;
+    initlock(&amp;bcache.lock[i], lockname);
+    // Create linked list of buffers
+    bcache.hashbucket[i].prev = &amp;bcache.hashbucket[i];
+    bcache.hashbucket[i].next = &amp;bcache.hashbucket[i];
+  }
+  // use bcache.hashbucket[0] to store temporally， made a mistake there (put it in the loop above)
+  for (b = bcache.buf; b &lt; bcache.buf+NBUF; b++) {
+    b-&gt;next = bcache.hashbucket[0].next;
+    b-&gt;prev = &amp;bcache.hashbucket[0];
+    initsleeplock(&amp;b-&gt;lock, &quot;buffer&quot;);
+    bcache.hashbucket[0].next-&gt;prev = b;
+    bcache.hashbucket[0].next = b;
+  }
+}
+</code></pre>
+</li>
+<li>
+<p>修改<code>bget()</code>和<code>brelse()</code>使得查找和释放缓存中的不同块时，锁之间的冲突更少；</p>
+<ul>
+<li>首先在硬件层面寻找空闲的缓存块，如果没有则分配一个新的缓存块；</li>
+</ul>
+<pre><code class="language-c">static struct buf* bget(uint dev, uint blockno)
+{
+  // get the hash index of blockno
+  int locknumber = blockno % HashSize;
+  struct buf *b;
+  acquire(&amp;bcache.lock[locknumber]);
+
+  // Is the block already cached?
+  for(b = bcache.hashbucket[locknumber].next; b != &amp;bcache.hashbucket[locknumber]; b = b-&gt;next){
+    if(b-&gt;dev == dev &amp;&amp; b-&gt;blockno == blockno){
+      b-&gt;refcnt++;
+      release(&amp;bcache.lock[locknumber]);
+      acquiresleep(&amp;b-&gt;lock);
+      return b;
+    }
+  }
+  int hashnumber = hashconflict(locknumber);
+  // Not cached; recycle an unused buffer.
+  while (hashnumber != locknumber) {
+    acquire(&amp;bcache.lock[hashnumber]);
+    for(b = bcache.hashbucket[hashnumber].prev; b != &amp;bcache.hashbucket[hashnumber]; b = b-&gt;prev){
+      if(b-&gt;refcnt == 0) {
+        b-&gt;dev = dev;
+        b-&gt;blockno = blockno;
+        b-&gt;valid = 0;
+        b-&gt;refcnt = 1;
+        // take out the buf
+        b-&gt;next-&gt;prev = b-&gt;prev;
+        b-&gt;prev-&gt;next = b-&gt;next;
+
+        release(&amp;bcache.lock[hashnumber]);
+        // put the buf in locknumber bcache
+        b-&gt;next = bcache.hashbucket[locknumber].next;
+        b-&gt;prev = &amp;bcache.hashbucket[locknumber];
+        bcache.hashbucket[locknumber].next-&gt;prev = b;
+        bcache.hashbucket[locknumber].next = b;
+
+        release(&amp;bcache.lock[locknumber]);
+        acquiresleep(&amp;b-&gt;lock);
+        return b;
+      }
+    }
+    release(&amp;bcache.lock[hashnumber]);
+    hashnumber = hashconflict(hashnumber);
+  }
+  panic(&quot;bget: no buffers&quot;);
+}
+</code></pre>
+<ul>
+<li>
+<p>释放一个已经锁住的缓存块，将其移到MRU list的头部</p>
+<pre><code class="language-c">void brelse(struct buf *b)
+{
+  uint blockno = b-&gt;blockno;
+  int locknumber = blockno % HashSize;
+  if(!holdingsleep(&amp;b-&gt;lock))
+    panic(&quot;brelse&quot;);
+
+  releasesleep(&amp;b-&gt;lock);
+
+  acquire(&amp;bcache.lock[locknumber]);
+  b-&gt;refcnt--;
+  if (b-&gt;refcnt == 0) {
+    // no one is waiting for it.
+    b-&gt;next-&gt;prev = b-&gt;prev;
+    b-&gt;prev-&gt;next = b-&gt;next;
+    b-&gt;next = bcache.hashbucket[locknumber].next;
+    b-&gt;prev = &amp;bcache.hashbucket[locknumber];
+    bcache.hashbucket[locknumber].next-&gt;prev = b;
+    bcache.hashbucket[locknumber].next = b;
+  }
+  release(&amp;bcache.lock[locknumber]);
+}
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>修改<code>bpin()</code>和<code>bunpin()</code>增加或减少<code>refcnt</code>之前获取对应数据缓存块的锁，操作完成之后再释放锁。</p>
+<pre><code class="language-c">void bpin(struct buf *b) {
+  uint blockno = b-&gt;blockno % HashSize;
+  acquire(&amp;bcache.lock[blockno]);
+  b-&gt;refcnt++;
+  release(&amp;bcache.lock[blockno]);
+}
+
+void bunpin(struct buf *b) {
+  uint blockno = b-&gt;blockno % HashSize;
+  acquire(&amp;bcache.lock[blockno]);
+  b-&gt;refcnt--;
+  release(&amp;bcache.lock[blockno]);
+}
+</code></pre>
+</li>
+</ol>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/linux/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Linux</a>
+    
+    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#操作系统</a>
+    
+</div>
+        
+        
+        
+
+
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/lizhihao/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/avatar.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/lizhihao/" class="block font-bold text-lg pb-1 mb-2 border-b">Li Zhihao</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:lzh821403039@163.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://example.com/" class="mr-1">
+                <i class="fab fa-github"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C4%E7%AC%94%E8%AE%B0/" class="block">MIT 6.S081/Fall 2019 Lab3 Allocator for xv6</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C1%E7%AC%94%E8%AE%B0/" class="block">MIT 6.S081/Fall 2019 Lab1 Xv6 and Unix utilities</a>
+        
+    </div>
+</div>
+
+        
+
+
+
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-基本原理">1.1 基本原理</a></li>
+    <li><a href="#12-链表操作">1.2 链表操作</a>
+      <ul>
+        <li><a href="#释放内存">释放内存</a></li>
+        <li><a href="#申请内存">申请内存</a></li>
+      </ul>
+    </li>
+    <li><a href="#13-lock">1.3 Lock</a></li>
+    <li><a href="#14-具体步骤">1.4 具体步骤</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-bcache">2.1 bcache</a></li>
+    <li><a href="#22-锁">2.2 锁</a>
+      <ul>
+        <li><a href="#自旋锁">自旋锁</a></li>
+        <li><a href="#睡眠锁">睡眠锁</a></li>
+      </ul>
+    </li>
+    <li><a href="#23-具体步骤">2.3 具体步骤</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">See Also</h2>
+        <div class="content">
+            
+            <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/">MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell</a>
+            <br />
+            
+            <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C4%E7%AC%94%E8%AE%B0/">MIT 6.S081/Fall 2019 Lab3 Allocator for xv6</a>
+            <br />
+            
+            <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C1%E7%AC%94%E8%AE%B0/">MIT 6.S081/Fall 2019 Lab1 Xv6 and Unix utilities</a>
+            <br />
+            
+            <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/gunicorn%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Gunicorn基本使用</a>
+            <br />
+            
+            <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85anaconda/">Ubuntu服务器安装Anaconda</a>
+            <br />
+            
+            <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">Linux配置虚拟环境</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

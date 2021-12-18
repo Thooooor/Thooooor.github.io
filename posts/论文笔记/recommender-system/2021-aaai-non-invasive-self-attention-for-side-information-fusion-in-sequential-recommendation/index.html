@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>Non-invasive Self-attention for Side Information Fusion in Sequential Recommendation | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="2021 AAAI 序列推荐 Bert框架 优化辅助信息">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"Non-invasive Self-attention for Side Information Fusion in Sequential Recommendation",
+      "item":"/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-aaai-non-invasive-self-attention-for-side-information-fusion-in-sequential-recommendation/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-aaai-non-invasive-self-attention-for-side-information-fusion-in-sequential-recommendation/"
+    },
+    "headline": "Non-invasive Self-attention for Side Information Fusion in Sequential Recommendation | 若虚杂记","datePublished": "2021-08-17T23:58:00+00:00",
+    "dateModified": "2021-08-17T23:58:00+00:00",
+    "wordCount":  291 ,
+    "author": {
+        "@type": "Person",
+        "name": ["lizhihao"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Li Zhihao",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/icon.png"
+        }
+        },
+    "description": "2021 AAAI 序列推荐 Bert框架 优化辅助信息"
+}
+</script><meta property="og:title" content="Non-invasive Self-attention for Side Information Fusion in Sequential Recommendation | 若虚杂记" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-aaai-non-invasive-self-attention-for-side-information-fusion-in-sequential-recommendation/" />
+
+
+
+
+<meta property="og:description" content="2021 AAAI 序列推荐 Bert框架 优化辅助信息" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-08-17T23:58:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-08-17T23:58:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Recommender System" />
+
+<meta property="article:tag" content="Bert" />
+
+<meta property="article:tag" content="AAAI" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-kdd-handling-information-loss-of-graph-neural-networks-for-session-based-recommendation/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-wsdm-an-efficient-and-effective-framework-for-session-based-social-recommendation/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-session-aware-linear-item-item-models-for-session-based-recommendation/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">Non-invasive Self-attention for Side Information Fusion in Sequential Recommendation</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-17</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>2 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p><a href="https://arxiv.org/abs/2103.03578">Non-invasive Self-attention for Side Information Fusion in Sequential Recommendation</a></p>
+</blockquote>
+<p>顺序推荐系统旨在根据用户的历史行为对用户不断变化的兴趣进行建模，从而做出与时间相关的定制推荐。本文提出了 <strong>NO</strong>nin<strong>V</strong>asive self-<strong>A</strong>ttention 机制 (NOVA) 以在 BERT 框架下有效地利用边信息。 NOVA 利用辅助信息来生成更好的注意力分布，而不是直接改变物品嵌入，这可能会导致信息过多。</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162053378.png" alt="图1"></p>
+<p>本文研究了如何在成功的 BERT 框架下有效利用各种辅助信息，提出了 NOVA，它可以通过辅助信息持续提高预测精度，并在所有的实验中实现最先进的性能。 如图 1 所示，在 NOVA 中，辅助信息作为自注意力模块的辅助来学习更好的注意力分布，而不是被融合到物品表示中，这可能会导致信息压倒性等副作用。</p>
+<p>本文主要贡献：</p>
+<ol>
+<li>提出了 NOVA-BERT 框架，它可以有效地将各种辅助信息用于顺序推荐任务；</li>
+<li>提出了非侵入性自注意力（NOVA）机制，这是一种新颖的设计，可以对复合顺序数据进行自注意力；</li>
+<li>进行详细的实验和部署以证明 NOVA-BERT 的有效性，包括可视化分析以获得更好的可解释性。</li>
+</ol>
+<h1 id="1-相关工作">1. 相关工作</h1>
+<p>在顺序推荐领域，充分利用边信息来提高准确率也是一个长期讨论的话题。 如表 1 所示，在 CNN、RNN、注意力模型和 BERT 等不同框架下，之前的一些工作试图利用边信息。 尽管如此，他们中的大多数都使用了辅助信息，而没有过多研究如何添加辅助信息。 几乎所有人都使用一种我们称之为“侵入性”融合的简单做法。</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162058798.png" alt="表1"></p>
+<h2 id="invasive-approaches">Invasive approaches</h2>
+<p>大多数以前的工作，直接将边信息融合到物品表示中，如图 1(a) 所示。 他们通常使用融合操作（例如，求和、串联、门控求和）将额外信息与物品 ID 信息合并，然后将混合物输入神经网络。我们称这种直接合并做法为“侵入性方法”，因为它们改变了原始表示。</p>
+<p>如表 1 所示，之前的 CNN 和 RNN 工作试图通过将边信息直接融合到具有连接和加法等操作的物品嵌入中来利用边信息。 GRU等其他一些作品提出了更复杂的特征融合门机制和其他训练技巧，试图使特征选择成为一个可学习的过程。 然而，根据他们的实验结果，简单的方法不能有效地利用各种场景下的丰富边信息。 尽管可以通过为每种类型的辅助信息部署并行子网来提高预测精度，但该模型变得繁琐且不灵活。</p>
+<p>另一项研究没有直接改变物品嵌入，而是通过称为物品提升的技巧包括 RNN 模型的停留时间。 一般的想法是让损失函数知道停留时间。 用户查看物品的时间越长，他/她就越感兴趣。 然而，这个技巧在很大程度上依赖于启发式，并且仅限于与行为相关的辅助信息。 另一方面，一些与物品相关的辅助信息（例如价格）描述了物品的内在特征，这些特征不像停留时间那样容易被这种方法利用。</p>
+<h1 id="2-论文模型">2. 论文模型</h1>
+<p>本节中详细介绍研究领域和方法论。在第 3.1 至 3.3 节中，指定了研究问题并解释了辅助信息、BERT 和自注意力。然后，在第 3.4 节中介绍了非侵入性自注意力和不同的融合操作。最后，NOVA-BERT 模型在第 3.5 节中进行了说明。</p>
+<h2 id="21-问题陈述">2.1 问题陈述</h2>
+<p>给定用户与系统的历史交互，顺序推荐任务会询问下一个将与之交互的物品，或者将执行下一个操作。 让 u 表示一个用户，他/她的历史交互可以表示为一个时间序列：</p>
+<p><img src="C:%5CUsers%5CThor%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210816211249500.png" alt="image-20210816211249500"></p>
+<p>其中$v_{u}^{(j)}$表示用户制造的第$j$​个交互（行为），例如下载一个APP。当只有一种类型的动作且没有辅助信息时，每个交互都可以简单地用一个物品 ID 来表示：
+$$
+v_{u}^{(j)}=ID^{(k)}
+$$
+其中$ID^{(k)}\in I$，表示第$k$个物品的ID。
+$$
+I=\lbrace ID^{(1)},ID^{(2)},&hellip;,ID^{(m)}\rbrace
+$$
+是系统中要考虑的所有物品的词汇表。 $m$表示词汇量大小，表示问题域中的物品总数。</p>
+<p>给定用户$S_{u}$的历史记录，系统预测用户最有可能与之交互的下一个物品：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162118273.png" alt=""></p>
+<h2 id="22-side-information-侧面信息">2.2 Side Information 侧面信息</h2>
+<p>辅助信息可以是为推荐提供额外有用信息的任何内容，可以分为两种类型，物品相关或行为相关。
+除了物品 ID（例如，价格、生产日期、生产商）之外，与物品相关的辅助信息是内在的并且描述了物品本身。 与行为相关的辅助信息与用户发起的交互有关，例如操作类型（例如，购买、费率）、执行时间或用户反馈分数。 每次交互的顺序（即原始 BERT 中的位置 ID）也可以作为一种行为相关的辅助信息。</p>
+<p>如果涉及辅助信息，则交互变为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162122134.png" alt=""></p>
+<p>其中$b_{u,j}^{(\cdot)}$表示用户u进行的第$j$次交互的行为相关边信息。$I^{(\cdot)}$表示一个物品，包含一个 ID 和几条物品相关的边信息$f_{k}^{(\cdot)}$。与物品相关的辅助信息是静态的，并存储每个特定物品的内在特征。 因此，词汇表可以改写为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162125914.png" alt=""></p>
+<p>目标仍然是预测下一个物品的 ID：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162126534.png" alt=""></p>
+<p>其中$b_{1},b_{2},&hellip;,b_{q}$是潜在的与行为相关的边信息，如果考虑与行为相关的边信息。注意到模型应该仍然能够预测下一个物品，而不管与行为相关的辅助信息是假设的还是被忽略的。</p>
+<h2 id="23-bert-和-invasive-self-attention">2.3 BERT 和 Invasive Self-attention</h2>
+<p>BERT4Rec (Sun et al. 2019) 是第一个将 BERT 框架用于顺序推荐任务的方法，实现了 SOTA 性能。 如图2所示，在BERT框架下，物品被表示为向量，称为embeddings。 在训练期间，一些物品被随机屏蔽，BERT 模型将尝试使用多头自注意力机制（Vaswani et al. 2017）恢复它们的向量表示和物品 ID：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162130090.png" alt=""></p>
+<p>其中$\sigma$​​是 softmax 函数，$d_{k}$​​是比例因子，$Q$​​、$K$​和$V$是查询、键和值的派生分量。 BERT 遵循编码器-解码器设计，为输入序列中的每个物品生成上下文表示。 BERT 使用嵌入层来存储 m 个向量，每个向量对应于词汇表中的一个物品。</p>
+<p>为了利用边信息，传统方法使用单独的嵌入层将边信息编码为向量，然后将它们融合到具有融合函数$F$的 ID 嵌入中。 方法将边信息注入原始嵌入，并生成混合表示：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162133828.png" alt=""></p>
+<p>其中$E_{u,j}$是用户$u$第$j$次交互的集成嵌入，$E$​是将对象编码为向量的嵌入层。 集成嵌入的序列作为用户历史的输入输入模型。</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162138197.png" alt="图2"></p>
+<p>BERT 框架将通过自注意力机制逐层更新表示：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162135244.png" alt=""></p>
+<p>在最初的BERT和Transformer中，self-attention 操作是一个位置不变函数。 因此，每个物品嵌入都添加了一个位置嵌入来显式地对位置信息进行编码。 位置嵌入也可以被视为一种与行为相关的辅助信息（即交互的顺序）。 从这个角度看，原来的BERT也是把位置信息作为唯一的边信息，用加法作为融合函数F。</p>
+<h2 id="24-nova">2.4 NOVA</h2>
+<p>如果端到端地考虑 BERT 框架，它是一个具有堆叠自注意力层的自动编码器。 相同的嵌入映射用于编码物品 ID 和解码恢复的向量表示。 因此认为侵入性方法具有复合嵌入空间的缺点，因为物品 ID 与其他辅助信息不可逆转地融合。 混合来自 ID 的信息和其他辅助信息可能会使模型不必要地难以解码物品 ID。</p>
+<p>因此提出了一种称为无创自注意力（NOVA）的新方法，以保持嵌入空间的一致性，同时利用边信息更有效地对序列进行建模。 这个想法是修改自注意力机制并仔细控制自注意力组件的信息源，即查询 Q、键 K 和值 V (Vaswani et al. 2017)。 除了第 2.3 节中定义的集成嵌入 E，NOVA 还保留了一个用于纯 ID 嵌入的分支：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162143186.png" alt=""></p>
+<p>因此，对于 NOVA，用户历史现在由两组表示组成，纯 ID 嵌入和集成嵌入：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162144057.png" alt=""></p>
+<p>NOVA 从集成嵌入 R 计算 Q 和 K，从物品 ID 嵌入$E^{(ID)}$计算 V。实际中，以张量形式处理整个序列，其中 B 是批量大小，L 是序列长度，h 是嵌入向量的大小。NOVA 可以形式化为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162149293.png" alt=""></p>
+<p>用线性变换计算的 Q、K、V：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162150832.png" alt=""></p>
+<p>NOVA 和侵入式辅助信息融合方式的比较如图 3 所示。 一层一层地，沿着 NOVA 层的表示保持在一个一致的向量空间内，完全由物品 ID 的上下文形成。</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162152927.png" alt="图3"></p>
+<h2 id="25-融合操作">2.5 融合操作</h2>
+<p>NOVA 以不同于侵入式方法的方式利用边信息，将其视为辅助信息，并使用融合函数 F 将边信息融合到 Keys 和 Queries 中。在这项研究中，我们还研究了不同类型的融合函数及其性能。</p>
+<p>如上所述，位置信息也是一种行为相关的边信息，原始BERT利用它的加法操作很简单：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162156765.png" alt=""></p>
+<p>此外，定义了“concat”融合器来连接所有边信息，然后是一个完全连接的层来统一维度：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162157141.png" alt=""></p>
+<p>此外，还设计了一个门控融合器，其可训练系数来自上下文：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162158221.png" alt=""></p>
+<p>其中$F$是所有特征的矩阵形式$[f_{1},&hellip;,f_{m}]\in R^{m\times h}$，$W^{F}\in R^{h\times1}$是可训练的参数，$h$是要融合的特征向量的维度。</p>
+<h2 id="26-nova-bert">2.6 NOVA-BERT</h2>
+<p>如图 4 所示，在 BERT 框架下使用 NOVA 操作实现了 NOVA-BERT 模型。 每个 NOVA 层接受两个输入，补充边信息和物品表示序列，然后输出相同形状的更新表示，这些表示将被馈送到下一层。 对于第一层的输入，物品表示是纯物品 ID 嵌入。 由于仅使用辅助信息作为辅助来学习更好的注意力分布，因此辅助信息不会与 NOVA 层一起传播。 为每个 NOVA 层明确提供了相同的辅助信息集。</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162205679.png" alt="图4"></p>
+<p>NOVA-BERT 遵循 (Devlin et al. 2018) 中原始 BERT 的架构，除了用 NOVA 层替换 self-attention 层。 因此，额外的参数和计算开销可以忽略不计，主要由轻量级融合函数引入。</p>
+<p>使用 NOVA-BERT，隐藏的表示被保存在相同的嵌入空间中，这将使解码过程成为同构向量搜索并有利于预测。 下一节的结果也实证验证了 NOVA-BERT 的有效性。</p>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/recommender-system/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Recommender System</a>
+    
+    <a href="/tags/bert/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Bert</a>
+    
+    <a href="/tags/aaai/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#AAAI</a>
+    
+</div>
+        
+        
+        
+
+
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/lizhihao/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/avatar.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/lizhihao/" class="block font-bold text-lg pb-1 mb-2 border-b">Li Zhihao</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:lzh821403039@163.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://example.com/" class="mr-1">
+                <i class="fab fa-github"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-recsys-sse-pt-sequential-recommendation-via-personalized-transformed/" class="block">SSE-PT Sequential Recommendation Via Personalized Transformed</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-kdd-handling-information-loss-of-graph-neural-networks-for-session-based-recommendation/" class="block">Handling Information Loss of Graph Neural Networks for Session-based Recommendation</a>
+        
+    </div>
+</div>
+
+        
+
+
+
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#invasive-approaches">Invasive approaches</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-问题陈述">2.1 问题陈述</a></li>
+    <li><a href="#22-side-information-侧面信息">2.2 Side Information 侧面信息</a></li>
+    <li><a href="#23-bert-和-invasive-self-attention">2.3 BERT 和 Invasive Self-attention</a></li>
+    <li><a href="#24-nova">2.4 NOVA</a></li>
+    <li><a href="#25-融合操作">2.5 融合操作</a></li>
+    <li><a href="#26-nova-bert">2.6 NOVA-BERT</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">See Also</h2>
+        <div class="content">
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-kdd-handling-information-loss-of-graph-neural-networks-for-session-based-recommendation/">Handling Information Loss of Graph Neural Networks for Session-based Recommendation</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-wsdm-an-efficient-and-effective-framework-for-session-based-social-recommendation/">An Efficient and Effective Framework for Session-based Social Recommendation</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-session-aware-linear-item-item-models-for-session-based-recommendation/">Session-aware Linear Item-Item Models for Session-based Recommendation</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/">Inductive Matrix Completion Based on Graph Neural Networks</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/">HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

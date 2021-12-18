@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell 实验思路和代码实现">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell",
+      "item":"/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/"
+    },
+    "headline": "MIT 6.S081\/Fall 2019 Lab2 Simple xv6 shell | 若虚杂记","datePublished": "2020-11-24T14:32:00+00:00",
+    "dateModified": "2020-11-24T14:32:00+00:00",
+    "wordCount":  770 ,
+    "author": {
+        "@type": "Person",
+        "name": ["lizhihao"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Li Zhihao",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/icon.png"
+        }
+        },
+    "description": "MIT 6.S081\/Fall 2019 Lab2 Simple xv6 shell 实验思路和代码实现"
+}
+</script><meta property="og:title" content="MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell | 若虚杂记" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/" />
+
+
+
+
+<meta property="og:description" content="MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell 实验思路和代码实现" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2020-11-24T14:32:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2020-11-24T14:32:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Linux" />
+
+<meta property="article:tag" content="操作系统" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C4%E7%AC%94%E8%AE%B0/" />
+
+<meta property="og:see_also" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C3%E7%AC%94%E8%AE%B0/" />
+
+<meta property="og:see_also" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C1%E7%AC%94%E8%AE%B0/" />
+
+<meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/gunicorn%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" />
+
+<meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85anaconda/" />
+
+<meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2020-11-24</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>4 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/mit-6.s081/fall-2019-lab/" class="hover:text-eureka">MIT 6.S081/Fall 2019 Lab</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <p>MIT 6.S081/Fall 2019实验<a href="https://pdos.csail.mit.edu/6.828/2019/labs/sh.html">Lab: Simple xv6 shell</a>，为xv6写一个简单的shell。应该能够使用参数运行命令，处理输入和输出重定向，并设置双元素管道。对于这些示例以及类似的命令，实现的<code>shell</code>应类似于 xv6 shell sh：</p>
+<pre><code class="language-shell">echo hello there
+echo something &gt; file.txt
+ls | grep READ
+grep lion &lt; data.txt | wc &gt; count
+echo echo hello | nsh
+find . b | xargs grep hello
+</code></pre>
+<p>同时，该实验不能使用动态内存分配接口，例如<code>malloc()</code>、<code>sbrk()</code>，取而代之的是，只有本地变量（栈分配的）和全局变量可以使用。可以对命令名的最大长度、参数的最大数量或者任何单个参数的最大长度等内容施加合理的固定限制。</p>
+<p>本次实验的关键点和难点在于指令的解析和不同类型指令的执行。本文对主要思路和关键部分的代码实现进行说明，<a href="https://github.com/Thooooor/xv6-riscv-fall19/tree/sh">完整代码</a>实现可以参考我的GitHub仓库.</p>
+<h1 id="1-shell执行流程">1. shell执行流程</h1>
+<ol>
+<li>shell执行<code>getcmd</code>获得用户输入的命令；</li>
+<li>shell执行<code>fork</code>创建一个shell进程的副本，然后shell进行wait状态；</li>
+<li>调用<code>parsecmd(buf)</code>解析输入的命令；</li>
+<li>shell执行<code>runcmd</code>运行用户的命令；</li>
+<li><code>runcmd</code>函数调用<code>exec</code>系统调用加载适当的函数如：<code>echo</code>、<code>cat</code>、<code>grep</code>等；</li>
+<li>函数执行结束后，接着执行<code>exit</code>系统调用返回shell，shell从wait中退出。</li>
+</ol>
+<p>据此编写<code>main</code>函数：</p>
+<pre><code class="language-c">/*
+    main process:
+    get cmd -&gt; cd? -&gt; fork -&gt; parse cmd -&gt; run cmd -&gt; get cmd
+                   -&gt; cd
+*/
+int main(void) {
+    init_index();
+    static char buf[MAXBUF];
+    int fd;
+
+    while ((fd = open(&quot;console&quot;, O_RDWR)) &gt;= 0){
+        if (fd &gt;= 3) {
+            close(fd);
+            break;
+        }
+    }
+
+    while (getcmd(buf, sizeof(buf)) &gt;= 0) {
+        if (buf[0] == 'c' &amp;&amp; buf[1] == 'd' &amp;&amp; buf[2] == ' ') {
+            buf[strlen(buf) - 1] = 0;
+            if (chdir(buf+3) &lt; 0) fprintf(2, &quot;cannot cd %s\n&quot;, buf+3);
+            continue;
+        }
+        if(fork() == 0) runcmd(parsecmd(buf));
+        wait(0);
+    }
+    exit(0);
+}
+</code></pre>
+<p>其中<code>cd</code>指令较为特殊，需要进行特判。</p>
+<h1 id="2-parsecmd解析指令">2. parsecmd解析指令</h1>
+<p>指令解析函数<code>parsecmd</code>执行的核心函数的<code>parseline</code>，这个函数是递归执行的，其执行流程如下：</p>
+<ol>
+<li>
+<p>首先执行<code>parsepipe</code>的核心函数<code>parseexec</code>，调用<code>execcmd</code>，生成一个<code>execcmd</code>的结构体，然后调用<code>parseredirs</code>函数，检查是否有重定向符号&quot;&lt;“或”&gt;&quot;，如果有，则将之前的<code>execcmd</code>改为<code>redircmd</code>。将命令的入参保存在cmd-&gt;argv中；</p>
+</li>
+<li>
+<p>接着，检查用户输入的命令中是否有管道命令，如果有，递归调用<code>parsepipe</code>，则建立管道连接；</p>
+</li>
+<li>
+<p>返回parseline，执行命令中是否有&amp;（返回命令），如果有，则生成一个新的backcmd；</p>
+</li>
+<li>
+<p>检查是否有；（多条命令分别要执行），如果有，递归调用<code>parseline</code>，将所有的命令分别解析后连接起来。</p>
+</li>
+</ol>
+<p>据此编写以下解析cmd的函数：</p>
+<pre><code class="language-c">struct cmd* parsecmd(char *s) {
+    struct cmd *cmd;
+    char *es;
+    es = s + strlen(s);
+    cmd = parsepipe(&amp;s, es);
+    if (s != es) {
+        fprintf(2, &quot;leftovers: %s&quot;, s);
+        exit(-1);
+    }
+    return cmd;
+}
+
+/*
+    pipe cmd? -&gt; left_cmd | right_cmd -&gt; parseexec(left_cmd) -&gt; pipecmd(left_cmd, parsepipe(right_cmd))
+              -&gt; parseexec(cmd)
+*/
+struct cmd* parsepipe(char **ps, char *es) {
+    struct cmd *cmd;
+    char *q, *eq;
+    if (1 == scan(ps, es, &quot;|&quot;, &amp;q, &amp;eq)) {
+        cmd = parseexec(&amp;q, eq);
+        (*ps)++;
+        cmd = pipecmd(cmd, parsepipe(ps, es));
+    } else {
+        cmd = parseexec(&amp;q, eq);
+    }
+    return cmd;
+}
+
+struct cmd* parseexec(char **ps, char *es){
+    char *q, *eq;
+    int token, argc;
+    struct execcmd *cmd;
+    struct cmd *ret;
+
+    ret = execcmd();
+    cmd = (struct execcmd*)ret;
+
+    argc = 0;
+    ret = parseredirs(ret, ps, es);
+
+    while(*ps &lt; es) {
+        if((token=gettoken(ps, es, &amp;q, &amp;eq)) == 0) break;
+
+        if(token != 'a') {
+            fprintf(2, &quot;syntax error.\n&quot;);
+            exit(-1);
+        }
+
+        cmd-&gt;argv[argc] = copy(q, eq);
+        argc++;
+
+        if(argc &gt;= MAXARGS) {
+            fprintf(2, &quot;too many args.\n&quot;);
+            exit(-1);
+        }
+        
+        ret = parseredirs(ret, ps, es);
+    }
+    cmd-&gt;argv[argc] = 0;
+    return ret;
+}
+
+/*
+    cmd &gt; file -&gt;                                       -&gt; redircmd(cmd, file)
+                  cmd -&gt; parseexec(cmd) -&gt; execcmd(cmd)
+                  file -&gt; file
+*/
+struct cmd* parseredirs(struct cmd *cmd, char **ps, char *es) {
+    int token;
+    char *q, *eq;
+
+    while(peek(ps, es, &quot;&lt;&gt;&quot;)) {
+        token = gettoken(ps, es, 0, 0);
+        if (gettoken(ps, es, &amp;q, &amp;eq) != 'a') {
+            fprintf(2, &quot;missing file for redirection.\n&quot;);
+            exit(-1);
+        }
+
+        switch(token) {
+            case '&lt;':
+                // fprintf(2, &quot;&lt; cmd\n&quot;);
+                cmd = redircmd(cmd, copy(q, eq), REDIR, O_RDONLY, 0);
+                break;
+            case '&gt;':
+                // fprintf(2, &quot;&gt; cmd\n&quot;);
+                cmd = redircmd(cmd, copy(q, eq), REDIR, O_WRONLY|O_CREATE, 1);
+                break;
+        }
+    }
+    return cmd;
+}
+
+/*
+    create pipecmd and convert it to cmd
+*/
+struct cmd *pipecmd(struct cmd *left, struct cmd *right) {
+    if (++cmd_index[PIPE] &gt;= MAXCMDS) {
+        fprintf(2, &quot;Too many commands.\n&quot;);
+        exit(-1);
+    }
+    struct pipecmd *cmd = &amp;mypipecmd[cmd_index[PIPE]];
+
+    cmd-&gt;type = PIPE;
+    cmd-&gt;left = left;
+    cmd-&gt;right = right;
+
+    return (struct cmd*) cmd;
+}
+
+/*
+    create execcmd and convert it to cmd
+*/
+struct cmd *execcmd(void) {
+    if (++cmd_index[EXEC] &gt;= MAXCMDS) {
+        fprintf(2, &quot;Too many commands.\n&quot;);
+        exit(-1);
+    }
+    struct execcmd *cmd = &amp;myexeccmd[cmd_index[EXEC]];
+
+    cmd-&gt;type = EXEC;
+    
+    return (struct cmd*)cmd;
+}
+
+/*
+    create redircmd and convert it to cmd
+*/
+struct cmd *redircmd(struct cmd *subcmd, char *file, int type, int mode, int fd) {
+    if (++cmd_index[REDIR] &gt;= MAXCMDS) {
+        fprintf(2, &quot;Too many commands.\n&quot;);
+        exit(-1);
+    }
+    struct redircmd *cmd = &amp;myredircmd[cmd_index[REDIR]];
+
+    cmd-&gt;type = type;
+    cmd-&gt;cmd = subcmd;
+    cmd-&gt;file = file;
+    cmd-&gt;mode = mode;
+    cmd-&gt;fd = fd;
+
+    return (struct cmd*)cmd;
+}
+
+</code></pre>
+<h1 id="3-cmd执行">3. cmd执行</h1>
+<h2 id="31-cmd结构体">3.1 cmd结构体</h2>
+<p>参考<code>sh.c</code>中的cmd结构体定义，定义不同指令的结构体：</p>
+<pre><code class="language-c">struct cmd {
+  int type;
+};
+
+struct execcmd {
+  int type;
+  char *argv[MAXARGS];
+  char *eargv[MAXARGS];
+};
+
+struct redircmd {
+  int type;
+  struct cmd *cmd;
+  char *file;
+  char *efile;
+  int mode;
+  int fd;
+};
+
+struct pipecmd {
+  int type;
+  struct cmd *left;
+  struct cmd *right;
+};
+</code></pre>
+<p>由于不能使用动态分配函数，所以事先定义指令数组，分配好空间：</p>
+<pre><code class="language-c">/*
+    not allowed to use m a l l o c()
+    use global parameters instead
+    index and cmd_index record the use of space
+*/
+struct cmd mycmd[MAXCMDS];
+struct pipecmd mypipecmd[MAXCMDS];
+struct execcmd myexeccmd[MAXCMDS];
+struct redircmd myredircmd[MAXCMDS];
+int cmd_index[MAXCMDS];
+char mybuf[MAXBUF];
+char cmdbuff[MAXBUF];
+int index = 0;
+</code></pre>
+<h2 id="32-cmd执行">3.2 cmd执行</h2>
+<p>不同类型的指令，最终都会使用<code>exec</code>进行执行，根据指令的不同类型，递归调用<code>runcmd</code>完成对不同指令的执行。</p>
+<pre><code class="language-c">void runcmd(struct cmd *cmd) {
+    int p[2];
+    struct execcmd *ecmd;
+    struct pipecmd *pcmd;
+    struct redircmd *rcmd;
+
+    if (cmd == 0) exit(0);
+
+    switch(cmd-&gt;type) {
+        default:
+            fprintf(2, &quot;error cmd.\n&quot;);
+            exit(-1);
+        case EXEC:
+            ecmd = (struct execcmd*)cmd;
+
+            if (ecmd-&gt;argv[0] == 0) exit(-1);
+            if (-1 == exec(ecmd-&gt;argv[0], ecmd-&gt;argv)) fprintf(2, &quot;exec %s failed.\n&quot;, ecmd-&gt;argv[0]);
+            break;
+        case REDIR:
+            rcmd = (struct redircmd*)cmd;
+            close(rcmd-&gt;fd);
+
+            if (open(rcmd-&gt;file, rcmd-&gt;mode) &lt; 0) {
+                fprintf(2, &quot;open %s failed.\n&quot;, rcmd-&gt;file);
+                exit(-1);
+            }
+            runcmd(rcmd-&gt;cmd);
+            break;
+        case PIPE:
+            pcmd = (struct pipecmd*)cmd;
+            if (pipe(p) &lt; 0) exit(-1);
+            if (fork() == 0) {
+                close(1);
+                dup(p[1]);
+                close(p[0]);
+                close(p[1]);
+                runcmd(pcmd-&gt;left);
+            }
+            if (fork() == 0) {
+                close(0);
+                dup(p[0]);
+                close(p[0]);
+                close(p[1]);
+                runcmd(pcmd-&gt;right);
+            }
+            close(p[0]);
+            close(p[1]);
+            wait(0);
+            wait(0);
+            break;
+    }
+    exit(0);
+}
+</code></pre>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/linux/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Linux</a>
+    
+    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#操作系统</a>
+    
+</div>
+        
+        
+        
+
+
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/lizhihao/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/avatar.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/lizhihao/" class="block font-bold text-lg pb-1 mb-2 border-b">Li Zhihao</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:lzh821403039@163.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://example.com/" class="mr-1">
+                <i class="fab fa-github"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/matplotlib%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA/" class="block">Matplotlib中文显示</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C4%E7%AC%94%E8%AE%B0/" class="block">MIT 6.S081/Fall 2019 Lab3 Allocator for xv6</a>
+        
+    </div>
+</div>
+
+        
+
+
+
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#31-cmd结构体">3.1 cmd结构体</a></li>
+    <li><a href="#32-cmd执行">3.2 cmd执行</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">See Also</h2>
+        <div class="content">
+            
+            <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C4%E7%AC%94%E8%AE%B0/">MIT 6.S081/Fall 2019 Lab3 Allocator for xv6</a>
+            <br />
+            
+            <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C3%E7%AC%94%E8%AE%B0/">MIT 6.S081/Fall 2019 Lab7 locks</a>
+            <br />
+            
+            <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C1%E7%AC%94%E8%AE%B0/">MIT 6.S081/Fall 2019 Lab1 Xv6 and Unix utilities</a>
+            <br />
+            
+            <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/gunicorn%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Gunicorn基本使用</a>
+            <br />
+            
+            <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85anaconda/">Ubuntu服务器安装Anaconda</a>
+            <br />
+            
+            <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">Linux配置虚拟环境</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

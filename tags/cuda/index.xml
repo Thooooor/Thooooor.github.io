@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>cuda on 若虚杂记</title>
+    <link>/tags/cuda/</link>
+    <description>Recent content in cuda on 若虚杂记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://beian.miit.gov.cn/&#34;&gt;粤ICP备19090631号&lt;/a&gt;
+</copyright>
+    <lastBuildDate>Thu, 01 Jul 2021 23:33:00 +0000</lastBuildDate><atom:link href="/tags/cuda/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux多版本CUDA安装及切换</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E5%A4%9A%E7%89%88%E6%9C%ACcuda%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%87%E6%8D%A2/</link>
+      <pubDate>Thu, 01 Jul 2021 23:33:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E5%A4%9A%E7%89%88%E6%9C%ACcuda%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%87%E6%8D%A2/</guid>
+      <description>在Linux-Ubuntu服务器上安装使用多版本CUDA并通过软连接进行切换</description>
+    </item>
+    
+  </channel>
+</rss>

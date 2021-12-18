@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>SSE-PT Sequential Recommendation Via Personalized Transformed | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="2021 RecSys 序列推荐 个性化Transformer框架">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"SSE-PT Sequential Recommendation Via Personalized Transformed",
+      "item":"/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-recsys-sse-pt-sequential-recommendation-via-personalized-transformed/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-recsys-sse-pt-sequential-recommendation-via-personalized-transformed/"
+    },
+    "headline": "SSE-PT Sequential Recommendation Via Personalized Transformed | 若虚杂记","datePublished": "2021-08-18T22:58:00+00:00",
+    "dateModified": "2021-08-18T22:58:00+00:00",
+    "wordCount":  137 ,
+    "author": {
+        "@type": "Person",
+        "name": ["lizhihao"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Li Zhihao",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/icon.png"
+        }
+        },
+    "description": "2021 RecSys 序列推荐 个性化Transformer框架"
+}
+</script><meta property="og:title" content="SSE-PT Sequential Recommendation Via Personalized Transformed | 若虚杂记" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-recsys-sse-pt-sequential-recommendation-via-personalized-transformed/" />
+
+
+
+
+<meta property="og:description" content="2021 RecSys 序列推荐 个性化Transformer框架" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-08-18T22:58:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-08-18T22:58:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Recommender System" />
+
+<meta property="article:tag" content="RecSys" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-sigir-improving-collaborative-metric-learning-with-efficient-negative-sampling/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-aaai-non-invasive-self-attention-for-side-information-fusion-in-sequential-recommendation/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-kdd-handling-information-loss-of-graph-neural-networks-for-session-based-recommendation/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-wsdm-an-efficient-and-effective-framework-for-session-based-social-recommendation/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-session-aware-linear-item-item-models-for-session-based-recommendation/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">SSE-PT Sequential Recommendation Via Personalized Transformed</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-18</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p><a href="https://dl.acm.org/doi/10.1145/3383313.3412258">SSE-PT: Sequential Recommendation Via Personalized Transformer</a></p>
+<p><a href="https://github.com/SSE-PT/SSE-PT">SSE-PT/SSE-PT (github.com)</a></p>
+</blockquote>
+<p>时间信息对于推荐问题至关重要，因为用户偏好在现实世界中自然是动态的。 深度学习的最新进展，尤其是除了在自然语言处理中广泛使用的 RNN 和 CNN 之外，还发现了各种注意力机制和更新的架构，可以更好地利用每个用户参与的物品的时间顺序。 特别是 SASRec 模型，受到自然语言处理中流行的 Transformer 模型的启发，取得了最先进的结果。 然而，SASRec 就像最初的 Transformer 模型一样，本质上是一个非个性化的模型，不包括个性化的用户嵌入。</p>
+<p>为了克服这个限制，本文提出了一种个性化变换器 (SSE-PT) 模型，不仅更具可解释性，而且能够关注每个用户最近的参与模式。 此外， SSE-PT 模型稍加修改，称之为 SSE-PT++，可以处理极长的序列，并在具有可比训练速度的排名结果方面优于 SASRec，在性能和速度要求之间取得平衡。</p>
+<h1 id="1-论文模型">1. 论文模型</h1>
+<h2 id="11-序列推荐">1.1 序列推荐</h2>
+<p>给定 n 个用户，每个用户按时间顺序与 m 个物品的一个子集互动，顺序推荐的目标是在任何给定时间点为任何给定用户学习在总共 m 个物品中前 K 个物品的良好个性化排名。假设数据为 n 个物品序列的格式：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162241982.png" alt=""></p>
+<p>长度为 T 的序列$s_{i}$包含用户 i 按照时间顺序（从旧到新）与之交互的最后 T 个物品的索引。 对于不同的用户，序列长度可能会有所不同，但可以填充较短的序列，使它们都具有长度 T 。不能简单地将数据点随机分成训练/验证/测试集，因为它们按时间顺序排列。 相反，需要确保训练数据在验证数据之前，也就是在测试数据之前。 使用序列中的最后一个物品作为测试集，倒数第二个物品作为验证集，其余的作为训练集。使用 NDCG@K 和 Recall@K 等排名指标进行评估，这些指标在附录中定义。</p>
+<h2 id="12-个性化的-transformer-架构">1.2 个性化的 Transformer 架构</h2>
+<p>模型称之为 SSE-PT，它利用了一种称为随机共享嵌入的新正则化技术。在接下来的部分中，将检查的个性化转换器 (SSE-PT) 模型的每个重要组件，尤其是嵌入层，以及随机共享嵌入 (SSE) 正则化技术的新应用。</p>
+<h3 id="嵌入层">嵌入层</h3>
+<p>定义一个可学习的用户嵌入查找表$U\in R^{n\times d_{u}}$和物品嵌入查找表$V\in R^{m\times d_{i}}$，其中$d_{u},d_{i}$分别为用户和物品的隐藏单元的数量。同时还指定了可学习的位置编码表$P\in R^{T\times d}$，其中$d=d_{u}+d_{i}$。所以每个输入序列$s_{i}\in R^{T}$将由以下嵌入表示：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108162251309.png" alt=""></p>
+<p>其中$[v_{j_{it}};u_{i}]$表示将物品嵌入$v_{j_{it}}\in R^{d_{i}}$和用户嵌入$u_{i}\in R^{d_{u}}$连接为时间$t$下的嵌入$E_{t}\in R^{d}$。</p>
+<h3 id="transformer编码器">Transformer编码器</h3>
+<p>在嵌入层之上，我们有 B 个自注意力层和全连接层，其中每一层根据前一层的输出为每个时间步提取特征。 这部分与原始论文中使用的 Transformer 编码器相同。</p>
+<h3 id="预测层">预测层</h3>
+<p>在时间$t$，用户$i$参与物品$l$的预测概率为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108171457676.png" alt=""></p>
+<p>其中 σ 是 sigmoid 函数，$r_{itl}$是用户$i$在时间点$t$对物品$l$的预测得分，定义为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108171459555.png" alt=""></p>
+<p>其中$F_{t-1}^{B}$是在最后一个时间戳与变压器编码器关联的输出隐藏单元。</p>
+<p>尽管可以为$u_{i}$和$v_{l}$使用另一组用户和物品嵌入查找表，但使用与嵌入层中相同的一组嵌入查找表 U,V 更好。 但是这些嵌入的正则化可能会有所不同。 为了将（4）中的$u_{i}$和$v_{l}$与（2）中的 ui ,vj 区分开来，我们将（4）中的嵌入称为输出嵌入和（2）中的嵌入称为输入嵌入。</p>
+<p>{正项预测概率之间的二元交叉熵损失$l=j_{i(t+1)}$和一个均匀采样的负项$k\in \Omega$，由$-[\log(p_{itl})+\log(1-p_{itk})]$给出。对 $s_{i}$和$t$求和，可以得到想要最小化的目标函数：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108171526413.png" alt=""></p>
+<p>在推理时，可以通过对所有物品 ℓ 的分数$r_{itl}$进行排序并推荐排序列表中的前$K$个物品来为用户$i$在时间$t$做出前$K$个推荐。</p>
+<h3 id="随机共享嵌入的新应用">随机共享嵌入的新应用</h3>
+<p>SSE-PT 模型最重要的正则化技术是随机共享嵌入（SSE）。 SSE 的主要思想是在 SGD 期间用另一个具有一定概率的嵌入随机替换嵌入，这具有正则化嵌入层的效果。 如果没有 SSE，所有现有的众所周知的正则化技术，如层归一化、dropout 和权重衰减都将失败，并且无法防止模型在引入用户嵌入后严重过度拟合。</p>
+<h2 id="13-处理长序列sse-pt">1.3 处理长序列：SSE-PT++</h2>
+<p>为了处理极长的序列，可以对基本 SSE-PT 模型在输入序列$s_{i}$是如何馈送到 SSE-PT 神经网络方面进行轻微修改。将增强模型称为 SSE-PT++ 以区别于之前讨论的 SSE-PT 模型，后者无法处理长于 T 的序列。</p>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/recommender-system/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Recommender System</a>
+    
+    <a href="/tags/recsys/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#RecSys</a>
+    
+</div>
+        
+        
+        
+
+
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/lizhihao/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/avatar.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/lizhihao/" class="block font-bold text-lg pb-1 mb-2 border-b">Li Zhihao</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:lzh821403039@163.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://example.com/" class="mr-1">
+                <i class="fab fa-github"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-sigir-improving-collaborative-metric-learning-with-efficient-negative-sampling/" class="block">Improving Collaborative Metric Learning with Efficient Negative Sampling</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-aaai-non-invasive-self-attention-for-side-information-fusion-in-sequential-recommendation/" class="block">Non-invasive Self-attention for Side Information Fusion in Sequential Recommendation</a>
+        
+    </div>
+</div>
+
+        
+
+
+
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-序列推荐">1.1 序列推荐</a></li>
+    <li><a href="#12-个性化的-transformer-架构">1.2 个性化的 Transformer 架构</a>
+      <ul>
+        <li><a href="#嵌入层">嵌入层</a></li>
+        <li><a href="#transformer编码器">Transformer编码器</a></li>
+        <li><a href="#预测层">预测层</a></li>
+        <li><a href="#随机共享嵌入的新应用">随机共享嵌入的新应用</a></li>
+      </ul>
+    </li>
+    <li><a href="#13-处理长序列sse-pt">1.3 处理长序列：SSE-PT++</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">See Also</h2>
+        <div class="content">
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-sigir-improving-collaborative-metric-learning-with-efficient-negative-sampling/">Improving Collaborative Metric Learning with Efficient Negative Sampling</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-aaai-non-invasive-self-attention-for-side-information-fusion-in-sequential-recommendation/">Non-invasive Self-attention for Side Information Fusion in Sequential Recommendation</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-kdd-handling-information-loss-of-graph-neural-networks-for-session-based-recommendation/">Handling Information Loss of Graph Neural Networks for Session-based Recommendation</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-wsdm-an-efficient-and-effective-framework-for-session-based-social-recommendation/">An Efficient and Effective Framework for Session-based Social Recommendation</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-session-aware-linear-item-item-models-for-session-based-recommendation/">Session-aware Linear Item-Item Models for Session-based Recommendation</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/">Inductive Matrix Completion Based on Graph Neural Networks</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

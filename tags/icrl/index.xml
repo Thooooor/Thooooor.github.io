@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ICRL on 若虚杂记</title>
+    <link>/tags/icrl/</link>
+    <description>Recent content in ICRL on 若虚杂记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://beian.miit.gov.cn/&#34;&gt;粤ICP备19090631号&lt;/a&gt;
+</copyright>
+    <lastBuildDate>Thu, 05 Aug 2021 23:00:00 +0000</lastBuildDate><atom:link href="/tags/icrl/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Inductive Matrix Completion Based on Graph Neural Networks</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/</link>
+      <pubDate>Thu, 05 Aug 2021 23:00:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/</guid>
+      <description>2020 ICRL Inductive Matrix Completion Based on Graph Neural Networks 论文笔记</description>
+    </item>
+    
+  </channel>
+</rss>

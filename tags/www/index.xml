@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>WWW on 若虚杂记</title>
+    <link>/tags/www/</link>
+    <description>Recent content in WWW on 若虚杂记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://beian.miit.gov.cn/&#34;&gt;粤ICP备19090631号&lt;/a&gt;
+</copyright>
+    <lastBuildDate>Sat, 07 Aug 2021 23:58:00 +0000</lastBuildDate><atom:link href="/tags/www/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Session-aware Linear Item-Item Models for Session-based Recommendation</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-session-aware-linear-item-item-models-for-session-based-recommendation/</link>
+      <pubDate>Sat, 07 Aug 2021 23:58:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-session-aware-linear-item-item-models-for-session-based-recommendation/</guid>
+      <description>2021 WWW 基于会话的推荐系统 线性Item-Item模型</description>
+    </item>
+    
+    <item>
+      <title>Lorentzian Graph Convolutional Networks</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-www-lorentzian-graph-convolutional-networks/</link>
+      <pubDate>Thu, 05 Aug 2021 22:55:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-www-lorentzian-graph-convolutional-networks/</guid>
+      <description>2021 WWW Lorentzian Graph Convolutional Networks 洛伦兹GCN 论文笔记</description>
+    </item>
+    
+    <item>
+      <title>HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/</link>
+      <pubDate>Wed, 28 Jul 2021 23:58:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/</guid>
+      <description>2021 WWW 双曲协同过滤模型 HGCN</description>
+    </item>
+    
+  </channel>
+</rss>

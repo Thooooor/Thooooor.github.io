@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>MIT 6.S081/Fall 2019 Lab3 Allocator for xv6 | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="MIT 6.S081/Fall 2019 Lab3 Allocator for xv6 实验思路和代码实现">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"MIT 6.S081/Fall 2019 Lab3 Allocator for xv6",
+      "item":"/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C4%E7%AC%94%E8%AE%B0/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C4%E7%AC%94%E8%AE%B0/"
+    },
+    "headline": "MIT 6.S081\/Fall 2019 Lab3 Allocator for xv6 | 若虚杂记","datePublished": "2020-11-24T14:32:00+00:00",
+    "dateModified": "2020-11-24T14:32:00+00:00",
+    "wordCount":  670 ,
+    "author": {
+        "@type": "Person",
+        "name": ["lizhihao"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Li Zhihao",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/icon.png"
+        }
+        },
+    "description": "MIT 6.S081\/Fall 2019 Lab3 Allocator for xv6 实验思路和代码实现"
+}
+</script><meta property="og:title" content="MIT 6.S081/Fall 2019 Lab3 Allocator for xv6 | 若虚杂记" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C4%E7%AC%94%E8%AE%B0/" />
+
+
+
+
+<meta property="og:description" content="MIT 6.S081/Fall 2019 Lab3 Allocator for xv6 实验思路和代码实现" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2020-11-24T14:32:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2020-11-24T14:32:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Linux" />
+
+<meta property="article:tag" content="操作系统" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/" />
+
+<meta property="og:see_also" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C3%E7%AC%94%E8%AE%B0/" />
+
+<meta property="og:see_also" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C1%E7%AC%94%E8%AE%B0/" />
+
+<meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/gunicorn%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" />
+
+<meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85anaconda/" />
+
+<meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2 lg:col-start-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">MIT 6.S081/Fall 2019 Lab3 Allocator for xv6</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2020-11-24</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>4 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/mit-6.s081/fall-2019-lab/" class="hover:text-eureka">MIT 6.S081/Fall 2019 Lab</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <p>MIT 6.S081/Fall 2019实验 <a href="https://pdos.csail.mit.edu/6.828/2019/labs/alloc.html">Lab: Allocator for xv6</a>，用好友分配器替换 xv6 内核中的页面分配器，修改分配和释放文件方法，使用buddy allocator进行动态地分配和释放；同时，实现一个优化，减少buddy allocator对内存的使用。</p>
+<p>本文对主要思路和关键部分的代码实现进行说明，<a href="https://github.com/Thooooor/xv6-riscv-fall19/tree/alloc">完整代码</a>实现可以参考我的GitHub仓库.</p>
+<h1 id="1-使用buddy-allocator">1. 使用buddy allocator</h1>
+<p>修改<code>file.c</code>文件，删去ftable结构体中<code>file[NFILE]</code>的声明：</p>
+<pre><code class="language-c">struct {
+  struct spinlock lock;
+} ftable;
+</code></pre>
+<p>在<code>filealloc</code>中使用<code>bd_malloc</code>进行动态申请，同时每次申请之后对<code>f</code>进行初始化：</p>
+<pre><code class="language-c">struct file*
+filealloc(void)
+{
+  acquire(&amp;ftable.lock);
+  struct file *f  = bd_malloc(sizeof(struct file));
+  if (f) {
+    memset(f, 0, sizeof(struct file));
+    f-&gt;ref = 1;
+    release(&amp;ftable.lock);
+    return f;
+  }
+  release(&amp;ftable.lock);
+  return 0;
+}
+</code></pre>
+<p>之后对<code>fileclose</code>进行修改，使用对应的<code>bd_free</code>进行释放，需要使用<code>acquire</code>对<code>f-&gt;ref</code>进行保护：</p>
+<pre><code class="language-c">void
+fileclose(struct file *f)
+{
+  struct file ff;
+
+  acquire(&amp;ftable.lock);
+  if(f-&gt;ref &lt; 1)
+    panic(&quot;fileclose&quot;);
+  if(--f-&gt;ref &gt; 0){
+    release(&amp;ftable.lock);
+    return;
+  }
+  ff = *f;
+  f-&gt;ref = 0;
+  f-&gt;type = FD_NONE;
+  release(&amp;ftable.lock);
+
+  if(ff.type == FD_PIPE){
+    pipeclose(ff.pipe, ff.writable);
+  } else if(ff.type == FD_INODE || ff.type == FD_DEVICE){
+    begin_op(ff.ip-&gt;dev);
+    iput(ff.ip);
+    end_op(ff.ip-&gt;dev);
+  }
+
+  bd_free(f);
+}
+</code></pre>
+<h1 id="2-优化伙伴系统算法">2. 优化伙伴系统算法</h1>
+<p>首先修改<code>bd_init</code>函数，减半分配给<code>struct sz_info</code>的空间：</p>
+<pre><code class="language-c">for (int k = 0; k &lt; nsizes; k++) {
+    lst_init(&amp;bd_sizes[k].free);
+    sz = sizeof(char)* ROUNDUP(NBLK(k), 16)/16;
+    bd_sizes[k].alloc = p;
+    memset(bd_sizes[k].alloc, 0, sz);
+    p += sz;
+  }
+</code></pre>
+<p>Buddy alloctor管理内存时会在内存区域头部存放metadata，所以有部分的空间是不可用的（unavailable），通过以下代码可知：</p>
+<pre><code class="language-c">// done allocating; mark the memory range [base, p) as allocated, so
+  // that buddy will not hand out that memory.
+  int meta = bd_mark_data_structures(p);
+  
+  // mark the unavailable memory range [end, HEAP_SIZE) as allocated,
+  // so that buddy will not hand out that memory.
+  int unavailable = bd_mark_unavailable(end, p);
+  void *bd_end = bd_base+BLK_SIZE(MAXSIZE)-unavailable;
+</code></pre>
+<p>所以可用的<code>available space</code>为<code>[p, end]</code>，之后在初始化每层的buddy时，需要考虑边界范围。之后通过函数<code>bd_initfree</code>对每层进行初始化，修改函数<code>bd_initfree</code>。</p>
+<p>在函数入口增加左右边界<code>min_left</code>，<code>max_right</code>，对应可用空间<code>[p, end]</code>。</p>
+<pre><code class="language-c">int free = bd_initfree(p, bd_end, p, end);
+</code></pre>
+<p>函数<code>bd_initfree</code>中，通过调用<code>bd_initfree_pair</code>分别对内存块和它的buddy进行初始化，所以初始化的操作在<code>bd_initfree_pair</code>中进行，对应修改<code>bd_initfree_pair</code>的函数入口，增加<code>min_left</code>和<code>max_right</code>。</p>
+<pre><code class="language-c">int
+bd_initfree(void *bd_left, void *bd_right, void *min_left, void *max_right) {
+  int free = 0;
+
+  for (int k = 0; k &lt; MAXSIZE; k++) {   // skip max size
+    int left = blk_index_next(k, bd_left);
+    int right = blk_index(k, bd_right);
+    free += bd_initfree_pair(k, left, min_left, max_right);
+    if(right &lt;= left)
+      continue;
+    free += bd_initfree_pair(k, right, min_left, max_right);
+  }
+  return free;
+}
+</code></pre>
+<p><code>bd_initfree_pair</code>函数通过判断传入的内存块是否已经allocted，以及它的buddy是否空闲来判断是将buddy放入free list还是该内存块放入free list。因为使用一个bit来同时记录一对buddy的alloc情况，所以需要修改判断函数<code>bit_isset</code>，新的函数命名为<code>new_bit_isset</code>，因为分配给alloc的空间减半，故其中将index除以2。</p>
+<pre><code class="language-c">void new_bit_set(char *array, int index) {
+  index /= 2;
+  char m = (1 &lt;&lt; (index % 8));
+  array[index/8] ^= m;
+}
+</code></pre>
+<p>若该内存块已经allocted，则判断buddy是否为free，方法为判断buddy的地址是否在可用空间内，即<code>[min_left, max_right)</code>。如果在可用空间之内，则将buddy加入free list，否则将该内存块加入free list。</p>
+<pre><code class="language-c">if(new_bit_isset(bd_sizes[k].alloc, bi)) {
+    // one of the pair is free
+	free = BLK_SIZE(k);
+    if(addr(k, buddy) &gt;= min_left &amp;&amp; addr(k, buddy) &lt; max_right)
+      lst_push(&amp;bd_sizes[k].free, addr(k, buddy));   // put buddy on free list
+    else
+      lst_push(&amp;bd_sizes[k].free, addr(k, bi));      // put bi on free list
+}
+</code></pre>
+<p>接着修改<code>bd_malloc</code>函数，将其中对alloc的set操作换为<code>new_bit_set</code>，通过异或操作，只用一个bit位来记录一对buddy的alloc情况，其中注意需要将index除以2。</p>
+<pre><code class="language-c">int new_bit_isset(char *array, int index) {
+  index /= 2;
+  char b = array[index/8];
+  char m = (1 &lt;&lt; (index % 8));
+  return (b &amp; m) == m;
+}
+</code></pre>
+<p>修改<code>bd_malloc</code>函数时，需要注意<code>set split</code>的函数仍然需要使用原来的<code>set</code>函数，只有对alloc的set函数需要进行替换。</p>
+<pre><code class="language-c">void * bd_malloc(uint64 nbytes)
+{
+  int fk, k;
+
+  acquire(&amp;lock);
+
+  // Find a free block &gt;= nbytes, starting with smallest k possible
+  fk = firstk(nbytes);
+  for (k = fk; k &lt; nsizes; k++) {
+    if(!lst_empty(&amp;bd_sizes[k].free))
+      break;
+  }
+  if(k &gt;= nsizes) { // No free blocks?
+    release(&amp;lock);
+    return 0;
+  }
+
+  // Found a block; pop it and potentially split it.
+  char *p = lst_pop(&amp;bd_sizes[k].free);
+  new_bit_set(bd_sizes[k].alloc, blk_index(k, p));
+  for(; k &gt; fk; k--) {
+    // split a block at size k and mark one half allocated at size k-1
+    // and put the buddy on the free list at size k-1
+    char *q = p + BLK_SIZE(k-1);   // p's buddy
+    bit_set(bd_sizes[k].split, blk_index(k, p));
+    new_bit_set(bd_sizes[k-1].alloc, blk_index(k-1, p));
+    lst_push(&amp;bd_sizes[k-1].free, q);
+  }
+  release(&amp;lock);
+
+  return p;
+}
+</code></pre>
+<p>对应的，修改<code>bd_mark</code>函数中对alloc声明部分的函数为<code>new_bit_set</code>，对<code>split</code>的声明部分不变：</p>
+<pre><code class="language-c">void bd_mark(void *start, void *stop) {
+  int bi, bj;
+
+  if (((uint64) start % LEAF_SIZE != 0) || ((uint64) stop % LEAF_SIZE != 0))
+    panic(&quot;bd_mark&quot;);
+
+  for (int k = 0; k &lt; nsizes; k++) {
+    bi = blk_index(k, start);
+    bj = blk_index_next(k, stop);
+    for(; bi &lt; bj; bi++) {
+      if(k &gt; 0) {
+        // if a block is allocated at size k, mark it as split too.
+        bit_set(bd_sizes[k].split, bi);
+      }
+      new_bit_set(bd_sizes[k].alloc, bi);
+    }
+  }
+}
+</code></pre>
+<p>最后，修改<code>bd_free</code>函数，其中判断函数修改为<code>new_bit_isset</code>，对buddy的alloc函数更换为<code>new_bit_set</code>：</p>
+<pre><code class="language-c">void bd_free(void *p) {
+  void *q;
+  int k;
+
+  acquire(&amp;lock);
+  for (k = size(p); k &lt; MAXSIZE; k++) {
+    int bi = blk_index(k, p);
+    int buddy = (bi % 2 == 0) ? bi+1 : bi-1;
+    new_bit_set(bd_sizes[k].alloc, bi); // free p at size k
+    if (new_bit_isset(bd_sizes[k].alloc, buddy)) {  // is buddy allocated?
+      break;   // break out of loop
+    }
+    // budy is free; merge with buddy
+    q = addr(k, buddy);
+    lst_remove(q);    // remove buddy from free list
+    if(buddy % 2 == 0) {
+      p = q;
+    }
+    // at size k+1, mark that the merged buddy pair isn't split
+    // anymore
+    bit_clear(bd_sizes[k+1].split, blk_index(k+1, p));
+  }
+  lst_push(&amp;bd_sizes[k].free, p);
+  release(&amp;lock);
+}
+</code></pre>
+<p>本实验主要通过使用动态声明buddy alloctor来优化xv6的文件系统。其中动态声明解决静态声明文件的大小限制，不用受限于file文件的结构体数目。同时，优化buddy alloctor，使用一个bit位来同时记录一对buddy的alloc情况，节省内存空间。</p>
+<p>实验过程中最主要的困难在于理解buddy alloctor的分配和释放逻辑，需要知道整个流程以及流程中的函数调用，需要看懂每个函数中每行代码的作用。之后需要修改其中关于alloc的部分，减少分配空间，重写set函数。</p>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/linux/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Linux</a>
+    
+    <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#操作系统</a>
+    
+</div>
+        
+        
+        
+
+
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/lizhihao/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/avatar.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/lizhihao/" class="block font-bold text-lg pb-1 mb-2 border-b">Li Zhihao</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:lzh821403039@163.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://example.com/" class="mr-1">
+                <i class="fab fa-github"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/" class="block">MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C3%E7%AC%94%E8%AE%B0/" class="block">MIT 6.S081/Fall 2019 Lab7 locks</a>
+        
+    </div>
+</div>
+
+        
+
+
+
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2 lg:col-start-2 lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">See Also</h2>
+        <div class="content">
+            
+            <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/">MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell</a>
+            <br />
+            
+            <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C3%E7%AC%94%E8%AE%B0/">MIT 6.S081/Fall 2019 Lab7 locks</a>
+            <br />
+            
+            <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C1%E7%AC%94%E8%AE%B0/">MIT 6.S081/Fall 2019 Lab1 Xv6 and Unix utilities</a>
+            <br />
+            
+            <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/gunicorn%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Gunicorn基本使用</a>
+            <br />
+            
+            <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85anaconda/">Ubuntu服务器安装Anaconda</a>
+            <br />
+            
+            <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">Linux配置虚拟环境</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

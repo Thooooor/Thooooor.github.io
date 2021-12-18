@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>Semi-Riemannian Graph Convolutional Networks | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="2021 NeurIPS《Semi-Riemannian Graph Convolutional Networks》半黎曼GCN 论文笔记">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"Semi-Riemannian Graph Convolutional Networks",
+      "item":"/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/"
+    },
+    "headline": "Semi-Riemannian Graph Convolutional Networks | 若虚杂记","datePublished": "2021-07-22T02:11:00+00:00",
+    "dateModified": "2021-07-22T02:11:00+00:00",
+    "wordCount":  191 ,
+    "author": {
+        "@type": "Person",
+        "name": ["lizhihao"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Li Zhihao",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/icon.png"
+        }
+        },
+    "description": "2021 NeurIPS《Semi-Riemannian Graph Convolutional Networks》半黎曼GCN 论文笔记"
+}
+</script><meta property="og:title" content="Semi-Riemannian Graph Convolutional Networks | 若虚杂记" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/" />
+
+
+
+
+<meta property="og:description" content="2021 NeurIPS《Semi-Riemannian Graph Convolutional Networks》半黎曼GCN 论文笔记" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-07-22T02:11:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-07-22T02:11:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="GNN" />
+
+<meta property="article:tag" content="NeurIPS" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2016-nips-variational-graph-auto-encoders/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">Semi-Riemannian Graph Convolutional Networks</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-07-22</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p><a href="https://arxiv.org/abs/2106.03134">NeurIPS 2021 Semi-Riemannian Graph Convolutional Networks</a></p>
+<p><a href="https://github.com/QGCN/QGCN">QGCN代码</a></p>
+</blockquote>
+<p>该论文推导出一个有理论支撑的半黎曼 GCN，它在图神经网络的上下文中对恒定非零曲率的半黎曼流形中的数据进行建模。 论文方法提供了足够灵活的几何归纳偏置，可以对混合异构拓扑进行建模，例如具有循环的分层图。</p>
+<p>比起黎曼流形，配备不定度量的半黎曼流形构成了更大的几何类别。 恒定非零曲率的半黎曼流形不仅概括了双曲流形和球面流形，而且还包含它们的子流形，从而提供特定于这些几何的归纳偏置。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721170804.png" alt="图1"></p>
+<blockquote>
+<p>具有两个时间维度的-1曲率四维伪双曲面的不同子流形。 通过固定一个时间维度$x_{0}$，诱导的子流形包括 ：(a)一个单层双曲面，(b) 双锥体，和 (c) 一个两层双曲面。</p>
+</blockquote>
+<h1 id="1-基础定义-preliminaries">1. 基础定义 Preliminaries</h1>
+<h2 id="11-semi-riemannian-manifolds-半黎曼流形">1.1 Semi-Riemannian manifolds 半黎曼流形</h2>
+<p>半黎曼流形（Semi-Riemannian manifolds），也称为伪黎曼流形（pseudo-Riemannian manifolds）其上有一光滑、对称、点点非退化的$(0,2)$​张量。此张量称为伪黎曼度量或伪度量张量。</p>
+<p>伪黎曼流形与黎曼流形的区别是它不需要正定（通常要求非退化）。因为每个正定形式都是非退化的，所以黎曼度量也是一个伪黎曼度量，亦即黎曼流形是伪黎曼流形的一种特例。</p>
+<h2 id="12-pseudo-hyperboloid-伪双曲面">1.2 Pseudo-hyperboloid 伪双曲面</h2>
+<p>伪双曲面被定义为周围伪欧几里得空间$R^{s,t+1}$​​​​​​中的子流形，维数为$ d = s + t + 1$​​​​​​，使用方程（1）中的标量积。可以用该标量诱导的范数$||x||^{2}_t=&lt;x,x&gt;<em>t$​​​​​来定义伪双曲面$Q</em>{\beta}^{s,t}$​​​​​ ：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721170453.png" alt=""></p>
+<p>其中，$\beta$是曲率的非零实数参数：</p>
+<ul>
+<li>$\beta&gt;0$：伪球面</li>
+<li>$\beta&lt;0$：伪双曲面</li>
+</ul>
+<p>因为$Q_{\beta}^{s,t}$和$Q_{-\beta}^{t+1,s-1}$之间是可互换的，所以只用考虑伪双曲面$Q_{-\beta}^{t+1,s-1}$一种情况即可。根据狭义相对论，$Q_{\beta}^{s,t}$中的一个点$x$可以解释为一个事件，其中最开始的$t+1$维是时间维度，后$s-1$维是空间维度。</p>
+<p>双曲流形和球面流形可以分别定义为伪双曲面的特殊情况，方法是将除第1维之外的所有时间维度设置为零得到双曲面流形，将所有空间维度设置为零得到球面流形，即
+$$
+H_{\beta}=Q_{\beta}^{s,1},S_{-\beta}=Q_{\beta}^{0,t}
+$$</p>
+<h2 id="13-geodesical-connectedness-测地连通性">1.3 Geodesical connectedness 测地连通性</h2>
+<p>半黎曼流形 M 是连通的，当 M 的任意两点都可以通过分段（断开的）测地线连接，每条测地线都是平滑测地线。 流形是测地连通(g-连通)的，如果任意两点都可以通过测地线平滑连接，其中这两个点称为 g-连通，否则称为 g-断开。</p>
+<p>伪双曲面是测地线完备但不是g-连通的流形，其中存在不能通过测地线平滑连接的点。</p>
+<h1 id="2-伪双曲面上的测地线工具-geodesic-tools-on-pseudo-hyperboloid">2. 伪双曲面上的测地线工具 Geodesic Tools on Pseudo-Hyperboloid</h1>
+<h2 id="21-diffeomorphism-of-pseudo-hyperboloid-伪双曲面的微分同胚">2.1 Diffeomorphism of Pseudo-Hyperboloid 伪双曲面的微分同胚</h2>
+<p>解决微分几何中的难点的一种标准方法是对其更容易操作的微分同胚流形执行操作。</p>
+<p>对于半黎曼流形，遵循微分同胚可以将伪双曲面分解为单位球体和欧几里得空间的乘积流形。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721175135.png" alt=""></p>
+<p>受此启发，我们提出了两个对偶微分同胚，将 x 映射到曲率为$-1/\beta$的球体和欧几里得空间的乘积流形。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721173617.png" alt=""></p>
+<p>定理 3.2 和定理 3.3 分别产生球面投影（用$\psi_{S}$​表示）和双曲投影（用$\psi_{H}$​​表示），并且映射点仍然位于伪双曲面的表面上，如图2(a)。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721184808.png" alt="图2"></p>
+<blockquote>
+<p>(a) 双曲投影（青色）和球面投影（绿色）分别将点 x（红色）映射到切向量$v_{s+1}$和$v_{t}$​；</p>
+<p>(b) 平行传输$P_{x\to y}^{\beta}(\xi)$​​沿正切方向$\xi$​​将正切向量$\zeta\in T_{x}Q_{\beta}^{s,t}$​​移动到正切空间$T_{y}Q_{\beta}^{s,t}$​​​；</p>
+<p>(c) 分段测地距离（绿色、青色和黑色）和近似部分（灰色）。</p>
+</blockquote>
+<p>事实上，通过推广定理 3.2 和定理 3.3，我们提出了一个更灵活的微分同胚，将伪双曲面分解为乘积流形：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721174932.png" alt=""></p>
+<p>在这种情况下，定理 3.2 和定理 3.3 可以看作是两个特例，分别设置$a=0,b=t$和$a=s,b=1$。当测地线工具在伪双曲面中没有明确定义时，定理 3.4 提供了可分解性作为分析和操作测地线的替代方法。</p>
+<p>定理 3.5 表明，并非定理 3.4 中的所有微分流形都是 g-连通的：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721175415.png" alt=""></p>
+<p>如图1(c)所示，空间维度将导致包含两个孤立的表的双曲子流形，这显然是不连接的。所以，我们必须将所有空间维度都投影到欧几里得空间$R$​中。</p>
+<h2 id="22-geodesic-tools-for-g-disconnected-pseudo-hyperboloid-用于g-不连通伪双曲面的测地线工具">2.2 Geodesic Tools for G-disconnected Pseudo-hyperboloid 用于G-不连通伪双曲面的测地线工具</h2>
+<h3 id="exponential-and-logarithmic-map-指数映射和对数映射">Exponential and Logarithmic Map 指数映射和对数映射</h3>
+<p>如上所述，伪双曲面$Q_{\beta}^{s,t}$是g-不连通的，我们将指数映射和对数映射应用到两个微分同胚流形中：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721180317.png" alt=""></p>
+<p>零空间维参考点 x 处的微分同胚映射运算是内在（intrinsic）的，这意味着它们是从伪双曲面上的点到由 x 引起的切线空间的双射函数，由定理 3.6 断言：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721180528.png" alt=""></p>
+<p>值得注意的是，微分同胚运算的内在性使它们保留了伪双曲面的几何表现力。 这与独立操纵每个组件中的切向量的乘积流形不同。</p>
+<h3 id="tangential-operations-切向操作">Tangential Operations 切向操作</h3>
+<p>通过以上定义的映射操作实现伪双曲面的切向操作：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721180817.png" alt=""></p>
+<p>其中$x$为参考点。</p>
+<h3 id="parallel-transport-平行传输">Parallel Transport 平行传输</h3>
+<p>伪双曲面中的平行传输可以定义为黎曼平行传输的组合。但是，当$ x $和$ y $​之间不存在测地线时，无法定义平行传输。 换句话说，$x $引起的切向量不能传递到正交邻域$U_{x}$​之外的点的切空间。 直观地，正交邻域满足以下性质：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721181344.png" alt=""></p>
+<p>这可以保证，如果一个点$y\notin U_{x}$，则它的对映点（antipodal point）$-y\in U_{x}$。又因为$T_{y}M$和$T_{-y}M$之间是平行的，所以对于不连通的点，$P_{x\to y}^{\beta}$可以定义为$P_{x\to -y}^{\beta}$。</p>
+<h3 id="geodesic-distance-测地距离">Geodesic Distance 测地距离</h3>
+<p>伪双曲面中两个点$x,y$​之间的诱导测地距离定义为测地线$\gamma(\tau)$​的弧长$d_{\gamma}=\sqrt{||\log_{x}(y)||<em>{t}^{2}}$；对于$\log</em>{x}(y)$​无法定义的情况，可以使用近似。如下：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721182058.png" alt=""></p>
+<h1 id="3-半黎曼gcn-semi-riemannian-gcns">3. 半黎曼GCN Semi-Riemannian GCNs</h1>
+<p>GCN 可以解释为在对每一层的节点特征进行线性变换后执行邻域聚合。我们通过在伪双曲面$Q_{\beta}^{(s,t)}$​中使用开发的测地线工具导出相应的操作来呈现半黎曼 GCN(Q-GCN)。</p>
+<h2 id="31-feature-initialization-特征初始化">3.1 Feature Initialization 特征初始化</h2>
+<p>首先，将欧氏空间中的特征映射到伪双曲面中。然后，我们通过执行由定理3.2或3.3组成的可微映射$\varphi:R_{*}^{t+1}\times R^{s}\to Q_{\beta}^{s,t}$来初始化节点特征。</p>
+<h2 id="32-tangential-transformation-正切变换">3.2 Tangential Transformation 正切变换</h2>
+<p>我们通过利用等式(3)中定义的指数映射和对数映射对切线空间执行欧几里德变换。具体来说，首先通过对数映射将隐藏特征映射到正切空间，然后执行欧几里得矩阵乘法，最后通过指数映射回到原来的流形中。</p>
+<p>每一层都执行以上过程，可定义为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721183543.png" alt=""></p>
+<h2 id="33-bias-translation-偏置平移">3.3 Bias Translation 偏置平移</h2>
+<p>为了避免模型崩溃，我们在正切变换后执行偏置平移。通过伪双曲面并行传输，可以通过将切向量平行传输到感兴趣点的切线空间来执行偏置平移。最后再通过指数映射回到原始流形。偏置平移操作可定义为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721183811.png" alt=""></p>
+<h2 id="34-tangential-aggregation-正切聚合">3.4 Tangential Aggregation 正切聚合</h2>
+<p>邻域特征的线性组合被提升到切线空间，这是微分流形中的一个内在操作。具体来说，Q-GCN在参考点$o$​的正切空间中聚合领域嵌入，再通过一个正切激活函数，最后将更新后的表示投影回流形。</p>
+<p>在每一层$l$，每个节点$i$的更新特征定义为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210721184201.png" alt=""></p>
+<p>将双曲空间中的逐层可训练曲率推广到伪双曲面，以捕获每层嵌入的正确比例。 最后一层的伪双曲面嵌入可用于下游任务，例如预测节点属性或链接。</p>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/gnn/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#GNN</a>
+    
+    <a href="/tags/neurips/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#NeurIPS</a>
+    
+</div>
+        
+        
+        
+
+
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/lizhihao/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/avatar.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/lizhihao/" class="block font-bold text-lg pb-1 mb-2 border-b">Li Zhihao</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:lzh821403039@163.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://example.com/" class="mr-1">
+                <i class="fab fa-github"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/" class="block">Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/" class="block">Graph Geometry Interaction Learning</a>
+        
+    </div>
+</div>
+
+        
+
+
+
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-semi-riemannian-manifolds-半黎曼流形">1.1 Semi-Riemannian manifolds 半黎曼流形</a></li>
+    <li><a href="#12-pseudo-hyperboloid-伪双曲面">1.2 Pseudo-hyperboloid 伪双曲面</a></li>
+    <li><a href="#13-geodesical-connectedness-测地连通性">1.3 Geodesical connectedness 测地连通性</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-diffeomorphism-of-pseudo-hyperboloid-伪双曲面的微分同胚">2.1 Diffeomorphism of Pseudo-Hyperboloid 伪双曲面的微分同胚</a></li>
+    <li><a href="#22-geodesic-tools-for-g-disconnected-pseudo-hyperboloid-用于g-不连通伪双曲面的测地线工具">2.2 Geodesic Tools for G-disconnected Pseudo-hyperboloid 用于G-不连通伪双曲面的测地线工具</a>
+      <ul>
+        <li><a href="#exponential-and-logarithmic-map-指数映射和对数映射">Exponential and Logarithmic Map 指数映射和对数映射</a></li>
+        <li><a href="#tangential-operations-切向操作">Tangential Operations 切向操作</a></li>
+        <li><a href="#parallel-transport-平行传输">Parallel Transport 平行传输</a></li>
+        <li><a href="#geodesic-distance-测地距离">Geodesic Distance 测地距离</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#31-feature-initialization-特征初始化">3.1 Feature Initialization 特征初始化</a></li>
+    <li><a href="#32-tangential-transformation-正切变换">3.2 Tangential Transformation 正切变换</a></li>
+    <li><a href="#33-bias-translation-偏置平移">3.3 Bias Translation 偏置平移</a></li>
+    <li><a href="#34-tangential-aggregation-正切聚合">3.4 Tangential Aggregation 正切聚合</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">See Also</h2>
+        <div class="content">
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/">Graph Geometry Interaction Learning</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2016-nips-variational-graph-auto-encoders/">Variational Graph Auto-encoder</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

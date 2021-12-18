@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NER on 若虚杂记</title>
+    <link>/tags/ner/</link>
+    <description>Recent content in NER on 若虚杂记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://beian.miit.gov.cn/&#34;&gt;粤ICP备19090631号&lt;/a&gt;
+</copyright>
+    <lastBuildDate>Sun, 18 Oct 2020 22:58:00 +0000</lastBuildDate><atom:link href="/tags/ner/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Joint Neural Model for Information Extraction with Global Features</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/ner/a-joint-neural-model-for-information-extraction-with-global-features/</link>
+      <pubDate>Sun, 18 Oct 2020 22:58:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/ner/a-joint-neural-model-for-information-extraction-with-global-features/</guid>
+      <description>2020 ACL会议《A Joint Neural Model for Information Extraction with Global Features》论文笔记</description>
+    </item>
+    
+  </channel>
+</rss>

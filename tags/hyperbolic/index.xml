@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hyperbolic on 若虚杂记</title>
+    <link>/tags/hyperbolic/</link>
+    <description>Recent content in Hyperbolic on 若虚杂记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://beian.miit.gov.cn/&#34;&gt;粤ICP备19090631号&lt;/a&gt;
+</copyright>
+    <lastBuildDate>Thu, 05 Aug 2021 22:55:00 +0000</lastBuildDate><atom:link href="/tags/hyperbolic/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lorentzian Graph Convolutional Networks</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-www-lorentzian-graph-convolutional-networks/</link>
+      <pubDate>Thu, 05 Aug 2021 22:55:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-www-lorentzian-graph-convolutional-networks/</guid>
+      <description>2021 WWW Lorentzian Graph Convolutional Networks 洛伦兹GCN 论文笔记</description>
+    </item>
+    
+    <item>
+      <title>Lorentzian Distance Learning for Hyperbolic Representations</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-representation/2019-icml-lorentzian-distance-learning-for-hyperbolic-representations/</link>
+      <pubDate>Thu, 05 Aug 2021 22:50:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-representation/2019-icml-lorentzian-distance-learning-for-hyperbolic-representations/</guid>
+      <description>2019 ICML Oral Lorentzian Distance Learning for Hyperbolic Representations 论文笔记</description>
+    </item>
+    
+    <item>
+      <title>A Hyperbolic-to-Hyperbolic Graph Convolutional Network</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/</link>
+      <pubDate>Thu, 05 Aug 2021 22:45:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/</guid>
+      <description>2021 CVPR Oral A Hyperbolic-to-Hyperbolic Graph Convolutional Network 双曲GCN 论文笔记</description>
+    </item>
+    
+    <item>
+      <title>HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/</link>
+      <pubDate>Wed, 28 Jul 2021 23:58:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/</guid>
+      <description>2021 WWW 双曲协同过滤模型 HGCN</description>
+    </item>
+    
+    <item>
+      <title>Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/</link>
+      <pubDate>Wed, 28 Jul 2021 22:56:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/</guid>
+      <description>2021 ACL-IJCNLP 双曲时序知识图谱嵌入 HERCULES 对ATTH的改进</description>
+    </item>
+    
+  </channel>
+</rss>

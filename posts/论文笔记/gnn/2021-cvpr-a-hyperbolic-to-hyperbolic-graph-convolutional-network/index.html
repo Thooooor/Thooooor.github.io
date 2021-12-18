@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>A Hyperbolic-to-Hyperbolic Graph Convolutional Network | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="2021 CVPR Oral A Hyperbolic-to-Hyperbolic Graph Convolutional Network 双曲GCN 论文笔记">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"A Hyperbolic-to-Hyperbolic Graph Convolutional Network",
+      "item":"/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/"
+    },
+    "headline": "A Hyperbolic-to-Hyperbolic Graph Convolutional Network | 若虚杂记","datePublished": "2021-08-05T22:45:00+00:00",
+    "dateModified": "2021-08-05T22:45:00+00:00",
+    "wordCount":  129 ,
+    "author": {
+        "@type": "Person",
+        "name": ["lizhihao"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Li Zhihao",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/icon.png"
+        }
+        },
+    "description": "2021 CVPR Oral A Hyperbolic-to-Hyperbolic Graph Convolutional Network 双曲GCN 论文笔记"
+}
+</script><meta property="og:title" content="A Hyperbolic-to-Hyperbolic Graph Convolutional Network | 若虚杂记" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/" />
+
+
+
+
+<meta property="og:description" content="2021 CVPR Oral A Hyperbolic-to-Hyperbolic Graph Convolutional Network 双曲GCN 论文笔记" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-08-05T22:45:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-08-05T22:45:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="GNN" />
+
+<meta property="article:tag" content="CVPR" />
+
+<meta property="article:tag" content="Hyperbolic" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2016-nips-variational-graph-auto-encoders/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">A Hyperbolic-to-Hyperbolic Graph Convolutional Network</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-05</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p>2021 CVPR Oral <a href="https://arxiv.org/abs/2104.06942">A Hyperbolic-to-Hyperbolic Graph Convolutional Network</a></p>
+</blockquote>
+<p>双曲线图卷积网络 (GCN) 展示了对具有层次结构的图进行建模的强大表示能力。现有的双曲 GCN 求助于切线空间来实现双曲流形上的图卷积，该过程遵循流形-切线-流形方案，如图 1(a) 所示。然而，流形和切线空间之间的映射只是局部微分同胚，这可能会扭曲双曲流形的全局结构，尤其是大量使用切线空间近似之后。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729232119.png" alt="图1（a）"></p>
+<p>本文提出了一种直接作用于双曲流形的双曲线到双曲线图卷积网络（H2H-GCN），H2H-GCN 避免了由切线空间近似引起的失真并保持全局双曲结构。具体来说，如图1（b）所示，H2H-GCN是一个保留流形的图卷积，它由双曲特征变换和双曲邻域聚合组成。 双曲特征变换作为双曲流形上的线性变换起作用，它通过对变换子矩阵施加正交约束来确保变换后的节点表示仍然位于双曲流形上。 对于双曲线邻域聚合，通过爱因斯坦中点作为邻居节点的加权消息来更新每个节点表示。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729232532.png" alt="图1（b）"></p>
+<h1 id="1-preliminaries">1. Preliminaries</h1>
+<h2 id="11-hyperbolic-spaces">1.1 Hyperbolic Spaces</h2>
+<p>一个$n$维双曲空间的洛伦兹模型定义为$L=\lbrace x=[x_{0},x_{1},&hellip;,x_{n}]\in R^{n+1}:&lt;x,x&gt;<em>{L}=-1,x</em>{0}&gt;0\rbrace$，度量张量为$g=\mathrm{diag}([-1,1_{n}^{\top}])$。由$g$诱导的洛伦兹内积为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729233312.png" alt=""></p>
+<p>接下来是一些必要操作的定义。</p>
+<h3 id="距离-distance">距离 Distance</h3>
+<p>两个点之间的测地线距离（最短距离）：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729233410.png" alt=""></p>
+<h3 id="指数对数映射-exponential-and-logarithmic-maps">指数、对数映射 Exponential and logarithmic maps</h3>
+<p>通过指数映射和对数映射实现双曲空间和正切空间之间的切换：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729233520.png" alt=""></p>
+<h3 id="等距同构-isometric-isomorphism">等距同构 Isometric isomorphism</h3>
+<p>另外两个常见双曲模型为庞加莱模型和克莱因模型。洛伦兹模型和庞加莱模型之间的双射：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729233818.png" alt=""></p>
+<p>洛伦兹模型和克莱因模型之间的双射：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729233848.png" alt=""></p>
+<p>图2给出三种模型之间的几何关系。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729233938.png" alt="图2"></p>
+<h2 id="12-gcns">1.2 GCNs</h2>
+<p>在 GCN 的第$l$层，图卷积可以分为两个步骤。</p>
+<h3 id="特征变换-feature-transformation">特征变换 Feature Transformation</h3>
+<p><img src="http://note.lizhihao999.cn/notes/20210729234241.png" alt=""></p>
+<h3 id="邻域聚合-neighborhood-aggregation">邻域聚合 Neighborhood Aggregation</h3>
+<p><img src="http://note.lizhihao999.cn/notes/20210729234322.png" alt=""></p>
+<p>通过堆叠多个图卷积层，特征转换使 GCN 能够为目标任务学习理想的节点嵌入；邻域聚合使 GCN 能够利用图拓扑结构。</p>
+<h1 id="2-hyperbolic-to-hyperbolic-gcn">2. Hyperbolic-to-Hyperbolic GCN</h1>
+<p>H2H-GCN 直接对双曲流形进行图卷积以保持全局双曲结构。</p>
+<h2 id="21-hyperbolic-node-representations">2.1 Hyperbolic Node Representations</h2>
+<p>H2H-GCN 使用方程（3）中定义的指数映射在洛伦兹模型上生成双曲线节点表示：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730001229.png" alt=""></p>
+<p>可以合理地认为$[0,x_{i}^{E}]$作为原点 o 处切空间上的节点。</p>
+<h2 id="22-hyperbolic-feature-transformation">2.2 Hyperbolic Feature Transformation</h2>
+<p>等式（7）中定义的（欧几里德）GCN 中的特征变换是通过矩阵向量乘法实现的线性变换。尽管如此，在将矩阵向量乘法应用于双曲节点表示时，它将打破双曲流形约束，使变换后的节点不位于双曲流形上，可以通过洛伦兹线性变换来解决这个问题。</p>
+<h3 id="定义1-洛伦兹线性变换">定义1. 洛伦兹线性变换</h3>
+<p>对于$\forall x\in L$，洛伦兹变换定义为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730010335.png" alt=""></p>
+<p>其中$W$​为变换矩阵，$\hat{W}$​是变换子矩阵，$0$代表为零的列向量，$I$代表单位矩阵。</p>
+<p>利用洛伦兹线性变换作为 H2H-GCN 中的双曲特征变换。在第$l$层，前一层的节点表示$h_{i}^{l-1,L}$和变换矩阵$W^{l}$作为输入。第$i$个节点的中间表示：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730013600.png" alt=""></p>
+<p>对于第0层，$h_{i}^{0,L}=x_{i}^{L}$​.</p>
+<h2 id="23-hyperbolic-neighborhood-aggregation">2.3 Hyperbolic Neighborhood Aggregation</h2>
+<p>双曲空间中欧几里得均值聚合的推广是 Frechet 均值。 然而，Frechet 均值很难应用，因为它没有封闭形式的解决方案。 所以采用爱因斯坦中点作为 H2H-GCN 中的双曲邻域聚合。在这种情况下，双曲邻域聚合具有两个理想的特性：</p>
+<ol>
+<li>平移不变性</li>
+<li>旋转不变性。</li>
+</ol>
+<p>聚合双曲线平均对于将输入节点集沿共同方向平移相同距离是不变的，并且对于将输入节点集绕原点旋转相同角度是不变的。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730014456.png" alt="图3"></p>
+<p>爱因斯坦中点采用克莱因模型中的形式，如图 3 所示。所以，首先需要将洛伦兹模型的中间节点表示投影到克莱因模型，然后通过爱因斯坦中点计算双曲线平均值，最后Klein 模型上的聚合双曲线平均值被投影回 Lorentz 模型。形式上定义为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730014606.png" alt=""></p>
+<p>非线性激活在 GCN 中起着重要作用，它可以防止多层网络崩溃成单层网络。然而，在洛伦兹表示上应用常用的非线性激活函数（例如，ReLU）将打破洛伦兹模型的流形约束。 因为 Poincare 球模型上的非线性激活是保持流形的，所以将双曲线平均值$m_{i}^{l,L}$​投影到 Poincare 球模型以应用非线性激活，然后将结果投影回洛伦兹模型：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210730014908.png" alt=""></p>
+<h2 id="24-h2h-gcn-architecture">2.4 H2H-GCN Architecture</h2>
+<p>总结H2H-GCN嵌入生成算法如算法1所示：给定图$G=(V,E)$：</p>
+<ol>
+<li>将欧几里得特征映射到双曲空间；</li>
+<li>初始化后的双曲节点特征再通过多层的H2H-GCN；</li>
+<li>对于第$l$层：
+<ol>
+<li>对输入的节点特征进行<strong>双曲特征变换</strong>；</li>
+<li>进行<strong>双曲邻域聚合</strong>；</li>
+<li>通过非线性激活函数。</li>
+</ol>
+</li>
+<li>经过$L$​层后，得到最终的H2H-GCN节点嵌入。</li>
+</ol>
+<p><img src="http://note.lizhihao999.cn/notes/20210730015453.png" alt="算法1"></p>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/gnn/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#GNN</a>
+    
+    <a href="/tags/cvpr/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#CVPR</a>
+    
+    <a href="/tags/hyperbolic/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Hyperbolic</a>
+    
+</div>
+        
+        
+        
+
+
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/lizhihao/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/avatar.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/lizhihao/" class="block font-bold text-lg pb-1 mb-2 border-b">Li Zhihao</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:lzh821403039@163.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://example.com/" class="mr-1">
+                <i class="fab fa-github"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-representation/2019-icml-lorentzian-distance-learning-for-hyperbolic-representations/" class="block">Lorentzian Distance Learning for Hyperbolic Representations</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/" class="block">HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering</a>
+        
+    </div>
+</div>
+
+        
+
+
+
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-hyperbolic-spaces">1.1 Hyperbolic Spaces</a>
+      <ul>
+        <li><a href="#距离-distance">距离 Distance</a></li>
+        <li><a href="#指数对数映射-exponential-and-logarithmic-maps">指数、对数映射 Exponential and logarithmic maps</a></li>
+        <li><a href="#等距同构-isometric-isomorphism">等距同构 Isometric isomorphism</a></li>
+      </ul>
+    </li>
+    <li><a href="#12-gcns">1.2 GCNs</a>
+      <ul>
+        <li><a href="#特征变换-feature-transformation">特征变换 Feature Transformation</a></li>
+        <li><a href="#邻域聚合-neighborhood-aggregation">邻域聚合 Neighborhood Aggregation</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-hyperbolic-node-representations">2.1 Hyperbolic Node Representations</a></li>
+    <li><a href="#22-hyperbolic-feature-transformation">2.2 Hyperbolic Feature Transformation</a>
+      <ul>
+        <li><a href="#定义1-洛伦兹线性变换">定义1. 洛伦兹线性变换</a></li>
+      </ul>
+    </li>
+    <li><a href="#23-hyperbolic-neighborhood-aggregation">2.3 Hyperbolic Neighborhood Aggregation</a></li>
+    <li><a href="#24-h2h-gcn-architecture">2.4 H2H-GCN Architecture</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">See Also</h2>
+        <div class="content">
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/">HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/">Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/">Semi-Riemannian Graph Convolutional Networks</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/">Graph Geometry Interaction Learning</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2016-nips-variational-graph-auto-encoders/">Variational Graph Auto-encoder</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

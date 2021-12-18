@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>KDD on 若虚杂记</title>
+    <link>/tags/kdd/</link>
+    <description>Recent content in KDD on 若虚杂记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://beian.miit.gov.cn/&#34;&gt;粤ICP备19090631号&lt;/a&gt;
+</copyright>
+    <lastBuildDate>Mon, 16 Aug 2021 22:08:00 +0000</lastBuildDate><atom:link href="/tags/kdd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Handling Information Loss of Graph Neural Networks for Session-based Recommendation</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-kdd-handling-information-loss-of-graph-neural-networks-for-session-based-recommendation/</link>
+      <pubDate>Mon, 16 Aug 2021 22:08:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-kdd-handling-information-loss-of-graph-neural-networks-for-session-based-recommendation/</guid>
+      <description>2020 KDD 优化推荐中GNN的信息损失问题</description>
+    </item>
+    
+    <item>
+      <title>struc2vec Learning Node Representations from Structural Identity</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/graph-embedding/2017-kdd-struc2vec-learning-node-representations-from-structural-identity/</link>
+      <pubDate>Thu, 15 Jul 2021 01:36:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/graph-embedding/2017-kdd-struc2vec-learning-node-representations-from-structural-identity/</guid>
+      <description>2017 KDD 经典图嵌入方法 struc2vec</description>
+    </item>
+    
+  </channel>
+</rss>

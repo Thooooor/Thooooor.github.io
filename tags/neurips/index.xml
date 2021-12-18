@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>NeurIPS on 若虚杂记</title>
+    <link>/tags/neurips/</link>
+    <description>Recent content in NeurIPS on 若虚杂记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://beian.miit.gov.cn/&#34;&gt;粤ICP备19090631号&lt;/a&gt;
+</copyright>
+    <lastBuildDate>Thu, 22 Jul 2021 02:11:00 +0000</lastBuildDate><atom:link href="/tags/neurips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Semi-Riemannian Graph Convolutional Networks</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/</link>
+      <pubDate>Thu, 22 Jul 2021 02:11:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/</guid>
+      <description>2021 NeurIPS《Semi-Riemannian Graph Convolutional Networks》半黎曼GCN 论文笔记</description>
+    </item>
+    
+    <item>
+      <title>Graph Geometry Interaction Learning</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/</link>
+      <pubDate>Wed, 21 Jul 2021 23:53:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/</guid>
+      <description>2020 NeurIPS《Graph Geometry Interaction Learning》图形几何交互学习 (GIL)论文笔记</description>
+    </item>
+    
+  </channel>
+</rss>

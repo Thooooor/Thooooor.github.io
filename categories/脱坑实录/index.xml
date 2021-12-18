@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>脱坑实录 on 若虚杂记</title>
+    <link>/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/</link>
+    <description>Recent content in 脱坑实录 on 若虚杂记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://beian.miit.gov.cn/&#34;&gt;粤ICP备19090631号&lt;/a&gt;
+</copyright>
+    <lastBuildDate>Thu, 05 Aug 2021 23:02:00 +0000</lastBuildDate><atom:link href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>近期踩坑</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E8%BF%91%E6%9C%9F%E8%B8%A9%E5%9D%91/</link>
+      <pubDate>Thu, 05 Aug 2021 23:02:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E8%BF%91%E6%9C%9F%E8%B8%A9%E5%9D%91/</guid>
+      <description>近期踩坑记录，不定期整理</description>
+    </item>
+    
+    <item>
+      <title>tmux实现Linux下的终端复用</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/tmux%E5%AE%9E%E7%8E%B0linux%E4%B8%8B%E7%9A%84%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8/</link>
+      <pubDate>Mon, 19 Jul 2021 08:36:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/tmux%E5%AE%9E%E7%8E%B0linux%E4%B8%8B%E7%9A%84%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8/</guid>
+      <description>在Linux-Ubuntu服务器上安装使用tmux，断开SSH后可以继续执行操作</description>
+    </item>
+    
+    <item>
+      <title>安装PyTorch和PyTorch Geometric</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E5%AE%89%E8%A3%85pytorch%E5%92%8Cpytorch-geometric/</link>
+      <pubDate>Fri, 02 Jul 2021 00:57:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E5%AE%89%E8%A3%85pytorch%E5%92%8Cpytorch-geometric/</guid>
+      <description>根据CUDA版本安装PyTorch和PyTorch Geometric</description>
+    </item>
+    
+    <item>
+      <title>Linux多版本CUDA安装及切换</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E5%A4%9A%E7%89%88%E6%9C%ACcuda%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%87%E6%8D%A2/</link>
+      <pubDate>Thu, 01 Jul 2021 23:33:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E5%A4%9A%E7%89%88%E6%9C%ACcuda%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%87%E6%8D%A2/</guid>
+      <description>在Linux-Ubuntu服务器上安装使用多版本CUDA并通过软连接进行切换</description>
+    </item>
+    
+    <item>
+      <title>Gunicorn基本使用</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/gunicorn%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link>
+      <pubDate>Fri, 03 Apr 2020 09:25:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/gunicorn%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid>
+      <description>在Ubuntu服务器上使用Gunicorn</description>
+    </item>
+    
+    <item>
+      <title>Ubuntu服务器安装Anaconda</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85anaconda/</link>
+      <pubDate>Fri, 03 Apr 2020 09:25:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85anaconda/</guid>
+      <description>在Ubuntu服务器上安装Anaconda</description>
+    </item>
+    
+    <item>
+      <title>Linux配置虚拟环境</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/</link>
+      <pubDate>Sun, 29 Mar 2020 09:25:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/</guid>
+      <description>在Ubuntu服务器上配置管理虚拟环境</description>
+    </item>
+    
+    <item>
+      <title>Pycharm远程调试</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/pycharm%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/</link>
+      <pubDate>Sat, 28 Mar 2020 09:25:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/pycharm%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/</guid>
+      <description>在Ubuntu服务器上安装Anaconda</description>
+    </item>
+    
+  </channel>
+</rss>

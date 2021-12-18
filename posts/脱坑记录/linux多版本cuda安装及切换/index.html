@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>Linux多版本CUDA安装及切换 | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="在Linux-Ubuntu服务器上安装使用多版本CUDA并通过软连接进行切换">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"Linux多版本CUDA安装及切换",
+      "item":"/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E5%A4%9A%E7%89%88%E6%9C%ACcuda%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%87%E6%8D%A2/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E5%A4%9A%E7%89%88%E6%9C%ACcuda%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%87%E6%8D%A2/"
+    },
+    "headline": "Linux多版本CUDA安装及切换 | 若虚杂记","datePublished": "2021-07-01T23:33:00+00:00",
+    "dateModified": "2021-07-01T23:33:00+00:00",
+    "wordCount":  110 ,
+    "author": {
+        "@type": "Person",
+        "name": ["lizhihao"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Li Zhihao",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/icon.png"
+        }
+        },
+    "description": "在Linux-Ubuntu服务器上安装使用多版本CUDA并通过软连接进行切换"
+}
+</script><meta property="og:title" content="Linux多版本CUDA安装及切换 | 若虚杂记" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E5%A4%9A%E7%89%88%E6%9C%ACcuda%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%87%E6%8D%A2/" />
+
+
+
+
+<meta property="og:description" content="在Linux-Ubuntu服务器上安装使用多版本CUDA并通过软连接进行切换" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-07-01T23:33:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-07-01T23:33:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Linux" />
+
+<meta property="article:tag" content="Ubuntu" />
+
+<meta property="article:tag" content="cuda" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/gunicorn%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" />
+
+<meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85anaconda/" />
+
+<meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" />
+
+<meta property="og:see_also" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/" />
+
+<meta property="og:see_also" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C4%E7%AC%94%E8%AE%B0/" />
+
+<meta property="og:see_also" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C3%E7%AC%94%E8%AE%B0/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">Linux多版本CUDA安装及切换</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-07-01</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="hover:text-eureka">脱坑实录</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <h1 id="1-linux安装cuda">1. Linux安装cuda</h1>
+<h2 id="1-下载cuda">1. 下载CUDA</h2>
+<p>根据需要选择对应的CUDA Toolkit版本<a href="https://developer.nvidia.com/cuda-toolkit-archive">下载</a>：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210701142824.png" alt=""></p>
+<p>选择自己对应的操作系统、结构、系统版本等之后，根据命令进行下载：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210701150049.png" alt=""></p>
+<p>如果不知道对应信息可以通过第二点进行查看。<strong>推荐下载runfile</strong>，可以直接跳到第三点讲解如何安装。</p>
+<h2 id="2-确认系统版本">2. 确认系统版本</h2>
+<p>选择对应系统的下载教程：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210701143208.png" alt=""></p>
+<p>按照官方文档的指引，确认自己的系统和GPU是否满足条件。</p>
+<h3 id="1-确认gpu">1. 确认GPU</h3>
+<p>首先确认GPU是否支持CUDA，对照<a href="https://developer.nvidia.com/zh-cn/cuda-gpus">官方列表</a>，通过以下命令查看自己的GPU：</p>
+<pre><code class="language-shell">lspci | grep -i nvidia
+</code></pre>
+<p><img src="http://note.lizhihao999.cn/notes/20210701144448.png" alt=""></p>
+<h3 id="2-确认linux系统版本">2. 确认Linux系统版本</h3>
+<p>通过以下命令查看自己的系统版本：</p>
+<pre><code class="language-shell">uname -m &amp;&amp; cat /etc/*release
+</code></pre>
+<p><img src="http://note.lizhihao999.cn/notes/20210701144740.png" alt=""></p>
+<p>主要注意以上两个信息，对比文档中给出的表格：</p>
+<img src="http://note.lizhihao999.cn/notes/20210701144857.png" style="zoom:80%;" />
+<h3 id="3-确认安装gcc">3. 确认安装gcc</h3>
+<p>使用CUDA Toolkit进行开发需要gcc编译器，它通常是作为Linux安装的一部分安装的。可通过以下命令确认：</p>
+<pre><code class="language-shell">gcc --version
+</code></pre>
+<h3 id="4-确认系统有正确的内核头文件和正确的依赖包">4. 确认系统有正确的内核头文件和正确的依赖包</h3>
+<p>文档给出不同Linux系统的安装命令，比如Ubuntu：</p>
+<pre><code class="language-shell">sudo apt-get install linux-headers-$(uname -r)
+</code></pre>
+<h2 id="3-runfile安装">3. Runfile安装</h2>
+<p>下载好runfile文件之后，根据之前给出的指令进行安装：</p>
+<pre><code class="language-shell">sudo sh cuda_10.1.243_418.87.00_linux.run
+</code></pre>
+<h2 id="4-修改环境变量">4. 修改环境变量</h2>
+<p>下一节讲解如何通过软连接进行不同版本cuda之间的切换，在环境变量中只用指向一个软连接的文件夹<code>cuda</code>即可，首先编辑环境变量：</p>
+<pre><code class="language-shell">vim ~/.bashrc
+</code></pre>
+<p>在末尾添加：</p>
+<pre><code class="language-shell">export PATH=$PATH:/usr/local/cuda-10.0/bin
+export CUDA_HOME=$CUDA_HOME:/usr/local/cuda
+</code></pre>
+<p>修改之后需要使环境变量生效：</p>
+<pre><code class="language-shell">source ~/.bashrc
+</code></pre>
+<h2 id="5-查看cuda安装状态">5. 查看cuda安装状态</h2>
+<p>查看cuda-toolkit是否安装成功：</p>
+<pre><code class="language-shell">nvcc -V
+</code></pre>
+<p>查看显卡驱动运行情况：</p>
+<pre><code class="language-shell">nvidia-smi
+</code></pre>
+<h1 id="2-linux多版本cuda切换">2. Linux多版本cuda切换</h1>
+<p>当我们安装了多个版本的cuda时，可以将每个版本的cuda放在对应版本命名的文件夹<code>cuda-x.x</code>下，在建立一个CUDA的软连接，环境变量的路径直接指向CUDA的软连接，切换CUDA版本时只用删除当前的软连接，再指向需要版本的软连接即可。</p>
+<h2 id="1-建立软连接">1. 建立软连接</h2>
+<p>cuda一般安装在 /usr/local/路径下，首先进入该文件夹并建立一个空的<code>cuda</code>文件夹：</p>
+<pre><code class="language-shell">cd /usr/local
+sudo mkdir cuda
+</code></pre>
+<p>然后建立软连接，以<code>cuda-9.2</code>为例：</p>
+<pre><code class="language-shell">sudo ln -s cuda-9.2 cuda
+</code></pre>
+<p>查看<code>cuda</code>文件夹下的version.txt文档，里面记录了cuda的版本信息：</p>
+<pre><code class="language-shell">cat  cuda/version.txt
+</code></pre>
+<p><img src="http://note.lizhihao999.cn/notes/20210718235109.png" alt=""></p>
+<p>可以通过<code>stat</code>命令查看当前的cuda信息：</p>
+<pre><code class="language-shell">stat cuda
+</code></pre>
+<p><img src="http://note.lizhihao999.cn/notes/20210701140523.png" alt=""></p>
+<h2 id="2-切换软连接">2. 切换软连接</h2>
+<p>查看我们的所有的cuda版本，默认保存在/usr/local路径下：</p>
+<pre><code class="language-shell">cd /usr/local
+ls
+</code></pre>
+<p><img src="http://note.lizhihao999.cn/notes/20210701140137.png" alt=""></p>
+<p>这里我安装有三个版本。可以更改symbolic link，使其指向其他版本的cuda，例如10.0：</p>
+<pre><code class="language-shell">rm -rf cuda
+ln -s cuda-10.0 cuda
+</code></pre>
+<p>再次查看cuda版本和软连接情况：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210718235323.png" alt=""></p>
+<p>看到已经切换到10.0版本的cuda了。</p>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/linux/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Linux</a>
+    
+    <a href="/tags/ubuntu/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Ubuntu</a>
+    
+    <a href="/tags/cuda/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#cuda</a>
+    
+</div>
+        
+        
+        
+
+
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/lizhihao/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/avatar.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/lizhihao/" class="block font-bold text-lg pb-1 mb-2 border-b">Li Zhihao</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:lzh821403039@163.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://example.com/" class="mr-1">
+                <i class="fab fa-github"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E5%AE%89%E8%A3%85pytorch%E5%92%8Cpytorch-geometric/" class="block">安装PyTorch和PyTorch Geometric</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2016-nips-variational-graph-auto-encoders/" class="block">Variational Graph Auto-encoder</a>
+        
+    </div>
+</div>
+
+        
+
+
+
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-下载cuda">1. 下载CUDA</a></li>
+    <li><a href="#2-确认系统版本">2. 确认系统版本</a>
+      <ul>
+        <li><a href="#1-确认gpu">1. 确认GPU</a></li>
+        <li><a href="#2-确认linux系统版本">2. 确认Linux系统版本</a></li>
+        <li><a href="#3-确认安装gcc">3. 确认安装gcc</a></li>
+        <li><a href="#4-确认系统有正确的内核头文件和正确的依赖包">4. 确认系统有正确的内核头文件和正确的依赖包</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-runfile安装">3. Runfile安装</a></li>
+    <li><a href="#4-修改环境变量">4. 修改环境变量</a></li>
+    <li><a href="#5-查看cuda安装状态">5. 查看cuda安装状态</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#1-建立软连接">1. 建立软连接</a></li>
+    <li><a href="#2-切换软连接">2. 切换软连接</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">See Also</h2>
+        <div class="content">
+            
+            <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/gunicorn%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">Gunicorn基本使用</a>
+            <br />
+            
+            <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85anaconda/">Ubuntu服务器安装Anaconda</a>
+            <br />
+            
+            <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">Linux配置虚拟环境</a>
+            <br />
+            
+            <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/">MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell</a>
+            <br />
+            
+            <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C4%E7%AC%94%E8%AE%B0/">MIT 6.S081/Fall 2019 Lab3 Allocator for xv6</a>
+            <br />
+            
+            <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C3%E7%AC%94%E8%AE%B0/">MIT 6.S081/Fall 2019 Lab7 locks</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

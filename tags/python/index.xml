@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on 若虚杂记</title>
+    <link>/tags/python/</link>
+    <description>Recent content in Python on 若虚杂记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://beian.miit.gov.cn/&#34;&gt;粤ICP备19090631号&lt;/a&gt;
+</copyright>
+    <lastBuildDate>Fri, 02 Jul 2021 00:57:00 +0000</lastBuildDate><atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>安装PyTorch和PyTorch Geometric</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E5%AE%89%E8%A3%85pytorch%E5%92%8Cpytorch-geometric/</link>
+      <pubDate>Fri, 02 Jul 2021 00:57:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E5%AE%89%E8%A3%85pytorch%E5%92%8Cpytorch-geometric/</guid>
+      <description>根据CUDA版本安装PyTorch和PyTorch Geometric</description>
+    </item>
+    
+    <item>
+      <title>Matplotlib中文显示</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/matplotlib%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA/</link>
+      <pubDate>Mon, 11 Jan 2021 19:23:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/matplotlib%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA/</guid>
+      <description>Matplotlib设置中文显示</description>
+    </item>
+    
+  </channel>
+</rss>

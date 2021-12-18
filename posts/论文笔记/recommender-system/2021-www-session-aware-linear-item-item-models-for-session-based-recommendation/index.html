@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>Session-aware Linear Item-Item Models for Session-based Recommendation | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="2021 WWW 基于会话的推荐系统 线性Item-Item模型">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"Session-aware Linear Item-Item Models for Session-based Recommendation",
+      "item":"/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-session-aware-linear-item-item-models-for-session-based-recommendation/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-session-aware-linear-item-item-models-for-session-based-recommendation/"
+    },
+    "headline": "Session-aware Linear Item-Item Models for Session-based Recommendation | 若虚杂记","datePublished": "2021-08-07T23:58:00+00:00",
+    "dateModified": "2021-08-07T23:58:00+00:00",
+    "wordCount":  255 ,
+    "author": {
+        "@type": "Person",
+        "name": ["lizhihao"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Li Zhihao",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/icon.png"
+        }
+        },
+    "description": "2021 WWW 基于会话的推荐系统 线性Item-Item模型"
+}
+</script><meta property="og:title" content="Session-aware Linear Item-Item Models for Session-based Recommendation | 若虚杂记" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-session-aware-linear-item-item-models-for-session-based-recommendation/" />
+
+
+
+
+<meta property="og:description" content="2021 WWW 基于会话的推荐系统 线性Item-Item模型" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-08-07T23:58:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-08-07T23:58:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Recommender System" />
+
+<meta property="article:tag" content="WWW" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-www-lorentzian-graph-convolutional-networks/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">Session-aware Linear Item-Item Models for Session-based Recommendation</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-07</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>2 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p><a href="https://arxiv.org/abs/2103.16104">Session-aware Linear Item-Item Models for Session-based Recommendation (arxiv.org)</a></p>
+<p><a href="https://github.com/jin530/SLIST">https://github.com/jin530/SLIST</a></p>
+</blockquote>
+<p>基于会话的推荐旨在根据会话中先前消费的物品的序列预测下一个物品，例如电子商务或多媒体流服务。 具体来说，会话数据表现出一些独特的特征，即会话一致性和会话内物品的顺序依赖性、重复的物品消费和会话时效性。 本文提出了简单而有效的线性模型来考虑会话的整体方面。具体来说：</p>
+<ol>
+<li>综合考虑了基于会话的推荐的各个方面；</li>
+<li>实现了可扩展性。</li>
+</ol>
+<p>首先，设计了两个专注于会话不同属性的线性模型：</p>
+<ol>
+<li>Session-aware Linear Item Similarity (SLIS) 模型旨在更好地处理会话一致性；</li>
+<li>Session-aware Linear Item Transition (SLIT) 模型更关注顺序依赖。</li>
+</ol>
+<p>对于 SLIS 和 SLIT，放宽合并重复项的约束，并引入了权重方案以考虑会话的及时性。 结合这两种类型的模型，提出了一个统一的模型，即会话感知物品相似性/转换（SLIST）模型，这是一种全面覆盖会话各种属性的通用解决方案。</p>
+<h1 id="1-基本定义">1. 基本定义</h1>
+<h2 id="11-linear-item-item-models">1.1 Linear item-item models</h2>
+<p>给定两个矩阵$X$和$Y$，线性模型是用一个物品到物品的相似度矩阵$B\in R^{n\times n}$来制定的：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161433983.png" alt=""></p>
+<p>$B$将$X$中之前消费过的物品映射到$Y$中接下来观察到的物品中。该线性模型的典型目标函数是通过最小化普通最小二乘法 (OLS) 的岭回归公式化的。</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161435101.png" alt=""></p>
+<p>其中 𝜆 是正则项，$||\cdot||_{F}$​表示 Frobenius 范数。</p>
+<p>在传统的推荐中，每个用户被表示为所有消费物品的集合，没有会话的概念，X 和 Y 被视为相同的矩阵。SLIM 强制 B 中的所有条目都为非负且对角线元素为零。</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161654884.png" alt=""></p>
+<p>最近，$EASE^{R}$及其变体从等式（3）中删除了 B 和 L1 范数约束的非负约束，只留下对角约束。</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161656450.png" alt=""></p>
+<p>$EASE^{R}$​通过拉格朗日乘子绘制闭式解：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161656668.png" alt=""></p>
+<p>此外，diagMat(x) 表示从向量 x 展开的对角矩阵。最后，B 中的每个学习权重由下式给出</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161658781.png" alt=""></p>
+<p>尽管反转正则化的 Gram 矩阵是大规模数据集的瓶颈，但封闭形式的表达式在效率上具有显着优势。 $EASE^{R}$的复杂度与物品的数量成正比，通常远小于现实场景中的用户数量。 它还实现了与传统推荐设置中最先进模型相比具有竞争力的预测准确性。 受这些优势的启发，我们利用线性模型的优势进行基于会话的推荐。</p>
+<h1 id="2-论文模型">2. 论文模型</h1>
+<h2 id="21-动机">2.1 动机</h2>
+<p>首先展示会话的有用特征。 前三个是关于会话中物品之间的相关性，即会话内属性，而最后一个是关于会话之间的关系，即会话间属性。</p>
+<ul>
+<li>
+<p>Session consistency 会话连续性</p>
+<p>会话中的物品列表通常在主题上是连贯的，反映了特定且一致的用户意图。 例如，用户生成的播放列表中的歌曲通常有一个主题，例如相似的情绪、相同的流派或艺术家。</p>
+</li>
+<li>
+<p>Sequential dependency 顺序依赖</p>
+<p>有些物品往往以特定的顺序被观察到。 在大多数会话中，通常首先使用一个物品，接着另一个。 一个直观的例子是电视剧，它的剧集通常是按顺序观看的。 出于这个原因，当前会话中的最后一个物品通常是预测下一个物品的最有用的信号。</p>
+</li>
+<li>
+<p>Repeated item consumption 重复物品消费</p>
+<p>用户可能会在单个会话中多次重复消费一个物品。 例如，用户可能会反复收听她最喜欢的歌曲。 此外，用户可能多次点击同一产品以将其与其他产品进行比较。</p>
+</li>
+<li>
+<p>Timeliness of sessions 会话及时性</p>
+<p>一个会话通常反映用户当前的兴趣，而此类会话的集合通常反映最近的趋势。 例如，许多用户倾向于更频繁地观看新发布的音乐视频。 因此，与过去的会话相比，最近的会话可能是预测用户当前兴趣的更好指标。</p>
+</li>
+</ul>
+<p>本文的会话感知线性模型，不仅可以同时适应会话的各种属性，而且具有高度可扩展性。</p>
+<h2 id="22-会话表示">2.2 会话表示</h2>
+<p>尽管会话具有顺序性质，但线性模型仅将一组物品作为向量处理。如图 2 所示，考虑两个会话表示。</p>
+<ul>
+<li>
+<p>Full session representation 完整会话表示</p>
+<p>整个会话表示为单个向量，并且忽略会话中物品的顺序。如图 2 所示，训练示例 (𝑚) 的数量等于会话数。 它更适合会话中的物品之间往往具有更强的相关性，对消费顺序相对不敏感的情况。 请注意，会话中的重复项被视为单个项，因为完整会话表示主要处理跨项的会话一致性。</p>
+</li>
+<li>
+<p>Partial session representation 部分会话表示</p>
+<p>会话分为过去和未来两个子集，以表示物品之间的顺序相关性。 对于某个时间步 𝑡 ，过去的集合包含在 𝑡 之前已经消费过的物品。</p>
+</li>
+</ul>
+<p><img src="http://note.lizhihao999.cn/notes/202108161517116.png" alt="图2"></p>
+<h2 id="23-会话感知的线性模型">2.3 会话感知的线性模型</h2>
+<p>首先，设计了两个分别利用完整和部分会话表示的线性模型。 然后，统一两个线性模型以完全捕捉会话的多方面。</p>
+<h3 id="231-session-aware-linear-item-similarity-model-slis">2.3.1 Session-aware Linear Item Similarity Model (SLIS)</h3>
+<p>我们提出了一个使用完整会话表示的线性模型，重点是物品之间的相似性。 如第 2.2 节所述，输入和输出矩阵 (X) 相同，即$X=X\cdot B$​​​。本文通过重新制定SLIM的目标函数来提出一个新的线性模型，以适应会话的及时性和会话中重复的物品消耗：</p>
+<ol>
+<li>采用权重矩阵$W\in R^{m\times n}$，与$||X-X\cdot B||_{2}^{F}$相对应，假设会话的时效性随时间衰减，使用$W$来区分会话的时效性；</li>
+<li>放宽$B$​的零对角约束以处理重复的物品消费。 由于 B 的对角元素受到松散惩罚，模型允许重复预测与下一个物品相同的物品。</li>
+</ol>
+<p>形式上，SLIS 的目标函数由下式表示：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161614198.png" alt=""></p>
+<p>方程（7）中的目标函数是方程（4）中$EASE^{R}$目标函数的广义版本。$EASE^{R}$的主要优势在于其封闭形式的解决方案。我们仍然可以通过 Karush-Kuhn-Tucker (KKT) 条件为没有 W 的松弛对角线约束实现封闭形式的解决方案。 然而，对于任意权重矩阵 W，获得封闭形式的解并非易事。</p>
+<p>为了解决这个问题，我们处理 W 的两个特殊情况：会话权重和物品权重。 物品的权重不影响学习B。因此，我们只考虑会话的权重；$W$被视为会话的权重向量，以区分会话的重要性。 让$w_{full}$表示 S 中每个会话的权重向量。然后，将 W 替换为会话权重和一向量的外积，即$W_{full}=w_{full}\cdot 1^{T}$，其中$w_{full}\in R^{m},1\in R^{n}$。带有$W_{full}$的线性模型由封闭式方程求解。</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161629847.png" alt=""></p>
+<p>最后，我们描述了如何为 W 设置会话的权重。我们假设会话的重要性随时间衰减。 为了反映会话的及时性，我们通过以下方式为最近的会话分配更高的权重：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161632634.png" alt=""></p>
+<h3 id="232-session-aware-linear-item-transition-model-slit">2.3.2 Session-aware Linear Item Transition Model (SLIT)</h3>
+<p>使用第 2.2 节中的部分会话表示，我们设计了一个线性模型来捕获跨物品的顺序依赖性。 与 SLIS 不同，每个会话被拆分为多个部分会话，形成不同的输入和输出矩阵。 与 SLIS 类似，我们也将会话的权重纳入 SLIT。 同时，我们忽略了 B 中对角元素的约束，因为不同的输入和输出矩阵自然不受平凡解的影响。</p>
+<p>正式地，我们使用部分会话表示来制定 SLIT 的目标函数。</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161636420.png" alt=""></p>
+<p>虽然 S 和 T 不同，但我们仍然推导出闭式解：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161638665.png" alt=""></p>
+<p>最后，我们描述了如何调整 S 和 T 中过去和未来物品子集的重要性，我们利用两个物品之间的位置差距作为物品的权重。</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161641950.png" alt=""></p>
+<p>当给定一个目标物品时，可以根据顺序衰减部分会话中物品的重要性。</p>
+<h3 id="233-unifying-two-linear-models">2.3.3 Unifying Two Linear Models</h3>
+<p>由于 SLIS 和 SLIT 捕获了会话的各种特征，我们提出了一个统一的模型，称为会话感知线性相似性/转换模型 (SLIST)，通过联合优化这两个模型：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161645933.png" alt=""></p>
+<p>其中𝛼是控制SLIS和SLIT重要性比的超参数。</p>
+<p>尽管乍一看似乎无法实现封闭形式的解决方案，但我们仍然可以推导出它。 直觉是，当为 SLIS 和 SLIT 堆叠两个矩阵时，例如 X 和 S，SLIST 的目标函数类似于 SLIT 的目标函数。 形式上，闭式解由下式给出：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161646769.png" alt=""></p>
+<h3 id="234-model-inference">2.3.4 Model Inference</h3>
+<p>我们使用学习的物品-物品矩阵预测给定会话的下一个物品，其中包含一系列物品，即$\hat{T}=S\cdot \hat{B}$。对于推理，有必要根据 S 中的物品序列来考虑物品的重要性。与等式（12）类似，我们随着时间的推移将用于推理的物品权重衰减为</p>
+<p><img src="http://note.lizhihao999.cn/notes/202108161649356.png" alt=""></p>
+<p>其中$\delta_{inf}$是控制推理物品权重衰减的超参数，|𝑠 | 是会话的长度𝑠。 换句话说，SLIST 将通过部分表示的向量作为输入，并将其与物品权重一起使用。</p>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/recommender-system/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Recommender System</a>
+    
+    <a href="/tags/www/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#WWW</a>
+    
+</div>
+        
+        
+        
+
+
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/lizhihao/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/avatar.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/lizhihao/" class="block font-bold text-lg pb-1 mb-2 border-b">Li Zhihao</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:lzh821403039@163.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://example.com/" class="mr-1">
+                <i class="fab fa-github"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-wsdm-an-efficient-and-effective-framework-for-session-based-social-recommendation/" class="block">An Efficient and Effective Framework for Session-based Social Recommendation</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E8%BF%91%E6%9C%9F%E8%B8%A9%E5%9D%91/" class="block">近期踩坑</a>
+        
+    </div>
+</div>
+
+        
+
+
+
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#11-linear-item-item-models">1.1 Linear item-item models</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21-动机">2.1 动机</a></li>
+    <li><a href="#22-会话表示">2.2 会话表示</a></li>
+    <li><a href="#23-会话感知的线性模型">2.3 会话感知的线性模型</a>
+      <ul>
+        <li><a href="#231-session-aware-linear-item-similarity-model-slis">2.3.1 Session-aware Linear Item Similarity Model (SLIS)</a></li>
+        <li><a href="#232-session-aware-linear-item-transition-model-slit">2.3.2 Session-aware Linear Item Transition Model (SLIT)</a></li>
+        <li><a href="#233-unifying-two-linear-models">2.3.3 Unifying Two Linear Models</a></li>
+        <li><a href="#234-model-inference">2.3.4 Model Inference</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">See Also</h2>
+        <div class="content">
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/">HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/">Inductive Matrix Completion Based on Graph Neural Networks</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-www-lorentzian-graph-convolutional-networks/">Lorentzian Graph Convolutional Networks</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

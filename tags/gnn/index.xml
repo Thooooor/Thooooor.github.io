@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GNN on 若虚杂记</title>
+    <link>/tags/gnn/</link>
+    <description>Recent content in GNN on 若虚杂记</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; 2021 &lt;a href=&#34;https://beian.miit.gov.cn/&#34;&gt;粤ICP备19090631号&lt;/a&gt;
+</copyright>
+    <lastBuildDate>Mon, 16 Aug 2021 22:08:00 +0000</lastBuildDate><atom:link href="/tags/gnn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Handling Information Loss of Graph Neural Networks for Session-based Recommendation</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-kdd-handling-information-loss-of-graph-neural-networks-for-session-based-recommendation/</link>
+      <pubDate>Mon, 16 Aug 2021 22:08:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-kdd-handling-information-loss-of-graph-neural-networks-for-session-based-recommendation/</guid>
+      <description>2020 KDD 优化推荐中GNN的信息损失问题</description>
+    </item>
+    
+    <item>
+      <title>Inductive Matrix Completion Based on Graph Neural Networks</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/</link>
+      <pubDate>Thu, 05 Aug 2021 23:00:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/</guid>
+      <description>2020 ICRL Inductive Matrix Completion Based on Graph Neural Networks 论文笔记</description>
+    </item>
+    
+    <item>
+      <title>Lorentzian Graph Convolutional Networks</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-www-lorentzian-graph-convolutional-networks/</link>
+      <pubDate>Thu, 05 Aug 2021 22:55:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-www-lorentzian-graph-convolutional-networks/</guid>
+      <description>2021 WWW Lorentzian Graph Convolutional Networks 洛伦兹GCN 论文笔记</description>
+    </item>
+    
+    <item>
+      <title>A Hyperbolic-to-Hyperbolic Graph Convolutional Network</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/</link>
+      <pubDate>Thu, 05 Aug 2021 22:45:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/</guid>
+      <description>2021 CVPR Oral A Hyperbolic-to-Hyperbolic Graph Convolutional Network 双曲GCN 论文笔记</description>
+    </item>
+    
+    <item>
+      <title>HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/</link>
+      <pubDate>Wed, 28 Jul 2021 23:58:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/</guid>
+      <description>2021 WWW 双曲协同过滤模型 HGCN</description>
+    </item>
+    
+    <item>
+      <title>Semi-Riemannian Graph Convolutional Networks</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/</link>
+      <pubDate>Thu, 22 Jul 2021 02:11:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/</guid>
+      <description>2021 NeurIPS《Semi-Riemannian Graph Convolutional Networks》半黎曼GCN 论文笔记</description>
+    </item>
+    
+    <item>
+      <title>Graph Geometry Interaction Learning</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/</link>
+      <pubDate>Wed, 21 Jul 2021 23:53:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/</guid>
+      <description>2020 NeurIPS《Graph Geometry Interaction Learning》图形几何交互学习 (GIL)论文笔记</description>
+    </item>
+    
+    <item>
+      <title>Variational Graph Auto-encoder</title>
+      <link>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2016-nips-variational-graph-auto-encoders/</link>
+      <pubDate>Fri, 14 May 2021 10:15:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2016-nips-variational-graph-auto-encoders/</guid>
+      <description>2016 NIPS Workshop《Variational Graph Auto-encoder》变分图自动编码器论文笔记</description>
+    </item>
+    
+  </channel>
+</rss>

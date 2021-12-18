@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="2021 ACL-IJCNLP 双曲时序知识图谱嵌入 HERCULES 对ATTH的改进">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures",
+      "item":"/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/"
+    },
+    "headline": "Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures | 若虚杂记","datePublished": "2021-07-28T22:56:00+00:00",
+    "dateModified": "2021-07-28T22:56:00+00:00",
+    "wordCount":  71 ,
+    "author": {
+        "@type": "Person",
+        "name": ["lizhihao"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Li Zhihao",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/icon.png"
+        }
+        },
+    "description": "2021 ACL-IJCNLP 双曲时序知识图谱嵌入 HERCULES 对ATTH的改进"
+}
+</script><meta property="og:title" content="Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures | 若虚杂记" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/" />
+
+
+
+
+<meta property="og:description" content="2021 ACL-IJCNLP 双曲时序知识图谱嵌入 HERCULES 对ATTH的改进" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-07-28T22:56:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-07-28T22:56:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Knowledge Graph Embedding" />
+
+<meta property="article:tag" content="Hyperbolic" />
+
+<meta property="article:tag" content="ACL" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/ner/a-joint-neural-model-for-information-extraction-with-global-features/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-07-28</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <blockquote>
+<p><a href="https://arxiv.org/abs/2106.04311">论文地址</a></p>
+</blockquote>
+<p>通过简单地增加负样本的数量，最近提出的 ATTH 模型可以在 Temporal KGs (TKGs) 上实现具有竞争力甚至更好的性能，尽管它是非时间性的。 本文进一步提出了 HERCULES，这是 ATTH 模型（2020 ACL）的时间感知扩展，它将黎曼流形的曲率定义为关系和时间的乘积，这是第一次尝试利用流形的曲率来强制时间感知表示。</p>
+<h1 id="1-问题定义">1. 问题定义</h1>
+<p>考虑一个有效的四元组$&lt;s,p,o,t&gt;\in S\subset E\times R\times E\times T$，其中$E,R,T,S$分别表示实体集合、关系集合、时间戳集合和事实集合。打分函数$f:E\times R\times E\times T\to R$要求对$\in S$的四元组实现$f(s,p,o,t)$最大化，$\notin S$的四元组最小化。在上述约束的优化过程中，实体、关系和时间的表示被相应地学习，然后，生成的嵌入可以捕获多关系图结构。因此，$f$衡量实体$s$在时间$t$通过关系$p$连接到实体$o$的概率。</p>
+<h1 id="2-双曲几何">2. 双曲几何</h1>
+<p>欧几里得空间的曲率为零，因此称为平坦空间；双曲几何具有恒定的负曲率。当在双曲空间中表示直线时，直线会变成曲线，称为测地线（如图 1）。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210726222051.png" alt="图一"></p>
+<p>本文同之前在双曲空间进行知识图谱嵌入的模型一样，在庞加莱球中进行。同样通过指数映射和对数映射在双曲空间和正切空间之间进行切换。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210726222408.png" alt=""></p>
+<p>同样为了替换欧几里得加法，本文使用满足流形边界约束的莫比乌斯加法：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210726222732.png" alt=""></p>
+<p>进而使用通过莫比乌斯加法定义的双曲距离公式：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210726222817.png" alt=""></p>
+<h1 id="3-从atth到hercules">3. 从ATTH到HERCULES</h1>
+<h2 id="31-atth">3.1 ATTH</h2>
+<p>ATTH 使用特定关系的嵌入、旋转、反射和曲率。 曲率定义为取决于所涉及的对应关系$p$​。准确地说，关系$ p $被赋予一个单独的参数曲率$c_{p}$：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210726223205.png" alt=""></p>
+<p>其中$\mu_{p}$是可训练的参数，$\sigma$是ReLU激活函数的平滑逼近。</p>
+<p>通过这种方法，可以学习流形的几何形状，从而针对特定谓词进行修改。 曲率决定了流形的形状， 改变流形的曲率意味着改变投影点的位置。 这意味着对于不同的关系，由于每个关系的不同几何形状，同一实体将具有不同的位置。</p>
+<p>为了学习旋转和反射，ATTH使用$2\times 2$​的Givens变换矩阵。这些变换在双曲空间中保持相对距离，因此可以直接应用于双曲嵌入（等距）。我们表示$W_{\Theta_{p}}^{rot},W_{\Phi_{p}}^{ref}$​为块对角矩阵，​对角线上的元素分别通过$G^{+}(\theta_{p,i}),G^{-}(\phi_{p,i})$给出，其中$i$表示对角线中的第$i$个元素：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210726225225.png" alt=""></p>
+<p>旋转和反射仅应用于主体嵌入：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210726225320.png" alt=""></p>
+<p>此外，为了表示可以混合旋转和反射的复杂关系，ATTH 使用了双曲线注意力机制。通过指数映射，在正切空间计算注意力分数$\alpha^{p}<em>{q</em>{rot}^{H}},\alpha^{p}<em>{q</em>{ref}^{H}}$​​；ATTH通过切线空间平均来实现典型的加权平均，之后再通过指数映射回到双曲空间：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210726230202.png" alt=""></p>
+<p>ATTH 最终将一个双曲关系嵌入$r_{p}^{H}$的平移应用到生成的注意力向量上，平移有助于在层次结构的不同级别之间移动。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210726230527.png" alt=""></p>
+<p>最终的得分函数定义为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210726230629.png" alt=""></p>
+<h2 id="32-hercules">3.2 HERCULES</h2>
+<p>在ATTH的基础上进一步提出HERCULES，将流形的曲率重新定义为关系和时间的乘积。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210726231454.png" alt=""></p>
+<p>HERCULES 的主要思路是关系和时间都直接调整流形的几何形状，使得投影实体的位置与关系和时间相关。 这是有利的，因为不需要每个实体的附加时间参数。 由于整个几何结构针对特定关系和时间发生了变化，因此该流形上的所有未来投影都将与相应的关系和时间戳对齐。</p>
+<h1 id="4-总结">4. 总结</h1>
+<p>整篇文章读下来感觉是，重新读了一遍ACL 2020的<strong>Low-Dimensional Hyperbolic Knowledge Graph Embeddings</strong>，唯一的改进点在于将流形的曲率与关系和时间挂钩，而这篇文章的问题仍然在于没有考虑“时序”，只是将时间戳作为一个特征。</p>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/knowledge-graph-embedding/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Knowledge Graph Embedding</a>
+    
+    <a href="/tags/hyperbolic/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Hyperbolic</a>
+    
+    <a href="/tags/acl/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#ACL</a>
+    
+</div>
+        
+        
+        
+
+
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/lizhihao/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/avatar.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/lizhihao/" class="block font-bold text-lg pb-1 mb-2 border-b">Li Zhihao</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:lzh821403039@163.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://example.com/" class="mr-1">
+                <i class="fab fa-github"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/" class="block">HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/" class="block">Semi-Riemannian Graph Convolutional Networks</a>
+        
+    </div>
+</div>
+
+        
+
+
+
+    </div>
+    
+    <div class="col-span-2">
+        
+        
+        <div class="sticky top-16 z-10 hidden lg:block px-6 py-4  bg-primary-bg ">
+    <span class="text-lg font-semibold">On This Page</span>
+</div>
+<div class="sticky-toc hidden lg:block px-6 pb-6 ">
+    <nav id="TableOfContents">
+  <ul>
+    <li><a href="#31-atth">3.1 ATTH</a></li>
+    <li><a href="#32-hercules">3.2 HERCULES</a></li>
+  </ul>
+</nav>
+</div>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        enableStickyToc();
+    });
+</script>
+        
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2  lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">See Also</h2>
+        <div class="content">
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/ner/a-joint-neural-model-for-information-extraction-with-global-features/">A Joint Neural Model for Information Extraction with Global Features</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

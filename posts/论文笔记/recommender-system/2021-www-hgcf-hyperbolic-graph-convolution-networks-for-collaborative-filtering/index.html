@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="2021 WWW 双曲协同过滤模型 HGCN">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Posts",
+      "item":"/posts/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering",
+      "item":"/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/"}]
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/"
+    },
+    "headline": "HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering | 若虚杂记","datePublished": "2021-07-28T23:58:00+00:00",
+    "dateModified": "2021-07-28T23:58:00+00:00",
+    "wordCount":  87 ,
+    "author": {
+        "@type": "Person",
+        "name": ["lizhihao"]
+    },
+    "publisher": {
+        "@type": "Person",
+        "name": "Li Zhihao",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "/images/icon.png"
+        }
+        },
+    "description": "2021 WWW 双曲协同过滤模型 HGCN"
+}
+</script><meta property="og:title" content="HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering | 若虚杂记" />
+<meta property="og:type" content="article" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/" />
+
+
+
+
+<meta property="og:description" content="2021 WWW 双曲协同过滤模型 HGCN" />
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="article:published_time" content="2021-07-28T23:58:00&#43;00:00" />
+
+
+<meta property="article:modified_time" content="2021-07-28T23:58:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="posts" />
+
+
+<meta property="article:tag" content="Recommender System" />
+
+<meta property="article:tag" content="GNN" />
+
+<meta property="article:tag" content="Hyperbolic" />
+
+<meta property="article:tag" content="WWW" />
+
+
+
+
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/" />
+
+<meta property="og:see_also" content="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2016-nips-variational-graph-auto-encoders/" />
+
+
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  selected-menu-item  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+    <div class="pl-scrollbar">
+      <div class="w-full max-w-screen-xl lg:px-4 xl:px-8 mx-auto">
+
+
+<div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
+    <div
+        class="col-span-2 lg:col-start-2 lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
+        <h1 class="font-bold text-3xl text-primary-text">HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering</h1>
+        <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-07-28</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+        
+        
+        
+
+        <div class="content">
+            <p>本文提出用于协同过滤的双曲GCN 模型，模型可以通过边际排名损失有效地学习，并表明双曲空间在边界排序设置下具有理想的属性，称为双曲协同过滤 (HGCF)。</p>
+<p>HGCF 通过 GCN 模块在参考点的切线空间上聚合邻域信息，从而学习双曲空间中的用户和物品表示，使用基于黎曼梯度下降优化的双曲距离的边界排序损失来有效学习。</p>
+<h1 id="问题描述">问题描述</h1>
+<p>考虑标准隐式协同过滤设置：$m$​​个用户$U=\lbrace u_{1},&hellip;,u_{m}\rbrace$​​和$n$​​个物品$I=\lbrace i_{1},&hellip;,i_{n}\rbrace$​​。用户和物品之间的交互在一个稀疏的$m\times n$​​二元交互矩阵$R$​​中给出，其中当用户$u$​和物品$i$有交互时，$R_{ui}=1$​，否则$R_{ui}=0$。</p>
+<p>定义$N_{u}=\lbrace i\in I:R_{ui}=1\rbrace$为用户邻域，表示与用户$u$有交互的项目集；类似可以定义$N_{i}=\lbrace u\in U:R_{ui}=1\rbrace$为物品邻域。</p>
+<h1 id="模型总述">模型总述</h1>
+<p>图1总结了 HGCF 架构，为了应用 HGCF，首先为双曲空间中的所有用户和物品初始化嵌入。然后，给定具有相应嵌入$\theta_{u}\in H^{d}$的用户$u$，我们将$\theta_{u}$映射到参考点的切线空间，在切线空间中通过多层图卷积。更新后带有编码邻域信息的嵌入，被映射回$H^{d}$​，在双曲空间中应用双曲边界排序损失。损失中的信号被反向传播以更新相关参数并重复该过程。类似的过程应用于项目嵌入。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210727143044.png" alt="图1"></p>
+<h1 id="双曲嵌入">双曲嵌入</h1>
+<p>HGCF对用户和项目嵌入都使用洛伦兹表示。固定原点为$o=(\sqrt{k},0,&hellip;,0)\in H^{d}$​​并作为参考点。请注意，$k=-1/c$​是曲率$c$​的倒数，此处被视为超参数并根据经验设置。</p>
+<p>嵌入是通过从参考点$o$​​的切线空间上的高斯分布采样来初始化的。形式上，给定用户$u$​和项目$i$，首先从多元高斯中采样：
+$$
+\theta_{u}',\theta_{i}'\sim N(0,\sigma I_{d\times d})
+$$
+然后设置
+$$
+\theta_{u}''=[0;\theta_{u}']\quad \theta_{i}''=[0;\theta_{i}']
+$$
+其中满足$&lt;\theta_{u}'',o&gt;<em>{L}=0,&lt;\theta</em>{i}'',o&gt;<em>{L}=0$​，都属于正切空间$T</em>{o}H^{d}$​。为了在$H^{d}$​​中获得相应的嵌入，通过指数映射投影到双曲空间$\exp_{o}:T_{o}H^{d}\to H^{d}$​：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729141330.png" alt=""></p>
+<p>之后便可以得到用户和物品在双曲空间中的嵌入：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210727144209.png" alt=""></p>
+<p>以上的双曲嵌入用于为所有用户和物品初始化模型。</p>
+<h1 id="skip-connected-图卷积网络">Skip-connected 图卷积网络</h1>
+<p>GCN的主要思想是通过迭代聚合来自多跳邻居的本地信息来学习图中的节点表示。聚合过程通常涉及每个阶段的特征转换和非线性激活。然而最近的工作发现，与更简单的均值聚合方法相比，特征变换和非线性带来的收益是最小的。 此外，非线性为模型增加了相当大的表示能力，并可能导致对高度稀疏的CF数据集的导致过度拟合。 鉴于这些发现，HGCF选择去除特征变换和非线性，以降低模型复杂性并加快训练和推理速度。</p>
+<p>HGCF在正切空间执行聚合操作，首先将嵌入通过对数映射投影到正切空间：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210727145110.png" alt=""></p>
+<p>输出向量作为第一个 GCN 层的输入，分别表示为：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210727145226.png" alt=""></p>
+<p>给定用户邻域和物品邻域，每一层图卷积层都是通过聚合来自前一层的邻域表示来计算的：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210727145408.png" alt=""></p>
+<p>每一层都聚集在越来越高阶的邻居上，允许对用户和物品之间的长期关系进行明确建模。</p>
+<p>为了充分利用高阶关系，需要将多个图卷积层堆叠在一起。为了减轻深度的限制，本文探索了包含由残差网络和深度 GCN 相关工作激发的跳跃连接（Skip-connected）的架构，如图2所示。</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210727145743.png" alt="图2"></p>
+<p>这里，PlainGCN 是原始模型，SkipGCN、ResGCN 和 DenseGCN 具有不同的跳过连接结构。 SkipGCN 包含从每一层到最后一层的跳过连接，ResGCN 具有连续层之间的残差连接，而 DenseGCN 结合了 SkipGCN 和 ResGCN。 根据经验，SkipGCN 在双曲空间设置中表现最好，将这种架构用于 HGCF。</p>
+<p>在 SkipGCN 下，最后一层聚合来自所有中间层的表示，每个用户和项目的最终嵌入是通过应用指数映射将 SkipGCN 的输出投影回双曲空间来获得：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210729141945.png" alt=""></p>
+<p>更新后的嵌入现在编码了丰富的邻域信息，可以通过双曲距离$d_{L}(\Psi_{u},\Psi_{i})$来估计用户-物品对之间的相似性。</p>
+<h1 id="hyperbolic-margin-ranking-loss-双曲边界排序损失">Hyperbolic Margin Ranking Loss 双曲边界排序损失</h1>
+<p>边界排序损失已被证明对基于距离的推荐模型非常有效，这种损失旨在将正负用户-物品对分离到给定的边界。一旦达到边界，这些用户-用品对就被认为是分离良好的，不再造成损失。 这使优化能够不断地重新关注违反边界的“困难”对。HGCF模型中采用这种损失并优化双曲空间中的边界分离。</p>
+<p>形式上，对于每个用户$u$​采样一个正样例物品$i,R_{ui}=1$​和一个负样例物品$j,R_{uj}=0$​，目标是通过​两个物品$i,j$到用户$u$的距离来分离这两个物品：</p>
+<p><img src="http://note.lizhihao999.cn/notes/20210727150850.png" alt=""></p>
+<p>其中，$m$即为边界。一旦差异$d_{L}(\Psi_{u},\Psi_{i})^{2}-d_{L}(\Psi_{u},\Psi_{j})^{2}$大于边际，损失就变为0，物品对停止对梯度做出贡献。</p>
+
+        </div>
+        
+        <div class="my-4">
+    
+    <a href="/tags/recommender-system/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Recommender System</a>
+    
+    <a href="/tags/gnn/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#GNN</a>
+    
+    <a href="/tags/hyperbolic/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#Hyperbolic</a>
+    
+    <a href="/tags/www/" class="inline-block bg-tertiary-bg text-sm rounded px-3 py-1 my-1 mr-2 hover:text-eureka">#WWW</a>
+    
+</div>
+        
+        
+        
+
+
+        
+        
+        <div class="py-2">
+    
+    <div class="flex flex-col md:flex-row items-center my-8">
+        <a href="/authors/lizhihao/" class="w-24 h-24 md:mr-4">
+            
+            
+            <img src="/images/avatar.jpg" class="w-full bg-primary-bg rounded-full" alt="Avatar">
+            
+        </a>
+        <div class="w-full md:w-auto mt-4 md:mt-0">
+            <a href="/authors/lizhihao/" class="block font-bold text-lg pb-1 mb-2 border-b">Li Zhihao</a>
+            <span class="block pb-2"></span>
+            
+            
+            
+            
+            
+            <a href="mailto:lzh821403039@163.com" class="mr-1">
+                <i class="fas fa-envelope"></i>
+            </a>
+            
+            
+            
+            
+            
+            <a href="https://example.com/" class="mr-1">
+                <i class="fab fa-github"></i>
+            </a>
+            
+        </div>
+    </div>
+    
+</div>
+        
+        
+        
+<div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
+    <div>
+        
+        <span class="block font-bold">Previous</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/" class="block">A Hyperbolic-to-Hyperbolic Graph Convolutional Network</a>
+        
+    </div>
+    <div class="md:text-right mt-4 md:mt-0">
+        
+        <span class="block font-bold">Next</span>
+        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/" class="block">Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures</a>
+        
+    </div>
+</div>
+
+        
+
+
+
+    </div>
+    
+
+    
+    
+    <div
+        class="col-span-2 lg:col-start-2 lg:col-span-6 bg-secondary-bg rounded p-6">
+        <h2 class="text-lg font-semibold mb-4">See Also</h2>
+        <div class="content">
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/">Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/">Semi-Riemannian Graph Convolutional Networks</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/">Graph Geometry Interaction Learning</a>
+            <br />
+            
+            <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2016-nips-variational-graph-auto-encoders/">Variational Graph Auto-encoder</a>
+            <br />
+            
+        </div>
+    </div>
+    
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+        hljs.initHighlightingOnLoad();
+    })
+</script>
+
+      </div>
+    </div>
+    
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>

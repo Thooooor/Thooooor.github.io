@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang='en' ><meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+
+<title>Li Zhihao | 若虚杂记</title>
+
+<meta name="generator" content="Hugo Eureka 0.8.4" />
+<link rel="stylesheet" href="/css/eureka.min.css">
+<script defer src="/js/eureka.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+  href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Noto+Serif+SC:wght@400;600;700&display=swap"
+  as="style" onload="this.onload=null;this.rel='stylesheet'">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/styles/solarized-light.min.css"
+   media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/highlight.min.js"
+   crossorigin></script>
+
+  <script defer src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.0/build/languages/dart.min.js"
+     crossorigin></script>
+
+<script defer src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.14.0/js/all.min.js"
+   integrity="sha256-uNYoXefWRqv&#43;PsIF/OflNmwtKM4lStn9yrz2gVl6ymo="  crossorigin></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css"
+   integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3&#43;Aro6EYUG4&#43;cU&#43;KJWu/X"  media="print"
+  onload="this.media='all';this.onload=null" crossorigin>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.js" 
+  integrity="sha384-g7c&#43;Jr9ZivxKLnZTDUhnkOnsh30B4H0rpLUpJ4jAIKs4fnJI&#43;sEnkvrMWph2EDg4"  crossorigin></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/contrib/auto-render.min.js"
+   integrity="sha384-mll67QQFJfxn0IYznZYonOWZ644AWYC&#43;Pt2cHqMaRhXVrursRwvLnLaebdGIlYNa"  crossorigin></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    renderMathInElement(document.body, {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+    });
+  });
+</script>
+
+
+<script defer src="https://cdn.jsdelivr.net/npm/mermaid@8.9.2/dist/mermaid.min.js" 
+  integrity="sha256-Zmpaaj&#43;GXFsPF5WdPArSrnW3b30dovldeKsW00xBVwE="  crossorigin></script>
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_32x32_fill_box_center_3.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
+
+<meta name="description"
+  content="Self Introduction todo">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1 ,
+      "name":"Authors",
+      "item":"/authors/"},{
+      "@type": "ListItem",
+      "position": 2 ,
+      "name":"Li Zhihao",
+      "item":"/authors/lizhihao/"}]
+}
+</script>
+
+
+
+
+<script type="application/ld+json">
+{
+    "@context":"https://schema.org",
+    "@type":"ItemList",
+    "itemListElement":[{
+            "@type":"ListItem",
+            "position":  1 ,
+            "name": "Improving Collaborative Metric Learning with Efficient Negative Sampling",
+            "description": "2021 SIGIR 通过更有效的负采样提升协同过滤",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-sigir-improving-collaborative-metric-learning-with-efficient-negative-sampling/"
+        },{
+            "@type":"ListItem",
+            "position":  2 ,
+            "name": "SSE-PT Sequential Recommendation Via Personalized Transformed",
+            "description": "2021 RecSys 序列推荐 个性化Transformer框架",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-recsys-sse-pt-sequential-recommendation-via-personalized-transformed/"
+        },{
+            "@type":"ListItem",
+            "position":  3 ,
+            "name": "Non-invasive Self-attention for Side Information Fusion in Sequential Recommendation",
+            "description": "2021 AAAI 序列推荐 Bert框架 优化辅助信息",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-aaai-non-invasive-self-attention-for-side-information-fusion-in-sequential-recommendation/"
+        },{
+            "@type":"ListItem",
+            "position":  4 ,
+            "name": "Handling Information Loss of Graph Neural Networks for Session-based Recommendation",
+            "description": "2020 KDD 优化推荐中GNN的信息损失问题",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-kdd-handling-information-loss-of-graph-neural-networks-for-session-based-recommendation/"
+        },{
+            "@type":"ListItem",
+            "position":  5 ,
+            "name": "An Efficient and Effective Framework for Session-based Social Recommendation",
+            "description": "2021 WSDM 基于会话的社交推荐系统 高效模型",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-wsdm-an-efficient-and-effective-framework-for-session-based-social-recommendation/"
+        },{
+            "@type":"ListItem",
+            "position":  6 ,
+            "name": "Session-aware Linear Item-Item Models for Session-based Recommendation",
+            "description": "2021 WWW 基于会话的推荐系统 线性Item-Item模型",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-session-aware-linear-item-item-models-for-session-based-recommendation/"
+        },{
+            "@type":"ListItem",
+            "position":  7 ,
+            "name": "近期踩坑",
+            "description": "近期踩坑记录，不定期整理",
+            "url": "/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E8%BF%91%E6%9C%9F%E8%B8%A9%E5%9D%91/"
+        },{
+            "@type":"ListItem",
+            "position":  8 ,
+            "name": "Inductive Matrix Completion Based on Graph Neural Networks",
+            "description": "2020 ICRL Inductive Matrix Completion Based on Graph Neural Networks 论文笔记",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/"
+        },{
+            "@type":"ListItem",
+            "position":  9 ,
+            "name": "Lorentzian Graph Convolutional Networks",
+            "description": "2021 WWW Lorentzian Graph Convolutional Networks 洛伦兹GCN 论文笔记",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-www-lorentzian-graph-convolutional-networks/"
+        },{
+            "@type":"ListItem",
+            "position":  10 ,
+            "name": "Lorentzian Distance Learning for Hyperbolic Representations",
+            "description": "2019 ICML Oral Lorentzian Distance Learning for Hyperbolic Representations 论文笔记",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-representation/2019-icml-lorentzian-distance-learning-for-hyperbolic-representations/"
+        },{
+            "@type":"ListItem",
+            "position":  11 ,
+            "name": "A Hyperbolic-to-Hyperbolic Graph Convolutional Network",
+            "description": "2021 CVPR Oral A Hyperbolic-to-Hyperbolic Graph Convolutional Network 双曲GCN 论文笔记",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/"
+        },{
+            "@type":"ListItem",
+            "position":  12 ,
+            "name": "HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering",
+            "description": "2021 WWW 双曲协同过滤模型 HGCN",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/"
+        },{
+            "@type":"ListItem",
+            "position":  13 ,
+            "name": "Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures",
+            "description": "2021 ACL-IJCNLP 双曲时序知识图谱嵌入 HERCULES 对ATTH的改进",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/"
+        },{
+            "@type":"ListItem",
+            "position":  14 ,
+            "name": "Semi-Riemannian Graph Convolutional Networks",
+            "description": "2021 NeurIPS《Semi-Riemannian Graph Convolutional Networks》半黎曼GCN 论文笔记",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/"
+        },{
+            "@type":"ListItem",
+            "position":  15 ,
+            "name": "Graph Geometry Interaction Learning",
+            "description": "2020 NeurIPS《Graph Geometry Interaction Learning》图形几何交互学习 (GIL)论文笔记",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/"
+        },{
+            "@type":"ListItem",
+            "position":  16 ,
+            "name": "tmux实现Linux下的终端复用",
+            "description": "在Linux-Ubuntu服务器上安装使用tmux，断开SSH后可以继续执行操作",
+            "url": "/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/tmux%E5%AE%9E%E7%8E%B0linux%E4%B8%8B%E7%9A%84%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8/"
+        },{
+            "@type":"ListItem",
+            "position":  17 ,
+            "name": "struc2vec Learning Node Representations from Structural Identity",
+            "description": "2017 KDD 经典图嵌入方法 struc2vec",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/graph-embedding/2017-kdd-struc2vec-learning-node-representations-from-structural-identity/"
+        },{
+            "@type":"ListItem",
+            "position":  18 ,
+            "name": "安装PyTorch和PyTorch Geometric",
+            "description": "根据CUDA版本安装PyTorch和PyTorch Geometric",
+            "url": "/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E5%AE%89%E8%A3%85pytorch%E5%92%8Cpytorch-geometric/"
+        },{
+            "@type":"ListItem",
+            "position":  19 ,
+            "name": "Linux多版本CUDA安装及切换",
+            "description": "在Linux-Ubuntu服务器上安装使用多版本CUDA并通过软连接进行切换",
+            "url": "/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E5%A4%9A%E7%89%88%E6%9C%ACcuda%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%87%E6%8D%A2/"
+        },{
+            "@type":"ListItem",
+            "position":  20 ,
+            "name": "Variational Graph Auto-encoder",
+            "description": "2016 NIPS Workshop《Variational Graph Auto-encoder》变分图自动编码器论文笔记",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2016-nips-variational-graph-auto-encoders/"
+        },{
+            "@type":"ListItem",
+            "position":  21 ,
+            "name": "Matplotlib中文显示",
+            "description": "Matplotlib设置中文显示",
+            "url": "/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/matplotlib%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA/"
+        },{
+            "@type":"ListItem",
+            "position":  22 ,
+            "name": "MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell",
+            "description": "MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell 实验思路和代码实现",
+            "url": "/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/"
+        },{
+            "@type":"ListItem",
+            "position":  23 ,
+            "name": "MIT 6.S081/Fall 2019 Lab3 Allocator for xv6",
+            "description": "MIT 6.S081/Fall 2019 Lab3 Allocator for xv6 实验思路和代码实现",
+            "url": "/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C4%E7%AC%94%E8%AE%B0/"
+        },{
+            "@type":"ListItem",
+            "position":  24 ,
+            "name": "MIT 6.S081/Fall 2019 Lab7 locks",
+            "description": "MIT 6.S081/Fall 2019 Lab7 locks 实验思路和代码实现",
+            "url": "/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C3%E7%AC%94%E8%AE%B0/"
+        },{
+            "@type":"ListItem",
+            "position":  25 ,
+            "name": "MIT 6.S081/Fall 2019 Lab1 Xv6 and Unix utilities",
+            "description": "MIT 6.S081/Fall 2019 Lab1 Xv6 and Unix utilities 实验思路和代码实现",
+            "url": "/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C1%E7%AC%94%E8%AE%B0/"
+        },{
+            "@type":"ListItem",
+            "position":  26 ,
+            "name": "A Joint Neural Model for Information Extraction with Global Features",
+            "description": "2020 ACL会议《A Joint Neural Model for Information Extraction with Global Features》论文笔记",
+            "url": "/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/ner/a-joint-neural-model-for-information-extraction-with-global-features/"
+        },{
+            "@type":"ListItem",
+            "position":  27 ,
+            "name": "Gunicorn基本使用",
+            "description": "在Ubuntu服务器上使用Gunicorn",
+            "url": "/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/gunicorn%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/"
+        },{
+            "@type":"ListItem",
+            "position":  28 ,
+            "name": "Ubuntu服务器安装Anaconda",
+            "description": "在Ubuntu服务器上安装Anaconda",
+            "url": "/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85anaconda/"
+        },{
+            "@type":"ListItem",
+            "position":  29 ,
+            "name": "Linux配置虚拟环境",
+            "description": "在Ubuntu服务器上配置管理虚拟环境",
+            "url": "/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/"
+        },{
+            "@type":"ListItem",
+            "position":  30 ,
+            "name": "Pycharm远程调试",
+            "description": "在Ubuntu服务器上安装Anaconda",
+            "url": "/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/pycharm%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/"
+        }
+    ]
+}
+</script><meta property="og:title" content="Li Zhihao | 若虚杂记" />
+<meta property="og:type" content="website" />
+
+
+<meta property="og:image" content="/images/icon.png">
+
+
+<meta property="og:url" content="/authors/lizhihao/" />
+
+
+
+
+
+<meta property="og:description" content="Eureka is a elegant and powerful theme for Hugo." />
+
+
+
+
+
+<meta property="og:locale" content="en" />
+
+
+
+
+<meta property="og:site_name" content="若虚杂记" />
+
+
+
+
+
+
+<meta property="og:updated_time" content="2021-08-18T22:58:00&#43;00:00" />
+
+
+
+<meta property="article:section" content="authors" />
+
+
+<link rel="alternate" type="application/rss+xml" href="/authors/lizhihao/index.xml" title="若虚杂记" />
+
+<body class="flex flex-col min-h-screen">
+  <header class="fixed flex items-center w-full min-h-16 pl-scrollbar z-50 bg-secondary-bg shadow-sm">
+    <div class="w-full max-w-screen-xl mx-auto"><script>
+    let storageColorScheme = localStorage.getItem("lightDarkMode")
+    if (((storageColorScheme == 'Auto' || storageColorScheme == null) && window.matchMedia("(prefers-color-scheme: dark)").matches) || storageColorScheme == "Dark") {
+        document.getElementsByTagName('html')[0].classList.add('dark')
+    }
+</script>
+<nav class="flex items-center justify-between flex-wrap px-4 py-4 md:py-0">
+    <a href="/" class="mr-6 text-primary-text text-xl font-bold">若虚杂记</a>
+    <button id="navbar-btn" class="md:hidden flex items-center px-3 py-2" aria-label="Open Navbar">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <div id="target"
+        class="hidden block md:flex md:flex-grow md:justify-between md:items-center w-full md:w-auto text-primary-text z-20">
+        <div class="md:flex md:h-16 text-sm md:flex-grow pb-4 md:pb-0 border-b md:border-b-0">
+            <a href="/posts/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Posts</a>
+            <a href="/docs/" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">Docs</a>
+            <a href="/#about" class="block mt-4 md:inline-block md:mt-0 md:h-(16-4px) md:leading-(16-4px) box-border md:border-t-2 md:border-b-2  border-transparent  mr-4">About</a>
+        </div>
+
+        <div class="flex">
+            <div class="relative pt-4 md:pt-0">
+                <div class="cursor-pointer hover:text-eureka" id="lightDarkMode">
+                    <i class="fas fa-adjust"></i>
+                </div>
+                <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-30" id="is-open">
+                </div>
+                <div class="absolute flex flex-col left-0 md:left-auto right-auto md:right-0 hidden bg-secondary-bg w-48 rounded py-2 border border-tertiary-bg cursor-pointer z-40"
+                    id='lightDarkOptions'>
+                    <span class="px-4 py-1 hover:text-eureka" name="Light">Light</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Dark">Dark</span>
+                    <span class="px-4 py-1 hover:text-eureka" name="Auto">Auto</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed hidden inset-0 opacity-0 h-full w-full cursor-default z-0" id="is-open-mobile">
+    </div>
+
+</nav>
+<script>
+    
+    let element = document.getElementById('lightDarkMode')
+    if (storageColorScheme == null || storageColorScheme == 'Auto') {
+        document.addEventListener('DOMContentLoaded', () => {
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', switchDarkMode)
+        })
+    } else if (storageColorScheme == "Light") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'sun')
+        element.firstElementChild.classList.add('fa-sun')
+    } else if (storageColorScheme == "Dark") {
+        element.firstElementChild.classList.remove('fa-adjust')
+        element.firstElementChild.setAttribute("data-icon", 'moon')
+        element.firstElementChild.classList.add('fa-moon')
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        getcolorscheme();
+        switchBurger();
+    });
+</script>
+</div>
+  </header>
+  <main class="flex-grow pt-16">
+<div class="pl-scrollbar bg-secondary-bg">
+  <div class="max-w-screen-xl mx-auto">
+    <div class="lg:w-3/4 mx-auto px-6 md:px-8 xl:px-12 py-12">
+      <div class="flex flex-col md:flex-row items-center justify-center mb-12">
+  
+  
+    <div class="flex-none w-48 mx-auto md:ml-0 md:mr-8 md:pr-8 md:border-r">
+      <img src="/images/avatar.jpg" class="rounded-full" alt="Avatar">
+    </div>
+  
+  <div class="flex-grow mt-4 md:mt-0">
+    <div class="text-3xl py-4">Li Zhihao</div>
+    <div class="w-3/12 xl:w-2/12 border-b"></div>
+
+    <div class="flex items-center pt-4">
+      
+      <div class="flex flex-wrap">
+        
+
+        
+          <a href="https://www.hitsz.edu.cn/" class="pl-4">Harbin Institute of Technology, Shenzhen</a>
+        
+      </div>
+
+    </div>
+
+    
+  </div>
+  <div class="flex md:flex-col justify-center items-end ml-8">
+    
+    
+      
+      
+      
+      
+      
+      <div class="pb-2 pr-4 md:pr-0 pt-4 md:pt-0">
+        <a href="mailto:lzh821403039@163.com"><i class="fas fa-envelope"></i></a>
+      </div>
+    
+      
+      
+      
+      
+      
+      <div class="pb-2 pr-4 md:pr-0 pt-4 md:pt-0">
+        <a href="https://example.com/"><i class="fab fa-github"></i></a>
+      </div>
+    
+  </div>
+</div>
+<div class="content">
+  <h2 id="self-introduction">Self Introduction</h2>
+<p>todo</p>
+
+</div>
+
+    </div>
+  </div>
+</div>
+<div class="pl-scrollbar bg-primary-bg">
+  <div class="max-w-screen-xl mx-auto">
+    <div class="lg:w-3/4 mx-auto px-6 md:px-8 xl:px-12 py-12">
+      <div class="overflow-hidden divide-y">
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-sigir-improving-collaborative-metric-learning-with-efficient-negative-sampling/" class="font-bold text-xl hover:text-eureka">Improving Collaborative Metric Learning with Efficient Negative Sampling</a>
+</div>
+<div class="content">
+  
+    2021 SIGIR 通过更有效的负采样提升协同过滤
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-18</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-recsys-sse-pt-sequential-recommendation-via-personalized-transformed/" class="font-bold text-xl hover:text-eureka">SSE-PT Sequential Recommendation Via Personalized Transformed</a>
+</div>
+<div class="content">
+  
+    2021 RecSys 序列推荐 个性化Transformer框架
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-18</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-aaai-non-invasive-self-attention-for-side-information-fusion-in-sequential-recommendation/" class="font-bold text-xl hover:text-eureka">Non-invasive Self-attention for Side Information Fusion in Sequential Recommendation</a>
+</div>
+<div class="content">
+  
+    2021 AAAI 序列推荐 Bert框架 优化辅助信息
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-17</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>2 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-kdd-handling-information-loss-of-graph-neural-networks-for-session-based-recommendation/" class="font-bold text-xl hover:text-eureka">Handling Information Loss of Graph Neural Networks for Session-based Recommendation</a>
+</div>
+<div class="content">
+  
+    2020 KDD 优化推荐中GNN的信息损失问题
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-16</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>2 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-wsdm-an-efficient-and-effective-framework-for-session-based-social-recommendation/" class="font-bold text-xl hover:text-eureka">An Efficient and Effective Framework for Session-based Social Recommendation</a>
+</div>
+<div class="content">
+  
+    2021 WSDM 基于会话的社交推荐系统 高效模型
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-15</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>2 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-session-aware-linear-item-item-models-for-session-based-recommendation/" class="font-bold text-xl hover:text-eureka">Session-aware Linear Item-Item Models for Session-based Recommendation</a>
+</div>
+<div class="content">
+  
+    2021 WWW 基于会话的推荐系统 线性Item-Item模型
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-07</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>2 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E8%BF%91%E6%9C%9F%E8%B8%A9%E5%9D%91/" class="font-bold text-xl hover:text-eureka">近期踩坑</a>
+</div>
+<div class="content">
+  
+    近期踩坑记录，不定期整理
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-05</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="hover:text-eureka">脱坑实录</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-iclr-inductive-matrix-completion-based-on-graph-neural-networks/" class="font-bold text-xl hover:text-eureka">Inductive Matrix Completion Based on Graph Neural Networks</a>
+</div>
+<div class="content">
+  
+    2020 ICRL Inductive Matrix Completion Based on Graph Neural Networks 论文笔记
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-05</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-www-lorentzian-graph-convolutional-networks/" class="font-bold text-xl hover:text-eureka">Lorentzian Graph Convolutional Networks</a>
+</div>
+<div class="content">
+  
+    2021 WWW Lorentzian Graph Convolutional Networks 洛伦兹GCN 论文笔记
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-05</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-representation/2019-icml-lorentzian-distance-learning-for-hyperbolic-representations/" class="font-bold text-xl hover:text-eureka">Lorentzian Distance Learning for Hyperbolic Representations</a>
+</div>
+<div class="content">
+  
+    2019 ICML Oral Lorentzian Distance Learning for Hyperbolic Representations 论文笔记
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-05</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>2 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-cvpr-a-hyperbolic-to-hyperbolic-graph-convolutional-network/" class="font-bold text-xl hover:text-eureka">A Hyperbolic-to-Hyperbolic Graph Convolutional Network</a>
+</div>
+<div class="content">
+  
+    2021 CVPR Oral A Hyperbolic-to-Hyperbolic Graph Convolutional Network 双曲GCN 论文笔记
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-08-05</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-www-hgcf-hyperbolic-graph-convolution-networks-for-collaborative-filtering/" class="font-bold text-xl hover:text-eureka">HGCF - Hyperbolic Graph Convolution Networks for Collaborative Filtering</a>
+</div>
+<div class="content">
+  
+    2021 WWW 双曲协同过滤模型 HGCN
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-07-28</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/knowledge-graph-embedding/2021-acl-hyperbolic-temporal-knowledge-graph-embeddings-with-relational-and-time-curvatures/" class="font-bold text-xl hover:text-eureka">Hyperbolic Temporal Knowledge Graph Embeddings with Relational and Time Curvatures</a>
+</div>
+<div class="content">
+  
+    2021 ACL-IJCNLP 双曲时序知识图谱嵌入 HERCULES 对ATTH的改进
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-07-28</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2021-nips-semi-riemannian-graph-convolutional-networks/" class="font-bold text-xl hover:text-eureka">Semi-Riemannian Graph Convolutional Networks</a>
+</div>
+<div class="content">
+  
+    2021 NeurIPS《Semi-Riemannian Graph Convolutional Networks》半黎曼GCN 论文笔记
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-07-22</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/" class="font-bold text-xl hover:text-eureka">Graph Geometry Interaction Learning</a>
+</div>
+<div class="content">
+  
+    2020 NeurIPS《Graph Geometry Interaction Learning》图形几何交互学习 (GIL)论文笔记
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-07-21</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/tmux%E5%AE%9E%E7%8E%B0linux%E4%B8%8B%E7%9A%84%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8/" class="font-bold text-xl hover:text-eureka">tmux实现Linux下的终端复用</a>
+</div>
+<div class="content">
+  
+    在Linux-Ubuntu服务器上安装使用tmux，断开SSH后可以继续执行操作
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-07-19</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="hover:text-eureka">脱坑实录</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/graph-embedding/2017-kdd-struc2vec-learning-node-representations-from-structural-identity/" class="font-bold text-xl hover:text-eureka">struc2vec Learning Node Representations from Structural Identity</a>
+</div>
+<div class="content">
+  
+    2017 KDD 经典图嵌入方法 struc2vec
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-07-15</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E5%AE%89%E8%A3%85pytorch%E5%92%8Cpytorch-geometric/" class="font-bold text-xl hover:text-eureka">安装PyTorch和PyTorch Geometric</a>
+</div>
+<div class="content">
+  
+    根据CUDA版本安装PyTorch和PyTorch Geometric
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-07-02</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="hover:text-eureka">脱坑实录</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E5%A4%9A%E7%89%88%E6%9C%ACcuda%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%87%E6%8D%A2/" class="font-bold text-xl hover:text-eureka">Linux多版本CUDA安装及切换</a>
+</div>
+<div class="content">
+  
+    在Linux-Ubuntu服务器上安装使用多版本CUDA并通过软连接进行切换
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-07-01</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="hover:text-eureka">脱坑实录</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2016-nips-variational-graph-auto-encoders/" class="font-bold text-xl hover:text-eureka">Variational Graph Auto-encoder</a>
+</div>
+<div class="content">
+  
+    2016 NIPS Workshop《Variational Graph Auto-encoder》变分图自动编码器论文笔记
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-05-14</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/matplotlib%E4%B8%AD%E6%96%87%E6%98%BE%E7%A4%BA/" class="font-bold text-xl hover:text-eureka">Matplotlib中文显示</a>
+</div>
+<div class="content">
+  
+    Matplotlib设置中文显示
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2021-01-11</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/" class="hover:text-eureka">数学建模</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/" class="font-bold text-xl hover:text-eureka">MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell</a>
+</div>
+<div class="content">
+  
+    MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell 实验思路和代码实现
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2020-11-24</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>4 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/mit-6.s081/fall-2019-lab/" class="hover:text-eureka">MIT 6.S081/Fall 2019 Lab</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C4%E7%AC%94%E8%AE%B0/" class="font-bold text-xl hover:text-eureka">MIT 6.S081/Fall 2019 Lab3 Allocator for xv6</a>
+</div>
+<div class="content">
+  
+    MIT 6.S081/Fall 2019 Lab3 Allocator for xv6 实验思路和代码实现
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2020-11-24</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>4 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/mit-6.s081/fall-2019-lab/" class="hover:text-eureka">MIT 6.S081/Fall 2019 Lab</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C3%E7%AC%94%E8%AE%B0/" class="font-bold text-xl hover:text-eureka">MIT 6.S081/Fall 2019 Lab7 locks</a>
+</div>
+<div class="content">
+  
+    MIT 6.S081/Fall 2019 Lab7 locks 实验思路和代码实现
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2020-11-24</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>4 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/mit-6.s081/fall-2019-lab/" class="hover:text-eureka">MIT 6.S081/Fall 2019 Lab</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C1%E7%AC%94%E8%AE%B0/" class="font-bold text-xl hover:text-eureka">MIT 6.S081/Fall 2019 Lab1 Xv6 and Unix utilities</a>
+</div>
+<div class="content">
+  
+    MIT 6.S081/Fall 2019 Lab1 Xv6 and Unix utilities 实验思路和代码实现
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2020-11-24</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>5 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/mit-6.s081/fall-2019-lab/" class="hover:text-eureka">MIT 6.S081/Fall 2019 Lab</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/ner/a-joint-neural-model-for-information-extraction-with-global-features/" class="font-bold text-xl hover:text-eureka">A Joint Neural Model for Information Extraction with Global Features</a>
+</div>
+<div class="content">
+  
+    2020 ACL会议《A Joint Neural Model for Information Extraction with Global Features》论文笔记
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2020-10-18</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/" class="hover:text-eureka">论文笔记</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/gunicorn%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" class="font-bold text-xl hover:text-eureka">Gunicorn基本使用</a>
+</div>
+<div class="content">
+  
+    在Ubuntu服务器上使用Gunicorn
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2020-04-03</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="hover:text-eureka">脱坑实录</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85anaconda/" class="font-bold text-xl hover:text-eureka">Ubuntu服务器安装Anaconda</a>
+</div>
+<div class="content">
+  
+    在Ubuntu服务器上安装Anaconda
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2020-04-03</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="hover:text-eureka">脱坑实录</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" class="font-bold text-xl hover:text-eureka">Linux配置虚拟环境</a>
+</div>
+<div class="content">
+  
+    在Ubuntu服务器上配置管理虚拟环境
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2020-03-29</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="hover:text-eureka">脱坑实录</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+  <div class="py-6">
+    <div class="flex flex-col-reverse lg:flex-row justify-between">
+  
+  <div class="w-full ">
+    <div class="mb-4">
+  <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/pycharm%E8%BF%9C%E7%A8%8B%E8%B0%83%E8%AF%95/" class="font-bold text-xl hover:text-eureka">Pycharm远程调试</a>
+</div>
+<div class="content">
+  
+    在Ubuntu服务器上安装Anaconda
+  
+</div>
+
+<div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
+    <div class="mr-6 my-2">
+        <i class="fas fa-calendar mr-1"></i>
+        <span>2020-03-28</span>
+    </div>
+    <div class="mr-6 my-2">
+        <i class="fas fa-clock mr-1"></i>
+        <span>1 min read</span>
+    </div>
+    
+    
+    <div class="mr-6 my-2">
+        <i class="fas fa-folder mr-1"></i>
+        
+        <a href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/" class="hover:text-eureka">脱坑实录</a>
+        
+    </div>
+    
+
+    
+</div>
+
+  </div>
+
+  
+</div>
+  </div>
+  
+</div>
+
+
+    </div>
+  </div>
+</div>
+
+  </main>
+  <footer class="pl-scrollbar">
+    <div class="w-full max-w-screen-xl mx-auto"><div class="text-center p-6 pin-b">
+    <p class="text-sm text-tertiary-text">&copy; 2021 <a href="https://beian.miit.gov.cn/">粤ICP备19090631号</a>
+ &middot;  Powered by the <a href="https://github.com/wangchucheng/hugo-eureka" class="hover:text-eureka">Eureka</a> theme for <a href="https://gohugo.io" class="hover:text-eureka">Hugo</a></p>
+</div></div>
+  </footer>
+</body>
+
+</html>
