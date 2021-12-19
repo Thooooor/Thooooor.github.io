@@ -3,21 +3,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>/authors/</loc>
-    <lastmod>2021-08-18T22:58:00+00:00</lastmod>
+    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
   </url><url>
     <loc>/categories/</loc>
-    <lastmod>2021-08-18T22:58:00+00:00</lastmod>
+    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
+  </url><url>
+    <loc>/authors/lizhihao/</loc>
+    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/linux/</loc>
+    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
+  </url><url>
+    <loc>/posts/</loc>
+    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/</loc>
+    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/ubuntu/</loc>
+    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
+  </url><url>
+    <loc>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
+  </url><url>
+    <loc>/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/</loc>
+    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
   </url><url>
     <loc>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-sigir-improving-collaborative-metric-learning-with-efficient-negative-sampling/</loc>
     <lastmod>2021-08-18T22:58:00+00:00</lastmod>
   </url><url>
-    <loc>/authors/lizhihao/</loc>
-    <lastmod>2021-08-18T22:58:00+00:00</lastmod>
-  </url><url>
     <loc>/tags/negative-sampling/</loc>
-    <lastmod>2021-08-18T22:58:00+00:00</lastmod>
-  </url><url>
-    <loc>/posts/</loc>
     <lastmod>2021-08-18T22:58:00+00:00</lastmod>
   </url><url>
     <loc>/tags/recommender-system/</loc>
@@ -30,12 +48,6 @@
     <lastmod>2021-08-18T22:58:00+00:00</lastmod>
   </url><url>
     <loc>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2020-recsys-sse-pt-sequential-recommendation-via-personalized-transformed/</loc>
-    <lastmod>2021-08-18T22:58:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2021-08-18T22:58:00+00:00</lastmod>
-  </url><url>
-    <loc>/</loc>
     <lastmod>2021-08-18T22:58:00+00:00</lastmod>
   </url><url>
     <loc>/categories/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/</loc>
@@ -70,12 +82,6 @@
   </url><url>
     <loc>/tags/www/</loc>
     <lastmod>2021-08-07T23:58:00+00:00</lastmod>
-  </url><url>
-    <loc>/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/</loc>
-    <lastmod>2021-08-05T23:02:00+00:00</lastmod>
-  </url><url>
-    <loc>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E8%BF%91%E6%9C%9F%E8%B8%A9%E5%9D%91/</loc>
-    <lastmod>2021-08-05T23:02:00+00:00</lastmod>
   </url><url>
     <loc>/tags/icrl/</loc>
     <lastmod>2021-08-05T23:00:00+00:00</lastmod>
@@ -125,13 +131,7 @@
     <loc>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/gnn/2020-nips-graph-geometry-interaction-learning/</loc>
     <lastmod>2021-07-21T23:53:00+00:00</lastmod>
   </url><url>
-    <loc>/tags/linux/</loc>
-    <lastmod>2021-07-19T08:36:00+00:00</lastmod>
-  </url><url>
     <loc>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/tmux%E5%AE%9E%E7%8E%B0linux%E4%B8%8B%E7%9A%84%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8/</loc>
-    <lastmod>2021-07-19T08:36:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/ubuntu/</loc>
     <lastmod>2021-07-19T08:36:00+00:00</lastmod>
   </url><url>
     <loc>/tags/graph-embedding/</loc>

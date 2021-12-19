@@ -8,7 +8,16 @@
     <language>en</language>
     <copyright>&amp;copy; 2021 &lt;a href=&#34;https://beian.miit.gov.cn/&#34;&gt;粤ICP备19090631号&lt;/a&gt;
 </copyright>
-    <lastBuildDate>Mon, 19 Jul 2021 08:36:00 +0000</lastBuildDate><atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Dec 2021 22:53:00 +0000</lastBuildDate><atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>基于hugo搭建博客并部署</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Sat, 18 Dec 2021 22:53:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
+      <description>基于hugo搭建博客并部署到GitHub Page和服务器</description>
+    </item>
+    
     <item>
       <title>tmux实现Linux下的终端复用</title>
       <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/tmux%E5%AE%9E%E7%8E%B0linux%E4%B8%8B%E7%9A%84%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8/</link>

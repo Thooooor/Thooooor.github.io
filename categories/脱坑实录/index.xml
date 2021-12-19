@@ -8,14 +8,14 @@
     <language>en</language>
     <copyright>&amp;copy; 2021 &lt;a href=&#34;https://beian.miit.gov.cn/&#34;&gt;粤ICP备19090631号&lt;/a&gt;
 </copyright>
-    <lastBuildDate>Thu, 05 Aug 2021 23:02:00 +0000</lastBuildDate><atom:link href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 18 Dec 2021 22:53:00 +0000</lastBuildDate><atom:link href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>近期踩坑</title>
-      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E8%BF%91%E6%9C%9F%E8%B8%A9%E5%9D%91/</link>
-      <pubDate>Thu, 05 Aug 2021 23:02:00 +0000</pubDate>
+      <title>基于hugo搭建博客并部署</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>
+      <pubDate>Sat, 18 Dec 2021 22:53:00 +0000</pubDate>
       
-      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E8%BF%91%E6%9C%9F%E8%B8%A9%E5%9D%91/</guid>
-      <description>近期踩坑记录，不定期整理</description>
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</guid>
+      <description>基于hugo搭建博客并部署到GitHub Page和服务器</description>
     </item>
     
     <item>
