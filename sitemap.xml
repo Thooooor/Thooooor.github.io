@@ -2,22 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/posts/%E6%9D%82%E8%AE%B0/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2021-12-21T23:53:00+00:00</lastmod>
+  </url><url>
     <loc>/authors/</loc>
-    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
+    <lastmod>2021-12-21T23:53:00+00:00</lastmod>
   </url><url>
     <loc>/categories/</loc>
-    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
+    <lastmod>2021-12-21T23:53:00+00:00</lastmod>
   </url><url>
     <loc>/authors/lizhihao/</loc>
-    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
-  </url><url>
-    <loc>/tags/linux/</loc>
-    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
+    <lastmod>2021-12-21T23:53:00+00:00</lastmod>
   </url><url>
     <loc>/posts/</loc>
-    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
+    <lastmod>2021-12-21T23:53:00+00:00</lastmod>
   </url><url>
     <loc>/tags/</loc>
+    <lastmod>2021-12-21T23:53:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2021-12-21T23:53:00+00:00</lastmod>
+  </url><url>
+    <loc>/categories/%E6%9D%82%E8%AE%B0/</loc>
+    <lastmod>2021-12-21T23:53:00+00:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2021-12-21T23:53:00+00:00</lastmod>
+  </url><url>
+    <loc>/tags/linux/</loc>
     <lastmod>2021-12-18T22:53:00+00:00</lastmod>
   </url><url>
     <loc>/tags/ubuntu/</loc>
@@ -27,9 +39,6 @@
     <lastmod>2021-12-18T22:53:00+00:00</lastmod>
   </url><url>
     <loc>/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/</loc>
-    <lastmod>2021-12-18T22:53:00+00:00</lastmod>
-  </url><url>
-    <loc>/</loc>
     <lastmod>2021-12-18T22:53:00+00:00</lastmod>
   </url><url>
     <loc>/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-sigir-improving-collaborative-metric-learning-with-efficient-negative-sampling/</loc>
