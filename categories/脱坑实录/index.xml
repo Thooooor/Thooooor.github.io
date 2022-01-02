@@ -8,7 +8,16 @@
     <language>en</language>
     <copyright>&amp;copy; 2021 &lt;a href=&#34;https://beian.miit.gov.cn/&#34;&gt;粤ICP备19090631号&lt;/a&gt;
 </copyright>
-    <lastBuildDate>Sat, 18 Dec 2021 22:53:00 +0000</lastBuildDate><atom:link href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 01 Jan 2022 11:10:00 +0000</lastBuildDate><atom:link href="/categories/%E8%84%B1%E5%9D%91%E5%AE%9E%E5%BD%95/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>申请SSL证书并自动更新</title>
+      <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E7%94%B3%E8%AF%B7ssl%E8%AF%81%E4%B9%A6/</link>
+      <pubDate>Sat, 01 Jan 2022 11:10:00 +0000</pubDate>
+      
+      <guid>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E7%94%B3%E8%AF%B7ssl%E8%AF%81%E4%B9%A6/</guid>
+      <description>基于certbot实现SSL的申请和自动更新</description>
+    </item>
+    
     <item>
       <title>基于hugo搭建博客并部署</title>
       <link>/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/</link>

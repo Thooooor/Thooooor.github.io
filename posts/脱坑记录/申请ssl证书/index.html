@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width">
 
 
-<title>基于hugo搭建博客并部署 | 若虚杂记</title>
+<title>申请SSL证书并自动更新 | 若虚杂记</title>
 
 <meta name="generator" content="Hugo Eureka 0.8.4" />
 <link rel="stylesheet" href="/css/eureka.min.css">
@@ -58,7 +58,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/images/icon_hu64421c6c7700f606f0ad45d807017b09_5843_180x180_fill_box_center_3.png">
 
 <meta name="description"
-  content="基于hugo搭建博客并部署到GitHub Page和服务器">
+  content="基于certbot实现SSL的申请和自动更新">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -70,8 +70,8 @@
       "item":"/posts/"},{
       "@type": "ListItem",
       "position": 2 ,
-      "name":"基于hugo搭建博客并部署",
-      "item":"/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"}]
+      "name":"申请SSL证书并自动更新",
+      "item":"/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E7%94%B3%E8%AF%B7ssl%E8%AF%81%E4%B9%A6/"}]
 }
 </script>
 
@@ -83,11 +83,11 @@
     "@type": "Article",
     "mainEntityOfPage": {
         "@type": "WebPage",
-        "@id": "/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/"
+        "@id": "/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E7%94%B3%E8%AF%B7ssl%E8%AF%81%E4%B9%A6/"
     },
-    "headline": "基于hugo搭建博客并部署 | 若虚杂记","datePublished": "2021-12-18T22:53:00+00:00",
-    "dateModified": "2021-12-18T22:53:00+00:00",
-    "wordCount":  2179 ,
+    "headline": "申请SSL证书并自动更新 | 若虚杂记","datePublished": "2022-01-01T11:10:00+00:00",
+    "dateModified": "2022-01-01T11:10:00+00:00",
+    "wordCount":  606 ,
     "author": {
         "@type": "Person",
         "name": ["lizhihao"]
@@ -100,21 +100,21 @@
             "url": "/images/icon.png"
         }
         },
-    "description": "基于hugo搭建博客并部署到GitHub Page和服务器"
+    "description": "基于certbot实现SSL的申请和自动更新"
 }
-</script><meta property="og:title" content="基于hugo搭建博客并部署 | 若虚杂记" />
+</script><meta property="og:title" content="申请SSL证书并自动更新 | 若虚杂记" />
 <meta property="og:type" content="article" />
 
 
 <meta property="og:image" content="/images/icon.png">
 
 
-<meta property="og:url" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" />
+<meta property="og:url" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/%E7%94%B3%E8%AF%B7ssl%E8%AF%81%E4%B9%A6/" />
 
 
 
 
-<meta property="og:description" content="基于hugo搭建博客并部署到GitHub Page和服务器" />
+<meta property="og:description" content="基于certbot实现SSL的申请和自动更新" />
 
 
 
@@ -131,10 +131,10 @@
 
 
 
-<meta property="article:published_time" content="2021-12-18T22:53:00&#43;00:00" />
+<meta property="article:published_time" content="2022-01-01T11:10:00&#43;00:00" />
 
 
-<meta property="article:modified_time" content="2021-12-18T22:53:00&#43;00:00" />
+<meta property="article:modified_time" content="2022-01-01T11:10:00&#43;00:00" />
 
 
 
@@ -149,6 +149,8 @@
 
 
 
+<meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" />
+
 <meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/tmux%E5%AE%9E%E7%8E%B0linux%E4%B8%8B%E7%9A%84%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8/" />
 
 <meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E5%A4%9A%E7%89%88%E6%9C%ACcuda%E5%AE%89%E8%A3%85%E5%8F%8A%E5%88%87%E6%8D%A2/" />
@@ -158,8 +160,6 @@
 <meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/ubuntu%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%89%E8%A3%85anaconda/" />
 
 <meta property="og:see_also" content="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/" />
-
-<meta property="og:see_also" content="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/" />
 
 
 
@@ -238,15 +238,15 @@
 <div class="grid grid-cols-2 lg:grid-cols-8 gap-4 lg:pt-12">
     <div
         class="col-span-2  lg:col-span-6 bg-secondary-bg rounded px-6 py-8">
-        <h1 class="font-bold text-3xl text-primary-text">基于hugo搭建博客并部署</h1>
+        <h1 class="font-bold text-3xl text-primary-text">申请SSL证书并自动更新</h1>
         <div class="flex flex-wrap flex-row items-center mt-2 text-tertiary-text">
     <div class="mr-6 my-2">
         <i class="fas fa-calendar mr-1"></i>
-        <span>2021-12-18</span>
+        <span>2022-01-01</span>
     </div>
     <div class="mr-6 my-2">
         <i class="fas fa-clock mr-1"></i>
-        <span>5 min read</span>
+        <span>2 min read</span>
     </div>
     
     
@@ -265,143 +265,55 @@
         
 
         <div class="content">
-            <p>本文介绍如何通过hugo搭建个人博客并部署到GitHub Page和Linux服务器上。我的本地系统为Windows 11，hugo只需要安装在本地，生成静态网页后部署到GitHub Page和Linux服务器。</p>
-<h1 id="1-安装hugo">1. 安装hugo</h1>
-<p>基于以上方案，我们需要安装以下工具：</p>
-<ul>
-<li><a href="https://git-scm.com/downloads">Git</a></li>
-<li><a href="https://golang.google.cn/dl/">Go</a></li>
-<li><a href="https://gohugo.io/">hugo</a></li>
-</ul>
-<p>Git和Go可以点击链接进入官网自行下载安装，这里主要介绍如何安装hugo。</p>
-<h2 id="11-下载">1.1 下载</h2>
-<p>首先在官方<a href="https://github.com/gohugoio/hugo/releases">release页面</a>下载最新版本的hugo压缩包：</p>
-<p><img src="http://note.lizhihao999.cn/notes/202112191620609.png" alt="release"></p>
-<p>因为我们需要安装在Windows上，所以我选择的是<code>hugo_0.90.1_Windows-64bit.zip</code>。</p>
-<h2 id="12-安装">1.2 安装</h2>
-<p>下载后解压，可以自己选择路径，更改文件夹名称，例如我选择安装在<code>Program Files</code>文件夹下，并将文件夹命名为<code>hugo</code>。解压后可以得到以下文件：</p>
-<p><img src="http://note.lizhihao999.cn/notes/202112191626242.png" alt="files"></p>
-<p>新建一个名为<code>bin</code>的文件夹，并将<code>hugo.exe</code>移动到<code>bin</code>中。以我的安装路径为例，最后得到：</p>
-<p><img src="http://note.lizhihao999.cn/notes/202112191628360.png" alt=""></p>
-<h2 id="13-添加环境变量">1.3 添加环境变量</h2>
-<p>在设置中的系统-&gt;关于（或右击我的电脑-&gt;属性）中进入<code>高级系统设置</code>，接着在<code>高级</code>中进入<code>环境变量</code>，在<code>Path</code>中添加路径：</p>
-<p><img src="http://note.lizhihao999.cn/notes/202112191637357.png" alt="path"></p>
-<p>注意这里是到<code>bin</code>文件夹的路径。之后需要重启电脑激活路径。</p>
-<h2 id="14-验证">1.4 验证</h2>
-<p>在命令行中查询hugo版本来验证：</p>
-<pre><code class="language-shell">hugo version
+            <h1 id="申请ssl证书并自动更新">申请SSL证书并自动更新</h1>
+<p><a href="https://letsencrypt.org/">Let&rsquo;s Encrypt</a> 是一个免费的SSL证书申请项目，这里衔接之前的<a href="https://lizhihao999.cn/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">hugo博客部署教程</a>，介绍如何申请SSL证书。</p>
+<h2 id="1-certbot">1. certbot</h2>
+<p>根据网页指示，如果我们有<code>shell access</code>，即<code>SSH access</code>，则可以直接使用<a href="https://certbot.eff.org/instructions">cerbot</a>进行SSL证书的自动申请。进入网站后，根据实际情况选择自己的<code>server</code>和系统环境，本案例中分别为<code>Nginx</code>和<code>Ubuntu 20.04.3 LTS</code>，选择好后会有详细的指示出现：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202201021056247.png" alt=""></p>
+<p>接下来根据指示可以进行，这里以我的情况为例介绍，其中包含一些可能出现的问题和解决情况。</p>
+<h2 id="2-安装snapd">2. 安装snapd</h2>
+<p>直接从命令行中通过以下命令下载：</p>
+<pre><code class="language-shell">sudo apt update
+sudo apt install snapd
 </code></pre>
-<p>应该得到结果：</p>
-<p><img src="http://note.lizhihao999.cn/notes/202112191640192.png" alt="version"></p>
-<h1 id="2-本地配置hugo">2. 本地配置Hugo</h1>
-<h2 id="21-初始化">2.1 初始化</h2>
-<p>在命令行中进入目标安装目录，通过以下命令初始化：</p>
-<pre><code class="language-shell">hugo new site site-name
+<p>执行以下命令，确认使用最新版本的snapd：</p>
+<pre><code class="language-shell">sudo snap install core; sudo snap refresh core
 </code></pre>
-<p>这里<code>site-name</code>为自己想要构建的博客名称，之后会得到一个<code>site-name</code>的文件夹，进入该文件夹：</p>
-<pre><code class="language-shell">cd site-name
+<h2 id="3-环境检查">3. 环境检查</h2>
+<p>如果之前曾经安装过certbot相关的包，需要进行移除，执行命令为：</p>
+<pre><code class="language-shell">sudo apt-get remove certbot
 </code></pre>
-<h2 id="22-安装主题">2.2 安装主题</h2>
-<p>选择一个自己喜欢的主题（theme），这里我以<a href="https://themes.gohugo.io/themes/hugo-papermod/">PaperMod</a>为例，找到主题的GitHub仓库地址，通过Git Submodules进行安装：</p>
-<pre><code class="language-shell">git submodule add https://github.com/adityatelange/hugo-PaperMod.git themes/PaperMod
+<h2 id="4-安装certbot">4. 安装certbot</h2>
+<p>确认无误后，安装certbot：</p>
+<pre><code class="language-shell">sudo snap install --classic certbot
 </code></pre>
-<p>如果失败，可以选择ssh地址（需要在GitHub中添加本地的rsa）：</p>
-<pre><code class="language-shell">git submodule add git@github.com:adityatelange/hugo-PaperMod.git themes/PaperMod
+<p>安装后激活<code>certbot</code>命令：</p>
+<pre><code class="language-shell">sudo ln -s /snap/bin/certbot /usr/bin/certbot
 </code></pre>
-<p>也可以直接使用Git：</p>
-<pre><code class="language-shell">git clone https://github.com/adityatelange/hugo-PaperMod themes/PaperMod
+<h2 id="5-运行certbot">5. 运行certbot</h2>
+<p>与官方指引不同，这里建议先申请证书：</p>
+<pre><code class="language-shell">sudo certbot certonly --nginx
 </code></pre>
-<p>这一步会将对应主题的代码下载到<code>themes/主题名</code>文件夹下。</p>
-<p>之后需要修改主目录下的<code>config</code>文件，填写<code>theme</code>的名称，不同的主题这一步可能略有不同，具体可以根据自己选择主题的文档进行操作。</p>
-<h2 id="23-本地预览">2.3 本地预览</h2>
-<p>在博客主目录下，通过以下命令进行本地预览：</p>
-<pre><code class="language-shell">hugo server
+<p>之后可以再让Certbot自动编辑nginx配置以提供服务：</p>
+<pre><code class="language-shell">sudo certbot --nginx
 </code></pre>
-<p><img src="http://note.lizhihao999.cn/notes/202112191655830.png" alt="server"></p>
-<p>之后在浏览器中输入<code>127.0.0.1:1313</code>，可以预览网站。这时可以在本地修改主题，添加内容并实时预览效果，调试完毕后<code>Ctrl+C</code>结束预览。</p>
-<h2 id="24-生成静态网页">2.4 生成静态网页</h2>
-<p>本地修改好后，通过以下命令生成静态网页：</p>
-<pre><code class="language-shell">hugo
+<h3 id="51-hint">5.1 hint</h3>
+<p>如果这一步出错，可以尝试先关闭<code>port 80</code>：</p>
+<pre><code class="language-shell">netstat -apn|grep 80
 </code></pre>
-<p>生成的网页在主目录的<code>public</code>文件夹下，之后我们将其部署在GitHub和服务器上。</p>
-<h1 id="3-部署">3. 部署</h1>
-<p>这里我选择同时部署到GitHub Page上和自己的服务器上。无论选择部署在哪个平台，都建议先创建一个GitHub仓库，便于进行管理。</p>
-<h2 id="31-创建本地仓库">3.1 创建本地仓库</h2>
-<p>我们只用通过<code>Git</code>推送生成的静态网页，首先进入<code>public</code>文件夹，初始化仓库：</p>
-<pre><code class="language-shell">cd public
-git init
-git commit -m &quot;init&quot;
+<p>找到占用80端口的pid：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202201021113605.png" alt=""></p>
+<p>关闭：</p>
+<pre><code class="language-shell">sudo kill -9 82941
 </code></pre>
-<h2 id="32-github-page">3.2 GitHub Page</h2>
-<p>如果不需要部署到GitHub Page，可以只进行<code>3.2.1</code>中创建仓库的操作。</p>
-<h3 id="321-创建github仓库">3.2.1 创建GitHub仓库</h3>
-<p>首先在GitHub上创建一个<code>public</code>仓库，仓库名称为<code>username.github.io</code>，也可以根据自己需要更改<code>username</code>部分。接下来在本地<code>public</code>仓库操作，将上一步创建的GitHub仓库添加到本地的远程仓库并推送：</p>
-<pre><code class="language-shell">git remote add origin https://github.com/username/username.github.io.git
-git branch -M main
-git push -u origin main
+<p>之后再运行上述命令。</p>
+<h2 id="6-更新证书">6. 更新证书</h2>
+<p>cerbot会在证书到期之前自动更新证书，无需手动操作。可以通过以下命令测试：</p>
+<pre><code class="language-shell">sudo certbot renew --dry-run
 </code></pre>
-<p>注意替换自己的仓库地址。</p>
-<h3 id="322-设置github-page">3.2.2 设置GitHub Page</h3>
-<p>进入仓库，到<code>Settings/Pages</code>设置<code>main</code>分支为Source，这里可以根据自己的需要灵活设置：</p>
-<p><img src="http://note.lizhihao999.cn/notes/202112192112364.png" alt=""></p>
-<p>之后需要等待一些时间，可以在<code>Actions</code>中查看进度，设置成功后在仓库首页会有如下标志：</p>
-<p><img src="http://note.lizhihao999.cn/notes/202112192115376.png" alt=""></p>
-<p>此步之后，就点击可以查看并进入GitHub Page。</p>
-<h2 id="33-服务器">3.3 服务器</h2>
-<p>这里我使用的是阿里云轻量级应用服务器，系统为Ubuntu 20.04.3 LTS，域名也在阿里云购买并备案，并使用<code>Nginx</code>作为代理服务器。配置好代理之后，我们每次更新网站只需要通过<code>Git</code>拉取上一步的远程仓库即可。</p>
-<h3 id="331-安装依赖库">3.3.1 安装依赖库</h3>
-<p>一般而言，先对系统的库进行升级：</p>
-<pre><code class="language-shell">sudo apt-get update
-sudo apt-get upgrade
-</code></pre>
-<p>对于本项目而言，需要使用<code>Git</code>和<code>Nginx</code>，根据自己的情况安装：</p>
-<pre><code class="language-shell">sudo apt-get install git
-sudo apt-get install nginx
-</code></pre>
-<h3 id="332-配置仓库">3.3.2 配置仓库</h3>
-<p>这一步创建存储静态网页的文件夹。首先选定目录创建一个空文件夹：</p>
-<pre><code class="language-shell">sudo mkdir blog-name
-</code></pre>
-<p>这里我用<code>blog-name</code>指代文件夹的名称，读者自行替换即可。</p>
-<p>接着进入文件夹，使用<code>Git</code>初始化仓库，并拉取远程仓库：</p>
-<pre><code class="language-shell">cd blog-name
-git init
-git remote add origin https://github.com/username/username.github.io.git
-git pull origin
-</code></pre>
-<h3 id="333-配置nginx">3.3.3 配置Nginx</h3>
-<p>首先编写Nginx的配置文件：</p>
-<pre><code class="language-shell">sudo vi /etc/nginx/conf.d/yoursite.com.conf
-</code></pre>
-<p>这里的文件名为购买的域名，注意我这里只是用<code>yoursite.com</code>为例，最后的顶级域不一定为<code>.com</code>，替换为自己的域名即可。在文件中写入：</p>
-<pre><code>server {
-    listen 80;
-    server_name yoursite.com;
-    root path-to-blog-name;
-    location / {
-    }
-}
-</code></pre>
-<p>这里的<code>server_name</code>替换为域名，<code>root</code>为上一步存储静态网页的文件夹路径。</p>
-<p>接下来启动：</p>
-<pre><code class="language-shell">sudo service nginx start
-</code></pre>
-<h3 id="334-站点域名配置">3.3.4 站点/域名配置</h3>
-<p>如果和我一样在阿里云购买服务器和域名，则可以很方便地配置。</p>
-<p>首先配置域名，进入阿里云服务器控制台，在<code>站点设置</code>中找到<code>网站域名</code>，就可以直接进行绑定和DNS解析：</p>
-<p><img src="http://note.lizhihao999.cn/notes/202112192237069.png" alt=""></p>
-<p>我们在上一步<code>Nginx</code>的配置中设置的监听端口为<code>80</code>，所以需要开放此端口。在控制台中的<code>安全-&gt;防火墙</code>设置：</p>
-<p><img src="http://note.lizhihao999.cn/notes/202112192240620.png" alt=""></p>
-<p>完成以上步骤后，就可以在浏览器中输入域名浏览自己的博客了。</p>
-<h1 id="4-更新">4. 更新</h1>
-<p>按照这种方式部署之后的更新博客流程为：</p>
-<ol>
-<li>本地修改博客并预览；</li>
-<li>生成静态网页：</li>
-<li>在本地<code>public</code>仓库中<code>commit</code>修改；</li>
-<li>将本地仓库<code>push</code>到GitHub远程仓库，完成GitHub Page的更新；</li>
-<li>在服务器中<code>pull</code>更新后的远程仓库，完成更新。</li>
-</ol>
+<h2 id="7-访问网站">7. 访问网站</h2>
+<p>之后输入<code>https:\\yourwebsite.com</code>，可以在网址状态栏看到锁的图标：</p>
+<p><img src="http://note.lizhihao999.cn/notes/202201021110179.png" alt=""></p>
 
         </div>
         
@@ -458,14 +370,11 @@ git pull origin
 <div class="flex flex-col md:flex-row md:justify-between -mx-2 mt-4 px-2 pt-4 border-t">
     <div>
         
-        <span class="block font-bold">Previous</span>
-        <a href="/posts/%E6%9D%82%E8%AE%B0/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" class="block">2021 年终总结</a>
-        
     </div>
     <div class="md:text-right mt-4 md:mt-0">
         
         <span class="block font-bold">Next</span>
-        <a href="/posts/%E8%AE%BA%E6%96%87%E7%AC%94%E8%AE%B0/recommender-system/2021-sigir-improving-collaborative-metric-learning-with-efficient-negative-sampling/" class="block">Improving Collaborative Metric Learning with Efficient Negative Sampling</a>
+        <a href="/posts/%E6%9D%82%E8%AE%B0/%E5%B9%B4%E7%BB%88%E6%80%BB%E7%BB%93/" class="block">2021 年终总结</a>
         
     </div>
 </div>
@@ -485,35 +394,17 @@ git pull origin
 <div class="sticky-toc hidden lg:block px-6 pb-6 ">
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#11-下载">1.1 下载</a></li>
-    <li><a href="#12-安装">1.2 安装</a></li>
-    <li><a href="#13-添加环境变量">1.3 添加环境变量</a></li>
-    <li><a href="#14-验证">1.4 验证</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#21-初始化">2.1 初始化</a></li>
-    <li><a href="#22-安装主题">2.2 安装主题</a></li>
-    <li><a href="#23-本地预览">2.3 本地预览</a></li>
-    <li><a href="#24-生成静态网页">2.4 生成静态网页</a></li>
-  </ul>
-
-  <ul>
-    <li><a href="#31-创建本地仓库">3.1 创建本地仓库</a></li>
-    <li><a href="#32-github-page">3.2 GitHub Page</a>
+    <li><a href="#1-certbot">1. certbot</a></li>
+    <li><a href="#2-安装snapd">2. 安装snapd</a></li>
+    <li><a href="#3-环境检查">3. 环境检查</a></li>
+    <li><a href="#4-安装certbot">4. 安装certbot</a></li>
+    <li><a href="#5-运行certbot">5. 运行certbot</a>
       <ul>
-        <li><a href="#321-创建github仓库">3.2.1 创建GitHub仓库</a></li>
-        <li><a href="#322-设置github-page">3.2.2 设置GitHub Page</a></li>
+        <li><a href="#51-hint">5.1 hint</a></li>
       </ul>
     </li>
-    <li><a href="#33-服务器">3.3 服务器</a>
-      <ul>
-        <li><a href="#331-安装依赖库">3.3.1 安装依赖库</a></li>
-        <li><a href="#332-配置仓库">3.3.2 配置仓库</a></li>
-        <li><a href="#333-配置nginx">3.3.3 配置Nginx</a></li>
-        <li><a href="#334-站点域名配置">3.3.4 站点/域名配置</a></li>
-      </ul>
-    </li>
+    <li><a href="#6-更新证书">6. 更新证书</a></li>
+    <li><a href="#7-访问网站">7. 访问网站</a></li>
   </ul>
 </nav>
 </div>
@@ -533,6 +424,9 @@ git pull origin
         <h2 class="text-lg font-semibold mb-4">See Also</h2>
         <div class="content">
             
+            <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/hugo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">基于hugo搭建博客并部署</a>
+            <br />
+            
             <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/tmux%E5%AE%9E%E7%8E%B0linux%E4%B8%8B%E7%9A%84%E7%BB%88%E7%AB%AF%E5%A4%8D%E7%94%A8/">tmux实现Linux下的终端复用</a>
             <br />
             
@@ -546,9 +440,6 @@ git pull origin
             <br />
             
             <a href="/posts/%E8%84%B1%E5%9D%91%E8%AE%B0%E5%BD%95/linux%E9%85%8D%E7%BD%AE%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83/">Linux配置虚拟环境</a>
-            <br />
-            
-            <a href="/posts/mit-6.s081-fall-2019/%E5%AE%9E%E9%AA%8C2%E7%AC%94%E8%AE%B0/">MIT 6.S081/Fall 2019 Lab2 Simple xv6 shell</a>
             <br />
             
         </div>
